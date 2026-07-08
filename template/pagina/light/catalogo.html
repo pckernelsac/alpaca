@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#ffddae",
+                    "outline-variant": "#d4c4b1",
+                    "on-secondary-fixed-variant": "#50453b",
+                    "primary-container": "#9a6c14",
+                    "primary-fixed-dim": "#f6bd60",
+                    "inverse-on-surface": "#f9efe7",
+                    "surface-container": "#f6ece4",
+                    "surface-variant": "#ebe1d9",
+                    "surface-container-highest": "#ebe1d9",
+                    "on-primary-fixed": "#281800",
+                    "on-surface": "#1f1b16",
+                    "inverse-surface": "#352f2a",
+                    "on-tertiary-fixed": "#092102",
+                    "tertiary-container": "#607c52",
+                    "inverse-primary": "#f6bd60",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#e2d8d1",
+                    "on-primary": "#ffffff",
+                    "primary": "#7c5400",
+                    "on-secondary-container": "#6c6056",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#f0e0d2",
+                    "secondary": "#685c51",
+                    "on-secondary-fixed": "#221a12",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#d3c4b6",
+                    "on-tertiary-fixed-variant": "#344d28",
+                    "on-background": "#1f1b16",
+                    "surface-tint": "#7f5600",
+                    "on-primary-container": "#fffbff",
+                    "tertiary-fixed": "#ccecb9",
+                    "surface-container-high": "#f1e6de",
+                    "secondary-container": "#edddcf",
+                    "tertiary": "#48633b",
+                    "tertiary-fixed-dim": "#b1d09f",
+                    "surface": "#fff8f4",
+                    "outline": "#827565",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#504537",
+                    "surface-bright": "#fff8f4",
+                    "on-tertiary-container": "#f8ffee",
+                    "on-primary-fixed-variant": "#614000",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#fcf2ea",
+                    "background": "#fff8f4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "container-max": "1280px",
+                    "md": "32px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "lg": "64px",
+                    "sm": "16px",
+                    "xl": "96px",
+                    "margin-desktop": "64px",
+                    "xs": "8px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d4c4b1; border-radius: 10px; }
+        
+        .editorial-image-hover {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .editorial-image-container:hover .editorial-image-hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-50 bg-surface/90 backdrop-blur-md">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-xs max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter cursor-pointer">ALPACART</div>
+<div class="hidden md:flex items-center gap-md">
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-primary border-b border-primary pb-1 transition-all duration-200" href="#">Heritage</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Artisanal</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Fibers</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Collection</a>
+</div>
+<div class="flex items-center gap-gutter">
+<span class="material-symbols-outlined text-on-surface cursor-pointer">search</span>
+<span class="material-symbols-outlined text-on-surface cursor-pointer">shopping_bag</span>
+<span class="material-symbols-outlined text-on-surface cursor-pointer">person</span>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[819px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full" data-alt="A high-fashion editorial shot of a model draped in premium cream-colored alpaca wool, standing against the dramatic backdrop of the Peruvian Andes at sunset. The lighting is warm and ethereal, highlighting the incredible texture and drape of the fabric. The aesthetic is minimalist luxury with soft, earthy tones.">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6oKO8vQfZqQrt4ljO7kSFGYWEzv29o7eOWIYtuRc4shJIAde-T83tLYXiwe5omdjSWw3Wc5FACNHttBzDbdl1dpHo7pfMtxLK7fiXu7D8rzibXIesq8HdMBhFc1nw44nBpvA1xXdEUeKNw_of3m-YoG0gEx7z59-kysPrWRD5ecOzj-FUiI9b49nrROpRer2vruO6Bi4eC1CUAtJ2jQLZ49D0H15QOsoqpHRBUSf61lOesGWq6R-kEthsUFyIAov_p3sluJEMnmU"/>
+</div>
+<div class="absolute inset-0 bg-black/10"></div>
+</div>
+<div class="relative z-10 w-full px-margin-desktop max-w-container-max mx-auto">
+<div class="max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-surface-container-lowest mb-sm animate-fade-in-up">Colecciones de Origen</h1>
+<p class="font-body-lg text-body-lg text-surface-container-lowest opacity-90 max-w-lg leading-relaxed">
+                        Un tributo a la nobleza de las fibras andinas. Cada prenda es el resultado de siglos de sabiduría textil y el respeto absoluto por el ecosistema de las tierras altas.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Introduction Section -->
+<section class="py-xl bg-surface">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5">
+<p class="font-label-caps text-label-caps uppercase text-primary mb-xs">El Legado de la Fibra</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Curaduría de Excelencia</h2>
+</div>
+<div class="md:col-span-7">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Nuestra selección institucional representa la cúspide de la artesanía peruana. Desde el brillo etéreo de la Vicuña hasta la calidez estructural del Baby Alpaca, presentamos prendas diseñadas para trascender generaciones. No es solo moda; es una herencia táctil que preserva la trazabilidad y el bienestar animal en cada hebra.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Filters -->
+<section class="pb-xl bg-surface overflow-x-auto whitespace-nowrap scrollbar-hide">
+<div class="max-w-container-max mx-auto px-margin-desktop flex justify-center gap-lg">
+<button class="flex flex-col items-center gap-xs group outline-none">
+<div class="w-20 h-20 rounded-full border border-primary-fixed-dim overflow-hidden p-1 transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Close-up texture of white baby alpaca wool fibers, showing soft fluffiness and extreme purity under studio lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKK3_sZ_Vi2oc6tvqXKL6_UZ45EPvuOKepk1SEcbP2YcERJ6bstIqyWfDSyRTH-IBOsT0Q8M7M4UIcI3nwh0Lc2OJRaP7eccJaM3V9AjTYLdmiLECH9ye3mnyzT8RXsgP-Tf13aKghjGrsI0XBwgXr_ijRgspIjGqvS7kgfOAGn8eUbrfGv9zMuU6tMOTF2cCZeH2at420T1UzQRMAW-OZLo_EKaMO9__yyvviMCMLb9e6Y-YmX4z4UtT29vxAuJf9e_c97vEURXk')"></div>
+</div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-primary border-b border-primary">Baby Alpaca</span>
+</button>
+<button class="flex flex-col items-center gap-xs group outline-none">
+<div class="w-20 h-20 rounded-full border border-transparent overflow-hidden p-1 transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="The distinct golden-brown color of raw vicuna wool, displayed as a luxury textile swatch against a neutral background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4zXJwAfvSMQiiV5q8xowx0Bv-XknC_pVwvvHYVfw5CiPjgpJ_v7ahvCWJJZ9-EAjNA4IPQxTFVERFXg1AFi_3dcTV7pYPf9pn03MgGKjaTMao-nx8rYNjvVBcf7vaCOb2uFkupZwWusDdGJdaoHaqqF0G5Xmn7XUAErpeUDd9tZLzdRAqqxoKpEhfjMpNS-nKUHxEg-RSd1qXxd8BI10S7qt3napocd397xPtsz_9_1qNm4bkn1Be5d4kXNptYMaC6wjvVps3pHI')"></div>
+</div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Vicuña</span>
+</button>
+<button class="flex flex-col items-center gap-xs group outline-none">
+<div class="w-20 h-20 rounded-full border border-transparent overflow-hidden p-1 transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="A blend of grey and charcoal fibers woven into a fine textile, showcasing the subtle variation in natural colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6z7nDLqj-V9CtobwJT_eYfGelhmvtpCIaslDYObGGFRWohaNbx20B27SQ738_g3F6HamgHOMOSQZF-TYsb_cG1bSDH4P2eEKMeQDXOWm7LiAWRwECNOXTwY_9viMC-oEoZRtbzeCD5Y6Vu8ixHpldKP4MUHOOrdWEnkr4N8Rqht2Fm53XYCWTbqZnv3QUpk1_jN-MkPPqeh4FZgvaE46Rb5brv9vjT17sFb1NCV9hwZC28SqFVAw41-P74Qifg5_6A914mriSPxw')"></div>
+</div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Royal Blend</span>
+</button>
+<button class="flex flex-col items-center gap-xs group outline-none">
+<div class="w-20 h-20 rounded-full border border-transparent overflow-hidden p-1 transition-transform group-hover:scale-105">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Hand-knitted chunky wool patterns in a deep earthy brown tone, emphasizing traditional artisan craftsmanship." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiOjHk_HaKLhFD47BLm8bF5ck86Q3iXAk8IKc6CAAEUhaIDm2v5WCQzRk2ndnscAb0r5PX6obMqpAgKLBsC1Bz1tgFdhpn6u4o-PTHg0EfrkJJci06meViWcnNrVKe1pYrdvySU5cUybA33nShGHJNChGIS3dMR0I_icCHJoPYJAENxML7zgB_YAJlAX9-B85wWA4ROED--vcVCmxOsEXLLCq0CHvmoU-e8g-22fzDUeYbfFGibs39nPCUr87WVBMeyzdqugcIGok')"></div>
+</div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Artisanal Knit</span>
+</button>
+</div>
+</section>
+<!-- Collections Showcase (Bento Style) -->
+<section class="py-xl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Major Block -->
+<div class="md:col-span-8 group overflow-hidden relative editorial-image-container aspect-[16/9]">
+<div class="absolute inset-0 bg-black/20 z-10 pointer-events-none"></div>
+<img class="w-full h-full object-cover editorial-image-hover" data-alt="A sprawling landscape of the Andean highlands with alpacas grazing in the distance, framed by a minimalist stone architecture doorway. High contrast lighting with deep shadows and brilliant sun-kissed textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd4Q4RPIQgmndIJGbK5l99KlL7h7cGJ2vV4mmcZREE3-4OLPlnnx4UscOzPKixSlhQQNrmk8I2mvFyEqzT9ZaEQRL1hkF5z4iwUclMYAm6AvL6EbAkSI_xXZhnumhwGCc2o-b5XP4dXofnFClWSyDH5BwlPedl74EmSEiJ-seQG81qMfXhnea1dF1F_Bn9rDD7LzNMzRzaBXp9J8IpbXAGSVi3YFgalTo0vxD3Zh4OIfm6opdf130HN2fxoD9RZQsygp6-tefLjQk"/>
+<div class="absolute bottom-md left-md z-20 text-white">
+<span class="font-label-caps text-label-caps uppercase mb-xs block">Serie Limitada</span>
+<h3 class="font-headline-lg text-headline-lg mb-xs">Andean Winter</h3>
+<p class="font-body-md text-body-md max-w-md opacity-90">Explorando la protección térmica natural a través de estructuras volumétricas.</p>
+</div>
+</div>
+<!-- Secondary Block -->
+<div class="md:col-span-4 group overflow-hidden relative editorial-image-container aspect-[9/16] md:aspect-auto">
+<img class="w-full h-full object-cover editorial-image-hover" data-alt="Detail shot of a man's hands gently touching a heavy woven alpaca blanket. The focus is on the intricate weave and the organic tactile quality of the fiber. Soft window lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj_zSIAElzqK2nyTcLxKEWM8-kD78p01dfYRh7d61jZ6ozHvcodfFePKDdqY95-NXRHlti92KHdtFOm4d2z4at-M5L5jg76vNplYSt1uI_Hn_tUHvlq9jMayCs4kd8-SRxpOaEiTOIPShKVCiYWpgzjwRHzqpJ6xBTfX85p_xU3zwbJqftunKQOfgs_ejcnsRnwEXN6bq3tUZje7H_7bKA-AOxu704fTwNNBvaecFkRshHX8ak0FoKEUaorqQr-zoO9xR-TCYIdh8"/>
+<div class="absolute inset-0 bg-primary/20 z-10 pointer-events-none"></div>
+<div class="absolute top-md right-md text-right z-20 text-white">
+<h3 class="font-headline-md text-headline-md">Essence</h3>
+<span class="font-label-caps text-label-caps uppercase border-t border-white pt-1">Collection</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Products Showroom -->
+<section class="py-xl bg-surface">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Galería Institucional</h2>
+<div class="h-px w-24 bg-primary mt-xs"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">S/S 2024 SHOWROOM</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-xl">
+<!-- Product Item -->
+<div class="group flex flex-col items-center text-center">
+<div class="w-full aspect-[3/4] overflow-hidden mb-sm bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist fashion photography of a long-sleeved charcoal grey sweater made of 100% baby alpaca. The item is displayed on a clean white background with natural, soft shadows. Editorial lighting emphasizing texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwAilo61HRQqkF23eOTHMBcKC89VUvQ5lykDrE7osNbKVoiQo-FMZixecJ6QKbGxWpzM-SLD2Ah-URs0L0Wk6jDwEcv1ostiw798f9dGDF_Wy6KutlRW3-d7db6BT21gc_yyrbtU-aGpyatXqGQieEpvTPujSVaQGASpagOUwG5G_oDDWeA3XHg--fIuLCeSxqSM6CnFQwSqdrvxYC_W95MYIDsjSpxKK1PbH6VXHZl6odwaMGyDcFCkiTTfw44TJmEheLYb58gj0"/>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-xs">Chaqueta 'Altitud'</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-unit">Baby Alpaca &amp; Seda</p>
+<p class="font-label-caps text-label-caps text-primary tracking-widest">Sastrería Contemporánea</p>
+</div>
+<!-- Product Item -->
+<div class="group flex flex-col items-center text-center">
+<div class="w-full aspect-[3/4] overflow-hidden mb-sm bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A draped ivory-colored wrap scarf made from the finest vicuna fiber. The image captures the fluid motion of the fabric and its extraordinary sheen. High-end luxury product photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6pRSx-SmHjnM-o64FNvvC6JyXCMJrrN3VkIGpTqOh8t68VR5XPlthBpq8kmjf1YvQDhBIyiMWf1qSyNZmbf8sYfulBfJTpRYhZs_W5d54hB4ljoM5zCzHnvX6d3Z9FnyEn9w4Gl4HXW3bQUPw_LQ7jl_D7hp08WVY33InVvl6TIReUJVPJiB-AdniMzc0cBEa_w0YxxQouSzoiaAjoKhg3pV9zx0iTn0jnKWPEN0fSbnQxUx-Mm96lgGOwbwliH9JB_F66VnS-FA"/>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-xs">Manta 'Vicuña Gold'</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-unit">100% Vicuña de Esquila Silvestre</p>
+<p class="font-label-caps text-label-caps text-primary tracking-widest">Pieza de Coleccionista</p>
+</div>
+<!-- Product Item -->
+<div class="group flex flex-col items-center text-center">
+<div class="w-full aspect-[3/4] overflow-hidden mb-sm bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A tailored men's coat in deep navy blue, crafted from a heavy alpaca blend. The shot shows the sharp lines and premium finish of the garment. Minimalist and powerful aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwwZKbOp9Lm9AYztPj3hKikvBY9chMe7I0PTKqlDAeRANsWBRYVQ1TLRSvZ1vFHTLcrzPLiWXt6Hocik1Y5em6OukW0-gAnV5sZtG1UWY96lnSrZ-UOnq3wrksBYjhi8m7mpMDrqAHwaprXQlmtLaZZSfD6hxD2RdJAAls_u5f4gSi7ImOyj-g73EMh68OYcDQ17aSJJgn-HDr4kfLgRiPW3k8l0jsQb8ar9hZKnofqkLnLlWbD92Qw6lzAT1L6EcBO0jFCwcEAKQ"/>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-xs">Abrigo 'Altiplano'</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-unit">Royal Alpaca Blend</p>
+<p class="font-label-caps text-label-caps text-primary tracking-widest">Estructura &amp; Calidez</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Materials & Quality (Technical Excellence) -->
+<section class="py-xl bg-on-secondary-fixed-variant text-secondary-fixed overflow-hidden relative">
+<div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+<span class="material-symbols-outlined text-[400px]">filter_vintage</span>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-primary-fixed-dim mb-xs block">Excelencia Técnica</span>
+<h2 class="font-headline-lg text-headline-lg mb-md">La Ciencia Detrás de la Ternura</h2>
+<div class="space-y-gutter">
+<div class="border-l-2 border-primary-fixed-dim pl-gutter">
+<h4 class="font-title-lg text-title-lg text-secondary-fixed mb-xs">16.5 Micrones</h4>
+<p class="font-body-md text-body-md opacity-80">Nuestra fibra de Baby Alpaca alcanza niveles de finura comparables al cachemir más selecto, garantizando una suavidad absoluta sin irritación.</p>
+</div>
+<div class="border-l-2 border-primary-fixed-dim pl-gutter">
+<h4 class="font-title-lg text-title-lg text-secondary-fixed mb-xs">Trazabilidad Total</h4>
+<p class="font-body-md text-body-md opacity-80">Cada lote de fibra está certificado mediante tecnología blockchain, desde la comunidad de origen en Puno hasta el telar final en Arequipa.</p>
+</div>
+<div class="border-l-2 border-primary-fixed-dim pl-gutter">
+<h4 class="font-title-lg text-title-lg text-secondary-fixed mb-xs">Termorregulación Inteligente</h4>
+<p class="font-body-md text-body-md opacity-80">La estructura medular hueca de la fibra de alpaca permite el aislamiento térmico en climas fríos y la transpirabilidad en climas cálidos.</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="Scientific macro photography showing individual fibers of alpaca wool under cross-polarized light, revealing their unique cellular scale structure. The image is artistic, technical, and high-resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoXR0MOkrkKk68sSprNZwxV6UKbcICuKH3OslCV6rdmv-rM5SzVEDnt4JuB_1UsnDB8bYS4otxRzygqFtoUzcVznAX1_-OUETi24VfxiFtg_okopXZ6rrnfWrRnjdktb7WAyKGWne3UO_W9AzRJeE3cf-sV4YBzvOjpcIT2ZgqEgEJLczB2r2REhOOwlzyNDrHO-P_wqf83mhmShouzJih1wbSk3yS2RXIjpjq8RmGqz5J74FMrAl69Mb_BDx_ADH2Q8bFIO3DMw0"/>
+</div>
+<div class="absolute -bottom-xs -left-xs bg-primary-fixed-dim text-on-primary-fixed p-md shadow-xl">
+<p class="font-label-caps text-label-caps uppercase">Certificado de Origen</p>
+<p class="font-headline-md text-headline-md tracking-tighter">WPA 100%</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Institutional CTA -->
+<section class="py-xl bg-surface">
+<div class="max-w-4xl mx-auto text-center px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Lleve el Lujo a su Espacio</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                    Nuestra plataforma institucional es una ventana al arte textil. Si desea adquirir estas piezas para su colección personal o boutique, le invitamos a visitar nuestra tienda digital curada.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-gutter">
+<button class="bg-primary text-on-primary px-xl py-sm font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary-container transition-all">Explorar Boutique Online</button>
+<button class="border border-on-surface text-on-surface px-xl py-sm font-label-caps text-label-caps uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-all">Solicitar Catálogo Físico</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-secondary-fixed dark:bg-on-secondary-fixed-variant w-full mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-margin-desktop py-lg max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col gap-sm">
+<div class="font-headline-md text-headline-md text-on-secondary-fixed dark:text-secondary-fixed">ALPACART</div>
+<p class="max-w-xs font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim">
+                    © 2024 ALPACART TEXTILES. SUSTAINABLY CRAFTED IN PERU.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-lg">
+<div class="flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-secondary-fixed dark:text-secondary-fixed">Compañía</span>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all" href="#">Traceability</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all" href="#">Sustainability</a>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-secondary-fixed dark:text-secondary-fixed">Soporte</span>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all" href="#">Shipping &amp; Returns</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all" href="#">Contact Us</a>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-secondary-fixed dark:text-secondary-fixed">Legal</span>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all" href="#">Wholesale</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and subtle scroll effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, observerOptions);
+
+            // Simple reveal for product cards
+            document.querySelectorAll('.group.flex-col').forEach(card => {
+                card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+                observer.observe(card);
+            });
+        });
+    </script>
+</body></html>

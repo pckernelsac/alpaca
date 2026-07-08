@@ -1,0 +1,72 @@
+.section {
+  padding-bottom: var(--spacing-xl);
+  background-color: var(--color-bg);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.imgWrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  overflow: hidden;
+  padding: 4px;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover .imgWrap {
+  transform: scale(1.05);
+}
+
+.activeBorder {
+  border-color: var(--color-primary-dim);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-size: cover;
+  background-position: center;
+}
+
+.label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.btn:hover .label {
+  color: var(--color-primary);
+}
+
+.labelActive {
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-primary);
+}

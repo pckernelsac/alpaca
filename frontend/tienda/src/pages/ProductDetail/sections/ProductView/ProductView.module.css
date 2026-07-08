@@ -1,0 +1,21 @@
+.grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-lg); }
+@media (min-width: 1024px) { .grid { grid-template-columns: 7fr 5fr; gap: var(--spacing-xl); } }
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md); }
+.mainImg { grid-column: span 2; aspect-ratio: 3/4; position: relative; overflow: hidden; background: var(--color-bg-tertiary); border-radius: var(--radius-sm); }
+.mainImg:hover .img { transform: scale(1.05); }
+.thumbImg { aspect-ratio: 1; overflow: hidden; background: var(--color-bg-tertiary); border-radius: var(--radius-sm); }
+.thumbImg:hover .img { transform: scale(1.05); }
+.img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.22,1,0.36,1); }
+.badge { position: absolute; top: var(--spacing-md); left: var(--spacing-md); background: var(--color-glass); backdrop-filter: blur(8px); padding: var(--spacing-xs) var(--spacing-md); font-family: var(--font-label); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text); }
+.info { display: flex; flex-direction: column; gap: var(--spacing-md); position: sticky; top: 6rem; align-self: start; }
+.title { font-family: var(--font-display); font-size: 2.5rem; line-height: 1.1; font-weight: 400; letter-spacing: -0.02em; color: var(--color-text); }
+.subtitle { font-family: var(--font-display); font-size: 1.25rem; color: var(--color-text-secondary); font-style: italic; }
+.priceRow { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--color-border); padding-bottom: var(--spacing-md); }
+.price { font-family: var(--font-display); font-size: 2rem; color: var(--color-primary); }
+.stockBadge { font-family: var(--font-label); font-size: 0.75rem; color: var(--color-error); background: var(--color-bg-tertiary); padding: 0.25rem 0.75rem; border-radius: 9999px; }
+.desc { font-family: var(--font-body); font-size: 18px; line-height: 1.7; color: var(--color-text-secondary); }
+.actions { display: flex; flex-direction: column; gap: var(--spacing-md); margin-top: var(--spacing-sm); }
+.buyBtn { width: 100%; padding: var(--spacing-lg); background: var(--color-bg-inverse); color: var(--color-text-inverse); border: none; font-family: var(--font-label); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
+.buyBtn:hover { background: var(--color-primary); }
+.addBtn { width: 100%; padding: var(--spacing-lg); background: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); font-family: var(--font-label); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+.addBtn:hover { background: var(--color-bg-tertiary); }

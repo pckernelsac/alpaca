@@ -1,0 +1,94 @@
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--color-primary);
+}
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+.infoItem {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+}
+.infoIcon {
+  color: var(--color-primary);
+  margin-top: 0.25rem;
+}
+.infoLabel {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 0.125rem;
+}
+.infoValue {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0.5rem var(--spacing-lg);
+  background-color: var(--color-surface-container-high);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+.whatsapp:hover {
+  border-color: var(--color-primary);
+}
+.whatsappIcon {
+  color: var(--color-primary);
+}
+.whatsappLabel {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+.socialSection {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+.socialLabel {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+}
+.socialLinks {
+  display: flex;
+  gap: var(--spacing-md);
+}
+.socialLink {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.socialLink:hover {
+  color: var(--color-primary);
+}

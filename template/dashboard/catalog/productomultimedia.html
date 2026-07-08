@@ -1,0 +1,433 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Multimedia - Alpacart ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#271808",
+                    "secondary": "#705a46",
+                    "surface-variant": "#ece0d9",
+                    "surface-container": "#f8ece4",
+                    "on-primary-fixed": "#281800",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#f6bd60",
+                    "tertiary-fixed": "#d0e4ff",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#352f2b",
+                    "surface": "#fff8f5",
+                    "outline-variant": "#d4c4b1",
+                    "on-primary-fixed-variant": "#614000",
+                    "primary-fixed": "#ffddae",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#9acbff",
+                    "surface-dim": "#e3d8d1",
+                    "on-secondary-container": "#76604c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#f2e6df",
+                    "secondary-fixed-dim": "#dec1a8",
+                    "on-surface-variant": "#504537",
+                    "on-background": "#201b16",
+                    "secondary-container": "#fbddc3",
+                    "on-tertiary-container": "#fdfcff",
+                    "on-primary-container": "#fffbff",
+                    "inverse-on-surface": "#faeee7",
+                    "tertiary": "#215f92",
+                    "surface-container-low": "#fdf1ea",
+                    "on-tertiary": "#ffffff",
+                    "background": "#fff8f5",
+                    "tertiary-container": "#3f78ad",
+                    "inverse-primary": "#f6bd60",
+                    "on-surface": "#201b16",
+                    "on-tertiary-fixed-variant": "#004a79",
+                    "surface-tint": "#7f5600",
+                    "surface-bright": "#fff8f5",
+                    "on-secondary-fixed-variant": "#574330",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#9a6c14",
+                    "outline": "#827565",
+                    "surface-container-highest": "#ece0d9",
+                    "secondary-fixed": "#fbddc3",
+                    "on-tertiary-fixed": "#001d34",
+                    "primary": "#7c5400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "density-comfortable": "16px",
+                    "density-compact": "8px",
+                    "container-margin": "32px",
+                    "topbar-height": "56px",
+                    "sidebar-width": "260px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .asset-card:hover .asset-actions { opacity: 1; }
+        .active-selection { border-color: #7c5400 !important; background-color: #fdf1ea; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f8ece4; }
+        ::-webkit-scrollbar-thumb { background: #d4c4b1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-sidebar-width h-screen sticky left-0 overflow-y-auto bg-surface-container dark:bg-inverse-surface border-r border-outline-variant flex flex-col py-density-comfortable gap-unit">
+<div class="px-gutter mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">diamond</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Alpacart ERP</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Textiles Premium</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Inventario
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span> Producción
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary font-bold bg-secondary-container rounded-lg font-label-md text-label-md transition-all duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">perm_media</span> Multimedia
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">shopping_cart</span> Ventas
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span> Reportes
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span> Ajustes
+            </a>
+</nav>
+<div class="mt-auto px-4 border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span> Ayuda
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-highest transition-all duration-200 cursor-pointer rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span> Cerrar Sesión
+            </a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- Top App Bar -->
+<header class="w-full h-topbar-height sticky top-0 z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-container-margin">
+<div class="flex items-center gap-4">
+<nav class="flex text-on-surface-variant font-label-md text-label-md items-center gap-2">
+<span>Inventario</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Productos</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Manta Imperial Gold</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">Multimedia</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-surface-container-high text-on-surface border border-outline-variant px-4 py-1.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-highest transition-colors active:scale-95">
+                    Cancelar
+                </button>
+<button class="bg-primary text-white px-4 py-1.5 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                    Guardar Cambios
+                </button>
+</div>
+</header>
+<div class="flex-1 flex overflow-hidden">
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-container-margin space-y-8">
+<!-- Upload Zone -->
+<section>
+<div class="border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low p-12 flex flex-col items-center justify-center text-center group hover:border-primary transition-colors cursor-pointer active:scale-[0.99] duration-200">
+<div class="w-16 h-16 bg-secondary-container text-primary rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+</div>
+<h2 class="font-title-lg text-title-lg text-on-surface mb-2">Arrastra tus archivos aquí o haz clic para explorar</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                            Sube las imágenes de producto y videos promocionales en alta resolución.
+                            <span class="block mt-1 font-label-sm text-label-sm opacity-60">Soportamos JPG, PNG, MP4 hasta 50MB</span>
+</p>
+</div>
+</section>
+<!-- Asset Gallery -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Galería de Activos</h3>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-high">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-high">
+<span class="material-symbols-outlined">view_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter" id="asset-grid">
+<!-- Asset Card 1 (Principal) -->
+<div class="asset-card group relative bg-surface border border-outline-variant rounded-lg overflow-hidden transition-all hover:shadow-lg active-selection cursor-pointer" onclick="toggleDetails('asset-1')">
+<div class="absolute top-2 left-2 z-10 flex gap-1">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">PRINCIPAL</span>
+<span class="bg-surface/80 backdrop-blur-sm text-on-surface text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">JPG</span>
+</div>
+<div class="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white/90 p-1.5 rounded-full text-secondary hover:text-primary transition-colors shadow-md">
+<span class="material-symbols-outlined text-[18px]">drag_indicator</span>
+</button>
+</div>
+<div class="h-48 overflow-hidden bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A professional product photograph of a luxury gold alpaca blanket, draped elegantly over a dark wooden chair. The lighting is soft and cinematic, highlighting the fine texture of the natural fibers. The setting is a minimalist, high-end interior with warm earth tones. Corporate luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYPh-lyNskM1oEaT8vtwUb31zqx4QZc2_FaIg63cc5UUclRrkbXa8TETdhLBtE4jS7UbkdfXE94aj8NQNI9GZ3padDr_y4GHn23HxLUm9xQ_KurpN29UzjypafausIoFFeNf6Z9YAnvyeP8TrRCxY96mmJkGQ9N4yD37lxK3jAvT9XlDMQiRqFbzZ-J89_mMhBTmEKKd_uy3SANDGwtQN3WAy2cRBU693ZntOaMvgcJsDMli21izN8qK8vs_rKCjcpWtzdbnOHxOa_">
+</div>
+<div class="p-3 border-t border-outline-variant flex justify-between items-center bg-white">
+<div>
+<p class="font-label-md text-label-md text-on-surface truncate w-32">manta_gold_frontal.jpg</p>
+<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Optimizado
+                                    </span>
+</div>
+<div class="flex gap-1 opacity-0 asset-actions transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Editar Metadatos">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors" title="Eliminar">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asset Card 2 -->
+<div class="asset-card group relative bg-surface border border-outline-variant rounded-lg overflow-hidden transition-all hover:shadow-lg cursor-pointer" onclick="toggleDetails('asset-2')">
+<div class="absolute top-2 left-2 z-10">
+<span class="bg-surface/80 backdrop-blur-sm text-on-surface text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">PNG</span>
+</div>
+<div class="h-48 overflow-hidden bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up detailed macro shot of alpaca fiber texture in a rich gold hue. The fibers appear soft, lustrous, and intricately woven. Shallow depth of field with a clean studio lighting background. High-quality textile manufacturing visual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7_gJtIZZas-nL1rb40vRdOp0VWDWqnLUC7lKwZJOATIqaKuXzAENZe4kam9kxDWAvOBPD2FGHNWhJoo9a3aUmF5tVwDhtbFJMQ8xkv--Jxo1D8ce3pFII_mYKUPuNFwvPOC1cUQiwuUcfhzyJhXKGIH_ovUnA5eIK4KIY19jJQg6ZVrlFPe3E2MkulQTYocJAIAvnjLgiamaqZYFjn5oXMs1FeZLSQAkWKBWsIfPCf_6RAHNh2hzauU3O6eAnXSarUrGYPS08cLDI">
+</div>
+<div class="p-3 border-t border-outline-variant flex justify-between items-center bg-white">
+<div>
+<p class="font-label-md text-label-md text-on-surface truncate w-32">textura_macro_01.png</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60">Original (2.4MB)</span>
+</div>
+<div class="flex gap-1 opacity-0 asset-actions transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asset Card 3 (Video) -->
+<div class="asset-card group relative bg-surface border border-outline-variant rounded-lg overflow-hidden transition-all hover:shadow-lg cursor-pointer" onclick="toggleDetails('asset-3')">
+<div class="absolute top-2 left-2 z-10 flex gap-1">
+<span class="bg-tertiary text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm uppercase">VIDEO</span>
+</div>
+<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[48px] text-white opacity-80 drop-shadow-lg">play_circle</span>
+</div>
+<div class="h-48 overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover brightness-75 transition-transform duration-500 group-hover:scale-110" data-alt="A video thumbnail showing a craftsman's hands carefully folding a luxury gold alpaca blanket. The scene is lit by warm natural morning light in an artisanal workshop. High production value, slow motion, professional cinematography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoY9IqdzEP20y4KN0JK4L_g32DE7YoYXi6r7a_wOwEiExl5R5VjDaNRCCsOyNj2PaNJqvVAPN9NIcNjYdcwpe2X4JqIWIakuMaUDqv5Osk0oZCEgbSBkvQO3LjN_nCAwmdyIoOQRIJadZARmvwBHqjS8D_UgTalnm24l0y68jVRgfyuS_Ldb2csQfADc9zK6ZaclGTEZ8J2mnNnO4oUyWQtjnHN_Axba7lZB0yDRid2VHhhjiZb3Hmhx6Vp43p0SXIqgG31draGKRl">
+</div>
+<div class="p-3 border-t border-outline-variant flex justify-between items-center bg-white">
+<div>
+<p class="font-label-md text-label-md text-on-surface truncate w-32">lifestyle_promo.mp4</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60">0:15 seg</span>
+</div>
+<div class="flex gap-1 opacity-0 asset-actions transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asset Card 4 -->
+<div class="asset-card group relative bg-surface border border-outline-variant rounded-lg overflow-hidden transition-all hover:shadow-lg cursor-pointer" onclick="toggleDetails('asset-4')">
+<div class="h-48 overflow-hidden bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A model wearing a premium alpaca wrap in a high-fashion outdoor setting in the Peruvian Andes. The lighting is natural but dramatic, with mountains in the soft focus background. Professional fashion editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiFWOxRHZGxGZlMxyPC2UjjZ-AZiMiA4xgNOK2r2yelX2r4li-yZ2iNeFO2BgcmdWUWW5OHSRbN4w7i8ArqpxP6xMrzOzAbU3mQIx_tchdrnoHrEosYHjaf5KUrOV6-lj33fFyUVD8pV1fU104UCnuZc5TF8MIrN1agcZBx9D840F0c2SUihpu6acAfWiNhs8t0SE5T9cDA2z71bOZ8TtTif7WvbPmd7nStxxpVGxQb8Iwy1_179LKOk3ehf-qEJYd6OkbLEJ3-9Nc">
+</div>
+<div class="p-3 border-t border-outline-variant flex justify-between items-center bg-white">
+<div>
+<p class="font-label-md text-label-md text-on-surface truncate w-32">campana_modelo_04.jpg</p>
+<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Optimizado
+                                    </span>
+</div>
+<div class="flex gap-1 opacity-0 asset-actions transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Side Detail Panel (Active/Selectable) -->
+<aside class="w-[380px] h-full bg-surface border-l border-outline-variant overflow-y-auto hidden lg:flex flex-col" id="detail-panel">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h4 class="font-title-md text-title-md text-on-surface">Detalles del Activo</h4>
+<button class="p-1 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6">
+<!-- Preview Small -->
+<div class="aspect-video w-full rounded-lg overflow-hidden border border-outline-variant bg-surface-container-highest">
+<img class="w-full h-full object-contain" data-alt="A professional product photograph of a luxury gold alpaca blanket, draped elegantly over a dark wooden chair. Corporate luxury aesthetic." id="detail-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOZaAoSKLg34k9UH-dW8QqMurC-jfn0ett5I5RNua9dJXxQCfLzbSFfge9DOSHa0O70vOdzpAumuf7K7adWEwxvoyTiI4u40kUM3u-MyOr5e1OQg-umm1OnCjFaRDj64_wFRuCWjN5NG1COw1BuDEa3FtoM3MAaOO0qqe7btk9jiyfCHnTk9ao8tBr9JSNHTe9rfcfj--JFPGWA0YxqCuPWrbKX-Y5dE9SUgo_XI2VzGhe_Tt1xRRIHDAT_V8pUTB8FdPmofd0z2QB">
+</div>
+<!-- Meta Info -->
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex-1 overflow-hidden">
+<h5 class="font-title-md text-title-md text-on-surface truncate" id="detail-name">manta_gold_frontal.jpg</h5>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Imagen JPG • 2400x1600 px</p>
+</div>
+<span class="material-symbols-outlined text-primary">verified</span>
+</div>
+<!-- Stats Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-4 grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Original</p>
+<p class="font-title-md text-title-md text-on-surface">4.2 MB</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Optimizado</p>
+<p class="font-title-md text-title-md text-primary">850 KB</p>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md text-label-md hover:bg-secondary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+                            Optimizar ahora
+                        </button>
+</div>
+<!-- Form Section -->
+<div class="space-y-4 pt-4 border-t border-outline-variant">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+                                Alt Text (SEO) 
+                                <span class="material-symbols-outlined text-[14px] opacity-40">info</span>
+</label>
+<input class="w-full border-outline-variant rounded-lg bg-surface px-3 py-2 text-body-md focus:border-primary focus:ring-1 focus:ring-primary-fixed outline-none transition-all" type="text" value="Manta de Alpaca Imperial Gold - Vista Frontal">
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">Descripción</label>
+<textarea class="w-full border-outline-variant rounded-lg bg-surface px-3 py-2 text-body-md focus:border-primary focus:ring-1 focus:ring-primary-fixed outline-none transition-all" rows="3">Fotografía de alta resolución para la ficha de producto del catálogo premium 2024.</textarea>
+</div>
+<div class="flex items-center justify-between p-3 border border-outline-variant rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">visibility</span>
+<span class="font-label-md text-label-md text-on-surface">Visibilidad Pública</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-10 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="pt-6 flex gap-2">
+<button class="flex-1 border border-outline-variant text-on-surface py-2 rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">fullscreen</span>
+                            Ver Pantalla Completa
+                        </button>
+<button class="p-2 border border-error/30 text-error rounded-lg hover:bg-error-container/20 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<script>
+        // Simple interactivity for demonstration
+        function toggleDetails(assetId) {
+            const panel = document.getElementById('detail-panel');
+            const cards = document.querySelectorAll('.asset-card');
+            
+            // Highlight selected card
+            cards.forEach(card => card.classList.remove('active-selection'));
+            event.currentTarget.classList.add('active-selection');
+
+            // Simulate loading content based on assetId
+            const assetName = event.currentTarget.querySelector('p').innerText;
+            const detailName = document.getElementById('detail-name');
+            detailName.innerText = assetName;
+
+            // In a real app, we would update the image src here as well
+            
+            // Make sure panel is visible
+            panel.classList.remove('hidden');
+        }
+
+        // Drag and drop visual feedback simulation
+        const dropZone = document.querySelector('.border-dashed');
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.add('border-primary', 'bg-surface-container-high');
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-primary', 'bg-surface-container-high');
+            });
+        });
+    </script>
+</body></html>

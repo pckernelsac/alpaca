@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ALPACART | Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .search-backdrop {
+            backdrop-filter: blur(12px);
+            background-color: rgba(19, 19, 19, 0.98);
+        }
+        .luxury-input-focus:focus {
+            outline: none;
+            border-bottom-color: #B8862F;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1c1b1b;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #393939;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-container": "#4a3613",
+                        "inverse-primary": "#B8862F",
+                        "inverse-on-surface": "#131313",
+                        "on-secondary-fixed-variant": "#d4c4b1",
+                        "on-primary-fixed-variant": "#ffddae",
+                        "on-secondary": "#131313",
+                        "secondary-fixed": "#352f2a",
+                        "on-tertiary": "#131313",
+                        "on-tertiary-fixed-variant": "#b1d09f",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#393939",
+                        "primary": "#B8862F",
+                        "surface-variant": "#2a2a2a",
+                        "inverse-surface": "#F5F5F5",
+                        "on-primary": "#131313",
+                        "on-primary-fixed": "#131313",
+                        "on-error": "#131313",
+                        "on-tertiary-fixed": "#131313",
+                        "secondary-container": "#2a2a2a",
+                        "on-tertiary-container": "#b1d09f",
+                        "surface-tint": "#B8862F",
+                        "primary-fixed-dim": "#B8862F",
+                        "on-secondary-container": "#F5F5F5",
+                        "outline": "#504537",
+                        "surface-container-highest": "#2a2a2a",
+                        "on-secondary-fixed": "#F5F5F5",
+                        "surface-container": "#1c1b1b",
+                        "on-surface": "#F5F5F5",
+                        "secondary": "#a6937c",
+                        "on-background": "#F5F5F5",
+                        "tertiary-fixed-dim": "#b1d09f",
+                        "surface-container-low": "#161616",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#ccecb9",
+                        "tertiary": "#b1d09f",
+                        "surface-container-high": "#222222",
+                        "tertiary-container": "#344d28",
+                        "surface": "#131313",
+                        "primary-fixed": "#ffddae",
+                        "on-primary-container": "#ffddae",
+                        "surface-dim": "#131313",
+                        "outline-variant": "#393939",
+                        "secondary-fixed-dim": "#dcc2a6",
+                        "on-surface-variant": "#d4c4b1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "display-sm": ["Playfair Display"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-sm": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden dark">
+<!-- Search Overlay -->
+<section class="fixed inset-0 z-[100] search-backdrop flex flex-col items-center custom-scrollbar overflow-y-auto">
+<!-- Header / Close Action -->
+<header class="w-full flex justify-between items-center px-margin-desktop py-base max-w-container-max sticky top-0 bg-transparent z-10">
+<span class="text-headline-md font-headline-md tracking-widest text-on-background">ALPACART</span>
+<button class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors" onclick="window.history.back()">
+            CLOSE <span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Main Search Canvas -->
+<div class="w-full max-w-[900px] px-margin-mobile md:px-0 py-xl flex flex-col gap-xl">
+<!-- Search Input Section -->
+<div class="relative group w-full">
+<div class="flex items-center border-b border-outline-variant pb-base transition-all duration-300 group-focus-within:border-primary">
+<span class="material-symbols-outlined text-outline mr-md">search</span>
+<input autofocus="" class="w-full bg-transparent border-none p-0 text-headline-md font-headline-md text-on-background placeholder:text-outline-variant focus:ring-0 luxury-input-focus" id="main-search-input" placeholder="Search our collections..." type="text"/>
+</div>
+<!-- Autocomplete Dropdown -->
+<div class="hidden absolute top-full left-0 w-full bg-surface-container-lowest border border-outline-variant border-t-0 shadow-2xl z-20 py-base" id="autocomplete-results">
+<div class="px-md py-sm hover:bg-surface-container-low cursor-pointer transition-colors flex items-center gap-md">
+<span class="material-symbols-outlined text-outline-variant">trending_up</span>
+<span class="text-body-md text-on-surface">Andean <span class="font-bold text-primary">Gold</span> Sweaters</span>
+</div>
+<div class="px-md py-sm hover:bg-surface-container-low cursor-pointer transition-colors flex items-center gap-md">
+<span class="material-symbols-outlined text-outline-variant">history</span>
+<span class="text-body-md text-on-surface">Vicuna <span class="font-bold text-primary">Scarves</span> Collection</span>
+</div>
+<div class="px-md py-sm hover:bg-surface-container-low cursor-pointer transition-colors flex items-center gap-md">
+<span class="material-symbols-outlined text-outline-variant">search</span>
+<span class="text-body-md text-on-surface">Organic <span class="font-bold text-primary">Alpaca</span> Blankets</span>
+</div>
+</div>
+</div>
+<!-- Discovery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl" id="search-discovery">
+<!-- Left Column: History & Trends -->
+<div class="md:col-span-4 flex flex-col gap-lg">
+<!-- Recent History -->
+<div>
+<h3 class="text-label-sm font-label-sm uppercase tracking-widest text-primary mb-md">Recent History</h3>
+<div class="flex flex-col gap-base">
+<button class="text-left text-body-md text-on-surface-variant hover:text-primary transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">history</span>
+                            Cashmere Blend Poncho
+                        </button>
+<button class="text-left text-body-md text-on-surface-variant hover:text-primary transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">history</span>
+                            Midnight Blue Scarf
+                        </button>
+<button class="text-left text-body-md text-on-surface-variant hover:text-primary transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary">history</span>
+                            Winter 2024 Lookbook
+                        </button>
+</div>
+</div>
+<!-- Trending Now -->
+<div>
+<h3 class="text-label-sm font-label-sm uppercase tracking-widest text-primary mb-md">Trending Now</h3>
+<div class="flex flex-wrap gap-sm">
+<span class="px-md py-xs bg-surface-container-high rounded-full text-label-md text-on-surface-variant hover:bg-primary hover:text-background transition-colors cursor-pointer">Artisan Vests</span>
+<span class="px-md py-xs bg-surface-container-high rounded-full text-label-md text-on-surface-variant hover:bg-primary hover:text-background transition-colors cursor-pointer">Heritage Knits</span>
+<span class="px-md py-xs bg-surface-container-high rounded-full text-label-md text-on-surface-variant hover:bg-primary hover:text-background transition-colors cursor-pointer">Sustainable Dyed Wool</span>
+<span class="px-md py-xs bg-surface-container-high rounded-full text-label-md text-on-surface-variant hover:bg-primary hover:text-background transition-colors cursor-pointer">Summer Alpaca</span>
+</div>
+</div>
+<!-- Quick Access -->
+<div>
+<h3 class="text-label-sm font-label-sm uppercase tracking-widest text-primary mb-md">Quick Access</h3>
+<ul class="flex flex-col gap-base">
+<li><a class="text-body-md text-on-surface-variant border-b border-transparent hover:border-primary hover:text-primary transition-all" href="#">All Sweaters</a></li>
+<li><a class="text-body-md text-on-surface-variant border-b border-transparent hover:border-primary hover:text-primary transition-all" href="#">Artisan Accessories</a></li>
+<li><a class="text-body-md text-on-surface-variant border-b border-transparent hover:border-primary hover:text-primary transition-all" href="#">The Gift Edit</a></li>
+<li><a class="text-body-md text-on-surface-variant border-b border-transparent hover:border-primary hover:text-primary transition-all" href="#">Sustainability Report</a></li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Suggested Products -->
+<div class="md:col-span-8 flex flex-col gap-lg">
+<div class="flex justify-between items-end mb-md">
+<h3 class="text-headline-md font-headline-md italic text-on-background">Suggested Products</h3>
+<a class="text-label-md font-label-md text-primary hover:underline transition-all" href="#">VIEW ALL</a>
+</div>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-sm relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" data-alt="A high-end Andean Gold Alpaca sweater displayed elegantly in a minimalist, bright luxury boutique setting with soft shadows and warm highlights. The fabric texture is visibly plush and premium. Minimalist light mode aesthetic, sophisticated composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAssAMpLZs8ERa72ZlpNlBv8gscyiNqjGgDdIhBjU25LRzGopsXSEE_cj-6Je0Qg1uI2MiOwQMt4AT1jLgJJZxPS3gVgs5m2aWbTWFYZkbBlKn2X8kygQAFNE9vjAAlBiDZEcmD1BgSSk5luAvoe2y8pEjrwgjc0Pk7M5XIKq0886vROFD1B-JnA6-uBQ_oscQk6o-VYg7eSgBHFpi24t4QKZYCaWanUydCQsvYt0uRVqyliiEhWcxQ0x8X25QUEk-i0FEwLwN4SV8Y"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-primary text-background text-label-sm uppercase tracking-tighter">Limited</div>
+</div>
+<h4 class="text-body-md font-medium text-on-surface">Andean Gold Crewneck</h4>
+<p class="text-label-md text-primary">$420</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-sm relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" data-alt="A luxurious Vicuna wool scarf draped over a marble pedestal in a sunlit architectural space. The color is a deep, warm cinnamon. High-fashion photography style with a focus on material quality and quiet luxury. Light neutral color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWY-hoTapfc2psYlOoOaFlRCwaTcky0PcxII5aufhM4gZcYCAVlnj8u7TLFDhS329zrx63uvheMVSwquFh6DWzCzpDjv4qVY6VHmfVdJYoxnCmb5-fwHCDYLr9Q-YTBTNtJfsBMF6S7vqpajQ_A9oryzTzAV5lSCCzGj1ptclLX1AR07GXMJceuZubfqulwRxSckCfMc9JWI_3yNGr5pGynRtzBn4tgUAIkk7-Y8T6HHDWeiq6zzkVH4nGVAloowuMRPn7C6reH0Ga"/>
+</div>
+<h4 class="text-body-md font-medium text-on-surface">Vicuna Heritage Scarf</h4>
+<p class="text-label-md text-primary">$1,250</p>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-sm">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" data-alt="Detail shot of a minimalist grey alpaca wool cardigan with high-quality horn buttons. Soft, natural lighting highlights the fine knit texture. Minimalist studio background with a focus on artisanal craftsmanship and timeless design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQPqYHWnw_RLol5QHKnQNoD8Qj26d5eJJ_T06gdGNVPQnUO1hlkDaHfPhZ_egw7ry-ImrZww317SHSq0IUAqDPhoewLZQPRw_QbSYCtF8IpvfiDlRzg_drKy8zhQIFK5TsvYJbFYkP2F4f3-pZ-4rgzCeFqCQOrlqnf8aQR8oBWzndFioMRdjniPtgfa6FG3Zit9mRBMr3CC5P4O1mt-85TrxC4a1eMpg-IOsgKB44_514-AfUzEWSo54bhsw8JJU3vQk8hB_b5GFK"/>
+</div>
+<h4 class="text-body-md font-medium text-on-surface">Pima-Alpaca Cardigan</h4>
+<p class="text-label-md text-primary">$380</p>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-sm">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" data-alt="A pair of handmade alpaca wool lounge trousers in a soft cream color, displayed in a serene, modern living space. Soft daylight, clean lines, and an atmosphere of ultimate comfort and luxury. Elegant editorial fashion photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALYETHyKBAvTS6-0UwMvCqmFyXMU5nomG-Q905GSdvUUBHFSwgCFzXn6ooIHiNDtNL2ykCJ-QtVICYvwj1G4_nJadB1pFuip9cNA9FBkbDxVGKt0CJ50N44rpJbGcpGbrWnwXF-zWfL8pnzx1jp7RmWP0nU48i94Am0Z6LwTsCh-EoguPY_kZ_inOvTTt1y7MRHHT0kW343MJvrESQnr9HXoejwaVQ7qt2260f4nO5isXpv__d5hqdtryfwJg1vpQZIqhGbHH1otg5"/>
+</div>
+<h4 class="text-body-md font-medium text-on-surface">Cloud Lounge Trousers</h4>
+<p class="text-label-md text-primary">$295</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Collections (Lower Section) -->
+<div class="w-full pt-xl border-t border-outline-variant">
+<h3 class="text-label-sm font-label-sm uppercase tracking-widest text-primary mb-lg text-center">Featured Collections</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Collection Card 1 -->
+<div class="relative h-[300px] group overflow-hidden cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0" data-alt="An editorial wide shot of a model wearing luxury alpaca textiles walking through a mist-covered Andean landscape. High-contrast, cinematic lighting, emphasizing the heritage and origin of the brand. Quiet luxury aesthetic, moody yet clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJSgiLusD4tj5miFXkcbGX6CjdBNF7FtfDen2HjE8yYz4SK9f3T7fzK28TRdKlb34kFw5GRd08rCHLN7524VEp_Taa81x1kxP2agcDg7mDeyyN9X-uqkMQNDy7GMdVaCw8VQCDmVm1lqExaJZjO-fmg-55wlcExiR0ppNK_1A3l7cCgg-TS3mvkLNX1Rd2onWrELFFTTX11u1eFB2FYIpliHi8j1GPlQUtcqg1zcY-7Fct1Jjjp2kcnKRylcMrB8OxgWBGdNYxXCBY"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all"></div>
+<div class="absolute inset-0 flex flex-col justify-end p-xl">
+<h4 class="text-headline-md font-headline-md text-white mb-2">The Andean Origins</h4>
+<p class="text-white/80 text-body-md italic border-b border-primary/50 w-fit pb-1 group-hover:border-primary transition-all group-hover:text-primary">Explore the Heritage</p>
+</div>
+</div>
+<!-- Collection Card 2 -->
+<div class="relative h-[300px] group overflow-hidden cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0" data-alt="A minimalist architectural interior featuring modern textile art and alpaca wool home goods. Soft warm lighting, neutral tones, and a sense of calm and sophistication. High-end lifestyle photography for a luxury brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ_jatLp0MfyJKNIv6RlTdUaxSq2Ry9e4deichJ0KzgZLsEqS1ItfM19QPTCE-YEJQDR60_ny7S1IS0YMLDpi3cFbPsx3B4A9jPTMSS10dYT7VDqv9r-Qzmc0wattOdh14epGgc9YBF5BPoirKU68WB8oamG3PqT6zaQU6nPCIPb6DNBrOdJTpyOgdgxd6HkgteMjYYq4H_SinMJtfvxdOWm4mB7STqzRu480avrnRFsVkQK74vlJS3VBkVaZQnLgig7QAlIt14OCm"/>
+<div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all"></div>
+<div class="absolute inset-0 flex flex-col justify-end p-xl">
+<h4 class="text-headline-md font-headline-md text-white mb-2">The Modern Home</h4>
+<p class="text-white/80 text-body-md italic border-b border-primary/50 w-fit pb-1 group-hover:border-primary transition-all group-hover:text-primary">Sustainable Sanctuary</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Page Footer -->
+<footer class="fixed bottom-0 left-0 w-full p-md text-center pointer-events-none">
+<p class="text-label-sm text-outline font-label-sm">© 2024 ALPACART TEXTILES. DISCOVER CONSCIOUS CRAFTSMANSHIP.</p>
+</footer>
+<script>
+    const searchInput = document.getElementById('main-search-input');
+    const autocomplete = document.getElementById('autocomplete-results');
+
+    searchInput.addEventListener('input', (e) => {
+        if (e.target.value.length > 2) {
+            autocomplete.classList.remove('hidden');
+        } else {
+            autocomplete.classList.add('hidden');
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            autocomplete.classList.add('hidden');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !autocomplete.contains(e.target)) {
+            autocomplete.classList.add('hidden');
+        }
+    });
+</script>
+</body></html>

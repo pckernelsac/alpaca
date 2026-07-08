@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ALPACART | The Gold of the Andes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#d4c4b1",
+                    "primary-fixed": "#ffddae",
+                    "on-surface": "#1f1b16",
+                    "inverse-primary": "#f6bd60",
+                    "on-secondary-fixed": "#221a12",
+                    "on-tertiary-fixed-variant": "#344d28",
+                    "outline": "#827565",
+                    "on-background": "#1f1b16",
+                    "primary-fixed-dim": "#f6bd60",
+                    "secondary-fixed-dim": "#d3c4b6",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fff8f4",
+                    "surface": "#fff8f4",
+                    "secondary-fixed": "#f0e0d2",
+                    "on-primary-fixed": "#281800",
+                    "primary-container": "#9a6c14",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ccecb9",
+                    "primary": "#7c5400",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#6c6056",
+                    "surface-container-highest": "#ebe1d9",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#352f2a",
+                    "secondary-container": "#edddcf",
+                    "on-tertiary-container": "#f8ffee",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#7f5600",
+                    "on-primary-container": "#fffbff",
+                    "surface-dim": "#e2d8d1",
+                    "surface-bright": "#fff8f4",
+                    "tertiary-fixed-dim": "#b1d09f",
+                    "on-primary-fixed-variant": "#614000",
+                    "on-secondary-fixed-variant": "#50453b",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#607c52",
+                    "surface-container": "#f6ece4",
+                    "on-tertiary-fixed": "#092102",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#ebe1d9",
+                    "surface-container-high": "#f1e6de",
+                    "inverse-on-surface": "#f9efe7",
+                    "surface-container-low": "#fcf2ea",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#48633b",
+                    "secondary": "#685c51",
+                    "on-surface-variant": "#504537"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "96px",
+                    "sm": "16px",
+                    "unit": "4px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "lg": "64px",
+                    "gutter": "24px",
+                    "xs": "8px",
+                    "container-max": "1280px",
+                    "md": "32px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(31,27,22,0.2) 0%, rgba(31,27,22,0.6) 100%);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-sm">
+<div class="flex justify-between items-center w-full px-margin-desktop py-xs max-w-container-max mx-auto">
+<div class="flex items-center gap-md">
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed-dim">ALPACART</span>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-label-caps text-label-caps tracking-widest text-primary dark:text-primary-fixed-dim border-b border-primary/30 pb-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Heritage</a>
+<a class="font-label-caps text-label-caps tracking-widest text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Artisanal</a>
+<a class="font-label-caps text-label-caps tracking-widest text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Fibers</a>
+<a class="font-label-caps text-label-caps tracking-widest text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Collection</a>
+<a class="font-label-caps text-label-caps tracking-widest text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Journal</a>
+</div>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-on-surface-variant scale-95 transition-transform duration-200">shopping_bag</button>
+<button class="material-symbols-outlined text-on-surface-variant scale-95 transition-transform duration-200">person</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Editorial Hero -->
+<section class="relative h-screen w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] hover:scale-110" data-alt="A cinematic, wide-angle shot of a majestic white alpaca standing on a high-altitude Andean plateau during the golden hour. In the background, the snow-capped Andes mountains are bathed in soft orange and pink light, creating a serene and ethereal atmosphere. The alpaca's thick, luxurious fleece is highlighted by the low sun, emphasizing its soft texture and natural warmth. The composition is elegant and minimalist, capturing the essence of luxury fibers in their natural heritage home." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_ktbu8hj5zHIO0H8NnHtS6XSy9Of8vqKkDmLFE03CziHXlThep6xoGWnXy-UQCUgg_0eAgFJYPq_MkHnryRvRXk_0hAXBOI69PKw6ggXUCVS5RjwCkmK9847wQH8hKkYeSkxN8Tk2jdEoboUCvLTpSrqPgN1rrJuxeQ7U_Q0ZQlDv_fBmpuhJsppUwPSlie4XU5Ce3N3KZBe2VFR8ymtQNm_Z812cjF9V1xFp3UttD-FtsQ0gAP_GRAFO4hYwjOEo8lJTWuzc3WA')"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="relative h-full flex flex-col justify-end pb-xl px-margin-desktop max-w-container-max mx-auto">
+<p class="font-label-caps text-label-caps tracking-[0.3em] text-white/80 mb-md uppercase">The Andean Heritage</p>
+<h1 class="font-display-lg text-[80px] leading-[0.9] text-white max-w-4xl mb-lg">A Legacy Woven in the Sky.</h1>
+<div class="flex items-center gap-md">
+<a class="px-md py-sm bg-white text-on-surface font-label-caps text-label-caps tracking-widest hover:bg-primary-fixed transition-colors duration-300" href="#">Explore the Journey</a>
+<span class="w-24 h-px bg-white/30 hidden md:block"></span>
+</div>
+</div>
+</section>
+<!-- Brand Story -->
+<section class="py-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 reveal-on-scroll">
+<h2 class="font-headline-lg text-headline-lg mb-md">Ancestral Echoes</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+                        In the heart of the Peruvian Andes, our story begins where the air is thin and the tradition is thick. For generations, we have honored the bond between shepherd and mountain, crafting textiles that breathe with the history of the earth.
+                    </p>
+<a class="inline-flex items-center gap-xs font-label-caps text-label-caps tracking-widest text-primary hover:gap-sm transition-all duration-300" href="#">
+                        Our History <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="md:col-span-7 reveal-on-scroll">
+<div class="relative aspect-[4/5] md:ml-lg">
+<img class="w-full h-full object-cover" data-alt="A close-up, high-fidelity photograph of a skilled Peruvian weaver's hands working on a traditional backstrap loom. The lighting is soft and directional, casting subtle shadows that highlight the intricate textures of the colorful, hand-spun alpaca wool. The artisan's hands are weathered and graceful, telling a story of decades of craftsmanship. The surrounding environment is a rustic stone courtyard with soft, warm Andean light filtering in." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALkmj9XMhNL0PFnvY6uRtvAI45SLftm7drh1CISx1zWb1nmc9CKii7Drn_PWUb0mXuzAXssTvx6RIXnOpeFUEmED9rocV97mrGFuefN7wP5NQHN6E8TQgBLlQSpgA3f6jTR65ek7X5h07RSHOY1MSxrg9CiWIvCZHFBSyA8ULl1YZ_RYJd08eZByUfotBTJvO4A6Vgd9ezuXcKDYMAuTfsQPDtpnAH2fb7qvxYNZRM4s8BEKt9aJEpFTjB49MCci3mV4IKk43IlTA"/>
+<div class="absolute -bottom-xs -left-xs md:-bottom-md md:-left-md w-2/3 h-2/3 border-l border-b border-primary/20 -z-10"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Values & Fibers -->
+<section class="bg-surface-container py-xl">
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-xl reveal-on-scroll">
+<span class="font-label-caps text-label-caps tracking-widest text-primary mb-xs block">UNPARALLELED NOBILITY</span>
+<h2 class="font-headline-lg text-headline-lg">The Gold of the Andes</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="text-center reveal-on-scroll">
+<span class="material-symbols-outlined text-primary text-[48px] mb-md" data-weight="fill">spa</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Baby Alpaca</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Selected for its extreme fineness and thermal properties, surpassing cashmere in both warmth and weightlessness.</p>
+</div>
+<div class="text-center reveal-on-scroll" style="transition-delay: 100ms;">
+<span class="material-symbols-outlined text-primary text-[48px] mb-md" data-weight="fill">water_drop</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Traceable Origin</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Every fiber is tracked from the remote Andean herds to our final weaving house, ensuring ethical treatment and quality.</p>
+</div>
+<div class="text-center reveal-on-scroll" style="transition-delay: 200ms;">
+<span class="material-symbols-outlined text-primary text-[48px] mb-md" data-weight="fill">eco</span>
+<h3 class="font-title-lg text-title-lg mb-sm">Natural Palette</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">We prioritize undyed fibers, celebrating the 22 natural shades of the alpaca—from cloud white to obsidian black.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Collections -->
+<section class="py-xl">
+<div class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="relative group cursor-pointer overflow-hidden reveal-on-scroll">
+<div class="aspect-[16/9] mb-md overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An editorial fashion shot of a model wearing a heavy, cream-colored knitted alpaca poncho, standing against a minimalist architectural background of textured sand-colored concrete. The mood is sophisticated and quiet. The natural drape of the textile is the main focus, with soft side-lighting emphasizing the knit's volume and soft texture. The color palette is composed of warm whites, beiges, and subtle earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJepKokAF379XQEM4YaFHk4S7HvZi_mMf2TSI_UeN-Y0Jdr8LCSEeXX46QdMG1vLOm2hKNVhxMzuiTaYqJd4vIab-lPa2oD0WKSlRr0uwNvI4KfamndQSO0FAnPX80SbITvhApXxSjCBlnLxBkXaNkWUKwua5HlBs99YAbUlh9EDwVRsG2dNJ5NkQxs1u8bdUkJmKHUdosRc2azgv45pjUXqhLcOnv8Mk5y7VHey7TREGsgoxvYnjms0zFsqSKZCuYBdVCZ0JTMkI"/>
+</div>
+<h3 class="font-headline-md text-headline-md mb-xs">Andean Winter</h3>
+<p class="font-label-caps text-label-caps tracking-widest text-on-surface-variant mb-md">Volume, Texture, Resilience</p>
+<div class="w-full h-px bg-outline-variant scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></div>
+</div>
+<div class="relative group cursor-pointer overflow-hidden reveal-on-scroll md:mt-xl">
+<div class="aspect-[16/9] mb-md overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A portrait-style editorial image of a luxury lightweight alpaca scarf draped over a chair in a high-end, sun-drenched minimalist living room. The scarf is a deep charcoal grey with a delicate, almost translucent weave. Shadows of window frames create a beautiful graphic pattern across the scene. The lighting is high-key and elegant, showcasing the scarf as a piece of art within a refined lifestyle setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuxj_sB8jb2TMMrqJP4ftjoyU3UKS274TrY3W7E_cHae1iJeV59nMY9-SDrCKGbGg5oiRCbnDH7OkmwSVSBL7pLsMNrHoVu6AyUqx-prQiEOhWivtJOrz1w7DIzLNyBaiqN7flHDPFfsfwTvwvQZfIs9ARhYyhjPK6sY2YxtIn1iuP-C80f2sJ3xHwpjzl0coq_QwiHm622zdARfLFakQbyDqUDWSmG_uAUrWRLptYyhKCWmf1bvkDJqdpmnP54S_9VybjkQ2fYtA"/>
+</div>
+<h3 class="font-headline-md text-headline-md mb-xs">Essence Collection</h3>
+<p class="font-label-caps text-label-caps tracking-widest text-on-surface-variant mb-md">Lighter Than Air, Stronger Than Silk</p>
+<div class="w-full h-px bg-outline-variant scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></div>
+</div>
+</div>
+</section>
+<!-- Artisanal Process -->
+<section class="relative py-xl bg-surface-dim overflow-hidden">
+<div class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-10">
+<div class="md:col-span-8 reveal-on-scroll">
+<div class="aspect-video relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A wide, atmospheric shot of a traditional textile workshop in a valley of the Andes. The room is filled with large wooden looms and bundles of raw, unspun alpaca fleece. Soft mountain light enters through high windows, creating dramatic shafts of light and dust motes. Artisans are seen in the distance, focused on their work, blending ancient architecture with timeless craftsmanship. The color tone is warm, rustic, and deeply peaceful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqqAIBNNU2sR_FrdfxBIua68LBkLGecf5Nlh5s9BS97w4kxTKHO_ih2fHkdQUfEDOO4OOKIdOWsbESwoxaX6qBjoL-KorSyUktf3mf0bHMBqKLsFOAIDf8hnWEZh14QULgHAbuZM27FF4cQvBTKqaRAQu0gPEp9-ovuXdy2q4BSWTdGGvqJTPj5kD2zZ3HtRmglad3mWmJ2krgUNVFTIStVs-0qDF-YPonMFTt4gw87AhXv2dT970Mk_5LURPXzdM3cGb-hHK6_OI"/>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col justify-center reveal-on-scroll">
+<h2 class="font-headline-lg text-headline-lg mb-md">The Slow Weave</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-lg">
+                        Each piece requires up to three weeks of focused hand-weaving. This is not production; it is devotion. A single mistake means starting again from the first thread. This is why an ALPACART piece lasts a lifetime.
+                    </p>
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full border border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">play_arrow</span>
+</div>
+<span class="font-label-caps text-label-caps tracking-widest">Watch the Process</span>
+</div>
+</div>
+</div>
+<!-- Decorative text -->
+<span class="absolute -bottom-10 right-0 font-display-lg text-[120px] text-on-surface/5 pointer-events-none select-none uppercase">CRAFTSMANSHIP</span>
+</section>
+<!-- Featured Products (Editorial Selection) -->
+<section class="py-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-xl reveal-on-scroll">
+<div>
+<span class="font-label-caps text-label-caps tracking-widest text-primary block mb-xs">CURATED PIECES</span>
+<h2 class="font-headline-lg text-headline-lg">Winter Accoutrements</h2>
+</div>
+<a class="font-label-caps text-label-caps tracking-widest border-b border-on-surface pb-1 mb-2 hover:text-primary hover:border-primary transition-all duration-300" href="#">View Online Boutique</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Item 1 -->
+<div class="group reveal-on-scroll">
+<div class="aspect-[3/4] mb-md overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A studio photograph of a premium camel-colored alpaca wool sweater on a minimalist hanger. The sweater features a unique basketweave knit pattern on the neck and cuffs. The lighting is soft and wrapping, revealing the luxurious fuzz and depth of the fiber. The background is a slightly darker warm neutral tone, creating a tonal and expensive feel. No text or logos, just the purity of the garment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMP4jRXpZrsBMvYmkf8IZnRU4Ul-1enTbYrDACqe3Y5OhQY3Xoz5m17_DueADwDzCaHZvtU6BU_CKn6wEFj1Ra8-eRgWxM0IADx1nKaTR4GBIExEUfggt1Ps5Q16qfVGG7x8XtjaITpw5pUEpcffbCgTFAHJt7__63HPPD3fYzS9d-JHRUi57iNJLQ7MEUQUinWB6w_OT5Cm2Q_7-eRbo0k-aQqFU1hMCZw-13y9BKqBGGzXe0GYVsblaTiA00_TGTjO1QHuyfb1w"/>
+</div>
+<div class="text-center">
+<h4 class="font-title-lg text-title-lg mb-xs">The Origin Sweater</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-sm">Natural Vicuña Hue</p>
+<p class="font-label-caps text-label-caps tracking-widest text-primary">Limited Edition</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group reveal-on-scroll" style="transition-delay: 100ms;">
+<div class="aspect-[3/4] mb-md overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An editorial detail shot of a woman draped in a large, oversized charcoal grey alpaca wrap. Only her shoulder and part of her face are visible, focusing on how the heavy textile folds and drapes naturally. The texture is rich and inviting. The setting is a misty morning in a mountain landscape, adding to the mood of warmth and protection. High-end fashion editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGj-kVsbGJR9sUfdBvoce_cgP3qwc6-pokmI3yr_uycPfeHJMMfsMIP3O3DK4vNEVOAuuysBSoYws93JoA2GcqYEypt-Id5YJJztNqHJaXEv5Gc4HeaCTtHGoQbvc1PdonrbNTQOO6o0xg4m5i-HY4iTVd6TOyhIMp6HsdrHjNM5LaBDQekTZQlRaQXgO4yXIka2lkN0MssUsbUXAOdRdTo9qWD2OnUFEYOxoPndpYAnH3WuAfYLZWADGL4L1ZB-Vom0heKDWjqVI"/>
+</div>
+<div class="text-center">
+<h4 class="font-title-lg text-title-lg mb-xs">Sierra Wrap</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-sm">Slate Grey Hand-Loomed</p>
+<p class="font-label-caps text-label-caps tracking-widest text-primary">Artisanal Release</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group reveal-on-scroll" style="transition-delay: 200ms;">
+<div class="aspect-[3/4] mb-md overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist product shot of a pair of high-end alpaca fiber gloves and a matching beanie, neatly arranged on a piece of dark volcanic rock. The fibers are ivory white, creating a stark and beautiful contrast with the black stone. The focus is incredibly sharp, showing every loop of the knit. The lighting is clean and museum-like, emphasizing the items as precious objects." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDBvvbSWV9Y_w4jjW_v7XBE0M4RxpheWY0GUY-QxT_4h2qAqmfM8rXHZKKRD-EZTWnx1B6o67T0FTpac11loG6hv_hrWMH-26YjSQXM774eQxSaePUx4iA8_Euo2Wl5JAdwe7QPAn3WF3KD3aShB8mME5_1zYSJaGGCTZFew7OFS95f55rOHoSveLW8_usNrWCZ5TVQO85m41pd3OWOdAuVbQbvd1KxImUIVzjsFR-RNHJKMLA7qOrYrzrYPSfvSoOBkh7HE-GwAo"/>
+</div>
+<div class="text-center">
+<h4 class="font-title-lg text-title-lg mb-xs">Altiplano Set</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-sm">Cloud White Pure Blend</p>
+<p class="font-label-caps text-label-caps tracking-widest text-primary">Core Collection</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Promotions -->
+<section class="py-xl">
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="bg-primary text-on-primary py-xl px-lg flex flex-col items-center text-center reveal-on-scroll">
+<span class="font-label-caps text-label-caps tracking-[0.4em] mb-md">THE EQUINOX OFFERING</span>
+<h2 class="font-headline-lg text-[48px] mb-lg leading-tight">Celebrate the change of seasons with <br/> complimentary global shipping.</h2>
+<a class="px-xl py-sm border border-on-primary font-label-caps text-label-caps tracking-widest hover:bg-white hover:text-primary transition-all duration-300" href="#">Discover the Collection</a>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-xl bg-surface-container-low">
+<div class="px-margin-desktop max-w-container-max mx-auto text-center reveal-on-scroll">
+<span class="material-symbols-outlined text-primary mb-lg">format_quote</span>
+<blockquote class="font-display-lg text-headline-lg italic max-w-3xl mx-auto mb-md">
+                    "There is a weight to these garments that feels like a warm embrace from the earth itself. ALPACART is not just fashion; it is soul."
+                </blockquote>
+<cite class="font-label-caps text-label-caps tracking-widest not-italic text-on-surface-variant">— ELENA V., MILAN</cite>
+</div>
+</section>
+<!-- Social Media Grid -->
+<section class="py-xl">
+<div class="px-margin-desktop max-w-container-max mx-auto mb-lg flex justify-between items-center reveal-on-scroll">
+<h2 class="font-headline-md text-headline-md">Visions of Peru</h2>
+<a class="font-label-caps text-label-caps tracking-widest text-on-surface-variant" href="#">@ALPACART_TEXTILES</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-xs reveal-on-scroll">
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A lifestyle photo of a coffee cup resting on a stack of neatly folded alpaca blankets near a window overlooking a misty mountain range. Cozy, warm, luxury home vibes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7ifpqgs1To9n_RXl4Pi-v-905cYLZwUwrUTiRj_f6sj0p3MyLAv4_2QEsUodR3smj-p1XDbR-Ca0n6K5JzV-o-AmVqMPEo2odR_BTJA0qZuyOWPm3RFVpezRAyXQ1eAV9VX9vb01jB0-Lpw8GyivC5Hp9K1Di0Risz0NB-DGoWJEloEeJqlRQLZ0wCjljo9119j1X6VBjkrZw0Cx9zVXnvcECIO1H1oif28d1nhicZcMhPqbUxSoXtSk46OZ1JueVXG9--qdA9eM"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young alpaca with its head tilted curiously toward the camera, the wool around its face looking incredibly soft and fluffy. High detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp_7toZvwwzpgPZY0kyKkT6mbDKUip_bYz0bT5nf1X2HcIEvH3HgNccWzWJo-vB9f7i7Qbtk5d5jZhesfjmQ48tUV4iMNdnzBqwypllK9ftTELGzuPe4Ugc10ehr-qZ30YGYhA7zyrSTLwCeXmeVct81Fi9MWtgoNXdDwET055Z7W-KLrOnpgM1B1jNPWyx7hUHKJ44m4AtVpBMLDiR5ZyisuJ15ChjaBKv4PYU2Bq5OVUr_-MPBO8QXVOEs6DUh7QjL974i-wmmU"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of a hand running through raw, carded alpaca fiber before spinning. The fibers look like clouds of gold and cream." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8YBdulhXNZWF7s2Bj-B_pTYkR53dH7DoErZ6ulsau6WxhFBk94hty1pEugKZUWF1LzGcghR_5QSNJD53wAUN58FvMFhEPiiNv1SIqCvGQF3b3HBGo-WYHTl7ycJ8X3P2NFSnEinIQ2oy39aWP7OrlUjqE0doQU5kA6arQkrv0nIYVqKhikUPYvNpJoFl1Vybu-cwJ9H6JIC5MnQYQfmWYQMZdck0wMQfNmvRkgfnSkkYDNVHbvcrE1jmnfHTAPNLik4HYtsXPzSM"/>
+</div>
+<div class="aspect-square bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A wide landscape of a serene blue lake in the Andes at dawn, with llamas grazing peacefully on the shore. Pure, untouched nature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXhnuxs5_mfCE-W0dU80MTTsJq1iB2EQ0epvf_rfUHjmEy6KQ4uqs-bEF_WtgGnixgv52bhiayTzVNZCh3WVtuW6bkWzQLlwTk_yZW51aweMJ-TCXQ_TenXU5F9SuPaSEIfmZcK16RYY8NYsRhNXfpyFFxAT3JfJbBzyutuIiC3J0dbjsTswR4BPwK7ywnlBZc8KHrnRwEhj3L_9S8JUa-DRgxN15iziEpoPT3ZYaEZ7tOyuDdV031CY1zr2e7XQ2asiXVf57WFQs"/>
+</div>
+</div>
+</section>
+<!-- Newsletter -->
+<section class="py-xl border-t border-outline-variant/30">
+<div class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-lg items-center reveal-on-scroll">
+<div>
+<h2 class="font-headline-md text-headline-md mb-sm">The Journal</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Stay connected with the stories of the Andes, new collection arrivals, and our sustainability initiatives.</p>
+</div>
+<form class="flex border-b border-on-surface pb-xs">
+<input class="bg-transparent border-none focus:ring-0 w-full font-label-caps text-label-caps tracking-widest px-0" placeholder="YOUR EMAIL ADDRESS" type="email"/>
+<button class="font-label-caps text-label-caps tracking-widest text-primary ml-md" type="submit">SUBSCRIBE</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface mt-xl">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter px-margin-desktop py-xl max-w-container-max mx-auto">
+<div class="md:col-span-4">
+<span class="font-display-lg text-headline-md text-primary dark:text-primary-fixed-dim block mb-md">ALPACART</span>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant mb-lg pr-md">
+                    Sustainably crafted in the Peruvian Andes. Dedicated to the preservation of ancient weaving techniques and the welfare of our community.
+                </p>
+<p class="font-label-caps text-label-caps text-on-surface dark:text-inverse-on-surface tracking-widest opacity-80">© 2024 ALPACART TEXTILES. SUSTAINABLY CRAFTED IN PERU.</p>
+</div>
+<div class="md:col-span-2 md:col-start-6">
+<h5 class="font-label-caps text-label-caps tracking-widest text-on-surface dark:text-inverse-on-surface mb-md">EXPLORE</h5>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Traceability</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Collections</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Journal</a></li>
+</ul>
+</div>
+<div class="md:col-span-2">
+<h5 class="font-label-caps text-label-caps tracking-widest text-on-surface dark:text-inverse-on-surface mb-md">SERVICE</h5>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Shipping &amp; Returns</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="md:col-span-2">
+<h5 class="font-label-caps text-label-caps tracking-widest text-on-surface dark:text-inverse-on-surface mb-md">CONNECT</h5>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Press</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Instagram</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">Contact Us</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        // Reveal on scroll micro-interaction
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        // Smooth nav background transition
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

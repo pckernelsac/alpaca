@@ -1,0 +1,23 @@
+.overlay { position: fixed; inset: 0; z-index: 100; backdrop-filter: blur(8px); background: rgba(255,248,244,0.96); display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
+[data-theme="dark"] .overlay { background: rgba(19,19,20,0.98); }
+.inner { width: 100%; max-width: 900px; padding: 0 var(--spacing-lg); }
+.header { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-base) 0; position: sticky; top: 0; background: transparent; z-index: 10; }
+.logo { display: flex; align-items: center; }
+.logoImg { display: block; height: 42px; width: auto; }
+.closeBtn { display: flex; align-items: center; gap: var(--spacing-sm); font-family: var(--font-label); font-size: 0.8rem; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; transition: color 0.2s; }
+.closeBtn:hover { color: var(--color-primary); }
+.canvas { padding: var(--spacing-xl) 0; display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.searchForm { }
+.inputWrap { display: flex; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: var(--spacing-base); gap: var(--spacing-md); }
+.inputWrap:focus-within { border-color: var(--color-primary); }
+.input { width: 100%; background: transparent; border: none; font-family: var(--font-display); font-size: 1.5rem; color: var(--color-text); }
+.input:focus { outline: none; }
+.input::placeholder { color: var(--color-text-light); }
+.suggestions { display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.sectionTitle { font-family: var(--font-label); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: var(--spacing-md); }
+.tags { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); }
+.tag { display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--color-border); border-radius: 9999px; font-size: 0.85rem; color: var(--color-text); text-decoration: none; transition: border-color 0.2s; }
+.tag:hover { border-color: var(--color-primary); }
+.links { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.link { font-size: 0.9rem; color: var(--color-text-secondary); text-decoration: none; transition: color 0.2s; }
+.link:hover { color: var(--color-primary); }

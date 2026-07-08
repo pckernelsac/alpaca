@@ -1,0 +1,9 @@
+.card { position: relative; display: block; overflow: hidden; border-radius: var(--radius-lg); text-decoration: none; }
+.imageWrap { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+.image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.card:hover .image { transform: scale(1.05); }
+.overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%); }
+.content { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--spacing-lg); color: #fff; }
+.title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+.desc { font-size: 0.875rem; opacity: 0.85; margin-bottom: var(--spacing-sm); }
+.cta { font-family: var(--font-label); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #fff; padding-bottom: 0.125rem; }

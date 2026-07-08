@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Heirloom Overcoat | Alpacart</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#dcc2a6",
+                      "secondary-fixed": "#f9dec1",
+                      "on-background": "#1f1b16",
+                      "on-primary-container": "#fffbff",
+                      "on-secondary-fixed-variant": "#55442e",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#827565",
+                      "secondary": "#6e5b44",
+                      "surface-container-low": "#fcf2ea",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#7f5600",
+                      "inverse-on-surface": "#f9efe7",
+                      "background": "#fff8f4",
+                      "tertiary-fixed": "#ccecb9",
+                      "surface": "#fff8f4",
+                      "surface-dim": "#e2d8d1",
+                      "on-surface": "#1f1b16",
+                      "surface-variant": "#ebe1d9",
+                      "surface-container-highest": "#ebe1d9",
+                      "on-tertiary-container": "#f8ffee",
+                      "tertiary": "#48633b",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#261907",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#f6bd60",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#ffddae",
+                      "outline-variant": "#d4c4b1",
+                      "inverse-surface": "#352f2a",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#f1e6de",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#f6ece4",
+                      "on-primary-fixed": "#281800",
+                      "secondary-container": "#f6dbbe",
+                      "primary": "#7c5400",
+                      "on-secondary-container": "#735f48",
+                      "surface-bright": "#fff8f4",
+                      "tertiary-fixed-dim": "#b1d09f",
+                      "primary-container": "#9a6c14",
+                      "primary-fixed-dim": "#f6bd60",
+                      "on-tertiary-fixed": "#092102",
+                      "on-tertiary-fixed-variant": "#344d28",
+                      "on-primary-fixed-variant": "#614000",
+                      "on-surface-variant": "#504537",
+                      "tertiary-container": "#607c52"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "xl": "80px",
+                      "sm": "12px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "lg": "48px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "display-sm": ["Playfair Display"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "headline-md": ["Playfair Display"],
+                      "headline-lg": ["Playfair Display"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Playfair Display"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "display-sm": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fff8f4;
+            color: #1f1b16;
+            -webkit-font-smoothing: antialiased;
+        }
+        .editorial-image-zoom {
+            overflow: hidden;
+        }
+        .editorial-image-zoom img {
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .editorial-image-zoom:hover img {
+            transform: scale(1.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1e6de;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #7c5400;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-surface border-b border-outline-variant">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<a class="font-display-sm text-display-sm text-on-surface" href="#">Alpacart</a>
+<div class="hidden md:flex gap-lg items-center">
+<a class="font-label-md text-label-md uppercase tracking-wider text-primary border-b border-primary font-bold" href="#">Collections</a>
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Materials</a>
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Our Heritage</a>
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Sustainability</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface cursor-pointer active:opacity-70">shopping_bag</button>
+<button class="material-symbols-outlined text-on-surface cursor-pointer active:opacity-70">person</button>
+<button class="md:hidden material-symbols-outlined">menu</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-base">
+<!-- Breadcrumb -->
+<nav class="py-md flex items-center gap-xs text-label-sm uppercase tracking-widest text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Collection</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Men</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">The Heirloom Overcoat</span>
+</nav>
+<!-- Editorial Product Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl">
+<!-- Image Gallery Cluster (Bento-style layout) -->
+<div class="lg:col-span-7 grid grid-cols-2 gap-md h-fit">
+<div class="col-span-2 editorial-image-zoom bg-surface-container aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-fashion editorial photograph of a male model wearing a long, double-breasted overcoat in rich vicuña gold color. He is walking through a minimalist architectural space with soft, natural morning light casting gentle shadows. The coat's fine texture and impeccable tailoring are clearly visible against a neutral-toned stone background. The overall mood is sophisticated, quiet luxury, and timeless." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlnw-7sdF7x1Y8IHL2BJQoHeXwn4887s7BRZ9s07m2xvmhGUdXAZncCPMHitGJJQnyZThFisM-2TBSq23oVHvxNKfz-oDfbtBMyrYKsvwwegq6eQqKTsygoElm-wam3Ou3PoSRPAwiWkiPeo0c0kzV1EJ0hKKn5O2qBuMctnEJHasQvyCtD2K2AWse8WdtuTRgJ-W7oZu8lJgqA5gytIzilvx2FqTpphfIAzpw_7a73KPSnFPeK4DOhusup5sqGpZYbOflA4rUGNX3"/>
+<div class="absolute top-md left-md bg-surface/80 backdrop-blur-md px-md py-xs text-label-sm uppercase font-bold tracking-widest">Masterpiece Series</div>
+</div>
+<div class="editorial-image-zoom bg-surface-container aspect-square">
+<img class="w-full h-full object-cover" data-alt="A macro close-up of the raw vicuña fiber fabric, showcasing the incredibly fine, soft, and slightly lustrous texture of the 'Gold of the Andes.' The lighting is warm and directional, emphasizing the delicate weave and the natural golden-brown hue. The background is softly blurred to keep all focus on the tactile quality of the luxury material." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIUUa_fLV7KfgmciUgwuoPIx4dlZ3hkg8ExLcszWhaeifnTi4sEvK3yy9JYW-7SP5l_oMKXMee6xZNQ4FRW1LhHwgeG7VPWtwgEyzRSktaPW0Tec-Y5i0dmdLAdQdWPMdKSSjwbbkbDXrXFYyfRA0X1HOah8lrKEFprA8WACf71XfRosLeR6hU0uWX8MotOw8-PX6CBf4Z7XRHwT5GlqQpJGEtxmx3rjNmYig8fUHKcfDcWYqWqQFjeofzqZOAL7KCl2CRWXgafx9f"/>
+</div>
+<div class="editorial-image-zoom bg-surface-container aspect-square">
+<img class="w-full h-full object-cover" data-alt="A detailed shot focusing on the hand-finished lapel and horn button of a luxury overcoat. The craftsmanship is evident in the precise, nearly invisible stitching. The lighting is soft and high-end, highlighting the subtle variations in the vicuña fabric's surface. The color palette is composed of warm tans, beiges, and deep browns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6atifML8z3-nlHancofxIuyFx_7zW0IrxtZ9IIiBhAF8sMK6RdyAomIyCzXzW1Oi_H2InjA_agY60o9k0ZcbXCX2XowyPwI1AVcV5mq1g1oPYgfkYoPYWYtZXnw51ZE1PsFrUPjGMIdfmQR0tnzZfGzXi4CKsUAGC1UieHVBKaJSRaV1DClyMnzsASujV3Lv-1mxK9pb_3Tt8EILW5M1FJZX9SyrWCG6w8wen365JdMpW66bKPn_bbk1WhfyDGZv0o6Xt9Nrd58KO"/>
+</div>
+</div>
+<!-- Product Info Column -->
+<div class="lg:col-span-5 flex flex-col gap-md lg:sticky lg:top-24 h-fit">
+<div>
+<h1 class="font-display-lg text-display-lg mb-xs">The Heirloom Overcoat</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant italic">100% Raw Vicuña - The Gold of the Andes</p>
+</div>
+<div class="flex justify-between items-baseline border-b border-outline-variant pb-md">
+<span class="font-display-sm text-display-sm text-primary">$8,450.00</span>
+<span class="font-label-sm text-error bg-error-container px-sm py-1 rounded-full">Limited Edition - 5 pieces remaining</span>
+</div>
+<div class="space-y-md">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        Handcrafted in the heart of the Peruvian Andes, this overcoat represents the pinnacle of textile artistry. Vicuña, once reserved for Incan royalty, offers a warmth-to-weight ratio unmatched by any other natural fiber. The Heirloom is a lifetime investment in silent elegance and heritage quality.
+                    </p>
+</div>
+<!-- Selectors -->
+<div class="space-y-lg mt-md">
+<!-- Color -->
+<div>
+<span class="font-label-sm uppercase tracking-widest text-on-surface-variant block mb-md">Select Shade</span>
+<div class="flex gap-md">
+<button class="w-12 h-12 rounded-full border-2 border-primary bg-[#b8862f] ring-offset-4 ring-2 ring-transparent" title="Vicuña Gold"></button>
+<button class="w-12 h-12 rounded-full border border-outline-variant bg-[#1f1b16] hover:ring-2 ring-outline transition-all" title="Midnight Black"></button>
+<button class="w-12 h-12 rounded-full border border-outline-variant bg-[#d4d1cc] hover:ring-2 ring-outline transition-all" title="Andean Mist"></button>
+</div>
+</div>
+<!-- Size -->
+<div>
+<div class="flex justify-between items-center mb-md">
+<span class="font-label-sm uppercase tracking-widest text-on-surface-variant">Choose Size</span>
+<a class="text-label-sm text-primary underline decoration-1" href="#">Size Guide</a>
+</div>
+<div class="grid grid-cols-5 gap-base">
+<button class="py-md border border-outline-variant hover:border-primary transition-colors text-label-md font-bold disabled:opacity-30" disabled="">XS</button>
+<button class="py-md border border-outline-variant hover:border-primary transition-colors text-label-md font-bold">S</button>
+<button class="py-md border border-primary bg-surface-container-low text-label-md font-bold">M</button>
+<button class="py-md border border-outline-variant hover:border-primary transition-colors text-label-md font-bold">L</button>
+<button class="py-md border border-outline-variant hover:border-primary transition-colors text-label-md font-bold">XL</button>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-md mt-lg">
+<button class="w-full py-lg bg-on-surface text-surface font-label-md uppercase tracking-widest transition-all hover:bg-primary active:scale-[0.98]">
+                        Buy Now — Secure Checkout
+                    </button>
+<button class="w-full py-lg border border-primary text-primary font-label-md uppercase tracking-widest transition-all hover:bg-primary-container/10 active:scale-[0.98]">
+                        Add to Collection
+                    </button>
+</div>
+<!-- Details Accordion -->
+<div class="mt-xl space-y-px bg-outline-variant">
+<details class="group bg-surface" open="">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md uppercase tracking-widest">Material &amp; Benefits</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-on-surface-variant">
+<p class="mb-base">The world's rarest fiber. Vicuñas are shorn only once every three years, producing fiber that is significantly finer than cashmere.</p>
+<ul class="space-y-xs list-disc list-inside text-sm">
+<li>Exceptional thermal regulation</li>
+<li>Hypoallergenic &amp; ultra-soft</li>
+<li>Naturally water-repellent properties</li>
+</ul>
+</div>
+</details>
+<details class="group bg-surface">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md uppercase tracking-widest">Care Guide</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-on-surface-variant">
+<p>To preserve the natural oils and structure: Professional dry clean only. Store in a cool, dry place with natural cedar blocks. Use the provided breathable cotton garment bag for seasonal storage.</p>
+</div>
+</details>
+<details class="group bg-surface">
+<summary class="flex justify-between items-center p-md cursor-pointer list-none">
+<span class="font-label-md uppercase tracking-widest">Shipping &amp; Returns</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-on-surface-variant">
+<p>Complimentary white-glove delivery in discreet luxury packaging. Carbon-neutral shipping worldwide. Exchanges or returns are accepted within 30 days of receipt.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<!-- Complete the Look / Related -->
+<section class="mt-xl py-xl border-t border-outline-variant">
+<h2 class="font-display-sm text-display-sm mb-lg">Complete the Look</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden mb-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A luxury silk-cashmere turtleneck sweater in a deep espresso brown color. The photograph is minimalist and clean, highlighting the smooth texture and fine knit of the garment against a light ivory backdrop. The style is sophisticated and elegant, fitting the quiet luxury aesthetic of a high-end fashion brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBf38mHudzB1g_Yhhj0FqCZvz8ycNZq2QMZdxOdbh6mPw-qUjcxo3yFbJcTzq9NrEZ0FRIhwKtvm9f_wRhTcH3KLell6MvXcYVUQzj928I57dy9uN6-kPPVtY0lkh0Qz1O5_BG12QG4PcwWchCXxILmuT6xQO52HaVm3j0ghP2aXG_7M-QDLOr1Zvg_NH25crNPcGNF3c6HSF9KDXCQcGcGwh-yr1gwztvtbRoDdbbOataQX7IduoyX99tWfXAQdnXsIBa_SJqaOZw"/>
+</div>
+<h3 class="font-label-md uppercase tracking-wider mb-xs">Silk-Cashmere Turtleneck</h3>
+<p class="text-on-surface-variant">$650.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden mb-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Bespoke tailored wool trousers in charcoal grey, shown in a clean studio setting. The photograph emphasizes the sharp crease and the premium drape of the fabric. The lighting is soft and professional, creating an atmosphere of understated luxury and classic style. The overall aesthetic is minimal and refined." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM9QUeT1CeQ8bekM9lfNcO-dQoWHFVup-pIckJ5drsAUbD8x85Ma6vV7xFbReh6BEfhah6mzEX1AebPaPMy0fFOg-ffgn4NBdnfCEFuE_b6R-ePRS3RA3jA8M7vh46lDHyIkNYxxVZ2ZYFetQ9jL0r29QwPuokZJnSlzMJY-7I24Mj10EW8BO2Nk0pspXWZJAuJ-CSssiyHYx2ZOlH0M9SYNeEicvHhP6Gv-BpDPtFHVv7gFKC9zhnUSTMfYmh1xA-glxu01jyBFky"/>
+</div>
+<h3 class="font-label-md uppercase tracking-wider mb-xs">Wool Trousers</h3>
+<p class="text-on-surface-variant">$890.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden mb-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Handcrafted leather Chelsea boots in a rich cognac brown finish. The image showcases the smooth, high-quality calfskin leather and the meticulous stitching. The background is a soft, warm neutral stone, enhancing the earthy tones of the leather. The lighting is dramatic yet soft, highlighting the luxurious details of the artisanal footwear." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc2B_MejvvQ-_cfxLYjB2dt0_ooDsenr1r87ADtcEqXD5_fd-LKcAwcUGvtZvAOSF2quMmSkvEnwQ5WVSZ9Ri3hX8LYzr5uuYgRzQfKrVOrMC_KqXZbLkTZ248fHn_mKXggVQgDiioTr8s8IEtHAa6qnyVp6uOq3kb2laEhhHqXgBab7KRTOKzIx3-5iGW1e6N96Ki6YIAGzC4C6LkFk0XWisPv7Jb2x1g1_YYkrYyUbJBmPrBEs20JSNlNCqMs4sAEvnWrKUL2GjR"/>
+</div>
+<h3 class="font-label-md uppercase tracking-wider mb-xs">Artisan Chelsea Boots</h3>
+<p class="text-on-surface-variant">$1,200.00</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container overflow-hidden mb-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A vicuña wool scarf in a natural tan color, draped elegantly on a minimalist display stand. The photograph highlights the incredibly soft, fuzzy texture of the rare fiber. The background is a clean, neutral beige, reinforcing the quiet luxury theme. The lighting is high-key and bright, emphasizing the premium quality of the material." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7Ir5A-hO9fsDjwZjMdmOhUDO8ztZqQAS2VjnbJAt8NaHftXP79Ebtklm0QUgR9ayJpDDZ14o5YdlcwMRfylWokx49ZH6xNPOsC_6n6WhZoWVTeBtMGPChwacPrk0Xpr3TALcKh3A8_FwVQIhqvItsM9g-IgCyQ6RRM1-r2OE9aj-LUraJpx5niI2IQxkXDrtksnEAamda1qtxc_yuhHQA2PvtTjcXxegv3aVYNXZvB9u6Lp71zKxIvKqprGZV2XRUhZcBMNDsJQ_x"/>
+</div>
+<h3 class="font-label-md uppercase tracking-wider mb-xs">The Signature Scarf</h3>
+<p class="text-on-surface-variant">$1,450.00</p>
+</div>
+</div>
+</section>
+<!-- Customer Reviews -->
+<section class="py-xl bg-surface-container-low -mx-margin-mobile md:-mx-margin-desktop px-margin-mobile md:px-margin-desktop">
+<div class="max-w-4xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-xl gap-md">
+<h2 class="font-display-sm text-display-sm">Refined Impressions</h2>
+<div class="flex items-center gap-xs">
+<span class="text-primary material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-primary material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-primary material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-primary material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-primary material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md ml-md">5.0 / 5.0 (12 Reviews)</span>
+</div>
+</div>
+<div class="space-y-xl">
+<div class="border-l-4 border-primary pl-lg">
+<p class="font-headline-md italic mb-md">"The Heirloom is more than a coat; it's a sensory experience. The weightlessness combined with the intense warmth is truly remarkable. A masterpiece of Andean heritage."</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm uppercase tracking-widest">— Julian V., Geneva</span>
+<span class="text-on-surface-variant text-sm">Verified Collector</span>
+</div>
+</div>
+<div class="border-l-4 border-outline-variant pl-lg">
+<p class="font-headline-md italic mb-md">"Rarely does a product exceed the high expectations set by its price. This overcoat does. The Vicuña Gold shade is breathtaking in natural light."</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm uppercase tracking-widest">— Alexander K., New York</span>
+<span class="text-on-surface-variant text-sm">Verified Collector</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-xl">
+<h2 class="font-display-sm text-display-sm text-center mb-xl">Provenance &amp; Care</h2>
+<div class="max-w-3xl mx-auto space-y-lg">
+<div>
+<h4 class="font-label-md uppercase tracking-widest mb-base">How is the fiber sourced sustainably?</h4>
+<p class="text-on-surface-variant">We partner with local Andean communities using the traditional 'Chaccu' method. This centuries-old communal shearing ritual ensures the vicuñas are safely captured, shorn, and released back into the wild unharmed, supporting both the species' survival and the local economy.</p>
+</div>
+<div>
+<h4 class="font-label-md uppercase tracking-widest mb-base">What makes Raw Vicuña so expensive?</h4>
+<p class="text-on-surface-variant">Vicuñas live in the high altitudes of the Andes. A single animal produces only about 500 grams of fiber every three years. The scarcity, combined with the extreme difficulty of harvesting and processing such fine fiber, makes it the most precious textile in the world.</p>
+</div>
+<div>
+<h4 class="font-label-md uppercase tracking-widest mb-base">Is there a warranty for this investment?</h4>
+<p class="text-on-surface-variant">Every Heirloom Overcoat comes with a lifetime repair guarantee. Should the garment require re-shaping or minor repair due to wear, our artisans in Peru will restore it to its original glory at no additional labor cost.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xl bg-surface-container-highest">
+<div class="py-xl px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between border-t border-outline-variant">
+<div class="mb-lg md:mb-0">
+<span class="font-display-sm text-display-sm text-on-surface-variant">Alpacart</span>
+<p class="mt-md max-w-xs text-on-surface-variant opacity-70">
+                    Preserving heritage through the world's most exquisite natural fibers. Handcrafted in the Andes.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-xl">
+<div class="flex flex-col gap-base">
+<span class="font-label-sm uppercase tracking-widest mb-xs">Services</span>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-1" href="#">Traceability</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-1" href="#">Care Guide</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-1" href="#">Shipping &amp; Returns</a>
+</div>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm uppercase tracking-widest mb-xs">Legal</span>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-1" href="#">Privacy Policy</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-all underline decoration-1" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm uppercase tracking-widest mb-xs">Newsletter</span>
+<div class="flex border-b border-outline">
+<input class="bg-transparent border-none focus:ring-0 py-xs text-sm w-full" placeholder="Your email" type="email"/>
+<button class="material-symbols-outlined text-on-surface">arrow_forward</button>
+</div>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop max-w-container-max mx-auto py-md border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-body-md text-on-surface-variant text-sm">© 2024 Alpacart Textiles. Excellence in Fiber.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-surface-variant">public</span>
+<span class="material-symbols-outlined text-on-surface-variant">eco</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for variant selection
+        document.querySelectorAll('[title]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const parent = btn.parentElement;
+                parent.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('border-primary', 'ring-2', 'ring-primary/20');
+                    b.classList.add('border-outline-variant');
+                });
+                btn.classList.add('border-primary', 'ring-2', 'ring-primary/20');
+                btn.classList.remove('border-outline-variant');
+            });
+        });
+
+        // Size button selection
+        const sizeButtons = document.querySelectorAll('button:not([disabled])');
+        sizeButtons.forEach(btn => {
+            if(btn.parentElement.classList.contains('grid-cols-5')) {
+                btn.addEventListener('click', () => {
+                    btn.parentElement.querySelectorAll('button').forEach(b => {
+                        b.classList.remove('border-primary', 'bg-surface-container-low');
+                        b.classList.add('border-outline-variant');
+                    });
+                    btn.classList.add('border-primary', 'bg-surface-container-low');
+                    btn.classList.remove('border-outline-variant');
+                });
+            }
+        });
+    </script>
+</body></html>

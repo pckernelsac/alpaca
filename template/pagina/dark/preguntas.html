@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Preguntas Frecuentes | ALPACART</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Source+Serif+4:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "on-primary": "#412d00",
+                    "inverse-on-surface": "#313031",
+                    "surface": "#131314",
+                    "on-surface": "#e5e2e3",
+                    "on-secondary": "#581d00",
+                    "surface-container": "#201f20",
+                    "error-container": "#93000a",
+                    "primary-container": "#c5a059",
+                    "tertiary-container": "#ada58e",
+                    "surface-variant": "#353436",
+                    "surface-bright": "#3a393a",
+                    "secondary-fixed": "#ffdbcd",
+                    "primary-fixed": "#ffdea5",
+                    "secondary-container": "#7a3410",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "error": "#ffb4ab",
+                    "outline-variant": "#4e4639",
+                    "surface-container-low": "#1c1b1c",
+                    "on-primary-fixed": "#261900",
+                    "surface-container-highest": "#353436",
+                    "on-background": "#e5e2e3",
+                    "surface-tint": "#e9c176",
+                    "secondary-fixed-dim": "#ffb597",
+                    "tertiary-fixed-dim": "#cfc6ae",
+                    "on-surface-variant": "#d1c5b4",
+                    "on-error-container": "#ffdad6",
+                    "tertiary": "#cfc6ae",
+                    "surface-container-high": "#2a2a2b",
+                    "on-tertiary-fixed-variant": "#4c4634",
+                    "background": "#131314",
+                    "secondary": "#ffb597",
+                    "on-secondary-container": "#ffa178",
+                    "on-tertiary-container": "#403b29",
+                    "tertiary-fixed": "#ece2c9",
+                    "surface-container-lowest": "#0e0e0f",
+                    "primary-fixed-dim": "#e9c176",
+                    "outline": "#9a8f80",
+                    "on-primary-container": "#4e3700",
+                    "on-tertiary": "#35301f",
+                    "inverse-primary": "#775a19",
+                    "surface-dim": "#131314",
+                    "on-secondary-fixed-variant": "#77320e",
+                    "inverse-surface": "#e5e2e3",
+                    "on-tertiary-fixed": "#201b0c",
+                    "primary": "#e9c176",
+                    "on-secondary-fixed": "#360f00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "container-max": "1280px",
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "label-sm": ["Hanken Grotesk"],
+                    "label-md": ["Hanken Grotesk"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "body-md": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 28, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+        }
+        .gold-dust-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a059 50%, transparent);
+            opacity: 0.3;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-item.active .chevron-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-xs max-w-container-max mx-auto h-20">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter cursor-pointer">ALPACART</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Heritage</a>
+<a class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Artisanal</a>
+<a class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Fibers</a>
+<a class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Collection</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container px-4 py-2 rounded-full border border-outline-variant/30">
+<span class="material-symbols-outlined text-outline text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface placeholder:text-outline-variant" placeholder="Search heritage..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-on-surface cursor-pointer hover:text-primary transition-all" data-icon="shopping_bag">shopping_bag</span>
+<span class="material-symbols-outlined text-on-surface cursor-pointer hover:text-primary transition-all" data-icon="person">person</span>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-16">
+<!-- Hero Section -->
+<div class="mb-20 text-center relative">
+<div class="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-6">Preguntas Frecuentes</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Encuentre respuestas detalladas sobre nuestra herencia textil, procesos artesanales y políticas de cuidado.</p>
+<div class="mt-12 max-w-xl mx-auto md:hidden">
+<div class="flex items-center bg-surface-container px-6 py-4 rounded-xl border border-outline-variant/30">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-md w-full text-on-surface" placeholder="¿Cómo podemos ayudarte?" type="text"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Category SideNav -->
+<aside class="w-full md:w-64 flex-shrink-0">
+<div class="sticky top-32 space-y-2">
+<div class="p-4 rounded-lg bg-primary-container/10 border-l-2 border-primary text-primary font-label-md flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span>Lo más buscado</span>
+</div>
+<div class="p-4 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md flex items-center gap-3 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Pedidos y Envíos</span>
+</div>
+<div class="p-4 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md flex items-center gap-3 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+<span>Cuidado de Fibras</span>
+</div>
+<div class="p-4 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md flex items-center gap-3 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+<span>Autenticidad</span>
+</div>
+<div class="p-4 rounded-lg hover:bg-surface-container-high text-on-surface-variant font-label-md flex items-center gap-3 cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span>Trazabilidad</span>
+</div>
+</div>
+</aside>
+<!-- FAQ Accordions Content -->
+<div class="flex-grow space-y-6">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-8 border-b border-outline-variant/20 pb-4">Lo más buscado</h2>
+<!-- Accordion Item 1 -->
+<div class="accordion-item glass-panel rounded-xl group transition-all duration-300">
+<button class="w-full px-8 py-6 flex justify-between items-center text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-lg text-on-surface group-hover:text-primary transition-colors">¿Cómo garantizan el origen ético de la fibra de alpaca?</span>
+<span class="material-symbols-outlined chevron-icon text-outline transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<div class="px-8 pb-8 text-on-surface-variant leading-relaxed">
+<p class="mb-4">Nuestra fibra proviene exclusivamente de comunidades altoandinas que practican la esquila tradicional. Trabajamos bajo un modelo de comercio directo, asegurando que los pastores reciban un precio justo que supere los estándares del mercado internacional.</p>
+<p>Cada lote cuenta con un certificado de origen y trazabilidad completa desde el vellón hasta la prenda final.</p>
+</div>
+</div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="accordion-item glass-panel rounded-xl group transition-all duration-300">
+<button class="w-full px-8 py-6 flex justify-between items-center text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-lg text-on-surface group-hover:text-primary transition-colors">¿Cuál es la diferencia entre Baby Alpaca y Royal Alpaca?</span>
+<span class="material-symbols-outlined chevron-icon text-outline transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<div class="px-8 pb-8 text-on-surface-variant leading-relaxed">
+<p class="mb-4">La clasificación no depende de la edad del animal, sino de la finura del micrón de la fibra. La <strong>Baby Alpaca</strong> oscila entre 21 y 23 micrones, ofreciendo una suavidad excepcional para el uso diario.</p>
+<p>La <strong>Royal Alpaca</strong> es la selección más selecta del mundo, con fibras inferiores a 19 micrones, resultando en una textura que rivaliza con la seda y el cachemir más fino del mundo.</p>
+</div>
+</div>
+</div>
+<!-- Accordion Item 3 -->
+<div class="accordion-item glass-panel rounded-xl group transition-all duration-300">
+<button class="w-full px-8 py-6 flex justify-between items-center text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-lg text-on-surface group-hover:text-primary transition-colors">¿Realizan envíos internacionales de piezas de colección?</span>
+<span class="material-symbols-outlined chevron-icon text-outline transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<div class="px-8 pb-8 text-on-surface-variant leading-relaxed">
+<p>Sí, enviamos nuestras piezas a más de 50 países utilizando servicios de mensajería premium con seguro integral. Las piezas de colección son embaladas en cajas climáticas especiales para preservar las fibras naturales durante el tránsito.</p>
+</div>
+</div>
+</div>
+<!-- Accordion Item 4 -->
+<div class="accordion-item glass-panel rounded-xl group transition-all duration-300">
+<button class="w-full px-8 py-6 flex justify-between items-center text-left" onclick="toggleAccordion(this)">
+<span class="font-label-md text-lg text-on-surface group-hover:text-primary transition-colors">¿Cómo debo cuidar mi prenda de alpaca para que dure décadas?</span>
+<span class="material-symbols-outlined chevron-icon text-outline transition-transform duration-300" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content">
+<div class="px-8 pb-8 text-on-surface-variant leading-relaxed">
+<p class="mb-4">La alpaca es naturalmente repelente a la suciedad y los olores. Recomendamos ventilar la prenda después de cada uso en lugar de lavarla frecuentemente.</p>
+<ul class="list-disc ml-6 space-y-2">
+<li>Lavar a mano con agua fría y jabón neutro.</li>
+<li>Secar en superficie plana, nunca colgar.</li>
+<li>Guardar en un lugar fresco con repelente natural (madera de cedro).</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Personalized Assistance CTA -->
+<div class="mt-16 relative overflow-hidden rounded-2xl bg-surface-container border border-primary/20 p-12 text-center">
+<div class="absolute inset-0 opacity-10 pointer-events-none" data-alt="A macro photography shot of finely woven dark charcoal alpaca fibers showing intricate texture and golden backlighting, creating a luxury nocturnal aesthetic. The focus is soft and cinematic with high detail." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMyIC8lkStxZ3f2YPSreL609M0LG5IcHlofIpHo1CY34BygWndTOc1M0TII_9oD-vACJD19WH7wiIILVEFUaEdtlMZ139U5Gbb3GNNVc4lSVWOVHJSXhX-4ya1ham9D0CJj1z3_9WJB7G4zEwTSUfH7C5alzTo_oAPj9uzYj2iNn0q0lc3FVTsdCImfH5vWTFaNNRS3QFL4FJNXSK69n1Jc9i0HO2H8g-R8ZToQ6UR2HkKJr70JgkBvMbbHAlqpWlDlRTTbHR2axM')"></div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-primary mb-4">¿No encontró lo que buscaba?</h3>
+<p class="font-body-md text-on-surface-variant max-w-md mx-auto mb-8">Nuestros curadores textiles están disponibles para brindarle asesoría personalizada sobre cualquier pieza o proceso.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="bg-primary text-on-primary px-8 py-3 font-label-md uppercase tracking-wider rounded transition-transform hover:scale-105">Contactar Curador</button>
+<button class="border border-secondary text-secondary px-8 py-3 font-label-md uppercase tracking-wider rounded hover:bg-secondary/5 transition-colors">WhatsApp Concierge</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-secondary-fixed dark:bg-on-secondary-fixed-variant w-full mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-margin-desktop py-lg max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col gap-6">
+<div class="font-headline-md text-headline-md text-on-secondary-fixed dark:text-secondary-fixed">ALPACART</div>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim max-w-xs">
+                    © 2024 ALPACART TEXTILES. SUSTAINABLY CRAFTED IN PERU.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:flex gap-x-12 gap-y-4">
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Traceability</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Shipping &amp; Returns</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Wholesale</a>
+</div>
+</div>
+</footer>
+<script>
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+        }
+
+        // Search interaction mockup
+        const searchInputs = document.querySelectorAll('input[type="text"]');
+        searchInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('border-primary/50');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('border-primary/50');
+            });
+        });
+    </script>
+</body></html>

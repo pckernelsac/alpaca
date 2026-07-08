@@ -1,0 +1,4 @@
+.bar { background: var(--color-primary); color: var(--color-text-inverse); text-align: center; padding: 0.5rem 1rem; font-size: 0.8rem; position: relative; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.text { font-weight: 500; }
+.close { position: absolute; right: 1rem; background: none; border: none; color: inherit; cursor: pointer; opacity: 0.8; padding: 0.25rem; }
+.close:hover { opacity: 1; }

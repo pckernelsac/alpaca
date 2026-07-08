@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Your Shopping Bag | Alpacart Textiles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-primary-fixed": "#281800",
+                  "error-container": "#ffdad6",
+                  "surface": "#fff8f4",
+                  "tertiary-fixed-dim": "#b1d09f",
+                  "surface-container-high": "#f1e6de",
+                  "on-secondary-fixed": "#261907",
+                  "on-error-container": "#93000a",
+                  "secondary-fixed-dim": "#dcc2a6",
+                  "on-tertiary-container": "#f8ffee",
+                  "surface-bright": "#fff8f4",
+                  "on-primary": "#ffffff",
+                  "on-background": "#1f1b16",
+                  "inverse-primary": "#f6bd60",
+                  "inverse-on-surface": "#f9efe7",
+                  "surface-container": "#f6ece4",
+                  "surface-container-low": "#fcf2ea",
+                  "on-error": "#ffffff",
+                  "secondary": "#6e5b44",
+                  "on-primary-container": "#fffbff",
+                  "surface-container-lowest": "#ffffff",
+                  "outline": "#827565",
+                  "inverse-surface": "#352f2a",
+                  "secondary-fixed": "#f9dec1",
+                  "on-tertiary": "#ffffff",
+                  "tertiary-container": "#607c52",
+                  "primary-fixed": "#ffddae",
+                  "background": "#fff8f4",
+                  "surface-dim": "#e2d8d1",
+                  "tertiary": "#48633b",
+                  "primary-container": "#9a6c14",
+                  "tertiary-fixed": "#ccecb9",
+                  "primary": "#7c5400",
+                  "surface-container-highest": "#ebe1d9",
+                  "on-tertiary-fixed": "#092102",
+                  "on-primary-fixed-variant": "#614000",
+                  "on-tertiary-fixed-variant": "#344d28",
+                  "outline-variant": "#d4c4b1",
+                  "primary-fixed-dim": "#f6bd60",
+                  "error": "#ba1a1a",
+                  "on-secondary": "#ffffff",
+                  "on-surface-variant": "#504537",
+                  "on-secondary-container": "#735f48",
+                  "secondary-container": "#f6dbbe",
+                  "on-surface": "#1f1b16",
+                  "surface-tint": "#7f5600",
+                  "on-secondary-fixed-variant": "#55442e",
+                  "surface-variant": "#ebe1d9"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "container-max": "1440px",
+                  "base": "8px",
+                  "gutter": "24px",
+                  "xl": "80px",
+                  "margin-desktop": "64px",
+                  "margin-mobile": "16px",
+                  "lg": "48px",
+                  "xs": "4px",
+                  "sm": "12px",
+                  "md": "24px"
+          },
+          "fontFamily": {
+                  "headline-lg": ["Playfair Display"],
+                  "label-sm": ["Inter"],
+                  "display-sm": ["Playfair Display"],
+                  "body-md": ["Inter"],
+                  "headline-md": ["Playfair Display"],
+                  "headline-lg-mobile": ["Playfair Display"],
+                  "display-lg": ["Playfair Display"],
+                  "label-md": ["Inter"],
+                  "body-lg": ["Inter"]
+          },
+          "fontSize": {
+                  "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                  "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                  "display-sm": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                  "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                  "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #fff8f4;
+      color: #1f1b16;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar Implementation -->
+<header class="bg-surface dark:bg-surface-dim w-full sticky top-0 z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<a class="font-display-sm text-display-sm text-on-surface dark:text-inverse-on-surface cursor-pointer active:opacity-70 transition-opacity" href="/">Alpacart</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-md">
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Collections</a>
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Materials</a>
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Our Heritage</a>
+<a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Sustainability</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-md">
+<button class="cursor-pointer transition-opacity active:opacity-70">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">search</span>
+</button>
+<button class="cursor-pointer transition-opacity active:opacity-70 relative">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">shopping_bag</span>
+<!-- Active State Indicator -->
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="cursor-pointer transition-opacity active:opacity-70">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">person</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-xl">
+<!-- Page Header -->
+<div class="mb-lg border-b border-outline-variant pb-md flex justify-between items-baseline">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Your Shopping Bag</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">(3 Items)</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-start">
+<!-- Product List Area (8 cols) -->
+<section class="lg:col-span-8 space-y-md">
+<!-- Item 1 -->
+<div class="flex flex-col md:flex-row gap-md py-md border-b border-outline-variant items-start">
+<div class="w-full md:w-40 aspect-[4/5] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A luxurious, close-up shot of a cream-colored Peruvian Alpaca throw blanket draped elegantly over a mid-century modern chair. The lighting is warm and golden, emphasizing the fine, soft texture of the fibers. The surrounding space is a minimalist, high-end interior with neutral tones and soft shadows, evoking a sense of quiet luxury and artisanal craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-YCQqP1oiFTOWZ_pgpPU_mRHJJY1rWsdq-YfySnBt_Q3z9QlxuKPiqX9Rw0Jr6Dc6zH6Ki2ROYdYOVpc39520_eDTxQb-62Xlc87wqF28AaHQdQeXm_79KhoIhHhf6xpKtXDoRxDrvBRcBW58AJpg9mrPiaNLdOWn9o-ugB4QqqV-KFvsyGnJEA6QoSY-A0cg7tabjOnUI0B7YeEQfODxvn51TKaSff2GGvYemoT77lIVXR0HFlDZD5_CJ7DuoyV-SnW2bLSZ5qnW"/>
+</div>
+<div class="flex-1 flex flex-col justify-between h-full py-xs">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Royal Alpaca Throw</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Color: Heirloom Cream | Size: 150x200cm</p>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">$420</p>
+</div>
+<div class="flex justify-between items-end mt-md">
+<div class="flex items-center border border-outline-variant px-sm py-1 gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-label-md text-label-md w-4 text-center">1</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 group">
+<span class="material-symbols-outlined text-[16px] group-hover:text-error">delete</span>
+                REMOVE
+              </button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex flex-col md:flex-row gap-md py-md border-b border-outline-variant items-start">
+<div class="w-full md:w-40 aspect-[4/5] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of a charcoal grey baby alpaca wool scarf folded neatly on a textured linen surface. The focus is on the intricate weave and the natural sheen of the wool. The palette is a sophisticated mix of deep grays and soft tans. The atmosphere is serene and elegant, bathed in soft, diffused morning light coming from a nearby window." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ4qjQS9O9GJJutFDrMt-qnVtG1xHY7wkE_q8DHNlp9ORhuP1CUkkGpJQcxoUUpo9HyscTrrLYUckp0i_zUJtgU5rE8VkSP8KVGTUz8EULLGzWZEkW5ByiGHzRYdqxfuRVpu21NOnpdw53sjWJhr01vA9i9QYzjQ08FCpE3ocalCSCoEatQ8YU7Ep5skrp8cMyxPRm0pRzVrjw8aQ0p0GtjPMNKt0JT9ozFkdJmfNViYS_ptOtK02Zy4fS3Vje4esli5_kd3AgdqMo"/>
+</div>
+<div class="flex-1 flex flex-col justify-between h-full py-xs">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Signature Scarf</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Color: Charcoal | Size: Standard</p>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">$185</p>
+</div>
+<div class="flex justify-between items-end mt-md">
+<div class="flex items-center border border-outline-variant px-sm py-1 gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-label-md text-label-md w-4 text-center">1</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 group">
+<span class="material-symbols-outlined text-[16px] group-hover:text-error">delete</span>
+                REMOVE
+              </button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex flex-col md:flex-row gap-md py-md border-b border-outline-variant items-start">
+<div class="w-full md:w-40 aspect-[4/5] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A pair of hand-knitted alpaca wool lounge socks in a soft taupe color, resting on a plush white rug. The image conveys ultimate comfort and warmth. The lighting is soft and airy, creating a high-key aesthetic that highlights the delicate texture of the knit. The scene is peaceful and inviting, typical of high-end home lifestyle photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AO5Jz6oOX2HaN82fQdr5HBrr90xC0BogTkyhsWnsBsrot4OvULWIVhoDm6wtz9ZkosXqwF-EMPE9D1sZ5PIkhZjza8mBrFS0aZ5v91zxOkntmlDz9V-jqmFUkCKgOi-h2pnQ-PGUH0yLOstcRP33Oz9GHZJSqLGsY7eDEN7ONHZ3lSWrrpkuvIpKNLZkYU4tg5xFAVwoWktoXDwzEmNB6oGtNLoXnJRVKNyYl_CWICJFQd878KBYEVJuNHEM5piVKl2kh4szgabp"/>
+</div>
+<div class="flex-1 flex flex-col justify-between h-full py-xs">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Cloud Knit Socks</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Color: Taupe | Size: Medium</p>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">$65</p>
+</div>
+<div class="flex justify-between items-end mt-md">
+<div class="flex items-center border border-outline-variant px-sm py-1 gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-label-md text-label-md w-4 text-center">1</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-error transition-colors flex items-center gap-1 group">
+<span class="material-symbols-outlined text-[16px] group-hover:text-error">delete</span>
+                REMOVE
+              </button>
+</div>
+</div>
+</div>
+<!-- Promo Code Section -->
+<div class="pt-lg">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-sm" for="promo">DISCOUNT CODE</label>
+<div class="flex gap-md max-w-sm">
+<input class="flex-1 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary font-body-md text-body-md px-0 py-2 placeholder:text-outline-variant" id="promo" placeholder="Enter code" type="text"/>
+<button class="font-label-md text-label-md text-on-surface hover:text-primary transition-colors border-b border-on-surface hover:border-primary pb-1">APPLY</button>
+</div>
+</div>
+<!-- Trust Signals Mobile Only -->
+<div class="lg:hidden grid grid-cols-2 gap-md pt-lg border-t border-outline-variant mt-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">local_shipping</span>
+<span class="font-label-sm text-[10px] leading-tight">FREE GLOBAL SHIPPING</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">verified_user</span>
+<span class="font-label-sm text-[10px] leading-tight">SECURE CHECKOUT</span>
+</div>
+</div>
+</section>
+<!-- Sidebar Area (4 cols) -->
+<aside class="lg:col-span-4 lg:sticky lg:top-28 space-y-md">
+<div class="bg-surface-container p-md md:p-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Order Summary</h2>
+<div class="space-y-sm pb-md border-b border-outline-variant">
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md text-on-surface">$670.00</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Shipping</span>
+<span class="font-label-sm text-label-sm text-secondary">FREE</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Taxes</span>
+<span class="font-body-md text-body-md text-on-surface-variant italic">Calculated at checkout</span>
+</div>
+</div>
+<div class="flex justify-between py-md">
+<span class="font-headline-md text-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md text-on-surface">$670.00</span>
+</div>
+<div class="space-y-sm mt-md">
+<button class="w-full bg-on-background text-on-primary font-label-md text-label-md py-4 tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-sm group">
+              PROCEED TO CHECKOUT
+              <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<a class="w-full block text-center font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface py-2 transition-colors" href="#">
+              CONTINUE SHOPPING
+            </a>
+</div>
+<!-- Trust Icons -->
+<div class="mt-lg pt-md border-t border-outline-variant">
+<div class="flex justify-center gap-lg text-outline opacity-60">
+<span class="material-symbols-outlined text-md">payments</span>
+<span class="material-symbols-outlined text-md">lock</span>
+<span class="material-symbols-outlined text-md">cycle</span>
+<span class="material-symbols-outlined text-md">inventory_2</span>
+</div>
+<p class="text-center font-label-sm text-[10px] text-outline-variant mt-sm tracking-wide">COMPLIMENTARY RETURNS WITHIN 30 DAYS</p>
+</div>
+</div>
+<!-- Help Section -->
+<div class="p-md bg-surface-container-low border border-outline-variant">
+<h4 class="font-label-md text-label-md text-on-surface mb-xs">NEED ASSISTANCE?</h4>
+<p class="font-body-md text-[13px] text-on-surface-variant mb-sm">Our concierge is available to guide your fiber selection and care.</p>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Contact Concierge</a>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Implementation -->
+<footer class="w-full mt-xl bg-surface-container-highest dark:bg-inverse-surface">
+<div class="py-xl px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between gap-lg">
+<div class="flex flex-col gap-md max-w-sm">
+<span class="font-display-sm text-display-sm text-on-surface-variant">Alpacart</span>
+<p class="font-body-md text-body-md text-on-surface dark:text-inverse-on-surface opacity-70 italic">Dedicated to the preservation of Andean heritage and the mastery of noble fibers.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-lg">
+<div class="flex flex-col gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Information</span>
+<nav class="flex flex-col gap-xs">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed underline decoration-1 transition-all duration-200" href="#">Traceability</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed underline decoration-1 transition-all duration-200" href="#">Care Guide</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed underline decoration-1 transition-all duration-200" href="#">Shipping &amp; Returns</a>
+</nav>
+</div>
+<div class="flex flex-col gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Legal</span>
+<nav class="flex flex-col gap-xs">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed underline decoration-1 transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed underline decoration-1 transition-all duration-200" href="#">Terms of Service</a>
+</nav>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop max-w-container-max mx-auto pb-lg">
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant opacity-60">© 2024 Alpacart Textiles. Excellence in Fiber.</p>
+</div>
+</footer>
+<script>
+    // Micro-interactions
+    document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+      icon.classList.add('transition-transform', 'duration-200');
+    });
+
+    // Simple Quantity Toggle Mock
+    const quantityButtons = document.querySelectorAll('button span');
+    quantityButtons.forEach(btn => {
+      btn.parentElement.addEventListener('click', () => {
+        // Just a visual feedback for demonstration
+        btn.parentElement.classList.add('scale-95');
+        setTimeout(() => btn.parentElement.classList.remove('scale-95'), 100);
+      });
+    });
+  </script>
+</body></html>

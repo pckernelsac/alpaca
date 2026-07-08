@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contacto | ALPACA LUXE</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#fcf2ea",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ccecb9",
+                    "tertiary": "#48633b",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#ffddae",
+                    "outline-variant": "#d4c4b1",
+                    "on-primary-fixed": "#281800",
+                    "on-secondary-container": "#6c6056",
+                    "secondary-container": "#edddcf",
+                    "surface-container-highest": "#ebe1d9",
+                    "on-primary-fixed-variant": "#614000",
+                    "surface-container-high": "#f1e6de",
+                    "secondary": "#685c51",
+                    "background": "#fff8f4",
+                    "on-tertiary-fixed-variant": "#344d28",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary-fixed": "#092102",
+                    "inverse-primary": "#f6bd60",
+                    "inverse-on-surface": "#f9efe7",
+                    "on-tertiary-container": "#f8ffee",
+                    "on-background": "#1f1b16",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#221a12",
+                    "outline": "#827565",
+                    "surface-bright": "#fff8f4",
+                    "primary-fixed-dim": "#f6bd60",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#e2d8d1",
+                    "surface": "#fff8f4",
+                    "inverse-surface": "#352f2a",
+                    "surface-container": "#f6ece4",
+                    "secondary-fixed": "#f0e0d2",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#d3c4b6",
+                    "primary-container": "#9a6c14",
+                    "primary": "#7c5400",
+                    "on-secondary-fixed-variant": "#50453b",
+                    "tertiary-container": "#607c52",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#7f5600",
+                    "surface-variant": "#ebe1d9",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#504537",
+                    "on-surface": "#1f1b16",
+                    "tertiary-fixed-dim": "#b1d09f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "gutter": "24px",
+                    "xl": "96px",
+                    "md": "32px",
+                    "margin-mobile": "20px",
+                    "sm": "16px",
+                    "lg": "64px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .form-underline:focus {
+            outline: none;
+            border-bottom-color: #7c5400;
+        }
+        .sepia-map {
+            filter: sepia(0.6) grayscale(0.2) contrast(0.9);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation -->
+<nav class="w-full top-0 z-50 bg-background dark:bg-on-background">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop py-md">
+<span class="font-display-lg text-headline-md tracking-tighter text-on-background dark:text-background uppercase">ALPACA LUXE</span>
+<div class="hidden md:flex gap-lg items-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Heritage</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Artisanal</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Fibers</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Collection</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-300" href="#">Journal</a>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary cursor-pointer">search</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">shopping_bag</span>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[716px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A breathtaking, cinematic landscape of the Peruvian Andes at golden hour. Soft, warm sunlight grazes the peaks, creating deep shadows and luminous golden ridges. The atmosphere is quiet, serene, and editorial, with a muted earthy color palette of ochre, cream, and deep slate. The composition follows high-end luxury fashion photography aesthetics with plenty of negative space in the sky." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWTVJyM8VUX9_6ejgKloEDvv6FJJWX8hkeoXGHuZZzx0k_ZEoRTN77zKaYQRPuPYSepGG2mpj0HassV2vGzNd0GqGA74cAvHug1zdnlAKzG9OgDJbXMsgSgxzUApB0u2S5ooUr6KU6VLSD9sDwaZDOBXWUXY7U6LWgILLfmP-zKQ0N0d7jbxmciB9KumkZwVnFB6DUF8j5JlWooTiHiNfFXIqDnW64xPcOv9Aa1FRRPFFnsx5Wh7XjJaha5nOpdoEdlZLVE5xv--U')"></div>
+<div class="absolute inset-0 bg-on-background/20"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop text-white">
+<h1 class="font-display-lg text-display-lg mb-sm max-w-2xl leading-none">Conectemos con la Tradición</h1>
+<p class="font-body-lg text-body-lg max-w-md opacity-90">Invitamos a compartir sus inquietudes y descubrir juntos la esencia de nuestras fibras ancestrales.</p>
+</div>
+</section>
+<!-- Contact Info & Form -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left: Info Blocks -->
+<div class="lg:col-span-5 space-y-lg">
+<div class="space-y-md">
+<h2 class="font-headline-lg text-headline-lg text-primary">Nuestra Casa</h2>
+<div class="space-y-sm">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">DIRECCIÓN</p>
+<p class="font-body-md text-body-md text-on-surface">Av. El Sol 123, Cusco, Perú.</p>
+</div>
+</div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1">call</span>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">TELÉFONO</p>
+<p class="font-body-md text-body-md text-on-surface">+51 84 123 456</p>
+</div>
+</div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1">mail</span>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">CORREO</p>
+<p class="font-body-md text-body-md text-on-surface">contacto@alpacart.com</p>
+</div>
+</div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1">schedule</span>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">HORARIOS</p>
+<p class="font-body-md text-body-md text-on-surface">Lun - Vie: 9:00 - 18:00<br/>Sáb: 10:00 - 14:00</p>
+</div>
+</div>
+</div>
+<div class="pt-md">
+<a class="inline-flex items-center gap-sm px-lg py-sm bg-surface-container-high border border-outline-variant hover:border-primary transition-all duration-300 group" href="https://wa.me/5184123456">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+<span class="font-label-caps text-label-caps text-on-surface">INICIAR CONVERSACIÓN</span>
+</a>
+</div>
+</div>
+<div class="space-y-md border-t border-outline-variant pt-lg">
+<p class="font-label-caps text-label-caps text-outline">SIGUE NUESTRA HUELLA</p>
+<div class="flex gap-md">
+<a class="text-on-surface hover:text-primary transition-colors font-body-md" href="#">Instagram</a>
+<a class="text-on-surface hover:text-primary transition-colors font-body-md" href="#">LinkedIn</a>
+<a class="text-on-surface hover:text-primary transition-colors font-body-md" href="#">Pinterest</a>
+</div>
+</div>
+</div>
+<!-- Right: Form -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-lg lg:p-xl border border-surface-container-highest">
+<form class="space-y-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline block">NOMBRE COMPLETO</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-sm px-0 focus:ring-0 focus:border-primary placeholder:text-surface-dim font-body-md" placeholder="Su nombre" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline block">EMAIL</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-sm px-0 focus:ring-0 focus:border-primary placeholder:text-surface-dim font-body-md" placeholder="ejemplo@correo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline block">ASUNTO</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-sm px-0 focus:ring-0 focus:border-primary placeholder:text-surface-dim font-body-md" placeholder="Motivo de su consulta" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline block">MENSAJE</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant py-sm px-0 focus:ring-0 focus:border-primary placeholder:text-surface-dim font-body-md resize-none" placeholder="Escriba su mensaje aquí..." rows="4"></textarea>
+</div>
+<div class="pt-md">
+<button class="w-full md:w-auto px-xl py-md bg-primary text-white font-label-caps text-label-caps tracking-widest hover:bg-primary-container transition-colors duration-500" type="submit">
+                                ENVIAR MENSAJE
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="w-full h-[500px] relative grayscale hover:grayscale-0 transition-all duration-700">
+<div class="absolute inset-0 z-0 bg-surface-dim">
+<div class="w-full h-full sepia-map bg-cover bg-center" data-alt="A stylized, high-contrast black and white map of Cusco city center. The map is minimalist, showing only major streets and landmarks with clean lines. The aesthetic is editorial and luxurious, with a subtle grain texture and sepia-toned highlights to match the brand colors. No labels, just pure geometric cartography." data-location="Cusco, Peru" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB20BBVRyJGeOVZp8FEPzyjaRjexTuJcqA2FK28qCkCQgayY9cl4uZiJwR7qqVWvPf8YMJZvECZtLslWI4QMWf43FwyFdPppV_CBUIdhIpwYiRq-ME4x6F920dqCcTIQu25BmBxtaC1UXyyqg4fcM-LLiOJ4SeD50cILM9ZEAjoNH13kmCxhhn4OXuUM2wvSlpHxwKz7v59QpeNYldZkhGtrzcUPApUOR5Q9WqXxjVVe4l3WYbgsBwn07xiXle10Pew4U9vWjjzXj8')"></div>
+</div>
+<!-- Overlay Info -->
+<div class="absolute bottom-md right-md bg-white p-md shadow-sm border border-outline-variant max-w-xs hidden md:block">
+<p class="font-display-lg text-headline-md text-primary mb-xs">Cusco</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Visite nuestro atelier principal en el corazón de los Andes.</p>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="bg-surface-container-low py-xl">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<h3 class="font-label-caps text-label-caps text-primary mb-lg text-center tracking-[0.2em]">PREGUNTAS FRECUENTES</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="space-y-sm text-center md:text-left">
+<h4 class="font-title-lg text-title-lg text-on-surface">¿Hacen envíos internacionales?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Sí, llevamos la excelencia de nuestra alpaca a cualquier rincón del mundo con trazabilidad garantizada.</p>
+</div>
+<div class="space-y-sm text-center md:text-left">
+<h4 class="font-title-lg text-title-lg text-on-surface">¿Puedo visitar el taller?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Las visitas al taller de Cusco se realizan bajo cita previa para garantizar una experiencia personalizada.</p>
+</div>
+<div class="space-y-sm text-center md:text-left">
+<h4 class="font-title-lg text-title-lg text-on-surface">¿Tienen venta al por mayor?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Colaboramos con boutiques selectas. Contáctenos para recibir nuestro catálogo de wholesale.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-low dark:bg-surface-dim py-xl">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="md:col-span-1">
+<span class="font-display-lg text-headline-lg text-on-background dark:text-background block mb-md">ALPACA LUXE</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Preservando el legado textil andino a través del lujo contemporáneo y la sostenibilidad radical.</p>
+</div>
+<div class="space-y-sm">
+<p class="font-label-caps text-label-caps text-primary font-bold">DESCUBRE</p>
+<ul class="space-y-xs">
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Traceability</a></li>
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Artisanal</a></li>
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Collection</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<p class="font-label-caps text-label-caps text-primary font-bold">CLIENTE</p>
+<ul class="space-y-xs">
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<p class="font-label-caps text-label-caps text-primary font-bold">CONTACTO</p>
+<ul class="space-y-xs">
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Contact Us</a></li>
+<li><a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Wholesale</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-xl pt-lg border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-body-md text-body-md text-secondary uppercase tracking-widest text-xs">© 2024 ALPACA LUXE. ALL RIGHTS RESERVED.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary transition-colors">language</span>
+<span class="font-label-caps text-label-caps text-secondary">PE — ES</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for form inputs
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.previousElementSibling.classList.add('text-primary');
+                input.previousElementSibling.classList.remove('text-outline');
+            });
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.previousElementSibling.classList.remove('text-primary');
+                    input.previousElementSibling.classList.add('text-outline');
+                }
+            });
+        });
+    </script>
+</body></html>

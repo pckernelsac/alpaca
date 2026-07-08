@@ -1,0 +1,13 @@
+.section { padding: var(--spacing-xl) 0; }
+.inner { max-width: 1440px; margin: 0 auto; padding: 0 var(--spacing-lg); }
+.header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--spacing-lg); }
+.title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; }
+.link { font-family: var(--font-label); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-primary); text-decoration: none; border-bottom: 1px solid var(--color-primary); padding-bottom: 0.125rem; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-xs); }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(6, 1fr); } }
+.item { aspect-ratio: 1; position: relative; overflow: hidden; cursor: pointer; border-radius: var(--radius-sm); }
+.itemImg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.item:hover .itemImg { transform: scale(1.1); }
+.itemOverlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; }
+.item:hover .itemOverlay { opacity: 1; }

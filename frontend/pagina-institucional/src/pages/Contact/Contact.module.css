@@ -1,0 +1,37 @@
+.main {
+  padding: var(--spacing-xl) 0;
+}
+
+.grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 5fr 7fr;
+  }
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.formCol {
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .formCol {
+    padding: var(--spacing-xl);
+  }
+}

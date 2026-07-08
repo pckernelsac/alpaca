@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ALPACART | Promociones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Source+Serif+4:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(26, 26, 28, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+        }
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C5A059, transparent);
+            opacity: 0.3;
+        }
+        .vignette-overlay {
+            background: radial-gradient(circle, transparent 40%, rgba(10, 10, 11, 0.8) 100%);
+        }
+        body {
+            background-color: #0A0A0B;
+            color: #e5e2e3;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "on-error": "#690005",
+                "on-primary": "#412d00",
+                "inverse-on-surface": "#313031",
+                "surface": "#131314",
+                "on-surface": "#e5e2e3",
+                "on-secondary": "#581d00",
+                "surface-container": "#201f20",
+                "error-container": "#93000a",
+                "primary-container": "#c5a059",
+                "tertiary-container": "#ada58e",
+                "surface-variant": "#353436",
+                "surface-bright": "#3a393a",
+                "secondary-fixed": "#ffdbcd",
+                "primary-fixed": "#ffdea5",
+                "secondary-container": "#7a3410",
+                "on-primary-fixed-variant": "#5d4201",
+                "error": "#ffb4ab",
+                "outline-variant": "#4e4639",
+                "surface-container-low": "#1c1b1c",
+                "on-primary-fixed": "#261900",
+                "surface-container-highest": "#353436",
+                "on-background": "#e5e2e3",
+                "surface-tint": "#e9c176",
+                "secondary-fixed-dim": "#ffb597",
+                "tertiary-fixed-dim": "#cfc6ae",
+                "on-surface-variant": "#d1c5b4",
+                "on-error-container": "#ffdad6",
+                "tertiary": "#cfc6ae",
+                "surface-container-high": "#2a2a2b",
+                "on-tertiary-fixed-variant": "#4c4634",
+                "background": "#131314",
+                "secondary": "#ffb597",
+                "on-secondary-container": "#ffa178",
+                "on-tertiary-container": "#403b29",
+                "tertiary-fixed": "#ece2c9",
+                "surface-container-lowest": "#0e0e0f",
+                "primary-fixed-dim": "#e9c176",
+                "outline": "#9a8f80",
+                "on-primary-container": "#4e3700",
+                "on-tertiary": "#35301f",
+                "inverse-primary": "#775a19",
+                "surface-dim": "#131314",
+                "on-secondary-fixed-variant": "#77320e",
+                "inverse-surface": "#e5e2e3",
+                "on-tertiary-fixed": "#201b0c",
+                "primary": "#e9c176",
+                "on-secondary-fixed": "#360f00"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "margin-mobile": "20px",
+                "container-max": "1280px",
+                "unit": "8px",
+                "margin-desktop": "64px",
+                "gutter": "24px"
+              },
+              "fontFamily": {
+                "headline-lg-mobile": ["Playfair Display"],
+                "display-lg": ["Playfair Display"],
+                "body-lg": ["Source Serif 4"],
+                "label-sm": ["Hanken Grotesk"],
+                "label-md": ["Hanken Grotesk"],
+                "headline-md": ["Playfair Display"],
+                "headline-lg": ["Playfair Display"],
+                "body-md": ["Source Serif 4"]
+              },
+              "fontSize": {
+                "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky bg-surface z-50">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-xs max-w-container-max mx-auto h-20">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter cursor-pointer">
+                ALPACART
+            </div>
+<div class="hidden md:flex gap-10">
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer" href="#">Heritage</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer" href="#">Artisanal</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer" href="#">Fibers</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-primary border-b border-primary pb-1 transition-colors duration-300 cursor-pointer" href="#">Collection</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group hidden sm:block">
+<span class="material-symbols-outlined text-primary cursor-pointer">search</span>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="shopping_bag">shopping_bag</span>
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="person">person</span>
+</div>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24 space-y-32">
+<!-- Hero Section: Editorial Campaign -->
+<section class="relative w-full h-[819px] flex items-center justify-center overflow-hidden">
+
+<div class="absolute inset-0 z-10 vignette-overlay"></div>
+<div class="relative z-20 text-center space-y-6 max-w-3xl">
+<span class="font-label-md text-label-md text-primary tracking-[0.3em] uppercase">Private Selection</span>
+<h1 class="font-display-lg text-display-lg text-on-surface italic">The Solstice Capsule</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">An exclusive exploration of undyed Vicuña and Baby Alpaca fibers, curated for the modern minimalist. Seasonal offerings reflecting the silent grace of the Andean peaks.</p>
+<div class="pt-8 flex justify-center gap-gutter">
+<button class="px-8 py-4 bg-primary text-on-primary font-label-md uppercase tracking-widest transition-transform hover:scale-105 active:scale-95">Explore Collection</button>
+<button class="px-8 py-4 border border-secondary text-secondary font-label-md uppercase tracking-widest bg-transparent hover:bg-secondary/10 transition-all">View Lookbook</button>
+</div>
+</div>
+<!-- Floating Image Accent -->
+<div class="absolute right-0 bottom-0 w-1/3 h-2/3 hidden lg:block opacity-80 translate-x-12 translate-y-12">
+<div class="w-full h-full glass-card overflow-hidden">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="A high-contrast cinematic photograph of a raw alpaca wool texture, focusing on the intricate details of the fibers illuminated by a single warm golden light source from the side. The background is a deep obsidian black, emphasizing the luxury and purity of the natural material in a high-end editorial style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBHRNXxFu_RNhYjWpodGwyjBprRWSlSFuDR6nRrAIuexBdHlmRgmOvrH40u6FdmE_AZI0WtWswzJ_MGlpgeXsQ0U2Sa9HYOMu-bEZxPFMy46xpdbDxNVhVGHDQBujCQ1NmxSoWZnf37g8E9kvRA1WtkN_2rTOkwefFui-04aZBGzAkcwhzll007UM8xoHYowOUTmMdjtxdjMcAMuDt6RF0XBNeLbZi089i9sWXFbrLWbbhon3ZhEvTmcEg_dNDVSVW_oRhpqsTmR0"/>
+</div>
+</div>
+</section>
+<!-- Product Grid: Season's Selection -->
+<section class="space-y-12">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="space-y-2">
+<h2 class="font-headline-lg text-headline-lg">Season's Selection</h2>
+<div class="h-px w-24 bg-primary"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Refined silhouettes and ancient weaving techniques meet in our most anticipated limited release of the year.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group relative space-y-4">
+<div class="aspect-[3/4] overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A studio shot of a luxurious charcoal grey alpaca wool sweater draped over a minimalist obsidian stone pedestal. Soft amber lighting highlights the soft halo of the fibers. The composition is asymmetrical and modern, set against a dark, moody background with a hint of bronzed gold glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFIkMrH3q9MDC24E1K12OkuasheUFxb5qWrimLT6cseeUzBHL5xdO1Oj1HWkEwjiLOZxwGvCyi_zjUPKHxGs5oW2XGktKtbM5HgXwPITBSG6Pog0JTjZEo-xqR3dXVRRDZtlz1sTDxFpGGo9HoQymbdSoyL3vFFtrDohZ6H_1kQ584mMjH5uaUrQW1wNxGRaplgmeT6IUC1lrbBkKwMo49ujaK4HIHS4HL6DgTPxF39zNSkHWIoCbiYPx52z3ExpDT1WHj3-Ou1mk"/>
+<div class="absolute top-4 right-4 bg-primary text-on-primary px-3 py-1 font-label-sm uppercase tracking-tighter">-25%</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-2xl">Obsidian Poncho</h3>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest">100% Baby Alpaca</p>
+</div>
+<div class="text-right">
+<span class="block text-primary font-headline-md">$420</span>
+<span class="block text-on-surface-variant text-sm line-through">$560</span>
+</div>
+</div>
+</div>
+<!-- Card 2 (Large Highlight) -->
+<div class="group relative space-y-4 lg:row-span-2">
+<div class="aspect-[3/5] overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A full-length fashion editorial image of a model wearing a floor-length burnished copper alpaca coat, standing in a vast, dark volcanic landscape of Peru at twilight. The sky is a deep midnight blue, and a soft bronzed glow illuminates the model from the front, highlighting the garment's flow and premium texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBct-4aWhaCLekhUKlJLI3LANaqFpBjQ917VAlKsRprGRJHVhFFHLTS4qqI0yMZEQ27Vz9FNX05uQghNZ-C12Izjm3gmP2PcOqDVYx1ucxCC1iMjjwVcZ1bRcTXXzISM2A2sMQ6v4mdKXxdsBbwe0PueShP0r3laxxt94dlSkL9Ni4Zoxho49_TE0lNvz98v7AqLhGFwNHnM58X0Ev8uzKRIq5tLiLwDROqGr14gGklCZxPVclusIc970bckeKfTdJ81POuByVrhMk"/>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-surface to-transparent">
+<p class="font-label-md text-primary mb-2">Campaign Exclusive</p>
+<h3 class="font-headline-lg text-3xl">The Altiplano Overcoat</h3>
+<p class="font-body-md text-on-surface-variant mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Hand-finished by master artisans in Arequipa. A testament to ancestral craftsmanship.</p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative space-y-4">
+<div class="aspect-[3/4] overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Close-up detail of a hand-woven artisanal throw blanket featuring geometric Inca-inspired patterns in bronze and sand colors. The weaving is sharp and intricate, set against a dark charcoal background. The lighting is low-key, emphasizing the physical weight and luxury of the textile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQe4_VuW8BiZx1rv9aXLPtZy2Hsk1zf4qsSUf4_j6xvSxe-hkOIDWUKlhzZhyPRjKXXeN7A2PvbwPIr5j9IhzbZ_i4JIUkPBhSFoFMv4CQiz9-5q4zysuaKgAHf90jkZ1En70oL2soMImMCAOpPlKmRy1nnHRqzHd2VTsZ2tqiWea76i6H78glAXiD0XvPedUn9UXdMbobQ8op_XV9hNEe7cBPuYcj2_B9A4cWZU-cFfv4fZqh221VusMxpFm4AZahxOaVvwwoT1I"/>
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary px-3 py-1 font-label-sm uppercase tracking-tighter">Limited</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-2xl">Heritage Throw</h3>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest">Handmade / Natural Dye</p>
+</div>
+<div class="text-right">
+<span class="block text-primary font-headline-md">$280</span>
+<span class="block text-on-surface-variant text-sm line-through">$350</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative space-y-4">
+<div class="aspect-[3/4] overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A minimalist display of high-end alpaca fiber accessories, including a scarf and gloves in a sand-toned weave. The items are arranged on a dark, reflective surface that mirrors the soft bronzed overhead lighting. The aesthetic is clean, premium, and focused on material excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVwbef7ktV22A7JyhXRAN7QDJIqkgFqD1bt28ALBfL4i46Kd7WNujgGGWO-hiLtv1afdELSccV8GsgMiRbBG4mGzfEYbovG6Bak5FGlSu6aG-ZYJQvZdODodttjpPe5ChuYJ5aqwqZGfGbuQRPxCmlMTc31MDw-0c6FUDz5wEANnUiHPmnx5FwIhKj8wPUeweBdlcHezdGxl_htcxIOFpxJXnA2OCoDOd4E6w1SSQXwN50DshIVgGaPc_wsHvaFrgZ3DoFkdeqHjs"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-2xl">Arisanal Scarf</h3>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest">Sand Fiber Collection</p>
+</div>
+<div class="text-right">
+<span class="block text-primary font-headline-md">$150</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative space-y-4">
+<div class="aspect-[3/4] overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An atmospheric image of a pair of hand-knit alpaca lounge pants in a deep midnight charcoal color, laid out on a textured volcanic stone surface. A subtle copper-colored light beam cuts across the image, highlighting the soft knit pattern. The overall feel is one of quiet luxury and comfort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP1k8U_1YnjAomqNWpGuK8vamdS32At6d3DtOmDbrsNaJkwwyKSV8vix1UChjr6cvJa1mYyK54IC-IlFaj1KkP4UEhacALnh3PN1SRSQ6VH4yEStKVZnFHn7R24UgzvS6QLe5lYLcxSCF4FuFtuRH8SCKayu65K54M4Q5v2PNaB2pmxYoQsniejcUK9FI_nl91DYZjcdGW2ij5_fTSPB6nTE7ILDQlqJ2QhBlQ2bbVvBn45JofVILeOPdpchwSngBiB5MY39HgXSQ"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-2xl">Lounge Pant</h3>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-widest">Quiet Luxury Home</p>
+</div>
+<div class="text-right">
+<span class="block text-primary font-headline-md">$210</span>
+<span class="block text-on-surface-variant text-sm line-through">$290</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Brand Philosophy: Asymmetric Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-5 space-y-8">
+<div class="gold-divider w-24"></div>
+<h2 class="font-headline-lg text-headline-lg">Beyond the Fiber</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Our "Promociones" are not mere reductions; they are invitations to participate in a sustainable heritage. Each piece sold supports a local Andean community and ensures the preservation of ancient weaving techniques that have survived for millennia.</p>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+<div>
+<h4 class="font-label-md text-on-surface uppercase tracking-widest">Traceability</h4>
+<p class="font-body-md text-on-surface-variant text-sm">Every garment comes with a digital passport tracking its journey from the high Altiplano to your hands.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<div>
+<h4 class="font-label-md text-on-surface uppercase tracking-widest">Ancient Wisdom</h4>
+<p class="font-body-md text-on-surface-variant text-sm">We employ natural, botanical dyes and hand-loom methods that respect the earth’s rhythm.</p>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<a class="inline-flex items-center gap-2 text-primary group font-label-md uppercase tracking-[0.2em]" href="#">
+                        Our Philosophy 
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-7 relative">
+<div class="aspect-video glass-card overflow-hidden relative">
+<div class="absolute inset-0 bg-primary/5 z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A wide-angle cinematic shot of a group of Andean weavers in traditional dress working on large outdoor looms under a vast, cloudless night sky filled with stars. The scene is illuminated by soft, warm perimeter lighting, creating a high-contrast nocturnal atmosphere. The focus is on the communal spirit and the rhythmic art of weaving." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmcpMkPBnZ-LnzdsUV4iH-TitlkXLIx3PQ6uERdunjM_muWEoKsh-onVa2wO1QbYjWCFGUXNRD9bBeqJUZclPJZgaAkT1AMyNDopBNkdqtLAlWlIeOBDnZCdJNjy7AqjUYgPcMo1C2IVTdp4uiclJf9iWVbKdu57dKtTaLtSZHIr5hoGjvXRNt_-byKYzdFb-XmOOKQ3zzGDmiH8k4-CPR2KA-3Nf6xeo8SSrLIewjgrim-K27x4Fu9WG-PPWbVexLObZa8RKAJ1o"/>
+</div>
+<!-- Decorative Gold Accent -->
+<div class="absolute -top-12 -right-12 w-48 h-48 rounded-full border border-primary/20 blur-2xl"></div>
+</div>
+</section>
+<!-- Newsletter / Access -->
+<section class="glass-card p-12 md:p-24 text-center space-y-8 max-w-4xl mx-auto border-primary/20">
+<h2 class="font-headline-md text-headline-md">First Access</h2>
+<p class="font-body-md text-on-surface-variant">Join our private registry to receive early invitations to seasonal collections and artisanal collaborations.</p>
+<form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+<input class="flex-1 bg-surface-container border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface transition-all px-4 py-3 placeholder:text-on-surface-variant/40" placeholder="Your email address" type="email"/>
+<button class="px-8 py-3 bg-primary text-on-primary font-label-md uppercase tracking-widest hover:opacity-90 transition-opacity" type="submit">Subscribe</button>
+</form>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xl bg-secondary-fixed dark:bg-on-secondary-fixed-variant">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-margin-desktop py-lg max-w-container-max mx-auto gap-gutter">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-on-secondary-fixed dark:text-secondary-fixed tracking-tighter">ALPACART</div>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim max-w-xs">
+                    © 2024 ALPACART TEXTILES. SUSTAINABLY CRAFTED IN PERU.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div class="flex flex-col gap-2">
+<span class="font-bold text-on-secondary-fixed dark:text-secondary-fixed mb-2">Heritage</span>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Traceability</a>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Our Story</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-bold text-on-secondary-fixed dark:text-secondary-fixed mb-2">Service</span>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Shipping &amp; Returns</a>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Contact Us</a>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Wholesale</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-bold text-on-secondary-fixed dark:text-secondary-fixed mb-2">Legal</span>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:underline transition-all duration-200" href="#">Terms</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Subtle Parallax & Hover Interactions
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const glow = document.querySelector('.vignette-overlay');
+            if (glow) {
+                glow.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, transparent 40%, rgba(10, 10, 11, 0.8) 100%)`;
+            }
+        });
+
+        // Add micro-interaction to primary buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.letterSpacing = '0.3em';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.letterSpacing = '0.1em';
+            });
+        });
+    </script>
+</body></html>

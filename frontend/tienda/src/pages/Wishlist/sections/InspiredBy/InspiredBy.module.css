@@ -1,0 +1,10 @@
+.section { border-top: 1px solid var(--color-border); padding-top: var(--spacing-xl); margin-top: var(--spacing-xl); }
+.title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; margin-bottom: var(--spacing-lg); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-gutter, 24px); }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+.card { cursor: pointer; }
+.cardImg { aspect-ratio: 1; overflow: hidden; margin-bottom: var(--spacing-md); background: var(--color-bg-tertiary); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+.cardImgEl { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.card:hover .cardImgEl { transform: scale(1.05); }
+.cardTitle { font-family: var(--font-label); font-size: 0.8rem; font-weight: 500; margin-bottom: var(--spacing-xs); }
+.cardPrice { font-size: 0.9rem; color: var(--color-text-secondary); }

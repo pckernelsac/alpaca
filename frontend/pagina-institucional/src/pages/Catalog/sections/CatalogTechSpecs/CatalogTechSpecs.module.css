@@ -1,0 +1,121 @@
+.section {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  overflow: hidden;
+  position: relative;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  position: relative;
+  z-index: 10;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.textCol {
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary-dim);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+  margin-bottom: var(--spacing-md);
+}
+
+.specsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter, 24px);
+}
+
+.specItem {
+  border-left: 2px solid var(--color-primary-dim);
+  padding-left: var(--spacing-gutter, 24px);
+}
+
+.specTitle {
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-text-inverse);
+  margin-bottom: var(--spacing-xs);
+}
+
+.specDesc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.imageCol {
+  position: relative;
+}
+
+.imageBox {
+  aspect-ratio: 1;
+  background-color: var(--color-surface-variant);
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.floatingBadge {
+  position: absolute;
+  bottom: calc(-1 * var(--spacing-xs));
+  left: calc(-1 * var(--spacing-xs));
+  background-color: var(--color-primary-dim);
+  color: var(--color-text);
+  padding: var(--spacing-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.badgeSmall {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.badgeLarge {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}

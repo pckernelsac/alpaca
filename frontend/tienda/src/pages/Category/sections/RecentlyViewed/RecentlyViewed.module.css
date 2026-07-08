@@ -1,0 +1,12 @@
+.section { background: var(--color-bg-secondary); padding: var(--spacing-xl) 0; }
+.inner { max-width: 1440px; margin: 0 auto; padding: 0 var(--spacing-lg); }
+.title { font-family: var(--font-display); font-size: 2rem; font-weight: 400; text-align: center; margin-bottom: var(--spacing-lg); }
+.track { display: flex; overflow-x: auto; gap: var(--spacing-gutter, 24px); padding-bottom: var(--spacing-base); }
+.track::-webkit-scrollbar { display: none; }
+.card { flex-shrink: 0; width: 240px; cursor: pointer; }
+.cardImg { aspect-ratio: 4/5; overflow: hidden; margin-bottom: var(--spacing-base); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+.cardImgEl { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.card:hover .cardImgEl { transform: scale(1.05); }
+.cardTitle { font-family: var(--font-label); font-size: 0.8rem; font-weight: 500; color: var(--color-text); transition: color 0.2s; }
+.card:hover .cardTitle { color: var(--color-primary); }
+.cardPrice { font-family: var(--font-label); font-size: 0.75rem; color: var(--color-text-secondary); }

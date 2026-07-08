@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmed | Alpacart Textiles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#131313",
+                    "surface": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container": "#212121",
+                    "surface-container-high": "#2b2b2b",
+                    "surface-container-highest": "#333333",
+                    "surface-bright": "#393939",
+                    "surface-dim": "#131313",
+                    "primary": "#B8862F",
+                    "on-primary": "#F5F5F5",
+                    "primary-container": "#4a3613",
+                    "on-primary-container": "#ffe08d",
+                    "secondary": "#a0907c",
+                    "on-secondary": "#131313",
+                    "secondary-container": "#4d4639",
+                    "on-secondary-container": "#f6dec1",
+                    "on-surface": "#F5F5F5",
+                    "on-surface-variant": "#d1c4b9",
+                    "outline": "#9c8f80",
+                    "outline-variant": "#4d4639",
+                    "inverse-surface": "#F5F5F5",
+                    "inverse-on-surface": "#131313",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "md": "24px",
+                    "container-max": "1440px",
+                    "margin-desktop": "64px",
+                    "xl": "80px",
+                    "lg": "48px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "display-sm": ["Playfair Display"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-sm": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant z-50">
+<nav class="max-w-container-max mx-auto px-margin-desktop flex justify-between items-center h-xl">
+<div class="font-headline-md text-headline-md font-normal text-on-surface tracking-tight">
+                Alpacart Textiles
+            </div>
+<div class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="#">Heritage</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="#">Collection</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="#">Philosophy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="#">Sustainability</a>
+</div>
+<div class="flex items-center gap-md text-primary">
+<button class="cursor-pointer transition-opacity active:opacity-70">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+<button class="cursor-pointer transition-opacity active:opacity-70">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Confirmation Section -->
+<section class="text-center mb-xl">
+<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-surface-container mb-md">
+<span class="material-symbols-outlined text-primary scale-150" style="font-variation-settings: 'wght' 200;">check</span>
+</div>
+<h1 class="font-display-sm text-display-sm text-on-surface mb-xs">Thank You for Your Order</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">Your selection of artisanal alpaca textiles is being prepared with meticulous care.</p>
+</section>
+<!-- Order Identity -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md items-end border-b border-outline-variant pb-md mb-lg">
+<div>
+<span class="font-label-sm text-label-sm uppercase text-outline mb-xs block">Order Reference</span>
+<h2 class="font-headline-md text-headline-md text-on-surface transition-colors">#APC-98234102</h2>
+</div>
+<div class="md:text-right">
+<span class="inline-flex items-center gap-xs px-sm py-1 bg-surface-container-high text-primary font-label-md text-label-md rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Order Confirmed
+                </span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Order Summary -->
+<div class="lg:col-span-7">
+<h3 class="font-label-sm text-label-sm uppercase tracking-widest text-outline mb-md">Your Collection</h3>
+<div class="space-y-md">
+<!-- Item 1 -->
+<div class="flex gap-md py-md group">
+<div class="w-24 h-32 flex-shrink-0 bg-surface-container overflow-hidden">
+<img alt="Luxurious charcoal grey alpaca wool overcoat" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-raKaETQMX_9Gz8yPTCcLuTlQ8OcWfNuiOJ3w3c8lD6dmMCIhvQH6YdRr8-Vpbd1mDQfseWhd3xGNBHQzXqMHjCql4kVxqRjX7Gz-LpHrzg0Cr89JLXuzdW_ix22a5YtYQj0oq5ISlAgEsD6xNxmMCGCEEkT6vEMhSSAgYpq5OHWuBmWeCqrP6QtlPo9lZQp91pWU00UK6XxFree2Ua65IjCaLYfb0sprNP2K8exfqRa2iTlAkt0oLMU9Wq7-JapmMPzPpjApKzoJ"/>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-md text-headline-md text-on-surface">The Heirloom Overcoat</h4>
+<p class="font-body-md text-body-md text-on-surface">$1,250</p>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-xs">Size: Medium | Color: Charcoal Grey</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Quantity: 1</p>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant"></div>
+<!-- Item 2 -->
+<div class="flex gap-md py-md group">
+<div class="w-24 h-32 flex-shrink-0 bg-surface-container overflow-hidden">
+<img alt="Sophisticated cream-colored alpaca wool scarf" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlPTmIcEExDUhtdH_vUTgTspihmFYRVsRKAXKQFRqKAzZvj3IInElWPVGWZD5cFjfssKQDWGc3cZjDlrJ107C43Un_ZKrtAhCB14pE9_utg1A4q4WFCBSCL_jrmDf3JcxTpHOYrbRti1ULK0S9-efRD1XO5BRWM8-mS3rBl9fZq7UyJU9BzCOlcyreWY9uOWacC9uzd4R_8eV92p4-D9aPe7HCZ3zym-pq0PU-TsSmGZi-5aHJBnH58bKoBZ0zFZ3NHPPpXGX4zsXr"/>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<h4 class="font-headline-md text-headline-md text-on-surface">Signature Scarf</h4>
+<p class="font-body-md text-body-md text-on-surface">$320</p>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-xs">Color: Natural Cream</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Quantity: 1</p>
+</div>
+</div>
+</div>
+<!-- Totals -->
+<div class="mt-lg pt-md border-t border-outline-variant space-y-xs">
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Subtotal</span>
+<span class="font-body-md text-body-md">$1,570.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Shipping</span>
+<span class="font-body-md text-body-md">Complimentary</span>
+</div>
+<div class="flex justify-between text-on-surface pt-sm">
+<span class="font-label-md text-label-md uppercase tracking-widest font-bold">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$1,570.00</span>
+</div>
+</div>
+</div>
+<!-- Next Steps -->
+<div class="lg:col-span-5">
+<div class="bg-surface-container-low p-lg border border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">What Happens Next</h3>
+<ul class="space-y-md">
+<li class="flex gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'wght' 300;">mail</span>
+<div>
+<p class="font-label-md text-label-md font-bold mb-xs text-on-surface">Confirmation Email</p>
+<p class="font-body-md text-body-md text-on-surface-variant">We've sent a detailed receipt to <span class="italic">a.vogel@gmail.com</span>.</p>
+</div>
+</li>
+<li class="flex gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'wght' 300;">precision_manufacturing</span>
+<div>
+<p class="font-label-md text-label-md font-bold mb-xs text-on-surface">Artisan Preparation</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Your items are being carefully inspected and hand-packaged by our team in Cusco.</p>
+</div>
+</li>
+<li class="flex gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'wght' 300;">local_shipping</span>
+<div>
+<p class="font-label-md text-label-md font-bold mb-xs text-on-surface">Courier Dispatch</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Expect a tracking number via email within the next 24 to 48 hours.</p>
+</div>
+</li>
+</ul>
+<div class="mt-xl space-y-sm">
+<button class="w-full bg-primary text-on-primary py-md font-label-md text-label-md uppercase tracking-widest transition-all duration-300 hover:brightness-110 active:scale-[0.98]">
+                            Track My Order
+                        </button>
+<button class="w-full border border-outline text-on-surface-variant py-md font-label-md text-label-md uppercase tracking-widest transition-all duration-300 hover:border-primary hover:text-primary active:scale-[0.98]">
+                            Continue Shopping
+                        </button>
+</div>
+</div>
+<div class="mt-md text-center">
+<p class="font-label-sm text-label-sm text-outline">Need assistance? <a class="underline hover:text-primary transition-colors" href="#">Contact our concierge.</a></p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xl bg-surface-container-low border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-desktop py-xl flex flex-col md:flex-row justify-between items-start gap-lg">
+<div class="max-w-sm">
+<div class="font-headline-md text-headline-md text-on-surface mb-md">
+                    Alpacart Textiles
+                </div>
+<p class="text-on-surface-variant font-body-md text-body-md mb-md">
+                    Dedicated to preserving the heritage of Peruvian craftsmanship through the world's finest sustainable fibers.
+                </p>
+<p class="text-outline font-body-md text-body-md">
+                    © 2024 Alpacart Textiles. Artisanal Quality, Sustainable Luxury.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-xl">
+<div class="flex flex-col gap-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface opacity-60">Client Service</span>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Shipping &amp; Returns</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Care Guide</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Contact Us</a>
+</div>
+<div class="flex flex-col gap-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface opacity-60">Legal</span>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for tracking number copy
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderRef = document.querySelector('h2');
+            orderRef.style.cursor = 'pointer';
+            orderRef.title = 'Click to copy order reference';
+            
+            orderRef.addEventListener('click', () => {
+                const text = orderRef.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = orderRef.innerText;
+                    orderRef.innerText = 'Copied to clipboard';
+                    orderRef.classList.add('text-primary');
+                    setTimeout(() => {
+                        orderRef.innerText = originalText;
+                        orderRef.classList.remove('text-primary');
+                    }, 1500);
+                });
+            });
+        });
+    </script>
+</body></html>

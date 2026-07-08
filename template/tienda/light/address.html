@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manage Addresses | Alpacart Textiles</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#7c5400",
+                    "surface-container": "#f6ece4",
+                    "error-container": "#ffdad6",
+                    "secondary": "#6e5b44",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#dcc2a6",
+                    "surface-dim": "#e2d8d1",
+                    "surface-container-low": "#fcf2ea",
+                    "surface-container-highest": "#ebe1d9",
+                    "background": "#fff8f4",
+                    "secondary-container": "#f6dbbe",
+                    "surface-variant": "#ebe1d9",
+                    "surface-container-high": "#f1e6de",
+                    "outline-variant": "#d4c4b1",
+                    "on-tertiary-container": "#f8ffee",
+                    "tertiary-container": "#607c52",
+                    "surface-tint": "#7f5600",
+                    "inverse-on-surface": "#f9efe7",
+                    "primary-fixed-dim": "#f6bd60",
+                    "inverse-surface": "#352f2a",
+                    "surface": "#fff8f4",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#344d28",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#48633b",
+                    "tertiary-fixed-dim": "#b1d09f",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffddae",
+                    "on-tertiary-fixed": "#092102",
+                    "inverse-primary": "#f6bd60",
+                    "secondary-fixed": "#f9dec1",
+                    "on-secondary-fixed-variant": "#55442e",
+                    "on-primary-fixed-variant": "#614000",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#1f1b16",
+                    "on-background": "#1f1b16",
+                    "on-primary-fixed": "#281800",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#261907",
+                    "primary-container": "#9a6c14",
+                    "surface-bright": "#fff8f4",
+                    "outline": "#827565",
+                    "tertiary-fixed": "#ccecb9",
+                    "on-surface-variant": "#504537",
+                    "on-secondary-container": "#735f48",
+                    "on-primary-container": "#fffbff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "lg": "48px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "sm": "12px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "display-sm": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-sm": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fff8f4;
+            color: #1f1b16;
+            -webkit-font-smoothing: antialiased;
+        }
+        .address-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .address-card:hover {
+            border-color: #7c5400;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface sticky top-0 z-50 border-b border-outline-variant w-full h-20 flex items-center">
+<nav class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="font-display-sm text-display-sm text-on-surface">Alpacart</div>
+<ul class="hidden md:flex items-center space-x-md">
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Collections</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Craftsmanship</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Sustainability</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">The Journal</a></li>
+</ul>
+<div class="flex items-center space-x-md">
+<button class="material-symbols-outlined text-primary scale-100 active:scale-95 transition-transform" data-icon="shopping_bag">shopping_bag</button>
+<button class="material-symbols-outlined text-primary scale-100 active:scale-95 transition-transform" data-icon="person">person</button>
+</div>
+</nav>
+</header>
+<div class="flex max-w-container-max mx-auto min-h-screen relative">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col py-lg space-y-md border-r border-outline-variant h-[calc(100vh-80px)] w-64 sticky top-20 bg-surface-container-low">
+<div class="px-md mb-md">
+<div class="flex items-center space-x-sm mb-xs">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sophisticated close-up portrait of a refined, middle-aged individual with a warm smile, captured in soft, natural window light. The background is a minimalist studio with neutral beige tones and a hint of a luxury textile texture. The aesthetic is clean and professional, representing a premium membership experience in a light-mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkKJSTxr6pvQVi-FLg74GQLPNoYVBZsOuCZunnVQRXCFdRcadViWtSGRbewrh8BDeLyASGc6fVvnuNiLOKwji7BPE28wf59VuvwJut3t37kj34NlLO3LWiP3FQwZT7rzb2bhvlv9wOfnrcGv-jN2NMyyyDrZYiXYn5Tk5zonVLObm98HIEDIv0IL3ZWYDtQC_KQxDC4kjPGcZ6Om0nASL4jpLT-lAooCtVM8WBugOPN99ZW85DvMVIVhfhQ3UI3Esbyj0EQ2upBCW6"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Welcome back</p>
+<p class="font-label-md text-label-md text-primary font-bold">Premium Member</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow">
+<a class="flex items-center space-x-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center space-x-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="package_2">package_2</span>
+<span class="font-body-md text-body-md">Orders</span>
+</a>
+<a class="flex items-center space-x-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="favorite">favorite</span>
+<span class="font-body-md text-body-md">Wishlist</span>
+</a>
+<a class="flex items-center space-x-sm px-md py-sm text-primary font-bold border-r-2 border-primary bg-surface-bright transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-body-md text-body-md">Addresses</span>
+</a>
+<a class="flex items-center space-x-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="credit_card">credit_card</span>
+<span class="font-body-md text-body-md">Payments</span>
+</a>
+</nav>
+<div class="px-md pb-md">
+<button class="w-full py-sm bg-inverse-surface text-surface-bright font-label-md text-label-md hover:bg-primary transition-colors">
+                    Book Private Viewing
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile md:px-margin-desktop py-lg">
+<div class="max-w-4xl">
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-lg space-y-md md:space-y-0">
+<div class="space-y-xs">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Addresses</h1>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-lg">Manage your shipping and billing destinations for a seamless checkout experience.</p>
+</div>
+<button class="flex items-center justify-center space-x-xs px-lg py-sm bg-inverse-surface text-white hover:bg-primary transition-all self-start">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+<span class="font-label-md text-label-md">Add New Address</span>
+</button>
+</div>
+<!-- Addresses Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Default Address Card -->
+<div class="address-card p-md border border-outline-variant bg-surface-container-lowest flex flex-col relative group">
+<div class="absolute top-md right-md">
+<span class="bg-primary-fixed text-on-primary-fixed px-sm py-xs font-label-sm text-label-sm uppercase tracking-widest rounded-full">Default</span>
+</div>
+<div class="mb-md">
+<p class="font-headline-md text-headline-md text-on-surface mb-xs">Eleanor Vance</p>
+<div class="text-on-surface-variant font-body-md text-body-md space-y-1">
+<p>128 High Street</p>
+<p>Cotswold Manor</p>
+<p>Chipping Campden, GL55 6AT</p>
+<p>United Kingdom</p>
+<p class="mt-md text-primary">+44 7700 900123</p>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant flex items-center space-x-md">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary flex items-center space-x-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+<span>Edit</span>
+</button>
+<button class="font-label-md text-label-md text-error hover:opacity-80 flex items-center space-x-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</div>
+<!-- Additional Address Card 1 -->
+<div class="address-card p-md border border-outline-variant bg-white flex flex-col relative">
+<div class="mb-md">
+<p class="font-headline-md text-headline-md text-on-surface mb-xs">Eleanor Vance</p>
+<div class="text-on-surface-variant font-body-md text-body-md space-y-1">
+<p>Apt 4B, The Gables</p>
+<p>Mayfair Crescent</p>
+<p>London, W1J 8AQ</p>
+<p>United Kingdom</p>
+<p class="mt-md text-primary">+44 7700 900123</p>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-wrap gap-md">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary flex items-center space-x-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+<span>Edit</span>
+</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary flex items-center space-x-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="star">star</span>
+<span>Set Default</span>
+</button>
+<button class="font-label-md text-label-md text-error hover:opacity-80 flex items-center space-x-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</div>
+<!-- Empty/Add New Slot -->
+<button class="group p-md border border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors min-h-[250px]">
+<div class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center mb-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+<p class="font-label-md text-label-md uppercase tracking-widest">Add another address</p>
+</button>
+</div>
+<!-- Informational Section -->
+<section class="mt-xl py-lg border-t border-outline-variant">
+<div class="flex flex-col md:flex-row gap-lg">
+<div class="md:w-1/3">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Secure Logistics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">We partner with premier white-glove couriers to ensure your alpacas textiles arrive in pristine condition.</p>
+</div>
+<div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-high p-md">
+<span class="material-symbols-outlined text-primary mb-sm" data-icon="local_shipping">local_shipping</span>
+<p class="font-label-md text-label-md mb-xs">International Shipping</p>
+<p class="text-on-surface-variant font-body-md text-body-md">Standard delivery across 40+ countries within 5-7 business days.</p>
+</div>
+<div class="bg-surface-container-high p-md">
+<span class="material-symbols-outlined text-primary mb-sm" data-icon="verified">verified</span>
+<p class="font-label-md text-label-md mb-xs">Material Guarantee</p>
+<p class="text-on-surface-variant font-body-md text-body-md">All shipments include carbon-neutral packaging and a certificate of authenticity.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full mt-xl py-xl px-margin-desktop bg-inverse-surface text-surface-container grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-1">
+<div class="font-display-sm text-display-sm text-surface-container mb-md">Alpacart</div>
+<p class="font-label-sm text-label-sm text-outline-variant">© 2024 Alpacart Textiles. Excellence in Craftsmanship.</p>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-label-md text-label-md text-surface-bright uppercase tracking-widest mb-xs">Company</h4>
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-surface-bright transition-colors" href="#">Our Heritage</a>
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-surface-bright transition-colors" href="#">Sustainability</a>
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-surface-bright transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-label-md text-label-md text-surface-bright uppercase tracking-widest mb-xs">Support</h4>
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-surface-bright transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-surface-bright transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-surface-bright transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col space-y-sm">
+<h4 class="font-label-md text-label-md text-surface-bright uppercase tracking-widest mb-xs">Newsletter</h4>
+<p class="font-label-sm text-label-sm text-outline-variant mb-sm">Join our inner circle for exclusive collection previews.</p>
+<div class="flex border-b border-outline-variant pb-xs">
+<input class="bg-transparent border-none focus:ring-0 text-label-sm text-surface-bright w-full placeholder:text-outline-variant" placeholder="Email Address" type="email"/>
+<button class="material-symbols-outlined text-surface-bright" data-icon="arrow_forward">arrow_forward</button>
+</div>
+</div>
+</footer>
+<script>
+        // Simple interactivity for the buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if(btn.innerText.includes('Delete')) {
+                    if(confirm('Are you sure you want to remove this address?')) {
+                        const card = btn.closest('.address-card');
+                        card.style.opacity = '0.5';
+                        setTimeout(() => card.remove(), 300);
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

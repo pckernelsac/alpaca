@@ -1,0 +1,9 @@
+.stepper { display: flex; align-items: center; justify-content: center; gap: 0; }
+.step { display: flex; align-items: center; gap: var(--spacing-sm); }
+.step + .step::before { content: ''; display: block; width: 3rem; height: 1px; background: var(--color-border); margin: 0 var(--spacing-md); }
+.circle { width: 2rem; height: 2rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; border: 2px solid var(--color-border); color: var(--color-text-light); background: var(--color-bg); }
+.active .circle { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-bg); }
+.completed .circle { border-color: var(--color-success); color: var(--color-text-inverse); background: var(--color-success); }
+.label { font-size: 0.8rem; font-weight: 500; color: var(--color-text-light); }
+.active .label { color: var(--color-text); font-weight: 600; }
+@media (max-width: 480px) { .label { display: none; } }

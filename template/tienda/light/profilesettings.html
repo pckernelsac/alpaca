@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile Settings | ALPACO Heritage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .luxury-input:focus {
+            outline: none;
+            border-color: #7c5400;
+            box-shadow: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-container": "#9a6c14",
+                      "on-secondary-fixed-variant": "#55442e",
+                      "outline-variant": "#d4c4b1",
+                      "surface-dim": "#e2d8d1",
+                      "surface-container-high": "#f1e6de",
+                      "on-surface-variant": "#504537",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#1f1b16",
+                      "tertiary-container": "#607c52",
+                      "on-tertiary-container": "#f8ffee",
+                      "tertiary-fixed-dim": "#b1d09f",
+                      "secondary-fixed-dim": "#dcc2a6",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#f6dbbe",
+                      "background": "#fff8f4",
+                      "primary": "#7c5400",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "inverse-on-surface": "#f9efe7",
+                      "surface-variant": "#ebe1d9",
+                      "surface-container-low": "#fcf2ea",
+                      "tertiary-fixed": "#ccecb9",
+                      "primary-fixed": "#ffddae",
+                      "secondary-fixed": "#f9dec1",
+                      "on-primary-fixed": "#281800",
+                      "tertiary": "#48633b",
+                      "surface-tint": "#7f5600",
+                      "error": "#ba1a1a",
+                      "surface": "#fff8f4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed": "#092102",
+                      "on-tertiary-fixed-variant": "#344d28",
+                      "on-error": "#ffffff",
+                      "outline": "#827565",
+                      "inverse-surface": "#352f2a",
+                      "surface-container": "#f6ece4",
+                      "on-surface": "#1f1b16",
+                      "inverse-primary": "#f6bd60",
+                      "primary-fixed-dim": "#f6bd60",
+                      "on-secondary-container": "#735f48",
+                      "surface-container-highest": "#ebe1d9",
+                      "on-primary-container": "#fffbff",
+                      "secondary": "#6e5b44",
+                      "surface-bright": "#fff8f4",
+                      "on-primary-fixed-variant": "#614000",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#261907"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "md": "24px",
+                      "margin-mobile": "16px",
+                      "container-max": "1440px",
+                      "margin-desktop": "64px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "xl": "80px",
+                      "sm": "12px",
+                      "lg": "48px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "display-sm": ["Playfair Display"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Playfair Display"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                      "display-sm": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface border-b border-outline-variant">
+<nav class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-lg">
+<a class="font-display-sm text-display-sm text-primary italic" href="#">ALPACO</a>
+<div class="hidden md:flex gap-md">
+<a class="font-label-md text-label-md tracking-wider uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Collections</a>
+<a class="font-label-md text-label-md tracking-wider uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Heritage</a>
+<a class="font-label-md text-label-md tracking-wider uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Craftsmanship</a>
+<a class="font-label-md text-label-md tracking-wider uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">The Fiber</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+</button>
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-primary">person</span>
+</button>
+<button class="md:hidden">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-xl min-h-screen">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl">
+<!-- Side Navigation -->
+<aside class="md:col-span-3">
+<div class="sticky top-28 space-y-base">
+<p class="font-label-sm text-label-sm text-outline mb-md uppercase tracking-widest">My Account</p>
+<nav class="flex flex-col gap-xs">
+<a class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">shopping_basket</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">favorite</span>
+<span class="font-label-md text-label-md">Wishlist</span>
+</a>
+<a class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">location_on</span>
+<span class="font-label-md text-label-md">Addresses</span>
+</a>
+<a class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">payments</span>
+<span class="font-label-md text-label-md">Payments</span>
+</a>
+<a class="flex items-center gap-sm py-sm px-md bg-surface-container text-primary rounded-lg border-l-2 border-primary group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md font-bold">Profile Settings</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<section class="md:col-span-9">
+<div class="mb-lg">
+<h1 class="font-display-sm text-display-sm text-on-surface mb-xs">Profile Settings</h1>
+<p class="font-body-md text-on-surface-variant">Manage your account details and personal preferences.</p>
+</div>
+<!-- Bento-style Sections -->
+<div class="space-y-lg">
+<!-- Personal Information -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary-container">badge</span>
+<h2 class="font-headline-md text-headline-md">Personal Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">First Name</label>
+<input class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" type="text" value="Julian"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Last Name</label>
+<input class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" type="text" value="Velasquez"/>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Date of Birth</label>
+<input class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" type="date" value="1988-10-15"/>
+</div>
+</div>
+</div>
+<!-- Contact Details -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary-container">contact_mail</span>
+<h2 class="font-headline-md text-headline-md">Contact Details</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Email Address</label>
+<input class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" type="email" value="julian.v@alpacart.com"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Phone Number</label>
+<input class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" type="tel" value="+1 (555) 0123 456"/>
+</div>
+</div>
+</div>
+<!-- Security -->
+<div class="bg-surface-container-highest p-lg rounded-xl border border-outline-variant">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary-container">security</span>
+<h2 class="font-headline-md text-headline-md">Security</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Current Password</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">New Password</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg" placeholder="Enter new password" type="password"/>
+</div>
+</div>
+<button class="bg-inverse-surface text-inverse-on-surface px-lg py-md font-label-md text-label-md rounded-lg hover:opacity-90 transition-all">
+                            Update Password
+                        </button>
+</div>
+<!-- Preferences -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary-container">tune</span>
+<h2 class="font-headline-md text-headline-md">Preferences</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Language</label>
+<select class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg appearance-none">
+<option>English (United Kingdom)</option>
+<option>Spanish (Castilian)</option>
+<option>Italian (Heritage)</option>
+<option>French (Luxury)</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Currency</label>
+<select class="w-full bg-surface border border-outline-variant p-md luxury-input font-body-md text-on-surface rounded-lg appearance-none">
+<option>USD ($)</option>
+<option>EUR (€)</option>
+<option>GBP (£)</option>
+<option>CHF (Fr.)</option>
+</select>
+</div>
+</div>
+<div class="space-y-md">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Communication Preferences</label>
+<div class="space-y-sm">
+<label class="flex items-center gap-md group cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface">Email Newsletters &amp; Exclusive Collections</span>
+</label>
+<label class="flex items-center gap-md group cursor-pointer">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface">SMS Notifications for Order Updates</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="flex flex-col sm:flex-row justify-end items-center gap-md pt-lg border-t border-outline-variant">
+<button class="w-full sm:w-auto border border-outline text-on-surface px-lg py-md font-label-md text-label-md rounded-lg hover:bg-surface-variant transition-all">
+                            Discard Changes
+                        </button>
+<button class="w-full sm:w-auto bg-primary text-on-primary px-xl py-md font-label-md text-label-md rounded-lg hover:opacity-90 transition-all">
+                            Save Changes
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-xl bg-surface-container-highest">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter py-xl px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-lg text-headline-lg text-primary mb-md">ALPACO</div>
+<p class="font-body-md text-on-surface-variant italic">Refined textiles from the high Andes.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-widest">Service</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Sustainability</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Care Guide</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-widest">Boutique</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Private Appointments</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Store Locator</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-widest">Connect</h4>
+<div class="flex gap-md">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">public</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">camera</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">mail</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-md">© 2024 ALPACO Heritage. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for the input fields
+        const inputs = document.querySelectorAll('.luxury-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Simple form dirty check simulation
+        let initialValues = Array.from(inputs).map(i => i.value);
+        const saveBtn = document.querySelector('button.bg-primary');
+        
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value !== initialValues[index]) {
+                    saveBtn.classList.remove('opacity-70');
+                } else {
+                    saveBtn.classList.add('opacity-70');
+                }
+            });
+        });
+    </script>
+</body></html>

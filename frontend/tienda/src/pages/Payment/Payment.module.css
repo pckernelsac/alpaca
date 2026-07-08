@@ -1,0 +1,6 @@
+.wrapper { max-width: 1440px; margin: 0 auto; padding: 0 var(--spacing-lg); }
+.grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-xl); }
+@media (min-width: 1024px) { .grid { grid-template-columns: 7fr 5fr; } }
+.formCol { }
+.summaryCol { }
+@media (min-width: 1024px) { .summaryCol { position: sticky; top: 6rem; align-self: start; } }

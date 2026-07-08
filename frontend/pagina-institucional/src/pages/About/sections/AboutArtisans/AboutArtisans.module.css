@@ -1,0 +1,94 @@
+.section {
+  padding: var(--spacing-xl) 0;
+}
+
+.inner {
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  max-width: 768px;
+  margin: 0 auto var(--spacing-lg);
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-gutter, 24px);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  cursor: pointer;
+}
+
+.cardImg {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.cardImgEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.card:hover .cardImgEl {
+  transform: scale(1.05);
+}
+
+.cardTitle {
+  font-family: var(--font-label);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.cardSub {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
