@@ -7,33 +7,33 @@
 }
 
 .default {
-  background-color: var(--color-bg-tertiary);
-  color: var(--color-text);
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
 }
 
 .primary {
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse);
+  background-color: var(--color-primary-fixed);
+  color: var(--color-primary);
 }
 
 .success {
-  background-color: var(--color-success);
-  color: var(--color-text-inverse);
+  background-color: var(--color-success-container);
+  color: var(--color-success);
 }
 
 .warning {
-  background-color: var(--color-warning);
-  color: var(--color-text-inverse);
+  background-color: var(--color-warning-container);
+  color: var(--color-warning);
 }
 
 .error {
-  background-color: var(--color-error);
-  color: var(--color-text-inverse);
+  background-color: var(--color-error-container);
+  color: var(--color-error);
 }
 
 .info {
-  background-color: var(--color-info);
-  color: var(--color-text-inverse);
+  background-color: var(--color-info-container);
+  color: var(--color-info);
 }
 
 .sm {

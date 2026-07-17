@@ -1,3 +1,4 @@
+import SEO from '@/components/seo/SEO';
 import Container from '@/components/layout/Container/Container';
 import CTA from '@/components/common/CTA/CTA';
 import CatalogHero from './sections/CatalogHero/CatalogHero';
@@ -11,6 +12,7 @@ import CatalogGallery from './sections/CatalogGallery/CatalogGallery';
 export default function Catalog() {
   return (
     <>
+      <SEO title="Catalogo" />
       <CatalogHero />
       <CatalogIntro />
       <CatalogFilters />
@@ -30,3 +32,5 @@ export default function Catalog() {
     </>
   );
 }
+
+

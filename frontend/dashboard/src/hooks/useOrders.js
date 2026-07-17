@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; import useOrdersStore from '../stores/useOrdersStore'; export default function useOrders() { const store = useOrdersStore(); useEffect(() => { if (store.orders.length === 0) store.fetchAll(); }, []); return store; }

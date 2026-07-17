@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { routes } from './routes';
 import Loader from '@/components/feedback/Loader/Loader';
 import PublicLayout from '@/layouts/PublicLayout/PublicLayout';
@@ -15,6 +16,7 @@ export default function AppRouter() {
   const catchAll = routes.find((r) => r.path === '*');
 
   return (
+    <HelmetProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<PublicLayout />}>
@@ -43,5 +45,6 @@ export default function AppRouter() {
         )}
       </Routes>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }

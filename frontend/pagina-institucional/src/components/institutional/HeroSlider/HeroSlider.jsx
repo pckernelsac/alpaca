@@ -6,13 +6,16 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import slides from './slides';
+import { useHero } from '@/hooks';
 import styles from './HeroSlider.module.css';
 
 export default function HeroSlider() {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { slides, fetch } = useHero();
+
+  useEffect(() => { fetch(); }, [fetch]);
 
   const handleSlideChange = useCallback((swiper) => {
     setActiveIndex(swiper.realIndex);

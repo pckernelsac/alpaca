@@ -5,9 +5,14 @@ export const UIContext = createContext(null);
 export function UIProvider({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [toasts, setToasts] = useState([]);
+  const [collapsedSections, setCollapsedSections] = useState({});
 
   const toggleSidebar = useCallback(() => {
     setSidebarOpen((prev) => !prev);
+  }, []);
+
+  const toggleSection = useCallback((label) => {
+    setCollapsedSections((prev) => ({ ...prev, [label]: !(prev[label] ?? false) }));
   }, []);
 
   const addToast = useCallback((message, type = 'info') => {
@@ -22,7 +27,7 @@ export function UIProvider({ children }) {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  const value = { sidebarOpen, toggleSidebar, toasts, addToast, removeToast };
+  const value = { sidebarOpen, toggleSidebar, collapsedSections, toggleSection, toasts, addToast, removeToast };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
 }

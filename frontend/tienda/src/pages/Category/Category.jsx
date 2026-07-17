@@ -27,7 +27,7 @@ export default function Category() {
           description={'Explora nuestra coleccion de ' + name.toLowerCase() + ' elaborados con la mejor fibra de alpaca peruana.'}
         />
       </div>
-      <CategoryGrid />
+      <CategoryGrid slug={slug} />
       <RecentlyViewed />
     </div>
   );

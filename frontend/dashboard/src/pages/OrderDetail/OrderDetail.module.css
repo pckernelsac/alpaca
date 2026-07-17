@@ -1,0 +1,681 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 6rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+}
+
+.breadcrumb a {
+  color: var(--color-on-surface-variant);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb span:last-child {
+  color: var(--color-on-surface);
+  font-weight: 600;
+}
+
+.breadcrumb .material-symbols-outlined {
+  font-size: 14px;
+}
+
+/* Header */
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .headerSection {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.statusBadge {
+  padding: 0.125rem 0.5rem;
+  background-color: var(--color-tertiary-container);
+  color: var(--color-on-tertiary-container);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-tertiary);
+  white-space: nowrap;
+}
+
+.pageDesc {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.headerActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--color-on-surface);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.btnOutline:hover {
+  background-color: var(--color-surface-container);
+}
+
+.btnOutline .material-symbols-outlined,
+.btnPrimary .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  box-shadow: 0 4px 12px rgba(124, 84, 0, 0.3);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 8fr 4fr;
+  }
+}
+
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.twoColGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .twoColGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Card */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardAccent {
+  width: 2px;
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.cardBody {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Info rows */
+.infoRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.infoValue {
+  font-weight: 500;
+  color: var(--color-on-surface);
+}
+
+/* Health bars */
+.healthBars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.healthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.375rem;
+}
+
+.healthLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.healthStatus {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.healthStatusMuted {
+  font-size: 11px;
+  color: var(--color-on-surface-variant);
+}
+
+.progressTrack {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-surface-container-highest);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+}
+
+.progressMuted {
+  height: 100%;
+  background-color: var(--color-outline);
+  border-radius: 9999px;
+}
+
+/* Customer */
+.customerHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+  margin-bottom: 1rem;
+}
+
+.customerAvatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.customerAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.customerName {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-on-surface);
+}
+
+.customerEmail {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.customerDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detailLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.detailText {
+  font-size: 14px;
+  color: var(--color-on-surface);
+  white-space: pre-line;
+}
+
+.detailTextBold {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-on-surface);
+}
+
+.shippingMethodRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+}
+
+/* Financial */
+.financialCard {
+  background-color: var(--color-surface-container-low);
+}
+
+.financialRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.financialRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.financialRowBorder {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 0.5rem;
+}
+
+.totalLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+}
+
+.totalValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.paidBadge {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-primary-fixed);
+  color: var(--color-on-primary-fixed);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 0.25rem;
+}
+
+.unpaidBadge {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-error-container);
+  color: var(--color-error);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 0.25rem;
+}
+
+/* Table */
+.tableCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.tableHeader {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background-color: var(--color-surface-container-lowest);
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table thead th {
+  background-color: var(--color-surface-container-low);
+  padding: 0.75rem 1.25rem;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-outline-variant);
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 1rem 1.25rem;
+  font-size: 14px;
+  color: var(--color-on-surface);
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.tableRow {
+  transition: background-color 0.15s;
+}
+
+.tableRow:hover {
+  background-color: var(--color-surface-container-lowest);
+}
+
+.thCenter {
+  text-align: center;
+}
+
+.thRight {
+  text-align: right;
+}
+
+.tdCenter {
+  text-align: center;
+}
+
+.tdRight {
+  text-align: right;
+}
+
+.tdRightBold {
+  text-align: right;
+  font-weight: 600;
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.productImg {
+  width: 2.5rem;
+  height: 3rem;
+  background-color: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.productImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productName {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.productVariant {
+  font-size: 11px;
+  color: var(--color-on-surface-variant);
+}
+
+.skuCell {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+/* Timeline in side panel */
+.timelineWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 9px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background-color: var(--color-outline-variant);
+}
+
+.timelineItem {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+}
+
+.timelineInactive {
+  opacity: 0.4;
+}
+
+.timelineDot {
+  z-index: 10;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 4px solid var(--color-surface);
+}
+
+.timelineDotDone {
+  background-color: var(--color-primary);
+}
+
+.timelineDotPending {
+  background-color: var(--color-outline-variant);
+}
+
+.timelineDotInner {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--color-on-primary);
+}
+
+.timelineContent {
+  flex: 1;
+  margin-top: -2px;
+}
+
+.timelineTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.timelineDate {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.timelineNote {
+  font-size: 11px;
+  margin-top: 0.25rem;
+  color: var(--color-primary);
+}
+
+/* Documents */
+.docList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.docItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.25rem;
+  background-color: var(--color-surface-container-low);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.docItem:hover {
+  background-color: var(--color-surface-container);
+}
+
+.docLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.docName {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Notes */
+.notesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addNoteBtn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addNoteBtn:hover {
+  text-decoration: underline;
+}
+
+.noteBubble {
+  background-color: var(--color-surface-container-highest);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border-left: 4px solid var(--color-primary);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.noteText {
+  font-size: 13px;
+  color: var(--color-on-surface);
+}
+
+.noteAuthor {
+  font-size: 11px;
+  color: var(--color-on-surface-variant);
+  margin-top: 0.5rem;
+}
+
+.noteInput {
+  width: 100%;
+  background-color: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--color-on-surface);
+  outline: none;
+  resize: vertical;
+}
+
+.noteInput:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}

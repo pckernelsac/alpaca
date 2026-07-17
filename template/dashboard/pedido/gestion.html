@@ -1,0 +1,504 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Orders Management | Alpacart ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#9acbff",
+                    "surface-container-low": "#fdf1ea",
+                    "outline-variant": "#d4c4b1",
+                    "on-surface-variant": "#504537",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#352f2b",
+                    "on-secondary-fixed": "#271808",
+                    "surface-container": "#f8ece4",
+                    "on-background": "#201b16",
+                    "surface": "#fff8f5",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#705a46",
+                    "surface-tint": "#7f5600",
+                    "error": "#ba1a1a",
+                    "inverse-primary": "#f6bd60",
+                    "on-primary-fixed": "#281800",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary-fixed-variant": "#004a79",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#f2e6df",
+                    "outline": "#827565",
+                    "surface-bright": "#fff8f5",
+                    "inverse-on-surface": "#faeee7",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#ece0d9",
+                    "on-tertiary-fixed": "#001d34",
+                    "primary-fixed": "#ffddae",
+                    "primary": "#7c5400",
+                    "on-secondary-fixed-variant": "#574330",
+                    "primary-container": "#9a6c14",
+                    "tertiary": "#215f92",
+                    "on-primary-fixed-variant": "#614000",
+                    "secondary-fixed-dim": "#dec1a8",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#76604c",
+                    "on-primary": "#ffffff",
+                    "background": "#fff8f5",
+                    "secondary-container": "#fbddc3",
+                    "on-surface": "#201b16",
+                    "secondary-fixed": "#fbddc3",
+                    "primary-fixed-dim": "#f6bd60",
+                    "tertiary-container": "#3f78ad",
+                    "surface-container-highest": "#ece0d9",
+                    "tertiary-fixed": "#d0e4ff",
+                    "surface-dim": "#e3d8d1",
+                    "on-tertiary-container": "#fdfcff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "density-comfortable": "16px",
+                    "gutter": "16px",
+                    "container-margin": "32px",
+                    "topbar-height": "56px",
+                    "density-compact": "8px",
+                    "sidebar-width": "260px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d4c4b1; border-radius: 10px; }
+        .row-hover:hover { background-color: #fcfbf9; }
+        .accent-bar { width: 2px; height: 100%; position: absolute; left: 0; top: 0; background-color: #7c5400; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-screen flex flex-col py-density-comfortable gap-density-compact z-50 bg-surface-container border-r border-outline-variant w-sidebar-width transition-all">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">texture</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary font-bold leading-tight">Alpacart ERP</h1>
+<p class="text-on-surface-variant font-label-md text-label-md">Andean Precision</p>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-title-md text-title-md hover:text-primary hover:bg-surface-bright transition-all scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-title-md text-title-md hover:text-primary hover:bg-surface-bright transition-all scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span>Production</span>
+</a>
+<!-- Active Tab: Orders -->
+<a class="flex items-center gap-3 px-3 py-2 text-primary font-bold font-title-md text-title-md bg-surface-bright rounded-lg border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-title-md text-title-md hover:text-primary hover:bg-surface-bright transition-all scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">conveyor_belt</span>
+<span>Suppliers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-title-md text-title-md hover:text-primary hover:bg-surface-bright transition-all scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span>Logistics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-title-md text-title-md hover:text-primary hover:bg-surface-bright transition-all scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-6 py-4 border-t border-outline-variant space-y-4">
+<button class="w-full bg-primary text-white py-2.5 rounded-lg font-title-md text-title-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_circle</span>
+                New Production Run
+            </button>
+<div class="space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant font-label-md text-label-md hover:text-primary" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Help Center
+                </a>
+<a class="flex items-center gap-3 text-on-surface-variant font-label-md text-label-md hover:text-primary" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+                    Account
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-sidebar-width min-h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 h-topbar-height w-full bg-surface flex justify-between items-center px-container-margin border-b border-outline-variant">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-10 pr-4 py-1.5 text-body-md focus:ring-2 focus:ring-primary-fixed focus:border-primary outline-none transition-all" placeholder="Search orders, customers, or SKUs..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full cursor-pointer hover:bg-surface-container transition-colors">
+<div class="w-2 h-2 bg-green-500 rounded-full"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">Live: Lima Factory Hub</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="flex items-center gap-2 pl-4 border-l border-outline-variant">
+<div class="text-right">
+<p class="font-title-md text-title-md text-primary leading-tight">Admin User</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">System Manager</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="Professional studio portrait of a corporate administrator in high-end office attire, with a clean and neutral background that complements a sophisticated light-mode UI aesthetic. The lighting is soft and professional, highlighting a reliable and diligent personality suitable for a textile ERP." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnXynB1i6g7YxWfzy57f-jMOhC5wpy22-yvZ1SdM-s1OLYhEqFbudr9CPSLNwT8xuv770CGR5z68Akr_980Iru8l5ky88Ub-xD6SdSkM8ZCrhAjU0m7-P9iYDMxQ-mz3zgFJmjaxm1kZ71G9pNpJTgaFBfqbGEh4B82RduF7lb2wmEj3RG-8A_-_tgDnw0vfnCTLKkqVWzSFZN4iU1vLz900QFDlNpuTK09zglD8bmzV1t9Slce3RF3yqX365Me_RHuGNbh7o4NINt">
+</div>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-container-margin space-y-6">
+<!-- Header & Bulk Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Orders Management</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Manage and fulfill Andean textile exports worldwide.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">file_download</span>
+                        Export
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">file_upload</span>
+                        Import
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-label-md text-label-md hover:shadow-lg transition-all">
+<span class="material-symbols-outlined">add</span>
+                        Create Order
+                    </button>
+</div>
+</div>
+<!-- Bento KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="relative bg-white border border-outline-variant p-4 rounded-lg overflow-hidden group">
+<div class="accent-bar"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Orders</p>
+<p class="font-headline-md text-headline-md mt-1">1,245</p>
+<div class="mt-2 flex items-center text-green-600 font-label-sm">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+<span>12% from last month</span>
+</div>
+</div>
+<div class="relative bg-white border border-outline-variant p-4 rounded-lg overflow-hidden">
+<div class="accent-bar"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pending Shipment</p>
+<p class="font-headline-md text-headline-md mt-1">84</p>
+<div class="mt-2 flex items-center text-orange-600 font-label-sm">
+<span class="material-symbols-outlined text-sm mr-1">schedule</span>
+<span>Requires Attention</span>
+</div>
+</div>
+<div class="relative bg-white border border-outline-variant p-4 rounded-lg overflow-hidden">
+<div class="accent-bar"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Revenue Today</p>
+<p class="font-headline-md text-headline-md mt-1">$42,890</p>
+<div class="mt-2 flex items-center text-primary font-label-sm">
+<span class="material-symbols-outlined text-sm mr-1">payments</span>
+<span>Lima Showroom leading</span>
+</div>
+</div>
+<div class="relative bg-white border border-outline-variant p-4 rounded-lg overflow-hidden">
+<div class="accent-bar"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Return Rate</p>
+<p class="font-headline-md text-headline-md mt-1">0.4%</p>
+<div class="mt-2 flex items-center text-green-600 font-label-sm">
+<span class="material-symbols-outlined text-sm mr-1">check_circle</span>
+<span>Below target (1.2%)</span>
+</div>
+</div>
+</div>
+<!-- Filters & Bulk Actions Bar -->
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-3 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white border border-outline-variant rounded-md cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-label-md text-label-md">Date Range</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white border border-outline-variant rounded-md cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="font-label-md text-label-md">Status: All</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white border border-outline-variant rounded-md cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">store</span>
+<span class="font-label-md text-label-md">Channel: All</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white border border-outline-variant rounded-md cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">warehouse</span>
+<span class="font-label-md text-label-md">Warehouse: Lima</span>
+</div>
+<button class="text-primary font-label-md text-label-md px-2 hover:underline">Clear Filters</button>
+</div>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4">
+<span class="text-on-surface-variant font-label-md text-label-md">Bulk Actions:</span>
+<button class="px-3 py-1 bg-white border border-outline-variant rounded-md font-label-md text-label-md hover:bg-surface transition-colors disabled:opacity-50">Change Status</button>
+<button class="px-3 py-1 bg-white border border-outline-variant rounded-md font-label-md text-label-md hover:bg-surface transition-colors disabled:opacity-50">Print Labels</button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-white border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-4 py-3 w-10">
+<input class="rounded text-primary focus:ring-primary" type="checkbox">
+</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Order No.</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Customer</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Date</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Payment</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Shipping</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Total</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Channel</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Agent</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="row-hover transition-colors">
+<td class="px-4 py-2"><input class="rounded text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-2 font-title-md text-title-md text-primary">#ORD-2024-001</td>
+<td class="px-4 py-2">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a professional luxury client, elegant and well-dressed, set against a warm neutral background that fits the Alpacart Andean Precision brand aesthetic. 4K high resolution, cinematic soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKryWptJZa1rULqf77MVGpF4pOG42EKpHocc-8YDBgV7e9rtCEVTZcp51qHXnY5iycJXM3ydy956N2nwYhvyCxp3hqpQQ4VmydelpTg6QgvWeq_lW0iSPuXR-RPH8DKP9oQN8m693OB0mUvlEpPqtm3jpG2HGIhYWdrT8-rXezj7lxkG2X-q5T3eMQIOri_fxrIVHTqvJLLcKbrzQlMuBpsc83YjSHcfSBgEhgoG4-6rcWiZHrUJaSv1D51C8qUBDw2ZYQDG9sXGzK">
+<span class="font-body-md text-body-md font-medium">Elena Rodriguez</span>
+</div>
+</td>
+<td class="px-4 py-2 font-body-md text-body-md">12/05/2024</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-green-100 text-green-800 font-label-sm text-label-sm">
+                                        Delivered
+                                    </span>
+</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-label-sm text-label-sm">
+                                        Paid
+                                    </span>
+</td>
+<td class="px-4 py-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">DHL Express</span>
+<span class="text-[10px] text-green-600 font-bold uppercase">Success</span>
+</div>
+</td>
+<td class="px-4 py-2 font-title-md text-title-md text-right">$4,250.00</td>
+<td class="px-4 py-2 font-body-md text-body-md">Wholesale</td>
+<td class="px-4 py-2 font-body-md text-body-md">M. Vargas</td>
+<td class="px-4 py-2">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="row-hover transition-colors">
+<td class="px-4 py-2"><input class="rounded text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-2 font-title-md text-title-md text-primary">#ORD-2024-002</td>
+<td class="px-4 py-2">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a high-end fashion boutique owner, focused and creative, set against a minimalist industrial studio background with warm lighting, consistent with a professional ERP interface. 4K high fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaWBdoMT3KYjp3ihd9P6_0vdwytWqNF1kD5qwoAeXvrKPwTB8AJdkA2AWY17ftFZW62sy1pJcaYxgVDkXyQCMXk1PwtfS9fZsNIoBzFdiNnAMfvM71U_5kf4tlMKTeljkclWAPWe1fkZN7bHaBBAuhH9-JEze9NDrEduxQVizMFIPpFxv8YBSKh6vqgFf0iZa12wzpZStkP0fr2J7NexaomGWqQDFN3alE1e0AU0vxElQXFSoSGPvRl32Gw3Dz1_tEXgQYP4Bo1e6f">
+<span class="font-body-md text-body-md font-medium">Marcello Silva</span>
+</div>
+</td>
+<td class="px-4 py-2 font-body-md text-body-md">14/05/2024</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-yellow-100 text-yellow-800 font-label-sm text-label-sm">
+                                        Shipped
+                                    </span>
+</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-label-sm text-label-sm">
+                                        Paid
+                                    </span>
+</td>
+<td class="px-4 py-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">Standard</span>
+<span class="text-[10px] text-yellow-600 font-bold uppercase">In Transit</span>
+</div>
+</td>
+<td class="px-4 py-2 font-title-md text-title-md text-right">$1,280.00</td>
+<td class="px-4 py-2 font-body-md text-body-md">Online</td>
+<td class="px-4 py-2 font-body-md text-body-md">S. Quispe</td>
+<td class="px-4 py-2">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="row-hover transition-colors">
+<td class="px-4 py-2"><input class="rounded text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-2 font-title-md text-title-md text-primary">#ORD-2024-003</td>
+<td class="px-4 py-2">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of an interior designer with professional attire, clean aesthetic, set against a bright studio background, 4K resolution, high-end corporate digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBokbpx2PlcLcKP5zi1baPl-Gx7zMn7paZ1BuEH4H3I0_GT7Nxjlo4lWtjrwXbYg5OUjEFGEXI39NNvF5BHWKOdTbaltTVRkm7O29eOvDiL-3UE2XMuOYienHM4aR7-TFGCxhldzmbD6aJfE6RhV2i7TACngPiTfaNssRZt07_De7SILSb78X6dmsT-89sNd_92ZGXaoZv3KJh_E1bsN5qjXCs6b0fIDn9IJEQgYBYRxSxyJCUJWGFNcImJ2Rx5li3DDBbniIbfX5oh">
+<span class="font-body-md text-body-md font-medium">Claire Dubois</span>
+</div>
+</td>
+<td class="px-4 py-2 font-body-md text-body-md">15/05/2024</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-red-100 text-red-800 font-label-sm text-label-sm">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-orange-100 text-orange-800 font-label-sm text-label-sm">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-4 py-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md">TBD</span>
+<span class="text-[10px] text-on-surface-variant font-bold uppercase">Awaiting Info</span>
+</div>
+</td>
+<td class="px-4 py-2 font-title-md text-title-md text-right">$8,940.50</td>
+<td class="px-4 py-2 font-body-md text-body-md">Showroom</td>
+<td class="px-4 py-2 font-body-md text-body-md">M. Vargas</td>
+<td class="px-4 py-2">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Repeat standard rows to fill screen density -->
+<script>
+                                const tbody = document.querySelector('tbody');
+                                const sampleRows = tbody.innerHTML;
+                                for(let i=0; i<7; i++) {
+                                    tbody.innerHTML += sampleRows;
+                                }
+                            </script>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-4 py-3 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<p class="font-label-md text-label-md text-on-surface-variant">Showing <span class="font-bold">1-50</span> of <span class="font-bold">12,450</span> results</p>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white font-label-md">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white font-label-md transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white font-label-md transition-colors">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white font-label-md transition-colors">249</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Rows per page:</span>
+<select class="bg-white border border-outline-variant rounded px-2 py-0.5 text-label-md outline-none focus:ring-1 focus:ring-primary">
+<option>50</option>
+<option>100</option>
+<option>200</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('tr.row-hover').forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+                    // Logic to open detail view
+                    console.log('Row clicked, opening detail view...');
+                }
+            });
+        });
+
+        // Simple checkbox toggle for bulk actions
+        const mainCheckbox = document.querySelector('thead input[type="checkbox"]');
+        const bulkCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+        const bulkActionButtons = document.querySelectorAll('button[disabled]');
+
+        mainCheckbox.addEventListener('change', (e) => {
+            bulkCheckboxes.forEach(cb => cb.checked = e.target.checked);
+            toggleBulkButtons();
+        });
+
+        bulkCheckboxes.forEach(cb => {
+            cb.addEventListener('change', toggleBulkButtons);
+        });
+
+        function toggleBulkButtons() {
+            const anyChecked = Array.from(bulkCheckboxes).some(cb => cb.checked);
+            bulkActionButtons.forEach(btn => {
+                btn.disabled = !anyChecked;
+            });
+        }
+    </script>
+</body></html>

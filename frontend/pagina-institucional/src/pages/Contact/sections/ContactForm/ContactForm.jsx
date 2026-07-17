@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import styles from './ContactForm.module.css';
 
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     const err = {};
@@ -21,14 +24,20 @@ export default function ContactForm() {
     if (errors[e.target.name]) setErrors({ ...errors, [e.target.name]: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const err = validate();
-    if (Object.keys(err).length > 0) {
-      setErrors(err);
-      return;
-    }
-    setSubmitted(true);
+    if (Object.keys(err).length > 0) { setErrors(err); return; }
+    setLoading(true);
+    try {
+      const res = await fetch(API + '/v1/contact', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) { setSubmitted(true); }
+      else { setErrors({ submit: 'Error al enviar. Intente nuevamente.' }); }
+    } catch { setErrors({ submit: 'Error de conexión. Verifique su internet.' }); }
+    setLoading(false);
   };
 
   if (submitted) {

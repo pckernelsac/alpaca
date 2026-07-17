@@ -1,0 +1,197 @@
+openapi: "3.0.0"
+info:
+  title: ALPACART API
+  description: "API Backend de Alpacart — Marca premium de alpaca peruana"
+  version: "1.0.0"
+  contact:
+    name: Alpacart Textiles
+    url: "https://alpacart.com"
+servers:
+  - url: "http://localhost:8000/api/v1"
+    description: Local development
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearer: []
+paths:
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: "Iniciar sesión"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "mateo.q@alpacart.com"
+                password:
+                  type: string
+                  minLength: 6
+                  example: "securePassword123"
+                remember:
+                  type: boolean
+                  default: false
+              required: [email, password]
+      responses:
+        "201":
+          description: "Login exitoso, retorna accessToken y refreshToken"
+        "401":
+          description: "Credenciales incorrectas"
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: "Registro de cliente"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                firstName:
+                  type: string
+                  minLength: 2
+                lastName:
+                  type: string
+                  minLength: 2
+                password:
+                  type: string
+                  minLength: 6
+              required: [email, firstName, lastName, password]
+      responses:
+        "201":
+          description: "Cliente registrado exitosamente"
+        "409":
+          description: "Email ya registrado"
+  /checkout:
+    post:
+      tags: [Customers]
+      summary: "Procesar checkout"
+      security:
+        - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                couponCode:
+                  type: string
+                idempotencyKey:
+                  type: string
+      responses:
+        "201":
+          description: "Orden creada"
+  /coupons/validate:
+    post:
+      tags: [Marketing]
+      summary: "Validar cupón"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                cartSubtotal:
+                  type: number
+              required: [code]
+      responses:
+        "201":
+          description: "Resultado de validación"
+  /coupons:
+    post:
+      tags: [Marketing]
+      summary: "Crear cupón"
+      security:
+        - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                type:
+                  type: string
+                value:
+                  type: number
+              required: [code, type, value]
+      responses:
+        "201":
+          description: "Cupón creado"
+  /contact:
+    post:
+      tags: [Settings]
+      summary: "Enviar formulario de contacto"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 2
+                email:
+                  type: string
+                  format: email
+                subject:
+                  type: string
+                  minLength: 2
+                message:
+                  type: string
+                  minLength: 2
+              required: [name, email, subject, message]
+      responses:
+        "201":
+          description: "Mensaje enviado"
+  /admin/hero-slides:
+    post:
+      tags: [CMS]
+      summary: "Crear hero slide"
+      security:
+        - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                ctaText:
+                  type: string
+                ctaLink:
+                  type: string
+                image:
+                  type: string
+                order:
+                  type: integer
+                active:
+                  type: boolean
+              required: [title]
+      responses:
+        "201":
+          description: "Hero slide creado"

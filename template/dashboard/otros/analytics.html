@@ -1,0 +1,509 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Dashboard Analytics | Alpacart ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-low": "#fdf1ea",
+                "outline-variant": "#d4c4b1",
+                "on-tertiary": "#ffffff",
+                "surface-tint": "#7f5600",
+                "secondary": "#705a46",
+                "primary-container": "#9a6c14",
+                "surface-container": "#f8ece4",
+                "on-primary-fixed-variant": "#614000",
+                "inverse-on-surface": "#faeee7",
+                "surface-container-highest": "#ece0d9",
+                "outline": "#827565",
+                "tertiary-fixed": "#d0e4ff",
+                "secondary-fixed-dim": "#dec1a8",
+                "secondary-container": "#fbddc3",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed-dim": "#9acbff",
+                "secondary-fixed": "#fbddc3",
+                "on-error": "#ffffff",
+                "background": "#fff8f5",
+                "inverse-primary": "#f6bd60",
+                "on-secondary-fixed": "#271808",
+                "tertiary": "#215f92",
+                "error": "#ba1a1a",
+                "on-surface": "#201b16",
+                "on-primary-fixed": "#281800",
+                "on-primary": "#ffffff",
+                "on-surface-variant": "#504537",
+                "tertiary-container": "#3f78ad",
+                "on-primary-container": "#fffbff",
+                "surface-dim": "#e3d8d1",
+                "surface": "#fff8f5",
+                "surface-container-high": "#f2e6df",
+                "inverse-surface": "#352f2b",
+                "on-secondary-container": "#76604c",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#ffddae",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed": "#001d34",
+                "primary-fixed-dim": "#f6bd60",
+                "surface-bright": "#fff8f5",
+                "on-secondary-fixed-variant": "#574330",
+                "surface-variant": "#ece0d9",
+                "primary": "#7c5400",
+                "on-tertiary-container": "#fdfcff",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-fixed-variant": "#004a79",
+                "on-background": "#201b16"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "sidebar-width": "260px",
+                "container-margin": "32px",
+                "density-compact": "8px",
+                "unit": "4px",
+                "topbar-height": "56px",
+                "gutter": "16px",
+                "density-comfortable": "16px"
+            },
+            "fontFamily": {
+                "title-lg": ["Inter"],
+                "headline-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "body-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "label-sm": ["Inter"],
+                "body-md": ["Inter"],
+                "title-md": ["Inter"],
+                "headline-sm": ["Inter"]
+            },
+            "fontSize": {
+                "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fff8f5;
+            color: #201b16;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .sidebar-active {
+            border-left: 4px solid #7c5400;
+            color: #7c5400;
+            font-weight: 700;
+        }
+        .card-accent-bar {
+            width: 2px;
+            background-color: #7c5400;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f8ece4;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d4c4b1;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-sidebar-width h-full fixed left-0 top-0 bg-surface-container flex flex-col py-density-comfortable border-r border-outline-variant z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-title-lg text-title-lg font-bold text-primary">Alpacart ERP</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Textile Operations</p>
+</div>
+<nav class="flex-1 px-3 space-y-1 overflow-y-auto custom-scrollbar">
+<a class="sidebar-active flex items-center gap-3 px-3 py-2.5 font-label-md text-label-md transition-colors hover:bg-surface-container-high rounded" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2.5 font-label-md text-label-md hover:bg-surface-container-high transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2.5 font-label-md text-label-md hover:bg-surface-container-high transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="factory">factory</span>
+                Production
+            </a>
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2.5 font-label-md text-label-md hover:bg-surface-container-high transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Sales
+            </a>
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2.5 font-label-md text-label-md hover:bg-surface-container-high transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+                Quality Control
+            </a>
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2.5 font-label-md text-label-md hover:bg-surface-container-high transition-colors rounded" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded font-label-md text-label-md hover:opacity-90 transition-all active:scale-[0.98]">
+                New Production Run
+            </button>
+<div class="border-t border-outline-variant pt-4 space-y-1">
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2 font-label-md text-label-md hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                    Help Center
+                </a>
+<a class="text-on-surface-variant flex items-center gap-3 px-3 py-2 font-label-md text-label-md hover:bg-surface-container-high rounded transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Log Out
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="flex-1 ml-sidebar-width min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="h-topbar-height w-full sticky top-0 bg-surface flex items-center justify-between px-gutter border-b border-outline-variant z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container-low border-outline-variant rounded-full pl-10 pr-4 py-1.5 text-body-sm focus:ring-primary focus:border-primary" placeholder="Search insights..." type="text">
+</div>
+<div class="hidden md:flex items-center gap-6 ml-4">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm" href="#">Reports</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-all" href="#">Analytics</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-all" href="#">Insights</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-1"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="font-label-sm text-label-sm text-on-surface leading-none">Elena Morales</p>
+<p class="text-[10px] text-on-surface-variant">Director of BI</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-outline-variant group-hover:border-primary transition-colors object-cover" data-alt="A professional headshot of a business executive in her 40s with a warm but professional expression, set against a blurred background of a modern textile design studio. The lighting is soft and natural, emphasizing the corporate modern and artisanal aesthetic of the Alpacart brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZYOHxMna5G1VAHZhuslnE7bDCzx1w-juvq4wNV9gyqStvNAnMfcojXbkzlEMvmZbo_jlqy3U-ZcoamXs7OlbC5lfzioMdVxJfe_K2RaU07zNNhthKIBpy5TXsPvh-gs31Mz4qompaJnLFhKCOk3DQMCYDBAO2RfQm4wLDt8qlD9Jywvsh3DN1xhxBdmGJqvF4hZ8KOlEkZd00IVYUpmuqu7oi6AiZzKD7MX7V8bq47CGs1EBzmuRfSYDU8kCoe_shHc2B2t-FYou">
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-[1600px] mx-auto w-full flex-1">
+<!-- Breadcrumbs & Title Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<nav class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface-variant mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">Analytics</span>
+</nav>
+<h2 class="font-headline-md text-headline-md text-on-surface">Inteligencia de Negocios</h2>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-container-low border border-outline-variant rounded px-3 py-1.5 gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">calendar_today</span>
+<span class="font-label-md text-label-md text-on-surface">Oct 01, 2023 - Oct 31, 2023</span>
+</div>
+<button class="flex items-center gap-2 border border-outline-variant bg-white px-4 py-1.5 rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Filtros
+                    </button>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded font-label-md text-label-md hover:opacity-90 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Export Data
+                    </button>
+</div>
+</div>
+<!-- Executive KPIs (Top Row) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-8">
+<!-- KPI 1 -->
+<div class="bg-white border border-[#E5D8C7] rounded p-5 flex relative overflow-hidden">
+<div class="card-accent-bar absolute left-0 top-0 h-full"></div>
+<div class="flex-1">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-1">Ventas Totales</p>
+<h3 class="text-headline-md font-headline-md text-on-surface">$245.8k</h3>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-success text-sm text-[#00875A]">trending_up</span>
+<span class="text-label-sm font-label-sm text-[#00875A]">+12% vs last month</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-white border border-[#E5D8C7] rounded p-5 flex relative overflow-hidden">
+<div class="card-accent-bar absolute left-0 top-0 h-full"></div>
+<div class="flex-1">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-1">Ingresos Netos</p>
+<h3 class="text-headline-md font-headline-md text-on-surface">$182.4k</h3>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-[#00875A] text-sm">trending_up</span>
+<span class="text-label-sm font-label-sm text-[#00875A]">+8.5%</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-white border border-[#E5D8C7] rounded p-5 flex relative overflow-hidden">
+<div class="card-accent-bar absolute left-0 top-0 h-full"></div>
+<div class="flex-1">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-1">Pedidos Totales</p>
+<h3 class="text-headline-md font-headline-md text-on-surface">1,452</h3>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-[#00875A] text-sm">trending_up</span>
+<span class="text-label-sm font-label-sm text-[#00875A]">+5%</span>
+</div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-white border border-[#E5D8C7] rounded p-5 flex relative overflow-hidden">
+<div class="card-accent-bar absolute left-0 top-0 h-full"></div>
+<div class="flex-1">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-1">Tasa de Conversión</p>
+<h3 class="text-headline-md font-headline-md text-on-surface">4.2%</h3>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-[#00875A] text-sm">trending_up</span>
+<span class="text-label-sm font-label-sm text-[#00875A]">+0.5%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Charts Grid -->
+<div class="grid grid-cols-12 gap-gutter mb-8">
+<!-- Large Line Chart -->
+<div class="col-span-12 lg:col-span-8 bg-white border border-[#E5D8C7] rounded p-6">
+<div class="flex items-center justify-between mb-6">
+<h4 class="font-title-md text-title-md text-on-surface">Tendencia de Ventas vs. Ingresos</h4>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Ventas</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Ingresos</span>
+</div>
+</div>
+</div>
+<div class="h-64 w-full relative">
+<!-- Simulated Chart Visualization with SVG -->
+<svg class="w-full h-full" viewBox="0 0 800 240">
+<!-- Grid lines -->
+<line stroke="#F7F2EA" stroke-width="1" x1="0" x2="800" y1="40" y2="40"></line>
+<line stroke="#F7F2EA" stroke-width="1" x1="0" x2="800" y1="90" y2="90"></line>
+<line stroke="#F7F2EA" stroke-width="1" x1="0" x2="800" y1="140" y2="140"></line>
+<line stroke="#F7F2EA" stroke-width="1" x1="0" x2="800" y1="190" y2="190"></line>
+<!-- Line 1: Ventas (Primary Gold) -->
+<path d="M0,180 L100,160 L200,140 L300,155 L400,110 L500,90 L600,105 L700,60 L800,45" fill="none" stroke="#7c5400" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Line 2: Ingresos (Secondary) -->
+<path d="M0,210 L100,200 L200,180 L300,195 L400,160 L500,145 L600,155 L700,120 L800,110" fill="none" stroke="#705a46" stroke-dasharray="6,4" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+<div class="flex justify-between mt-4 px-2 text-label-sm font-label-sm text-on-surface-variant">
+<span>01 Oct</span><span>08 Oct</span><span>15 Oct</span><span>22 Oct</span><span>31 Oct</span>
+</div>
+</div>
+</div>
+<!-- Donut Chart -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-[#E5D8C7] rounded p-6 flex flex-col">
+<h4 class="font-title-md text-title-md text-on-surface mb-6">Distribución por Canal</h4>
+<div class="flex-1 flex flex-col items-center justify-center">
+<div class="relative w-48 h-48 mb-6">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#f8ece4" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#7c5400" stroke-dasharray="45 55" stroke-dashoffset="0" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#705a46" stroke-dasharray="25 75" stroke-dashoffset="-45" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#9a6c14" stroke-dasharray="15 85" stroke-dashoffset="-70" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="15.915" stroke="#d4c4b1" stroke-dasharray="15 85" stroke-dashoffset="-85" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<p class="text-label-sm font-label-sm text-on-surface-variant">Total</p>
+<p class="text-title-lg font-title-lg">100%</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-x-4 gap-y-2 w-full">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Web (45%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">B2B (25%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Stores (15%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-outline-variant"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Intl (15%)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Grid: Bar Chart & Detailed Cards -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Horizontal Bar Chart -->
+<div class="col-span-12 lg:col-span-5 bg-white border border-[#E5D8C7] rounded p-6">
+<h4 class="font-title-md text-title-md text-on-surface mb-6">Top Categorías de Productos</h4>
+<div class="space-y-5">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-body-md font-body-md text-on-surface">Vicuña Premium</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">$112.5k</span>
+</div>
+<div class="h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-body-md font-body-md text-on-surface">Baby Alpaca Royal</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">$88.2k</span>
+</div>
+<div class="h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-body-md font-body-md text-on-surface">Alpaca Blends</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">$45.1k</span>
+</div>
+<div class="h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[40%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Marketing ROI & Inventory Health -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Marketing Performance -->
+<div class="bg-white border border-[#E5D8C7] rounded p-5 flex-1">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-title-md text-title-md text-on-surface">Marketing Performance</h4>
+<span class="bg-[#E6F4EA] text-[#00875A] text-[10px] font-bold px-2 py-0.5 rounded">HIGH ROI</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b border-surface-container-high pb-2">
+<span class="text-body-sm font-body-sm text-on-surface">Social Campaign Q4</span>
+<span class="text-label-sm font-label-sm font-bold text-primary">5.2x ROI</span>
+</div>
+<div class="flex items-center justify-between border-b border-surface-container-high pb-2">
+<span class="text-body-sm font-body-sm text-on-surface">Email Retargeting</span>
+<span class="text-label-sm font-label-sm font-bold text-primary">8.4x ROI</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-body-sm font-body-sm text-on-surface">Influencer Collabs</span>
+<span class="text-label-sm font-label-sm font-bold text-primary">3.1x ROI</span>
+</div>
+</div>
+</div>
+<!-- Inventory Health -->
+<div class="bg-white border border-[#E5D8C7] rounded p-5 flex-1">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-title-md text-title-md text-on-surface">Salud del Inventario</h4>
+<span class="material-symbols-outlined text-error text-xl" data-icon="report">report</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-[10px] uppercase font-bold text-on-surface-variant">Turnover</p>
+<p class="text-headline-sm font-headline-sm">4.2x</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-on-surface-variant">Low Stock</p>
+<p class="text-headline-sm font-headline-sm text-error">12 SKU</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-container-high">
+<button class="w-full text-center text-label-sm font-label-sm text-primary hover:underline">Revisar Alertas de Stock</button>
+</div>
+</div>
+</div>
+<!-- Client Geography (Map Widget) -->
+<div class="col-span-12 lg:col-span-3 bg-white border border-[#E5D8C7] rounded p-6 overflow-hidden flex flex-col">
+<h4 class="font-title-md text-title-md text-on-surface mb-4">Geografía de Clientes</h4>
+<div class="relative flex-1 bg-surface-container rounded overflow-hidden min-h-[160px]">
+<img class="w-full h-full object-cover grayscale opacity-50" data-location="Peru" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNZs-dOgGpoeGkMNAKoxJ0xoswCQjE6XdwqOAODIzG1h_AeDudy-yPaNmWnDe3NiyhsiAELJFhXORNga-ZNZWIBRNuxDehfkaof5SBy58RxxgcEgGsmqlOvHHp3NkHNRU1YCSiLjGPH4KZuGovbATowZ9OKKzBUQYGtuFs1Z2TqP9Lw39TIE0hRfLT0rEGBADIjYLm4FGturR7FBf-94PY5RMEypzD9UYnqKe26N-ViDB9Yt1am1RXSE8M_F3did7l1izX1E9caAJM">
+<div class="absolute inset-0 p-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface">Lima, PE</span>
+<span class="text-label-sm font-label-sm font-bold">42%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface">Arequipa, PE</span>
+<span class="text-label-sm font-label-sm font-bold">18%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface">Cusco, PE</span>
+<span class="text-label-sm font-label-sm font-bold">12%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface">United States</span>
+<span class="text-label-sm font-label-sm font-bold">15%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Feedback Bar -->
+<footer class="mt-auto px-8 py-4 bg-surface border-t border-outline-variant flex items-center justify-between">
+<p class="text-label-sm font-label-sm text-on-surface-variant">© 2023 Alpacart Textiles ERP - Sistema de Inteligencia de Negocios v2.4</p>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5 text-label-sm font-label-sm text-[#00875A]">
+<span class="w-2 h-2 rounded-full bg-[#00875A]"></span>
+                    Sincronizado en tiempo real
+                </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Última actualización: hace 5 min</span>
+</div>
+</footer>
+</main>
+<script>
+        // Simple micro-interactions for the cards
+        document.querySelectorAll('.bg-white').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow = "0px 4px 12px rgba(74, 67, 62, 0.08)";
+                card.style.transform = "translateY(-2px)";
+                card.style.transition = "all 0.2s ease-out";
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = "none";
+                card.style.transform = "translateY(0)";
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.style.boxShadow = "0 0 0 2px rgba(124, 84, 0, 0.1)";
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.style.boxShadow = "none";
+        });
+    </script>
+</body></html>

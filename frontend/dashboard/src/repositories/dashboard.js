@@ -1,0 +1,1 @@
+import { createRepository } from './base'; import { dashboardKpis, recentOrders, dashboardAlerts } from '../mocks/data'; export default { kpis: () => Promise.resolve(dashboardKpis), recentOrders: () => Promise.resolve(recentOrders), alerts: () => Promise.resolve(dashboardAlerts) };

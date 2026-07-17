@@ -10,7 +10,7 @@
 }
 
 .modal {
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
   width: 100%;
@@ -40,7 +40,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-outline-variant);
 }
 
 .title {
@@ -55,12 +55,12 @@
   width: 2rem;
   height: 2rem;
   border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
+  color: var(--color-on-surface-variant);
   transition: background-color var(--transition-fast);
 }
 
 .close:hover {
-  background-color: var(--color-bg-hover);
+  background-color: var(--color-surface-container);
 }
 
 .body {

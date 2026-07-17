@@ -22,16 +22,16 @@
 
 .primary {
   background-color: var(--color-primary);
-  color: var(--color-text-inverse);
+  color: var(--color-on-primary);
 }
 
 .primary:hover:not(:disabled) {
-  filter: brightness(1.1);
+  background-color: var(--color-primary-container);
 }
 
 .secondary {
-  background-color: var(--color-secondary);
-  color: var(--color-text-inverse);
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
 }
 
 .secondary:hover:not(:disabled) {
@@ -40,27 +40,26 @@
 
 .outline {
   background-color: transparent;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
+  border: 1px solid var(--color-outline);
+  color: var(--color-on-surface);
 }
 
 .outline:hover:not(:disabled) {
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse);
+  background-color: var(--color-surface-container-high);
 }
 
 .ghost {
   background-color: transparent;
-  color: var(--color-text);
+  color: var(--color-on-surface-variant);
 }
 
 .ghost:hover:not(:disabled) {
-  background-color: var(--color-bg-hover);
+  background-color: var(--color-surface-container);
 }
 
 .danger {
   background-color: var(--color-error);
-  color: var(--color-text-inverse);
+  color: white;
 }
 
 .danger:hover:not(:disabled) {
@@ -68,17 +67,17 @@
 }
 
 .sm {
-  padding: 0.375rem 0.75rem;
-  font-size: var(--font-size-sm);
+  padding: 6px 12px;
+  font-size: var(--font-size-xs);
 }
 
 .md {
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   font-size: var(--font-size-base);
 }
 
 .lg {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
   font-size: var(--font-size-lg);
 }
 

@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; import useTextileStore from '../stores/useTextileStore'; export default function useTextile() { const s = useTextileStore(); useEffect(() => { if (s.variants.length === 0) s.fetchAll(); }, []); return s; }

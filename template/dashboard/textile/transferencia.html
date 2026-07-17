@@ -1,0 +1,576 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Alpacart ERP - Transferencias entre Almacenes</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#d0e4ff",
+                    "primary-fixed-dim": "#f6bd60",
+                    "tertiary": "#215f92",
+                    "inverse-on-surface": "#faeee7",
+                    "on-primary-fixed-variant": "#614000",
+                    "surface-container-low": "#fdf1ea",
+                    "surface-container": "#f8ece4",
+                    "surface-container-highest": "#ece0d9",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "outline-variant": "#d4c4b1",
+                    "primary": "#7c5400",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-tertiary-fixed-variant": "#004a79",
+                    "on-background": "#201b16",
+                    "surface-bright": "#fff8f5",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#352f2b",
+                    "surface-tint": "#7f5600",
+                    "on-primary-fixed": "#281800",
+                    "surface-variant": "#ece0d9",
+                    "background": "#fff8f5",
+                    "on-secondary-fixed": "#271808",
+                    "primary-fixed": "#ffddae",
+                    "on-surface": "#201b16",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#3f78ad",
+                    "secondary": "#705a46",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#fbddc3",
+                    "on-primary-container": "#fffbff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#dec1a8",
+                    "on-tertiary-container": "#fdfcff",
+                    "secondary-container": "#fbddc3",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#574330",
+                    "inverse-primary": "#f6bd60",
+                    "tertiary-fixed-dim": "#9acbff",
+                    "primary-container": "#9a6c14",
+                    "surface-dim": "#e3d8d1",
+                    "on-surface-variant": "#504537",
+                    "on-secondary-container": "#76604c",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#f2e6df",
+                    "outline": "#827565",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-margin": "32px",
+                    "sidebar-width": "260px",
+                    "density-comfortable": "16px",
+                    "topbar-height": "56px",
+                    "density-compact": "8px",
+                    "unit": "4px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "title-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .sidebar-active {
+            border-left: 4px solid #7c5400;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f8ece4;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d4c4b1;
+            border-radius: 2px;
+        }
+        .accent-bar {
+            width: 2px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #7c5400;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md overflow-hidden h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-secondary-container dark:bg-inverse-surface w-sidebar-width h-screen fixed left-0 top-0 border-r border-outline-variant dark:border-outline flex flex-col py-density-comfortable z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Alpacart Textiles</h1>
+<p class="text-on-secondary-fixed-variant opacity-70 font-label-sm text-label-sm">ERP Premium</p>
+</div>
+<div class="flex flex-col gap-1 px-3 flex-grow overflow-y-auto custom-scrollbar">
+<div class="text-primary dark:text-primary-fixed-dim bg-surface dark:bg-surface-container-highest border-l-4 border-primary flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="font-label-md text-label-md">Transferencias</span>
+</div>
+<!-- Other Tabs (Inactive) -->
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Panel Control</span>
+</div>
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventario</span>
+</div>
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">factory</span>
+<span class="font-label-md text-label-md">Producción</span>
+</div>
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Logística</span>
+</div>
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2.5 transition-colors duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</div>
+</div>
+<div class="mt-auto px-3 flex flex-col gap-1 pt-4 border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-2.5 px-4 mb-4 rounded shadow-sm hover:opacity-90 active:scale-95 transition-all font-title-md text-title-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                Nueva Transferencia
+            </button>
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2 transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</div>
+<div class="text-on-secondary-fixed-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant flex items-center gap-3 px-3 py-2 transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Ayuda</span>
+</div>
+</div>
+</nav>
+<!-- Content Area -->
+<div class="ml-sidebar-width flex-grow flex flex-col h-full bg-surface-container-lowest">
+<!-- TopAppBar (from JSON) -->
+<header class="h-topbar-height w-full flex items-center justify-between px-container-margin border-b border-outline-variant dark:border-outline bg-surface dark:bg-surface-dim shadow-sm z-40">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-primary-fixed-dim">Andean Precision ERP</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-all font-title-md text-title-md" href="#">Pendientes</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-title-md text-title-md" href="#">En Tránsito</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-title-md text-title-md" href="#">Completadas</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all material-symbols-outlined">notifications</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all material-symbols-outlined">history</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-all material-symbols-outlined">download</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right">
+<p class="font-label-md text-label-md leading-none">M. Huamán</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Operador Senior</p>
+</div>
+<img class="w-8 h-8 rounded-full border border-outline object-cover" data-alt="Close-up portrait of a professional male warehouse manager in a clean, modern Peruvian textile facility, soft professional lighting, neutral warm background tones, high-resolution photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbLFGx_5Dcly5olgj-2ltWJ5OPVsY5pU24h1x-Rc4jb2edTwUPeR-f5gopXhHVv95ksMxZEigzhBj-GCVjLgy6X21Wv55oFLlr7MQIEtsbznMR32todJ_nsgxxIj9qDG6yjtCX_Q0iO3Qft8QPCSogEpS0RZJ2-VReum41vCywa_CBfxVR5sdK0tAfQj20WwETKDBaz19WWqXtrQ15Mpy_anTWIoytvVXB15R7htndi5lZlYvWp8L4cK13TvLT3WuRXRhaFQjZGx2D">
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-grow p-container-margin overflow-hidden flex gap-gutter">
+<!-- Left: Table & Filters -->
+<div class="flex-grow flex flex-col gap-gutter overflow-hidden">
+<!-- KPI Summary Section -->
+<section class="grid grid-cols-3 gap-gutter">
+<!-- KPI Card 1 -->
+<div class="relative bg-white p-4 border border-outline-variant shadow-sm overflow-hidden flex flex-col justify-between">
+<div class="accent-bar bg-primary"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">Pendientes de Envío</span>
+<div class="flex items-end justify-between mt-2">
+<span class="font-headline-md text-headline-md text-on-surface">14</span>
+<span class="text-primary font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">priority_high</span> Prioridad
+                            </span>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="relative bg-white p-4 border border-outline-variant shadow-sm overflow-hidden flex flex-col justify-between">
+<div class="accent-bar bg-tertiary"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">En Tránsito</span>
+<div class="flex items-end justify-between mt-2">
+<span class="font-headline-md text-headline-md text-on-surface">32</span>
+<span class="text-tertiary font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_shipping</span> 8 Críticos
+                            </span>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="relative bg-white p-4 border border-outline-variant shadow-sm overflow-hidden flex flex-col justify-between">
+<div class="accent-bar bg-secondary"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest">Recibidos Hoy</span>
+<div class="flex items-end justify-between mt-2">
+<span class="font-headline-md text-headline-md text-on-surface">09</span>
+<span class="text-on-secondary-fixed-variant font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> 100% Ok
+                            </span>
+</div>
+</div>
+</section>
+<!-- Filter Bar -->
+<section class="bg-white p-3 border border-outline-variant flex items-center gap-4 flex-wrap">
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-48" placeholder="Buscar por ID o Guía..." type="text">
+</div>
+<select class="bg-surface-container-low border border-outline-variant text-body-sm px-3 py-1.5 focus:ring-1 focus:ring-primary">
+<option>Almacén Origen: Todos</option>
+<option>Arequipa Central</option>
+<option>Cusco Hilados</option>
+<option>Lima Distribución</option>
+</select>
+<select class="bg-surface-container-low border border-outline-variant text-body-sm px-3 py-1.5 focus:ring-1 focus:ring-primary">
+<option>Estado: Todos</option>
+<option>Solicitada</option>
+<option>Autorizada</option>
+<option>En Tránsito</option>
+</select>
+<div class="flex items-center gap-2 border border-outline-variant px-3 py-1.5 hover:bg-surface-container-low cursor-pointer transition-all">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="text-body-sm">Últimos 7 días</span>
+</div>
+<button class="ml-auto flex items-center gap-2 px-4 py-1.5 bg-secondary text-white hover:opacity-90 active:scale-95 transition-all text-label-md font-label-md">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Filtros Avanzados
+                    </button>
+</section>
+<!-- Data Table Container -->
+<section class="flex-grow bg-white border border-outline-variant shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-auto custom-scrollbar flex-grow">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead>
+<tr class="bg-[#F7F2EA] border-b border-outline-variant sticky top-0 z-10">
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">ID Transferencia</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Fecha/Hora</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Origen / Destino</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Cant. SKUs</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Responsable</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase text-center">Estado</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors cursor-pointer group">
+<td class="px-4 py-3 font-medium text-primary">TR-2024-0892</td>
+<td class="px-4 py-3 text-body-sm">24/05/2024 09:15</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-semibold">Arequipa HQ</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+<span class="text-body-sm">Cusco Planta</span>
+</div>
+</td>
+<td class="px-4 py-3 text-body-sm">45 Items</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">RM</div>
+<span class="text-body-sm">R. Mendoza</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed-variant">En Tránsito</span>
+</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant" title="Ver Detalle"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant" title="Imprimir Guía"><span class="material-symbols-outlined text-[18px]">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/50 hover:bg-[#FCFBF9] transition-colors cursor-pointer group">
+<td class="px-4 py-3 font-medium text-primary">TR-2024-0891</td>
+<td class="px-4 py-3 text-body-sm">24/05/2024 08:30</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-semibold">Lima Dist.</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+<span class="text-body-sm">Ica Almacén</span>
+</div>
+</td>
+<td class="px-4 py-3 text-body-sm">12 Items</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center text-[10px] font-bold">LC</div>
+<span class="text-body-sm">L. Castro</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-primary-fixed text-on-primary-fixed-variant">Solicitada</span>
+</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors cursor-pointer group">
+<td class="px-4 py-3 font-medium text-primary">TR-2024-0889</td>
+<td class="px-4 py-3 text-body-sm">23/05/2024 16:45</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-semibold">Arequipa HQ</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+<span class="text-body-sm">Puno Planta 2</span>
+</div>
+</td>
+<td class="px-4 py-3 text-body-sm">128 Items</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-error-container flex items-center justify-center text-[10px] font-bold">AV</div>
+<span class="text-body-sm">A. Vargas</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed-variant">Recibida</span>
+</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors cursor-pointer group">
+<td class="px-4 py-3 font-medium text-primary">TR-2024-0888</td>
+<td class="px-4 py-3 text-body-sm">23/05/2024 14:20</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-semibold">Cusco HQ</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+<span class="text-body-sm">Lima Dist.</span>
+</div>
+</td>
+<td class="px-4 py-3 text-body-sm">56 Items</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold">JS</div>
+<span class="text-body-sm">J. Salazar</span>
+</div>
+</td>
+<td class="px-4 py-3 text-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed-variant">En Tránsito</span>
+</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+<button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Filling space with more rows -->
+<script>
+                                    for(let i=0; i<8; i++) {
+                                        document.write(`
+                                        <tr class="hover:bg-[#FCFBF9] transition-colors cursor-pointer group">
+                                            <td class="px-4 py-3 font-medium text-primary">TR-2024-088${7-i}</td>
+                                            <td class="px-4 py-3 text-body-sm">22/05/2024 10:00</td>
+                                            <td class="px-4 py-3"><div class="flex items-center gap-2"><span class="text-body-sm font-semibold">Central</span><span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span><span class="text-body-sm">Almacén B</span></div></td>
+                                            <td class="px-4 py-3 text-body-sm">22 Items</td>
+                                            <td class="px-4 py-3"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-outline-variant flex items-center justify-center text-[10px] font-bold">OP</div><span class="text-body-sm">Operador</span></div></td>
+                                            <td class="px-4 py-3 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-container text-on-secondary-container">Archivado</span></td>
+                                            <td class="px-4 py-3 text-right"><div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 hover:bg-surface-container-highest rounded-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">print</span></button></div></td>
+                                        </tr>
+                                        `);
+                                    }
+                                </script>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-4 py-3 border-t border-outline-variant bg-[#F7F2EA] flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Mostrando 1-12 de 128 transferencias</span>
+<div class="flex items-center gap-1">
+<button class="p-1 border border-outline-variant bg-white hover:bg-surface-container-highest transition-all rounded-sm"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="px-3 py-1 border border-primary bg-primary text-white font-bold text-label-sm rounded-sm">1</button>
+<button class="px-3 py-1 border border-outline-variant bg-white hover:bg-surface-container-highest transition-all font-bold text-label-sm rounded-sm">2</button>
+<button class="px-3 py-1 border border-outline-variant bg-white hover:bg-surface-container-highest transition-all font-bold text-label-sm rounded-sm">3</button>
+<button class="p-1 border border-outline-variant bg-white hover:bg-surface-container-highest transition-all rounded-sm"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right: Details/Timeline Sidebar -->
+<aside class="w-80 flex flex-col gap-gutter shrink-0">
+<div class="bg-white border border-outline-variant shadow-sm h-full flex flex-col">
+<div class="p-4 border-b border-outline-variant bg-[#F7F2EA]">
+<h2 class="font-title-md text-title-md text-on-surface">Detalle de Operación</h2>
+<p class="text-label-sm font-label-sm text-primary">TR-2024-0892</p>
+</div>
+<div class="flex-grow p-5 overflow-y-auto custom-scrollbar">
+<!-- Timeline Section -->
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-6">Línea de Tiempo</h3>
+<div class="relative">
+<!-- Timeline Connector -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-outline-variant"></div>
+<!-- Timeline Steps -->
+<div class="flex flex-col gap-8">
+<!-- Step 1: Completed -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div>
+<p class="text-body-sm font-bold text-on-surface">Solicitada</p>
+<p class="text-[11px] text-on-surface-variant">24/05/2024 • 09:15 AM</p>
+<p class="text-[11px] text-on-surface-variant italic mt-1">Por: R. Mendoza</p>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div>
+<p class="text-body-sm font-bold text-on-surface">Autorizada</p>
+<p class="text-[11px] text-on-surface-variant">24/05/2024 • 10:45 AM</p>
+<p class="text-[11px] text-on-surface-variant italic mt-1">Por: Gerencia Almacén</p>
+</div>
+</div>
+<!-- Step 3: Current -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-tertiary text-white flex items-center justify-center z-10 border-4 border-white shadow-sm animate-pulse">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+</div>
+<div>
+<p class="text-body-sm font-bold text-tertiary">En Tránsito</p>
+<p class="text-[11px] text-on-surface-variant">24/05/2024 • 11:30 AM</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Unidad: AB-234 (Externo)</p>
+</div>
+</div>
+<!-- Step 4: Pending -->
+<div class="relative pl-8 opacity-40">
+<div class="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-outline-variant text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+<span class="material-symbols-outlined text-[14px]">radio_button_unchecked</span>
+</div>
+<div>
+<p class="text-body-sm font-bold text-on-surface">Llegada a Destino</p>
+<p class="text-[11px] text-on-surface-variant">Pendiente de registro</p>
+</div>
+</div>
+<!-- Step 5: Pending -->
+<div class="relative pl-8 opacity-40">
+<div class="absolute left-0 top-0.5 w-6 h-6 rounded-full bg-outline-variant text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+<span class="material-symbols-outlined text-[14px]">inventory</span>
+</div>
+<div>
+<p class="text-body-sm font-bold text-on-surface">Recibida y Validada</p>
+<p class="text-[11px] text-on-surface-variant">Pendiente</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Map / Route Summary -->
+<div class="mt-10 pt-6 border-t border-outline-variant">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-3">Detalle del Envío</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">pin_drop</span>
+<div>
+<p class="text-[11px] font-bold text-on-surface-variant">ORIGEN</p>
+<p class="text-body-sm">Almacén Central Arequipa, Av. Industrial 405</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary">near_me</span>
+<div>
+<p class="text-[11px] font-bold text-on-surface-variant">DESTINO</p>
+<p class="text-body-sm">Planta Cusco Hilados, Sector Saylla Lote 12</p>
+</div>
+</div>
+</div>
+<div class="mt-6 aspect-video bg-surface-container-highest border border-outline-variant relative overflow-hidden flex items-center justify-center group cursor-pointer">
+<div class="absolute inset-0 grayscale opacity-40 bg-[url('https://www.google.com/maps/vt/pb=!1m4!1m3!1i12!2i1384!3i2292!2m3!1e0!2sm!3i637000000!3m8!2ses!3spe!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!5f2')] bg-cover"></div>
+<div class="relative z-10 bg-white/90 backdrop-blur-sm p-3 border border-outline-variant shadow-sm group-hover:bg-primary group-hover:text-white transition-all">
+<span class="font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined">map</span>
+                                        Rastreo en Tiempo Real
+                                    </span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant bg-[#F7F2EA] flex gap-2">
+<button class="flex-grow py-2 bg-primary text-on-primary font-bold text-label-md hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">print</span>
+                            Imprimir Guía
+                        </button>
+<button class="p-2 border border-outline text-on-surface-variant hover:bg-white transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</aside>
+</main>
+</div>
+<!-- Floating Action Button (for Mobile/Focused Context) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex md:hidden items-center justify-center active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<script>
+        // Simple micro-interaction for table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                // In a real app, this would fetch data for the sidebar
+                console.log('Fila seleccionada: ' + row.querySelector('td:first-child').textContent);
+            });
+        });
+
+        // Search Bar Focus shortcut
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                e.preventDefault();
+                document.querySelector('input[type="text"]').focus();
+            }
+        });
+    </script>
+</body></html>

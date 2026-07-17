@@ -19,7 +19,7 @@ function RouteWithLayout({ route }) {
   return (
     <Layout>
       <Suspense fallback={<Loader fullPage />}>
-        <route.element />
+        {route.element}
       </Suspense>
     </Layout>
   );

@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; import useAuditStore from '../stores/useAuditStore'; export default function useAudit() { const s = useAuditStore(); useEffect(() => { if (s.logs.length === 0) s.fetchAll(); }, []); return s; }
