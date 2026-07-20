@@ -10,8 +10,9 @@ export function useOrders() {
     setLoading(true);
     setError(null);
     try {
-      const data = await serviceProvider.orders.getAll(params);
-      setOrders(data || []);
+      const raw = await serviceProvider.orders.getAll(params);
+      const list = raw?.data ?? raw?.rows ?? raw ?? [];
+      setOrders(Array.isArray(list) ? list : []);
     } catch (err) {
       setError(err);
     } finally {

@@ -61,9 +61,29 @@ module.exports = {
       created_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updated_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     });
+    await queryInterface.createTable('faq_categories', {
+      id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+      name: { type: Sequelize.STRING(255), allowNull: false },
+      slug: { type: Sequelize.STRING(100), allowNull: false, unique: true },
+      icon: { type: Sequelize.STRING(50), allowNull: true },
+      order: { type: Sequelize.INTEGER, allowNull: false },
+      created_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+    });
+    await queryInterface.createTable('faq_items', {
+      id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+      category_id: { type: Sequelize.INTEGER, allowNull: false, references: { model: 'faq_categories', key: 'id' } },
+      question: { type: Sequelize.TEXT, allowNull: false },
+      answer: { type: Sequelize.TEXT, allowNull: false },
+      order: { type: Sequelize.INTEGER, allowNull: false },
+      created_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+      updated_at: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+    });
   },
 
   down: async (queryInterface) => {
+    await queryInterface.dropTable('faq_items');
+    await queryInterface.dropTable('faq_categories');
     await queryInterface.dropTable('artisan_processes');
     await queryInterface.dropTable('benefits');
     await queryInterface.dropTable('testimonials');

@@ -45,4 +45,12 @@ export class AuthService {
   login(email, pwd)    { return this.repo.login(email, pwd); }
   register(data)       { return this.repo.register(data); }
   getProfile()         { return this.repo.getProfile(); }
+  getAddresses()       { return this.repo.getAddresses(); }
+  createAddress(d)     { return this.repo.createAddress(d); }
+  deleteAddress(id)    { return this.repo.deleteAddress(id); }
+}
+
+export class PaymentsService {
+  constructor(repo) { this.repo = repo; }
+  createIntent(data) { return this.repo.createIntent(data); }
 }

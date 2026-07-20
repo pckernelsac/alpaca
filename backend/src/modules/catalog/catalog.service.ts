@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { Product } from './entities/product.entity';
 import { ProductVariant } from './entities/product-variant.entity';
+// import { ProductMedia } from './entities/product-media.entity';
 import { Category } from './entities/category.entity';
 import { Collection } from './entities/collection.entity';
 import { ProductMedia } from './entities/product-media.entity';
@@ -41,7 +42,7 @@ export class CatalogService {
     // Cache miss: query PostgreSQL
     const result = await this.p.findAndCountAll({
       where,
-      include: [Category, Collection],
+      include: [Category, Collection, { model: ProductVariant, attributes: ['id', 'price', 'sku', 'sizeId', 'colorName', 'stock'], limit: 10 }],
       limit: Math.min(perPage, 200),
       offset: (page - 1) * perPage,
       order: [[sort, order]],

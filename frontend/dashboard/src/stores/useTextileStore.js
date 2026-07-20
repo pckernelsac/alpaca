@@ -1,4 +1,8 @@
 import { create } from 'zustand';
-import repo from '../repositories/textile.js';
-const useTextileStore = create((set) => ({ variants: [], warehouses: [], loading: false, fetchAll: async () => { set({ loading: true }); const data = await repo.getAll(); const w = await repo.getWarehouses(); set({ variants: data, warehouses: w, loading: false }); } }));
+import { textileRepository } from '../repositories/api';
+
+const useTextileStore = create((set) => ({
+  variants: [], warehouses: [], loading: false,
+  fetchAll: async () => { set({ loading: true }); const data = await textileRepository.getMaterials(); set({ variants: data || [], loading: false }); },
+}));
 export default useTextileStore;

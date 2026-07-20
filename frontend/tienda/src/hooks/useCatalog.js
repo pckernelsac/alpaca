@@ -10,8 +10,9 @@ export function useCatalog() {
     setLoading(true);
     setError(null);
     try {
-      const data = await serviceProvider.catalog.getAll(params);
-      setProducts(data);
+      const raw = await serviceProvider.catalog.getAll(params);
+      const list = raw?.data ?? raw?.rows ?? raw ?? [];
+      setProducts(Array.isArray(list) ? list : []);
     } catch (err) {
       setError(err);
     } finally {

@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
+import { serviceProvider } from '@/providers/ServiceProvider';
 import logo from '@/assets/images/logo.png';
 import styles from './Login.module.css';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPw, setShowPw] = useState(false);
@@ -10,14 +15,25 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const result = await serviceProvider.auth.login(email, password);
+      const token = result?.accessToken || result?.token;
+      const user = result?.user || result?.data?.user;
+      if (token) {
+        login(token, user || { email, name: email.split('@')[0] });
+        navigate('/');
+      } else {
+        setError('Error al iniciar sesión');
+      }
+    } catch (err) {
+      setError(err.message || 'Credenciales incorrectas');
+    } finally {
       setLoading(false);
-      setError('Credenciales incorrectas. Inténtelo de nuevo.');
-    }, 1500);
+    }
   };
 
   return (
@@ -59,7 +75,7 @@ export default function Login() {
                 id="password"
                 type={showPw ? 'text' : 'password'}
                 className={styles.input}
-                placeholder="••••••••"
+                placeholder="******"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -91,11 +107,7 @@ export default function Login() {
           </div>
 
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? (
-              <span className={`material-symbols-outlined ${styles.spinner}`}>progress_activity</span>
-            ) : (
-              'Ingresar'
-            )}
+            {loading ? 'INGRESANDO...' : 'Ingresar'}
           </button>
         </form>
 

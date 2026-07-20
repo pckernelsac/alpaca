@@ -5,3 +5,5 @@ export { useWishlist } from './useWishlist';
 export { useCheckout } from './useCheckout';
 export { useOrders } from './useOrders';
 export { useCoupon } from './useCoupon';
+export { useProfile } from './useProfile';
+export { useAddresses } from './useAddresses';

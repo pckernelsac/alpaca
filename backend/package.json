@@ -16,7 +16,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/jest-e2e.json --runInBand"
+    "test:e2e": "jest --config ./test/jest-e2e.json --runInBand",
+    "db:migrate": "node scripts/sequelize-runner.js db:migrate --config database/config/sequelize.js --env development --migrations-path database/migrations",
+    "db:seed": "node scripts/sequelize-runner.js db:seed:all --config database/config/sequelize.js --env development --seeders-path database/seeds",
+    "db:reset": "node scripts/sequelize-runner.js db:migrate:undo:all --config database/config/sequelize.js --env development --migrations-path database/migrations && node scripts/sequelize-runner.js db:migrate --config database/config/sequelize.js --env development --migrations-path database/migrations && node scripts/sequelize-runner.js db:seed:all --config database/config/sequelize.js --env development --seeders-path database/seeds"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1085.0",

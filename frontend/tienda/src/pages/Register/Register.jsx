@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { serviceProvider } from '@/providers/ServiceProvider';
 import styles from './Register.module.css';
 
 export default function Register() {
@@ -22,16 +23,22 @@ export default function Register() {
     return err;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const err = validate();
     if (Object.keys(err).length > 0) { setErrors(err); return; }
     setLoading(true);
-    setTimeout(() => {
-      login('simulated_token_' + Date.now(), { name: form.firstName + ' ' + form.lastName, email: form.email });
+    try {
+      const result = await serviceProvider.auth.register({ email: form.email, firstName: form.firstName, lastName: form.lastName, password: form.password });
+      if (result) {
+        login(null, { name: form.firstName + ' ' + form.lastName, email: form.email });
+        navigate('/account');
+      }
+    } catch (e) {
+      setErrors({ submit: e.message || 'Error al registrarse' });
+    } finally {
       setLoading(false);
-      navigate('/account');
-    }, 1000);
+    }
   };
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -69,6 +76,7 @@ export default function Register() {
             <input className={[styles.input, errors.confirmPassword && styles.hasError].filter(Boolean).join(' ')} name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} placeholder="Repite la contraseña" />
             {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword}</span>}
           </div>
+          {errors.submit && <p className={styles.error}>{errors.submit}</p>}
           <button type="submit" className={styles.submitBtn} disabled={loading}>{loading ? 'Registrando...' : 'Crear Cuenta'}</button>
         </form>
         <p className={styles.loginLink}>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>

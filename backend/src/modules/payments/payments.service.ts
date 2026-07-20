@@ -48,18 +48,34 @@ export class PaymentsService {
     });
   }
 
-  async createPaymentIntent(orderId: string, amount: number, currency: string, customerEmail?: string) {
-    const pi = await this.stripeService.createPaymentIntent({ amount, currency, orderId, customerEmail });
+  async createPaymentIntent(data: { items: any[]; customerId: string; subtotal: number; discount: number; total: number; currency: string; couponId?: number | null; customerEmail?: string }) {
+    const { items, customerId, subtotal, discount, total, currency, couponId, customerEmail } = data;
+    if (total <= 0) throw new BadRequestException('El total debe ser mayor a cero');
+    const amountCents = Math.round(total * 100);
+    const pi = await this.stripeService.createPaymentIntent({ amount: amountCents, currency: currency || 'PEN', orderId: 'pending_' + customerId.slice(0, 8), customerEmail });
+
+    // Reserve stock while payment is processing
+    const stockIds = [...new Set(items.map((i: any) => i.productId).filter(Boolean))].sort();
+    for (const pid of stockIds) {
+      const qty = items.filter((i: any) => i.productId === pid).reduce((s: number, i: any) => s + i.quantity, 0);
+      const [rows]: any[] = await this.sequelize.query(`SELECT * FROM stock_items WHERE product_id = :pid FOR UPDATE`, { replacements: { pid } });
+      const si = rows?.[0];
+      if (si) {
+        const available = Number(si.quantity) - Number(si.reserved);
+        if (qty > available) throw new BadRequestException(`Stock insuficiente`);
+        await this.sequelize.query(`UPDATE stock_items SET reserved = reserved + :qty WHERE product_id = :pid`, { replacements: { pid, qty } });
+      }
+    }
 
     const tx = await this.txModel.create({
       transactionId: pi.id,
-      orderId,
+      orderId: null,
       stripeId: pi.id,
-      method: 'stripe',
-      amount,
-      currency: currency.toUpperCase(),
+      method: 'visa',
+      amount: total,
+      currency: (currency || 'PEN').toUpperCase(),
       status: 'pending',
-      metadata: { clientSecret: pi.client_secret },
+      metadata: { items, customerId, subtotal, discount, total, currency, couponId, clientSecret: pi.client_secret },
     } as any);
 
     return { clientSecret: pi.client_secret, transactionId: tx.id, stripePaymentIntentId: pi.id };
@@ -145,96 +161,71 @@ export class PaymentsService {
   private async handlePaymentSuccess(event: any) {
     const pi = event.data.object;
     const tx = await this.txModel.findOne({ where: { stripeId: pi.id } });
-    if (!tx) {
-      this.logger.warn(`No transaction found for ${pi.id}`);
-      return;
-    }
+    if (!tx) { this.logger.warn(`No transaction found for ${pi.id}`); return; }
+
+    const meta = tx.metadata as any;
+    const items: any[] = meta?.items || [];
+    if (items.length === 0) { this.logger.warn(`No items in metadata for ${pi.id}`); return; }
 
     await this.sequelize.transaction(async (t) => {
-      const order = await this.orderModel.findByPk(tx.orderId, { transaction: t });
-      if (!order) return;
+      const orderNumber = `ORD-${Date.now()}`;
+      const order = await this.orderModel.create({
+        orderNumber, customerId: meta.customerId || null, status: 'paid', paid: true, paidAt: new Date(),
+        subtotal: meta.subtotal || 0, discount: meta.discount || 0, total: meta.total || 0,
+        ...(meta.couponId ? { couponId: meta.couponId } : {}),
+      } as any, { transaction: t });
 
-      // Validate state transition
-      const allowed = ORDER_TRANSITIONS[order.status] || [];
-      if (!allowed.includes('paid')) {
-        this.logger.warn(`Cannot transition order ${order.id} from ${order.status} to paid`);
-        return;
+      for (const item of items) {
+        await this.orderItemModel.create({
+          orderId: order.id, productId: item.productId, variantId: item.variantId || null,
+          productName: item.name, sku: item.sku, variantLabel: item.variantLabel || '',
+          unitPrice: item.unitPrice, quantity: item.quantity, total: item.unitPrice * item.quantity,
+          currency: (meta.currency || 'PEN').toUpperCase(),
+        } as any, { transaction: t });
       }
 
-      // Update transaction
-      await tx.update({ status: 'succeeded' }, { transaction: t });
+      await this.orderEventModel.create({ orderId: order.id, type: 'paid', title: 'Pago Confirmado',
+        description: `Pago de S/ ${Number(meta.total || 0).toFixed(2)} confirmado vía Stripe`,
+      } as any, { transaction: t });
 
-      // Update order
-      await order.update({ status: 'paid', paid: true, paidAt: new Date() }, { transaction: t });
-
-      // Commit stock: quantity = quantity - reserved, reserved = 0
-      const items = await this.orderItemModel.findAll({ where: { orderId: order.id }, transaction: t });
-      const stockIds = [...new Set(items.map((i) => i.productId).filter(Boolean))].sort();
+      const stockIds = [...new Set(items.map((i: any) => i.productId).filter(Boolean))].sort();
       for (const pid of stockIds) {
+        const qty = items.filter((i: any) => i.productId === pid).reduce((s: number, i: any) => s + i.quantity, 0);
         await this.sequelize.query(
           `UPDATE stock_items SET quantity = quantity - CAST(:qty AS INTEGER), reserved = GREATEST(reserved - CAST(:qty AS INTEGER), 0) WHERE product_id = :pid`,
-          { replacements: { pid, qty: items.filter((i) => i.productId === pid).reduce((s, i) => s + i.quantity, 0) }, transaction: t },
+          { replacements: { pid, qty }, transaction: t },
         );
       }
 
-      // Order event
-      await this.orderEventModel.create(
-        {
-          orderId: order.id,
-          type: 'paid',
-          title: 'Pago Confirmado',
-          description: `Pago de $${Number(tx.amount).toFixed(2)} confirmado vía Stripe`,
-        } as any,
-        { transaction: t },
-      );
+      if (meta.couponId) {
+        await this.sequelize.query(
+          `UPDATE coupons SET used_count = used_count + 1 WHERE id = :id AND (max_uses IS NULL OR used_count < max_uses)`,
+          { replacements: { id: meta.couponId }, transaction: t },
+        );
+      }
+
+      if (meta.customerId) {
+        await this.sequelize.query(`DELETE FROM cart_items WHERE cart_id IN (SELECT id FROM carts WHERE customer_id = :cid)`, { replacements: { cid: meta.customerId }, transaction: t });
+      }
+
+      await tx.update({ status: 'succeeded', orderId: order.id }, { transaction: t });
     });
   }
 
   private async handlePaymentFailure(event: any) {
     const pi = event.data.object;
     const tx = await this.txModel.findOne({ where: { stripeId: pi.id } });
-    if (!tx) {
-      this.logger.warn(`No transaction found for ${pi.id}`);
-      return;
+    if (!tx) { this.logger.warn(`No transaction found for ${pi.id}`); return; }
+    await tx.update({ status: 'failed' });
+    // Release reserved stock
+    const meta = tx.metadata as any;
+    const items: any[] = meta?.items || [];
+    const stockIds = [...new Set(items.map((i: any) => i.productId).filter(Boolean))].sort();
+    for (const pid of stockIds) {
+      const qty = items.filter((i: any) => i.productId === pid).reduce((s: number, i: any) => s + i.quantity, 0);
+      await this.sequelize.query(`UPDATE stock_items SET reserved = GREATEST(reserved - :qty, 0) WHERE product_id = :pid`, { replacements: { pid, qty } });
     }
-
-    await this.sequelize.transaction(async (t) => {
-      const order = await this.orderModel.findByPk(tx.orderId, { transaction: t });
-      if (!order) return;
-
-      const allowed = ORDER_TRANSITIONS[order.status] || [];
-      if (!allowed.includes('cancelled')) {
-        this.logger.warn(`Cannot cancel order ${order.id} from ${order.status}`);
-        return;
-      }
-
-      // Update transaction
-      await tx.update({ status: 'failed' }, { transaction: t });
-
-      // Cancel order
-      await order.update({ status: 'cancelled' }, { transaction: t });
-
-      // Release reserved stock
-      const items = await this.orderItemModel.findAll({ where: { orderId: order.id }, transaction: t });
-      const stockIds = [...new Set(items.map((i) => i.productId).filter(Boolean))].sort();
-      for (const pid of stockIds) {
-        await this.sequelize.query(
-          `UPDATE stock_items SET reserved = GREATEST(reserved - CAST(:qty AS INTEGER), 0) WHERE product_id = :pid`,
-          { replacements: { pid, qty: items.filter((i) => i.productId === pid).reduce((s, i) => s + i.quantity, 0) }, transaction: t },
-        );
-      }
-
-      // Order event
-      await this.orderEventModel.create(
-        {
-          orderId: order.id,
-          type: 'cancelled',
-          title: 'Pago Fallido',
-          description: `El pago fue rechazado. Stock liberado.`,
-        } as any,
-        { transaction: t },
-      );
-    });
+    this.logger.log(`Payment failed for ${pi.id} — stock released`);
   }
 
   private async handleChargeRefunded(event: any) {
@@ -247,6 +238,7 @@ export class PaymentsService {
     }
 
     await this.sequelize.transaction(async (t) => {
+      if (!tx.orderId) return;
       const order = await this.orderModel.findByPk(tx.orderId, { transaction: t });
       if (!order) return;
 

@@ -11,6 +11,6 @@ export const api = createApiClient(axios.create({
   getToken,
   onUnauthorized: () => {
     removeToken();
-    window.location.href = '/login';
+    // No redirect aquí — los hooks manejan 401 (ej: carrito usa localStorage como fallback)
   },
 });

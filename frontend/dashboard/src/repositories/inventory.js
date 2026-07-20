@@ -1,1 +1,0 @@
-import { createRepository } from './base'; import { stockItems } from '../mocks/data'; const repo = createRepository(stockItems); repo.getKpis = () => Promise.resolve({ totalItems: 45280, outOfStock: 12, criticalStock: 34, entries: 5200, exits: 3450 }); export default repo;

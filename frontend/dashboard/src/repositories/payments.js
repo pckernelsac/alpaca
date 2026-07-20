@@ -1,1 +1,0 @@
-import { createRepository } from './base'; import { transactions } from '../mocks/data'; const txs = createRepository(transactions); txs.getSummary = () => Promise.resolve({ totalVolume: 1240000, successRate: 98.4, pendingPayouts: 42, avgTransaction: 4500 }); export default txs;

@@ -1,17 +1,18 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { CatalogService } from './catalog.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { Public } from '../../common/decorators/public.decorator';
 import { StaffOnly } from '../../common/decorators/actor.decorator';
 import { ActorGuard } from '../../common/guards/actor.guard';
+import { PaginationInterceptor } from '../../common/interceptors/pagination.interceptor';
 
 @ApiTags('Catalog')
 @Controller()
 export class CatalogController {
   constructor(private readonly s: CatalogService) {}
 
-  @Public() @Get('products') findAll(@Query() q: any) {
+  @Public() @UseInterceptors(PaginationInterceptor) @Get('products') findAll(@Query() q: any) {
     return this.s.findAllProducts(q);
   }
   @Public() @Get('products/:id') findOne(@Param('id') id: string) {

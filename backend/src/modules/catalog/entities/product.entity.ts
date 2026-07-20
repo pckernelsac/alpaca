@@ -1,6 +1,8 @@
-import { Table, Column, Model, DataType, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
 import { Category } from './category.entity';
 import { Collection } from './collection.entity';
+import { ProductVariant } from './product-variant.entity';
+import { ProductMedia } from './product-media.entity';
 
 @Table({ tableName: 'products', timestamps: true, underscored: true, paranoid: true })
 export class Product extends Model<Product> {
@@ -47,4 +49,10 @@ export class Product extends Model<Product> {
 
   @BelongsTo(() => Collection)
   collection: Collection;
+
+  @HasMany(() => ProductVariant)
+  variants: ProductVariant[];
+
+  @HasMany(() => ProductMedia)
+  media: ProductMedia[];
 }

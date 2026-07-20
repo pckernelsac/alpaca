@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from '@/components/common/ThemeToggle/ThemeToggle';
-import { cartStore } from '@/stores/cartStore';
 import logo from '@/assets/images/logo.png';
 import styles from './StoreHeader.module.css';
 
@@ -12,10 +11,15 @@ const navLinks = [
   { to: '/category/ofertas', label: 'Ofertas' },
 ];
 
+function getLocalCount() {
+  try { return JSON.parse(localStorage.getItem('tienda_cart') || '[]').reduce((s, i) => s + (i.quantity || 1), 0); }
+  catch { return 0; }
+}
+
 export default function StoreHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(cartStore.getCount());
+  const [cartCount, setCartCount] = useState(getLocalCount());
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -23,7 +27,13 @@ export default function StoreHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => cartStore.subscribe(() => setCartCount(cartStore.getCount())), []);
+  useEffect(() => {
+    const update = () => setCartCount(getLocalCount());
+    window.addEventListener('storage', update);
+    window.addEventListener('cart-updated', update);
+    const interval = setInterval(update, 2000);
+    return () => { window.removeEventListener('storage', update); window.removeEventListener('cart-updated', update); clearInterval(interval); };
+  }, []);
 
   return (
     <header className={[styles.header, scrolled ? styles.scrolled : ''].filter(Boolean).join(' ')}>
@@ -39,7 +49,7 @@ export default function StoreHeader() {
         <div className={styles.right}>
           <Link to="/search" className={styles.iconBtn} aria-label="Buscar"><span className="material-symbols-outlined">search</span></Link>
           <ThemeToggle />
-          <Link to="/cart" className={styles.cartBtn} aria-label="Carrito">
+          <Link to="/cart" className={styles.iconBtn} aria-label="Carrito">
             <span className="material-symbols-outlined">shopping_bag</span>
             {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
           </Link>

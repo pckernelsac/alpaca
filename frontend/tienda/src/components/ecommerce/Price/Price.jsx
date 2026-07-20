@@ -1,6 +1,6 @@
 import styles from './Price.module.css';
 
-export default function Price({ value, originalValue, currency = 'USD', size = 'md', className = '' }) {
+export default function Price({ value, originalValue, currency = 'PEN', size = 'md', className = '' }) {
   const fmt = (v) => {
     return new Intl.NumberFormat('es-PE', { style: 'currency', currency, minimumFractionDigits: 2 }).format(v);
   };

@@ -4,6 +4,7 @@ import { CatalogEndpoints } from '@/api/endpoints/catalog.endpoints';
 import { CustomersEndpoints } from '@/api/endpoints/customers.endpoints';
 import { OrdersEndpoints } from '@/api/endpoints/orders.endpoints';
 import { MarketingEndpoints } from '@/api/endpoints/marketing.endpoints';
+import { PaymentsEndpoints } from '@/api/endpoints/payments.endpoints';
 
 function get(ep, params) { return api.get(ep(), { params }); }
 function getById(ep, id, params) { return api.get(ep(id), { params }); }
@@ -13,6 +14,9 @@ export const authRepository = {
   login:         (email, password) => post(AuthEndpoints.customerLogin, { email, password }),
   register:      (data) => post(AuthEndpoints.register, data),
   getProfile:    () => get(AuthEndpoints.me),
+  getAddresses:  () => get(CustomersEndpoints.addresses),
+  createAddress: (d) => post(CustomersEndpoints.addresses, d),
+  deleteAddress: (id) => api.delete(CustomersEndpoints.addressById(id)),
 };
 
 export const catalogRepository = {
@@ -49,4 +53,8 @@ export const ordersRepository = {
 
 export const couponRepository = {
   validate: (data) => post(MarketingEndpoints.validateCoupon, data),
+};
+
+export const paymentsRepository = {
+  createIntent: (data) => post(PaymentsEndpoints.createIntent, data),
 };

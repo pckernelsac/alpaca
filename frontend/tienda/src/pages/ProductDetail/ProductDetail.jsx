@@ -1,34 +1,47 @@
 import { useParams } from 'react-router-dom';
-import { products } from '@/mocks';
+import { useProductDetail } from '@/hooks';
 import Breadcrumb from '@/components/navigation/Breadcrumb/Breadcrumb';
 import ProductView from './sections/ProductView/ProductView';
-import RelatedProducts from './sections/RelatedProducts/RelatedProducts';
-import ProductReviews from './sections/ProductReviews/ProductReviews';
 import styles from './ProductDetail.module.css';
 
 const crumbs = [{ label: 'Inicio', to: '/' }, { label: 'Producto' }];
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const product = products.find(p => p.id === Number(id)) || products[0];
+  const { product, loading, error } = useProductDetail(id);
 
-  const sampleProduct = {
-    ...product,
-    badge: product.badge || undefined,
-    images: [product.image],
-    tabs: [
-      { title: 'Composición y Beneficios', content: product.description },
-      { title: 'Cuidado y Lavado', content: 'Lavar a mano con agua fría y jabón neutro. No retorcer. Secar en superficie plana a la sombra.' },
-      { title: 'Envíos y Devoluciones', content: 'Envíos internacionales a más de 50 países. Devoluciones dentro de los 30 días.' },
-    ],
-  };
+  if (loading) return <div className={styles.wrapper}><p style={{ padding: 40, textAlign: 'center', color: '#888' }}>Cargando producto...</p></div>;
+  if (error) return <div className={styles.wrapper}><p style={{ padding: 40, textAlign: 'center', color: '#c00' }}>Error: {error.message}</p></div>;
+  if (!product) return <div className={styles.wrapper}><p style={{ padding: 40, textAlign: 'center', color: '#888' }}>Producto no encontrado.</p></div>;
+
+  const firstVariant = product.variants?.[0];
+  const price = Number(firstVariant?.price ?? product.price ?? 0);
+  const media = product.media || [];
+  const images = product.images?.length ? product.images : media.map(m => m.url).filter(Boolean);
+  const imageUrl = images[0] || product.image || '';
+  const colors = [...new Set(product.variants?.filter(v => v.colorHex || v.colorName).map(v => v.colorHex || v.colorName) || [])];
+  const sizeMap = { 1: 'XS', 2: 'S', 3: 'M', 4: 'L', 5: 'XL', 6: 'XXL', 7: 'Único', 8: 'KING' };
+  const sizes = product.variants?.filter(v => v.sizeId).map(v => ({ label: sizeMap[v.sizeId] || 'Talla ' + v.sizeId })) || [];
 
   return (
-    <div className={styles.page}>
+    <div className={styles.wrapper}>
       <Breadcrumb crumbs={crumbs} />
-      <ProductView product={sampleProduct} />
-      <ProductReviews />
-      <RelatedProducts />
+      <ProductView product={{
+        id: product.id,
+        title: product.name || 'Producto',
+        subtitle: product.subtitle || product.material || firstVariant?.sku || '',
+        price,
+        imageUrl,
+        description: product.description || 'Prenda elaborada con fibra de alpaca de primera calidad.',
+        colors,
+        sizes,
+        badge: product.status !== 'active' ? product.status : undefined,
+        tabs: [
+          { title: 'Composición', content: product.description || 'Fibra de alpaca seleccionada.' },
+          { title: 'Cuidado', content: 'Lavar a mano con agua fría. No retorcer. Secar en superficie plana.' },
+          { title: 'Envíos', content: 'Envíos internacionales. Devoluciones dentro de 30 días.' },
+        ],
+      }} />
     </div>
   );
 }

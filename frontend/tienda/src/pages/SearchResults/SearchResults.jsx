@@ -1,15 +1,15 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { products as allProducts } from '@/mocks';
+import { useCatalog } from '@/hooks';
 import Breadcrumb from '@/components/navigation/Breadcrumb/Breadcrumb';
 import styles from './SearchResults.module.css';
 
 export default function SearchResults() {
   const { query } = useParams();
   const decodedQuery = query ? decodeURIComponent(query).toLowerCase() : '';
+  const { products, fetch } = useCatalog();
 
-  const products = decodedQuery
-    ? allProducts.filter(p => p.title.toLowerCase().includes(decodedQuery) || p.subtitle.toLowerCase().includes(decodedQuery))
-    : allProducts;
+  useEffect(() => { if (decodedQuery) fetch({ search: decodedQuery }); }, [decodedQuery]);
 
   const crumbs = [
     { label: 'Inicio', path: '/' },
@@ -19,37 +19,24 @@ export default function SearchResults() {
 
   return (
     <div className={styles.wrapper}>
-      <Breadcrumb items={crumbs} />
-      <header className={styles.header}>
-        <h1 className={styles.title}>
-          {decodedQuery ? 'Resultados para "' + decodedQuery + '"' : 'Resultados de busqueda'}
-        </h1>
-        <p className={styles.count}>{products.length} producto(s) encontrados</p>
-      </header>
-      {products.length > 0 ? (
+      <div className={styles.inner}>
+        <Breadcrumb items={crumbs} />
+        <h1 className={styles.title}>Resultados para &quot;{decodedQuery}&quot;</h1>
+        <p className={styles.count}>{products.length} producto{products.length !== 1 ? 's' : ''} encontrado{products.length !== 1 ? 's' : ''}</p>
         <div className={styles.grid}>
           {products.map((p) => (
             <Link key={p.id} to={'/product/' + p.id} className={styles.card}>
-              <div className={styles.imgWrap}>
-                <img src={p.image} alt={p.title} className={styles.img} loading="lazy" />
-              </div>
+              <img src={p.image || p.images?.[0]} alt={p.name || p.title} className={styles.img} />
               <div className={styles.info}>
-                <p className={styles.subtitle}>{p.subtitle}</p>
-                <h3 className={styles.title}>{p.title}</h3>
-                <p className={styles.price}>${p.price}</p>
+                <h3 className={styles.name}>{p.name || p.title}</h3>
+                <p className={styles.subtitle}>{p.subtitle || p.description}</p>
+                <span className={styles.price}>${(p.price || 0).toFixed(2)}</span>
               </div>
             </Link>
           ))}
         </div>
-      ) : (
-        <div className={styles.empty}>
-          <span className="material-symbols-outlined">search_off</span>
-          <p>No se encontraron resultados para &ldquo;{decodedQuery}&rdquo;</p>
-          <Link to="/" className={styles.backBtn}>Volver al inicio</Link>
-        </div>
-      )}
+        {products.length === 0 && <p style={{ textAlign: 'center', padding: 40, color: '#888' }}>No se encontraron productos.</p>}
+      </div>
     </div>
   );
 }
-
-

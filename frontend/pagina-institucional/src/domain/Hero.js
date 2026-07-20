@@ -4,7 +4,8 @@ export function createHeroSlide(data) {
     title: data.title,
     subtitle: data.subtitle || '',
     image: data.image || '',
-    cta: data.cta || null,
+    primaryCta: data.primaryCta || { label: 'Explorar', to: '/catalogo' },
+    secondaryCta: data.secondaryCta || null,
     order: data.order || 0,
     active: data.active !== false,
   };

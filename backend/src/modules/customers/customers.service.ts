@@ -9,6 +9,7 @@ import { Cart } from './entities/cart.entity';
 import { CartItem } from './entities/cart-item.entity';
 import { Product } from '../catalog/entities/product.entity';
 import { ProductVariant } from '../catalog/entities/product-variant.entity';
+import { ProductMedia } from '../catalog/entities/product-media.entity';
 import { Order } from '../orders/entities/order.entity';
 import { OrderItem } from '../orders/entities/order-item.entity';
 import { OrderEvent } from '../orders/entities/order-event.entity';
@@ -110,6 +111,13 @@ export class CustomersService {
       unitPrice = Number(variant.price);
       sku = variant.sku;
       variantLabel = `${variant.colorName || ''} ${variant.code || ''}`.trim();
+    } else {
+      const firstVariant = await ProductVariant.findOne({ where: { productId: data.productId, status: 'active' }, order: [['price', 'ASC']] });
+      if (firstVariant) {
+        unitPrice = Number(firstVariant.price);
+        sku = firstVariant.sku;
+        variantLabel = `${firstVariant.colorName || ''} ${firstVariant.code || ''}`.trim();
+      }
     }
 
     const cart = await this.getOrCreateCart(customerId);
@@ -177,186 +185,57 @@ export class CustomersService {
 
   // ─── Checkout ─────────────────────────────────────────────────────────
   async checkout(customerId: string, data: { couponCode?: string; idempotencyKey?: string }) {
-    // Idempotency check (only for requests with Idempotency-Key header)
-    const idempotencyKey = data.idempotencyKey;
-    let idempotencyRecord: any = undefined;
-    const requestPayload = { couponCode: data.couponCode || null };
-    const requestHash = this.idempotency.computeRequestHash(requestPayload);
-
-    if (idempotencyKey) {
-      const result = await this.idempotency.processKey({
-        customerId,
-        scope: 'checkout',
-        idempotencyKey,
-        requestHash,
-      });
-      if (!result.isNew && result.existingRecord) {
-        // Replay existing result
-        if (result.existingRecord.resourceId) {
-          return this.oM.findByPk(result.existingRecord.resourceId, { include: [OrderItem, OrderEvent] });
-        }
-        return { idempotent: true, status: result.existingRecord.status };
-      }
-      idempotencyRecord = { key: idempotencyKey, requestHash };
-    }
-
     const cart = await this.cartM.findOne({ where: { customerId }, include: [CartItem] });
     if (!cart || !cart.items || cart.items.length === 0) throw new BadRequestException('Carrito vacío');
 
-    // Load products with prices from DB (server-side pricing)
-    const items: {
-      cartItem: CartItem;
-      product: Product;
-      variant: ProductVariant | null;
-      unitPrice: number;
-      sku: string;
-      name: string;
-      variantLabel: string;
-    }[] = [];
+    const items: { productId: string; variantId: string | null; quantity: number; name: string; sku: string; unitPrice: number; variantLabel: string; imageUrl: string }[] = [];
     for (const ci of cart.items) {
       const product = await Product.findByPk(ci.productId);
       if (!product) throw new NotFoundException(`Producto ${ci.productId} no encontrado`);
-      let unitPrice = 0;
-      let sku = product.sku;
-      let variantLabel = '';
-      let variant: ProductVariant | null = null;
+      let unitPrice = 0; let sku = product.sku; let variantLabel = ''; let imageUrl = '';
       if (ci.variantId) {
-        variant = await ProductVariant.findByPk(ci.variantId);
-        if (!variant) throw new NotFoundException(`Variante ${ci.variantId} no encontrada`);
-        unitPrice = Number(variant.price);
-        sku = variant.sku;
-        variantLabel = `${variant.colorName || ''} ${variant.code || ''}`.trim();
+        const variant = await ProductVariant.findByPk(ci.variantId);
+        if (!variant) throw new NotFoundException('Variante no encontrada');
+        unitPrice = Number(variant.price); sku = variant.sku;
+        variantLabel = `${variant.colorName || ''}`.trim();
+      } else {
+        const fv = await ProductVariant.findOne({ where: { productId: ci.productId, status: 'active' }, order: [['price', 'ASC']] });
+        if (fv) { unitPrice = Number(fv.price); sku = fv.sku; variantLabel = `${fv.colorName || ''}`.trim(); }
       }
-      items.push({ cartItem: ci, product, variant, unitPrice, sku, name: product.name, variantLabel });
+      const media = await ProductMedia.findOne({ where: { productId: ci.productId, isPrincipal: true } });
+      if (media) imageUrl = media.url;
+      items.push({ productId: ci.productId, variantId: ci.variantId || null, quantity: ci.quantity, name: product.name, sku, unitPrice, variantLabel, imageUrl });
     }
 
-    // Validate coupon if provided
-    let couponDiscount = 0;
-    let couponId: number | null = null;
+    // Validate stock
+    const stockIds = [...new Set(items.map(i => i.productId).filter(Boolean))].sort();
+    for (const pid of stockIds) {
+      const [rows] = await this.sequelize.query(`SELECT * FROM stock_items WHERE product_id = :pid FOR UPDATE`, { replacements: { pid }, model: StockItem, mapToModel: true });
+      const si = Array.isArray(rows) ? rows[0] : null;
+      if (si) {
+        const available = Number(si.quantity) - Number(si.reserved);
+        const needed = items.filter(i => i.productId === pid).reduce((s, i) => s + i.quantity, 0);
+        if (needed > available) throw new ConflictException(`Stock insuficiente para ${items.find(i => i.productId === pid)?.name}. Disponible: ${available}`);
+      }
+    }
+
+    // Validate coupon
+    let couponDiscount = 0; let couponId: number | null = null;
     if (data.couponCode) {
       const coupon = await this.coM.findOne({ where: { code: data.couponCode, active: true } });
       if (!coupon) throw new BadRequestException('Cupón no válido');
       if (coupon.expiresAt && new Date(coupon.expiresAt) < new Date()) throw new BadRequestException('Cupón expirado');
       if (coupon.maxUses && coupon.usedCount >= coupon.maxUses) throw new BadRequestException('Cupón agotado');
-      const subtotal = items.reduce((s, i) => s + i.unitPrice * i.cartItem.quantity, 0);
-      if (coupon.minPurchase && subtotal < Number(coupon.minPurchase))
-        throw new BadRequestException(`Compra mínima de $${Number(coupon.minPurchase).toFixed(2)}`);
+      const subtotal = items.reduce((s, i) => s + i.unitPrice * i.quantity, 0);
+      if (coupon.minPurchase && subtotal < Number(coupon.minPurchase)) throw new BadRequestException(`Compra mínima de S/ ${Number(coupon.minPurchase).toFixed(2)}`);
       couponDiscount = coupon.type === 'percentage' ? subtotal * (Number(coupon.value) / 100) : Number(coupon.value);
       couponId = coupon.id;
     }
 
-    let createdOrder: any = null;
+    const subtotal = items.reduce((s, i) => s + i.unitPrice * i.quantity, 0);
+    const discount = couponDiscount;
+    const total = Math.max(0, subtotal - discount);
 
-    // Execute in transaction
-    await this.sequelize.transaction(async (tx) => {
-      // Lock stock items deterministically (sorted by id)
-      const stockIds = [...new Set(items.map((i) => i.cartItem.productId).filter(Boolean))].sort();
-      const stockItems: StockItem[] = [];
-      for (const pid of stockIds) {
-        const [rows] = await this.sequelize.query(`SELECT * FROM stock_items WHERE product_id = :pid FOR UPDATE`, {
-          replacements: { pid },
-          transaction: tx,
-          model: StockItem,
-          mapToModel: true,
-        });
-        if (rows && (rows as unknown as any[]).length > 0) stockItems.push((rows as unknown as any[])[0]);
-      }
-
-      // Validate stock availability
-      for (const item of items) {
-        const si = stockItems.find((s) => s.productId === item.cartItem.productId);
-        if (si) {
-          const available = Number(si.quantity) - Number(si.reserved);
-          if (item.cartItem.quantity > available) {
-            throw new ConflictException(`Stock insuficiente para ${item.name}. Disponible: ${available}`);
-          }
-        }
-      }
-
-      // Calculate totals server-side
-      const subtotal = items.reduce((s, i) => s + i.unitPrice * i.cartItem.quantity, 0);
-      const discount = couponDiscount;
-      const total = Math.max(0, subtotal - discount);
-      const orderNumber = `ORD-${Date.now()}`;
-
-      // Create order
-      const order = await this.oM.create(
-        {
-          customerId,
-          orderNumber,
-          status: 'pending',
-          subtotal,
-          discount,
-          total,
-          placedAt: new Date(),
-          ...(couponId ? { couponId } : {}),
-        } as any,
-        { transaction: tx },
-      );
-
-      // Create order items (server-side pricing snapshot)
-      for (const item of items) {
-        const lineTotal = item.unitPrice * item.cartItem.quantity;
-        await this.oiM.create(
-          {
-            orderId: order.id,
-            productId: item.cartItem.productId,
-            variantId: item.cartItem.variantId || null,
-            productName: item.name,
-            sku: item.sku,
-            variantLabel: item.variantLabel,
-            unitPrice: item.unitPrice,
-            quantity: item.cartItem.quantity,
-            total: lineTotal,
-            currency: 'USD',
-          } as any,
-          { transaction: tx },
-        );
-      }
-
-      // Create order event
-      await this.oeM.create(
-        {
-          orderId: order.id,
-          type: 'created',
-          title: 'Pedido Creado',
-          description: 'Checkout completado exitosamente',
-        } as any,
-        { transaction: tx },
-      );
-
-      // Reserve stock
-      for (const item of items) {
-        const si = stockItems.find((s) => s.productId === item.cartItem.productId);
-        if (si) {
-          await si.update({ reserved: Number(si.reserved) + item.cartItem.quantity }, { transaction: tx });
-        }
-      }
-
-      // Consume coupon atomically
-      if (couponId) {
-        const [affected] = await this.sequelize.query(
-          `UPDATE coupons SET used_count = used_count + 1 WHERE id = :id AND (max_uses IS NULL OR used_count < max_uses)`,
-          { replacements: { id: couponId }, transaction: tx },
-        );
-        const rowCount = (affected as any)?.rowCount;
-        if (rowCount === 0) {
-          throw new ConflictException('Cupón agotado');
-        }
-      }
-
-      // Clear cart
-      await this.ciM.destroy({ where: { cartId: cart.id }, transaction: tx });
-      await this.cartM.update({ subtotal: 0, total: 0 }, { where: { id: cart.id }, transaction: tx });
-
-      createdOrder = order;
-    });
-
-    // Mark idempotency as completed after successful transaction
-    if (idempotencyRecord && createdOrder?.id && idempotencyKey) {
-      await this.idempotency.complete(idempotencyKey, customerId, 'checkout', createdOrder.id, 201, { success: true });
-    }
-
-    return createdOrder;
+    return { valid: true, customerId, items, subtotal, discount, total, currency: 'PEN', couponId };
   }
 }

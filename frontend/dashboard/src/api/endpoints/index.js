@@ -1,0 +1,16 @@
+export const AuthEndpoints = { login: () => '/auth/login', me: () => '/auth/me' };
+export const IamEndpoints = { users: () => '/users', userById: (id) => `/users/${id}`, userStatus: (id) => `/users/${id}/status`, roles: () => '/roles', roleById: (id) => `/roles/${id}`, permissions: () => '/permissions', permissionMatrix: () => '/permissions/matrix' };
+export const CatalogEndpoints = { products: () => '/products', productById: (id) => `/products/${id}`, variants: () => '/variants', variantById: (id) => `/variants/${id}`, productMedia: (id) => `/products/${id}/media`, categories: () => '/categories', collections: () => '/collections' };
+export const CustomersEndpoints = { profile: () => '/account/profile', addresses: () => '/account/addresses' };
+export const OrdersEndpoints = { orders: () => '/orders', orderById: (id) => `/orders/${id}`, orderStatus: (id) => `/orders/${id}/status`, orderNotes: (id) => `/orders/${id}/notes`, orderEvents: (id) => `/orders/${id}/events` };
+export const PaymentsEndpoints = { transactions: () => '/transactions', createIntent: () => '/create-payment-intent', refund: (id) => `/transactions/${id}/refund` };
+export const InventoryEndpoints = { stock: () => '/stock', adjust: (id) => `/stock/${id}/adjust`, movements: () => '/movements', transfers: () => '/transfers' };
+export const LogisticsEndpoints = { shipments: () => '/shipments', shipmentStatus: (id) => `/shipments/${id}/status`, carriers: () => '/carriers' };
+export const MarketingEndpoints = { campaigns: () => '/campaigns', campaignById: (id) => `/campaigns/${id}`, coupons: () => '/coupons', couponById: (id) => `/coupons/${id}`, validateCoupon: () => '/coupons/validate', promotions: () => '/promotions', promotionById: (id) => `/promotions/${id}`, subscribe: () => '/newsletter/subscribe' };
+export const CmsEndpoints = { contents: () => '/contents', contentById: (id) => `/contents/${id}`, heroSlides: () => '/admin/hero-slides', heroSlideById: (id) => `/admin/hero-slides/${id}`, gallery: () => '/admin/gallery', galleryById: (id) => `/admin/gallery/${id}`, testimonials: () => '/admin/testimonials', testimonialById: (id) => `/admin/testimonials/${id}`, benefits: () => '/admin/benefits', benefitById: (id) => `/admin/benefits/${id}`, artisanProcesses: () => '/admin/artisan-processes', artisanProcessById: (id) => `/admin/artisan-processes/${id}` };
+export const SettingsEndpoints = { company: () => '/settings/company', contact: () => '/contact' };
+export const AnalyticsEndpoints = { kpis: () => '/analytics/kpis' };
+export const AuditEndpoints = { logs: () => '/audit/logs' };
+export const CrmEndpoints = { clients: () => '/crm/clients', clientById: (id) => `/crm/clients/${id}`, clientNotes: (id) => `/crm/clients/${id}/notes` };
+export const TextileEndpoints = { materials: () => '/textile/materials', colors: () => '/textile/colors', sizes: () => '/textile/sizes', seasons: () => '/textile/seasons' };
+export const StorageEndpoints = { upload: () => '/upload', uploadPublic: () => '/upload/public', delete: (key) => `/upload/${key}` };

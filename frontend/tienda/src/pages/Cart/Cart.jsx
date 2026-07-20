@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart, useCoupon } from '@/hooks';
 import CartItem from '@/components/ecommerce/CartItem/CartItem';
 import CouponBox from '@/components/ecommerce/CouponBox/CouponBox';
-import { cartStore } from '@/stores/cartStore';
 import styles from './Cart.module.css';
 
 export default function Cart() {
-  const [items, setItems] = useState(cartStore.getItems());
+  const { items, loading, fetch, updateItem, removeItem, clearCart } = useCart();
+  const { validate, result: coupon } = useCoupon();
+  const [couponCode, setCouponCode] = useState('');
 
-  useEffect(() => cartStore.subscribe(() => setItems(cartStore.getItems())), []);
+  useEffect(() => { fetch(); }, []);
 
-  const subtotal = cartStore.getTotal();
-  const count = cartStore.getCount();
+  const subtotal = items.reduce((s, i) => s + ((i.price ?? i.unitPrice ?? 0) * (i.quantity || 1)), 0);
+  const count = items.reduce((s, i) => s + (i.quantity || 1), 0);
+
+  const handleApply = (code) => { setCouponCode(code); validate(code, subtotal); };
 
   return (
     <div className={styles.wrapper}>
@@ -21,28 +25,30 @@ export default function Cart() {
       </div>
       <div className={styles.grid}>
         <section className={styles.items}>
-          {items.length === 0 ? (
+          {loading && <p>Cargando...</p>}
+          {!loading && items.length === 0 ? (
             <div className={styles.empty}>
               <p className={styles.emptyText}>Tu carrito está vacío</p>
               <Link to="/collection" className={styles.emptyLink}>Seguir comprando</Link>
             </div>
           ) : (
             items.map((item) => (
-              <CartItem key={item.id} item={item} onUpdateQty={cartStore.updateQuantity} onRemove={cartStore.removeItem} />
+              <CartItem key={item.id} item={item} onUpdateQty={(id, qty) => updateItem(id, { quantity: qty })} onRemove={(id) => removeItem(id)} />
             ))
           )}
-          {items.length > 0 && <CouponBox />}
+          {items.length > 0 && <CouponBox onApply={handleApply} />}
+          {coupon && <p style={{ color: 'green' }}>Cupón aplicado: {coupon.code}</p>}
         </section>
         <aside className={styles.sidebar}>
           <div className={styles.summary}>
             <h2 className={styles.summaryTitle}>Resumen del pedido</h2>
             <div className={styles.summaryRows}>
-              <div className={styles.row}><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
+              <div className={styles.row}><span>Subtotal</span><span>S/ {subtotal.toFixed(2)}</span></div>
               <div className={styles.row}><span>Envío</span><span className={styles.free}>Gratis</span></div>
               <div className={styles.row}><span>Impuestos</span><span className={styles.tax}>Calculado al finalizar la compra</span></div>
             </div>
             <div className={styles.totalRow}>
-              <span>Total</span><span>${subtotal.toFixed(2)}</span>
+              <span>Total</span><span>S/ {subtotal.toFixed(2)}</span>
             </div>
             <Link to="/checkout" className={styles.checkoutBtn}>
               Finalizar Compra

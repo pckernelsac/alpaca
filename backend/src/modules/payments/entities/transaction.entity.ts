@@ -10,7 +10,7 @@ export class Transaction extends Model<Transaction> {
   transactionId: string;
 
   @Column({ type: DataType.UUID, allowNull: false })
-  orderId: string;
+  orderId: string | null;
 
   @Column({ type: DataType.STRING(100), allowNull: true })
   stripeId: string;

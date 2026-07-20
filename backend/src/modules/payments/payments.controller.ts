@@ -25,8 +25,8 @@ export class PaymentsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Crear Payment Intent (Stripe)' })
-  createPaymentIntent(@Body() body: { orderId: string; amount: number; currency: string; customerEmail?: string }) {
-    return this.paymentsService.createPaymentIntent(body.orderId, body.amount, body.currency, body.customerEmail);
+  createPaymentIntent(@Body() body: { items: any[]; customerId: string; subtotal: number; discount: number; total: number; currency: string; couponId?: number | null; customerEmail?: string }) {
+    return this.paymentsService.createPaymentIntent(body);
   }
 
   @Post('transactions/:id/refund')
