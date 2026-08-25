@@ -51,7 +51,7 @@ export function Colecciones() {
                 <article key={coleccion.id} className={styles.item} data-reveal>
                   <a
                     className={styles.itemMedia}
-                    href={`${TIENDA_URL}/tienda?collection_id=${coleccion.id}`}
+                    href={`${TIENDA_URL}/catalogo?collection_id=${coleccion.id}`}
                   >
                     <Figura
                       src={coleccion.image}
@@ -71,7 +71,7 @@ export function Colecciones() {
                     )}
                     <a
                       className={styles.itemEnlace}
-                      href={`${TIENDA_URL}/tienda?collection_id=${coleccion.id}`}
+                      href={`${TIENDA_URL}/catalogo?collection_id=${coleccion.id}`}
                     >
                       Ver la colección en la tienda
                       <IconArrowRight size={16} />

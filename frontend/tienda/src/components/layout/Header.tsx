@@ -20,7 +20,7 @@ import {
 import styles from './Header.module.css';
 
 const NAV = [
-  { to: '/tienda', label: 'Tienda' },
+  { to: '/catalogo', label: 'Tienda' },
   { to: '/colecciones', label: 'Colecciones' },
   { to: '/nosotros', label: 'Nosotros' },
   { to: '/preguntas', label: 'Ayuda' },
@@ -73,7 +73,7 @@ export function Header() {
     event.preventDefault();
     const value = term.trim();
     if (!value) return;
-    navigate(`/tienda?search=${encodeURIComponent(value)}`);
+    navigate(`/catalogo?search=${encodeURIComponent(value)}`);
     setSearchOpen(false);
     setMenuOpen(false);
     setTerm('');
@@ -194,7 +194,7 @@ export function Header() {
                 {categories.slice(0, 8).map((category) => (
                   <Link
                     key={category.id}
-                    to={`/tienda?category_id=${category.id}`}
+                    to={`/catalogo?category_id=${category.id}`}
                     className={styles.categoryLink}
                   >
                     {category.name}
@@ -248,7 +248,7 @@ export function Header() {
                   {categories.map((category) => (
                     <Link
                       key={category.id}
-                      to={`/tienda?category_id=${category.id}`}
+                      to={`/catalogo?category_id=${category.id}`}
                       className={styles.mobileCategory}
                       onClick={() => setMenuOpen(false)}
                     >

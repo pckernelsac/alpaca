@@ -205,7 +205,7 @@ function Colecciones() {
             <a
               key={coleccion.id}
               className={styles.coleccion}
-              href={`${TIENDA_URL}/tienda?collection_id=${coleccion.id}`}
+              href={`${TIENDA_URL}/catalogo?collection_id=${coleccion.id}`}
               data-reveal
             >
               <Figura src={coleccion.image} alt={coleccion.name} className={styles.coleccionImg} />
@@ -233,7 +233,7 @@ function Vitrina() {
           eyebrow="Vitrina"
           title="Piezas recién salidas del telar"
           actions={
-            <a className={styles.enlaceTienda} href={`${TIENDA_URL}/tienda`}>
+            <a className={styles.enlaceTienda} href={`${TIENDA_URL}/catalogo`}>
               Ir a la tienda
               <IconArrowRight size={16} />
             </a>

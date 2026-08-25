@@ -1,0 +1,85 @@
+# ALPACART en Dokploy.
+#
+# En Dokploy todos los stacks comparten `dokploy-network` y el DNS de Docker
+# resuelve por nombre de servicio en todas las redes del contenedor. Un servicio
+# llamado `backend` o `frontend` a secas puede terminar atendiendo al nginx de
+# otra aplicacion del mismo servidor. Por eso TODO lleva el prefijo `alpacart`:
+# servicios, red interna, routers y middleware de Traefik.
+#
+# Las variables se cargan desde App -> Environment en la UI de Dokploy, que las
+# escribe a un .env junto a este archivo. Las que llevan `:?` no tienen default
+# a proposito: si falta una, el deploy falla fuerte en vez de arrancar con una
+# credencial de juguete.
+
+services:
+  alpacart-backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      # Cadena completa del servicio de PostgreSQL 18 creado en Dokploy. El
+      # host es el nombre de ese servicio, alcanzable por dokploy-network.
+      DATABASE_URL: ${ALPACART_DATABASE_URL:?falta ALPACART_DATABASE_URL (cadena del Postgres de Dokploy)}
+      JWT_SECRET: ${ALPACART_JWT_SECRET:?falta ALPACART_JWT_SECRET (generar uno largo y aleatorio)}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ALPACART_TOKEN_MINUTES:-720}
+      # El navegador nunca llama al backend de forma cruzada —el nginx del
+      # frontend proxea /api/v1 y comparten origen—, pero si el dominio queda
+      # declarado aca, una llamada directa desde el mismo host tambien funciona.
+      CORS_ORIGINS: https://${ALPACART_DOMAIN:?falta ALPACART_DOMAIN}
+      # Sembrar BORRA y reescribe el catalogo. Se pone en true una sola vez, en
+      # el primer deploy, y se vuelve a false antes del siguiente.
+      RUN_SEED: ${ALPACART_RUN_SEED:-false}
+      STRIPE_SECRET_KEY: ${ALPACART_STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${ALPACART_STRIPE_WEBHOOK_SECRET:-}
+    networks:
+      # dokploy-network para llegar al servicio de base de datos;
+      # alpacart-internal para que lo vea el nginx y nadie mas.
+      - dokploy-network
+      - alpacart-internal
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=5).status == 200 else 1)"
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      # Generoso porque el primer arranque corre las migraciones, y con
+      # RUN_SEED=true ademas siembra.
+      start_period: 120s
+
+  alpacart-frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    depends_on:
+      alpacart-backend:
+        condition: service_healthy
+    networks:
+      - dokploy-network
+      - alpacart-internal
+    labels:
+      - traefik.enable=true
+      # Sin esto Traefik puede elegir la red interna para llegar al contenedor,
+      # que es justo la que el no ve.
+      - traefik.docker.network=dokploy-network
+
+      - traefik.http.routers.alpacart-frontend.rule=Host(`${ALPACART_DOMAIN}`)
+      - traefik.http.routers.alpacart-frontend.entrypoints=websecure
+      - traefik.http.routers.alpacart-frontend.tls=true
+      - traefik.http.routers.alpacart-frontend.tls.certresolver=letsencrypt
+      - traefik.http.services.alpacart-frontend.loadbalancer.server.port=80
+
+      - traefik.http.routers.alpacart-frontend-web.rule=Host(`${ALPACART_DOMAIN}`)
+      - traefik.http.routers.alpacart-frontend-web.entrypoints=web
+      - traefik.http.routers.alpacart-frontend-web.middlewares=alpacart-redirect-https
+      - traefik.http.middlewares.alpacart-redirect-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.alpacart-redirect-https.redirectscheme.permanent=true
+
+# Sin `ports:` en ningun servicio: Traefik enruta por labels. Publicar puertos
+# los dejaria accesibles por IP, saltandose el TLS.
+networks:
+  dokploy-network:
+    external: true
+  alpacart-internal:
+    driver: bridge

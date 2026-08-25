@@ -1,0 +1,16 @@
+# El entorno virtual local pesa cientos de megas y ademas trae binarios de
+# Windows: dentro de la imagen no sirven para nada.
+.venv/
+__pycache__/
+*.py[cod]
+
+# El .env de desarrollo apunta a localhost y trae credenciales locales; en el
+# servidor las variables las inyecta Dokploy.
+.env
+
+.git/
+.gitignore
+Dockerfile
+.dockerignore
+smoke_test.py
+*.md

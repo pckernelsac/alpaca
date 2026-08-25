@@ -58,7 +58,7 @@ export function Orders() {
           icon={<IconPackage size={26} />}
           title="Todavía no hiciste pedidos"
           description="Cuando compres algo, vas a poder seguirlo desde acá."
-          actions={<ButtonLink to="/tienda">Ver el catálogo</ButtonLink>}
+          actions={<ButtonLink to="/catalogo">Ver el catálogo</ButtonLink>}
         />
       ) : (
         <ul className={styles.list} style={{ paddingBottom: 'var(--space-20)' }}>

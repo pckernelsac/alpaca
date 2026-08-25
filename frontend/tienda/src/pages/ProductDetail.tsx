@@ -161,11 +161,11 @@ export function ProductDetail() {
             <nav className={page.breadcrumb} aria-label="Ruta">
               <Link to="/">Inicio</Link>
               <span>/</span>
-              <Link to="/tienda">Catálogo</Link>
+              <Link to="/catalogo">Catálogo</Link>
               {product.category && (
                 <>
                   <span>/</span>
-                  <Link to={`/tienda?category_id=${product.category.id}`}>
+                  <Link to={`/catalogo?category_id=${product.category.id}`}>
                     {product.category.name}
                   </Link>
                 </>

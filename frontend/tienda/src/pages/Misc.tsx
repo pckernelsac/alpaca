@@ -52,7 +52,7 @@ export function Collections() {
           {collections.map((collection) => (
             <Link
               key={collection.id}
-              to={`/tienda?collection_id=${collection.id}`}
+              to={`/catalogo?collection_id=${collection.id}`}
               className={styles.collectionCard}
             >
               <div className={styles.collectionMedia}>
@@ -100,7 +100,7 @@ export function Wishlist() {
           icon={<IconHeart size={26} />}
           title="Todavía no guardaste nada"
           description="Tocá el corazón en cualquier pieza para tenerla a mano."
-          actions={<ButtonLink to="/tienda">Explorar el catálogo</ButtonLink>}
+          actions={<ButtonLink to="/catalogo">Explorar el catálogo</ButtonLink>}
         />
       ) : (
         <div className={styles.wishlistGrid} style={{ paddingBottom: 'var(--space-20)' }}>
@@ -355,7 +355,7 @@ export function OrderConfirmed() {
         </p>
         <div className={styles.confirmedActions}>
           <ButtonLink to="/pedidos">Ver mis pedidos</ButtonLink>
-          <ButtonLink to="/tienda" variant="secondary">
+          <ButtonLink to="/catalogo" variant="secondary">
             Seguir comprando
           </ButtonLink>
         </div>
@@ -380,7 +380,7 @@ export function NotFound() {
         actions={
           <>
             <ButtonLink to="/">Volver al inicio</ButtonLink>
-            <ButtonLink to="/tienda" variant="secondary">
+            <ButtonLink to="/catalogo" variant="secondary">
               Ver el catálogo
             </ButtonLink>
           </>

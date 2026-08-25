@@ -81,7 +81,7 @@ export function Home() {
             </p>
             <div className={styles.heroActions}>
               <ButtonLink
-                to={current?.ctaLink ?? '/tienda'}
+                to={current?.ctaLink ?? '/catalogo'}
                 size="lg"
                 className={styles.heroLight}
               >
@@ -147,7 +147,7 @@ export function Home() {
                 Las últimas piezas que salieron del taller, en series cortas.
               </p>
             </div>
-            <ButtonLink to="/tienda" variant="link">
+            <ButtonLink to="/catalogo" variant="link">
               Ver todo el catálogo
             </ButtonLink>
           </div>
@@ -176,7 +176,7 @@ export function Home() {
               {collections.slice(0, 3).map((collection) => (
                 <Link
                   key={collection.id}
-                  to={`/tienda?collection_id=${collection.id}`}
+                  to={`/catalogo?collection_id=${collection.id}`}
                   className={styles.editorialCard}
                 >
                   {collection.image ? (

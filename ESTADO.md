@@ -213,6 +213,77 @@ primaria. `app/seeds/run.py` ahora corre `sincronizar_secuencias()` al final y
 deja las 44 secuencias al día. Si algún día una tabla sembrada a mano vuelve a
 dar "duplicate key", es esto.
 
+## Deploy en Dokploy
+
+Un solo dominio y tres aplicaciones separadas por ruta:
+
+| Ruta | App |
+|---|---|
+| `/` | institucional |
+| `/tienda/` | tienda |
+| `/panel/` | back office |
+| `/api/v1/` | backend FastAPI, por el proxy del nginx |
+
+Que compartan origen no es un detalle de infraestructura: es lo que hace que las
+tres llamen a `/api/v1` sin CORS de por medio.
+
+**Los prefijos viven en tres lugares y hay que moverlos juntos:** la `base` de
+Vite (`vite.config.ts` de cada app, solo al compilar), el `basename` del router
+—que la lee de `import.meta.env.BASE_URL`, para que no puedan divergir— y los
+`location` de `frontend/nginx.conf`.
+
+Archivos del deploy:
+
+```
+docker-compose.dokploy.yml   dos servicios: alpacart-backend y alpacart-frontend
+backend/Dockerfile           python:3.11-slim
+backend/entrypoint.sh        espera la base, migra, siembra si RUN_SEED=true, sirve
+frontend/Dockerfile          compila las tres apps y las mete en un nginx
+frontend/nginx.conf          rutas, cache y proxy a la API
+```
+
+Variables que van en **App → Environment** de Dokploy:
+
+| Variable | Nota |
+|---|---|
+| `ALPACART_DOMAIN` | el dominio, sin esquema |
+| `ALPACART_DATABASE_URL` | cadena del servicio de PostgreSQL **18** creado en Dokploy |
+| `ALPACART_JWT_SECRET` | largo y aleatorio; sin esto el deploy falla a propósito |
+| `ALPACART_RUN_SEED` | `true` sólo en el primer deploy; **borra y reescribe el catálogo** |
+| `ALPACART_TOKEN_MINUTES` | opcional, por defecto 720 |
+| `ALPACART_STRIPE_*` | opcionales, vacías mientras el checkout no cobre |
+
+Detalles que ya costaron una vuelta y conviene no repetir:
+
+- **Todo lleva el prefijo `alpacart`**: servicios, red interna, routers y
+  middleware de Traefik. En Dokploy todos los stacks comparten
+  `dokploy-network` y el DNS de Docker resuelve por nombre de servicio en
+  todas las redes del contenedor: un `backend` a secas puede terminar
+  atendiendo al nginx de otra aplicación del mismo servidor.
+- **El `proxy_pass` va por variable, con `resolver 127.0.0.11`.** Con el nombre
+  literal nginx resuelve al cargar la configuración: si el backend todavía no
+  existe se niega a arrancar (`host not found in upstream`), y si se reinicia
+  con otra IP se queda pegado a la vieja.
+- **El cacheo se decide con un `map`, no con `add_header` por `location`.** Un
+  `add_header` dentro de un `location` descarta todos los heredados del
+  `server`, y ahí se perderían en silencio las cabeceras de seguridad.
+- **`cta_link` de los slides va sin el prefijo `/tienda`** (`/catalogo?...`): la
+  tienda lo resuelve con el `basename` de su router y la institucional le
+  antepone `VITE_TIENDA_URL`. Con el prefijo escrito da `/tienda/tienda/...`.
+- **Redis no se usa** en el backend nuevo, así que no entra al deploy. Sigue en
+  el `docker-compose.yml` de desarrollo, pero no hace falta.
+
+Verificación después de desplegar (sustituir DOMINIO):
+
+```bash
+curl -sI https://DOMINIO | grep -iE 'HTTP|cache-control'
+curl -s  https://DOMINIO/api/v1/health
+curl -s  https://DOMINIO/tienda/ | grep -o '/tienda/assets/index-[^"]*\.js'
+curl -s  https://DOMINIO/panel/  | grep -o '/panel/assets/index-[^"]*\.js'
+# Ruta que sólo existe en esta app: detecta un proxy hacia el backend de otro stack
+curl -s  https://DOMINIO/api/v1/textile/materials | head -c 80
+```
+
 ## Pendientes menores
 
 - **El material fotográfico está mal.** Dos productos (Chalina Vicuña, Bufanda

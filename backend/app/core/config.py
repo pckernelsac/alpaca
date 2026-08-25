@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     PORT: int = 8000
     CORS_ORIGINS: str = "http://localhost:3200,http://localhost:3300,http://localhost:3101"
 
+    # En local se arma con las piezas de abajo. En un servidor —Dokploy y
+    # compania— lo que se tiene a mano es la cadena entera que da el servicio de
+    # base de datos, asi que si DATABASE_URL viene puesta, gana.
+    DATABASE_URL: str = ""
+
     DB_HOST: str = "localhost"
     DB_PORT: int = 5448
     DB_USER: str = "alpacart"
@@ -29,6 +34,17 @@ class Settings(BaseSettings):
 
     @property
     def database_url(self) -> str:
+        if self.DATABASE_URL:
+            # El driver hay que forzarlo: las cadenas que reparten los paneles
+            # vienen como postgresql:// y SQLAlchemy con eso busca psycopg2,
+            # que no esta instalado. El que usamos es psycopg 3.
+            url = self.DATABASE_URL
+            if url.startswith("postgres://"):
+                url = "postgresql://" + url[len("postgres://") :]
+            if url.startswith("postgresql://"):
+                url = "postgresql+psycopg://" + url[len("postgresql://") :]
+            return url
+
         return (
             f"postgresql+psycopg://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"

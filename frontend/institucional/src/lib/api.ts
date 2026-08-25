@@ -28,7 +28,12 @@ import type {
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8010/api/v1';
 
-/** La tienda es otra app en otro puerto: los enlaces de compra salen de acá. */
+/**
+ * Raiz de la tienda: otro origen en desarrollo (localhost:3200) y el prefijo
+ * `/tienda` en produccion, donde las tres apps comparten dominio. De ahi cuelga
+ * el resto: el catalogo es `${TIENDA_URL}/catalogo`, no `${TIENDA_URL}/tienda`
+ * —eso daria /tienda/tienda—, y una ficha es `${TIENDA_URL}/producto/{slug}`.
+ */
 export const TIENDA_URL = import.meta.env.VITE_TIENDA_URL ?? 'http://localhost:3200';
 
 export class ApiRequestError extends Error {

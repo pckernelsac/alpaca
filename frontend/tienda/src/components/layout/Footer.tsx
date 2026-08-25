@@ -14,9 +14,9 @@ const COLUMNS = [
   {
     title: 'Tienda',
     links: [
-      { to: '/tienda', label: 'Todo el catálogo' },
+      { to: '/catalogo', label: 'Todo el catálogo' },
       { to: '/colecciones', label: 'Colecciones' },
-      { to: '/tienda?sort=recent', label: 'Novedades' },
+      { to: '/catalogo?sort=recent', label: 'Novedades' },
       { to: '/favoritos', label: 'Mis favoritos' },
     ],
   },

@@ -168,18 +168,21 @@ PRODUCTS = [
     },
 ]
 
+# `cta_link` es relativo al catalogo de la tienda y va SIN el prefijo /tienda:
+# la tienda lo resuelve con el basename de su router y la institucional le
+# antepone VITE_TIENDA_URL. Escribir "/tienda/..." aca da "/tienda/tienda/...".
 HERO_SLIDES = [
     {"id": 1, "title": "Lujo ancestral, diseño contemporáneo",
      "subtitle": "Descubrí nuestra colección Otoño-Invierno, tejida con fibras nobles de los Andes",
-     "cta_text": "Explorar colección", "cta_link": "/tienda", "order": 1,
+     "cta_text": "Explorar colección", "cta_link": "/catalogo", "order": 1,
      "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=80"},
     {"id": 2, "title": "Colección Dorada de los Andes",
      "subtitle": "La suavidad más pura, envuelta en artesanía peruana que trasciende generaciones",
-     "cta_text": "Ver la colección", "cta_link": "/tienda?collection_id=AG-2024", "order": 2,
+     "cta_text": "Ver la colección", "cta_link": "/catalogo?collection_id=AG-2024", "order": 2,
      "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80"},
     {"id": 3, "title": "Vicuña: edición limitada",
      "subtitle": "Solo 80 piezas por temporada de la fibra más fina del mundo",
-     "cta_text": "Conocer más", "cta_link": "/tienda?collection_id=VC-2025", "order": 3,
+     "cta_text": "Conocer más", "cta_link": "/catalogo?collection_id=VC-2025", "order": 3,
      "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80"},
 ]
 

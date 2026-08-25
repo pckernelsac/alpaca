@@ -154,7 +154,7 @@ export function Account() {
           {orders.length === 0 ? (
             <div className={styles.emptyOrders}>
               <p>Todavía no hiciste ningún pedido.</p>
-              <ButtonLink to="/tienda" variant="secondary" size="sm">
+              <ButtonLink to="/catalogo" variant="secondary" size="sm">
                 Ver catálogo
               </ButtonLink>
             </div>

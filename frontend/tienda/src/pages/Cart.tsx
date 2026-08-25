@@ -39,7 +39,7 @@ export function Cart() {
           actions={
             <>
               <ButtonLink to="/ingresar">Iniciar sesión</ButtonLink>
-              <ButtonLink to="/tienda" variant="secondary">
+              <ButtonLink to="/catalogo" variant="secondary">
                 Ver catálogo
               </ButtonLink>
             </>
@@ -60,7 +60,7 @@ export function Cart() {
           icon={<IconBag size={26} />}
           title="Tu carrito está vacío"
           description="Cuando encuentres algo que te guste, va a aparecer acá."
-          actions={<ButtonLink to="/tienda">Explorar el catálogo</ButtonLink>}
+          actions={<ButtonLink to="/catalogo">Explorar el catálogo</ButtonLink>}
         />
       </div>
     );
