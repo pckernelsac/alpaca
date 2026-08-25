@@ -5,7 +5,7 @@
   line-height: 1.1;
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--color-surface-container-lowest, #fff);
+  color: #fff;
   margin-bottom: var(--spacing-sm);
 }
 
@@ -14,7 +14,7 @@
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.6;
-  color: var(--color-surface-container-lowest, #fff);
+  color: #fff;
   opacity: 0.9;
 }
 

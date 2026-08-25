@@ -1,0 +1,23 @@
+.cierre {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.cierreTitulo {
+  font-size: var(--text-3xl);
+  margin-top: var(--space-3);
+  max-width: 20ch;
+}
+
+.cierreTexto {
+  margin-top: var(--space-4);
+  color: var(--text-inverse-secondary);
+}
+
+@media (min-width: 900px) {
+  .cierre {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-16);
+  }
+}

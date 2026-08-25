@@ -1,0 +1,254 @@
+/* ==========================================================================
+   Primitivos varios: Badge, Skeleton, Price, Rating, EmptyState, Spinner
+   ========================================================================== */
+
+/* --- Badge ---------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.25rem var(--space-2);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.badgeNeutral {
+  background-color: var(--bg-muted);
+  color: var(--text-secondary);
+}
+
+.badgeGold {
+  background-color: var(--gold-soft);
+  color: var(--gold-600);
+}
+
+.badgeSuccess {
+  background-color: var(--success-soft);
+  color: var(--success);
+}
+
+.badgeWarning {
+  background-color: var(--warning-soft);
+  color: var(--warning);
+}
+
+.badgeDanger {
+  background-color: var(--danger-soft);
+  color: var(--danger);
+}
+
+.badgeInfo {
+  background-color: var(--info-soft);
+  color: var(--info);
+}
+
+.badgeSolid {
+  background-color: var(--accent);
+  color: var(--accent-text);
+}
+
+/* --- Skeleton ------------------------------------------------------------- */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-muted);
+  border-radius: var(--radius);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--surface) 55%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeletonText {
+  height: 0.85em;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Price ---------------------------------------------------------------- */
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.priceCurrent {
+  font-weight: var(--weight-medium);
+  color: var(--text);
+}
+
+.priceOriginal {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.priceFrom {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.priceLg {
+  font-size: var(--text-2xl);
+  font-family: var(--font-display);
+}
+
+.priceSm {
+  font-size: var(--text-sm);
+}
+
+/* --- Rating --------------------------------------------------------------- */
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 1px;
+  color: var(--gold);
+}
+
+.starEmpty {
+  color: var(--border-strong);
+}
+
+.ratingCount {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* --- EmptyState ----------------------------------------------------------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  padding: var(--space-16) var(--space-6);
+  max-width: 26rem;
+  margin-inline: auto;
+}
+
+.emptyIcon {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-muted);
+  color: var(--text-muted);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--text);
+}
+
+.emptyText {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+.emptyActions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- Spinner -------------------------------------------------------------- */
+.spinner {
+  display: inline-block;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--text);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.spinnerCenter {
+  display: grid;
+  place-items: center;
+  padding: var(--space-16);
+}
+
+/* --- Divider -------------------------------------------------------------- */
+.divider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  border: none;
+}
+
+.dividerLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.dividerLabel::before,
+.dividerLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+
+/* --- Alert ---------------------------------------------------------------- */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  border: 1px solid transparent;
+}
+
+.alertDanger {
+  background-color: var(--danger-soft);
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 25%, transparent);
+}
+
+.alertSuccess {
+  background-color: var(--success-soft);
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 25%, transparent);
+}
+
+.alertInfo {
+  background-color: var(--info-soft);
+  color: var(--info);
+  border-color: color-mix(in srgb, var(--info) 25%, transparent);
+}
+
+.alertWarning {
+  background-color: var(--warning-soft);
+  color: var(--warning);
+  border-color: color-mix(in srgb, var(--warning) 25%, transparent);
+}

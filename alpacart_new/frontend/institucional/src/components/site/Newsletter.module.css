@@ -1,0 +1,45 @@
+.section {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+  padding-block: var(--space-16);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.copy .eyebrow,
+.copy :global(.eyebrow) {
+  color: var(--accent-on-inverse);
+}
+
+.title {
+  font-size: var(--text-3xl);
+  margin-top: var(--space-2);
+}
+
+.text {
+  margin-top: var(--space-4);
+  max-width: 52ch;
+  color: var(--text-inverse-secondary);
+}
+
+.form {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.field {
+  min-width: 240px;
+  flex: 1;
+}
+
+@media (min-width: 900px) {
+  .inner {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-16);
+  }
+}

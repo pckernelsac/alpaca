@@ -1,3 +1,4 @@
+import SEO from '@/components/seo/SEO';
 import ContactHero from './sections/ContactHero/ContactHero';
 import ContactInfo from './sections/ContactInfo/ContactInfo';
 import ContactForm from './sections/ContactForm/ContactForm';
@@ -8,6 +9,7 @@ import styles from './Contact.module.css';
 export default function Contact() {
   return (
     <>
+      <SEO title="Contacto" />
       <ContactHero />
       <section className={styles.main}>
         <div className={styles.grid}>
@@ -24,3 +26,5 @@ export default function Contact() {
     </>
   );
 }
+
+

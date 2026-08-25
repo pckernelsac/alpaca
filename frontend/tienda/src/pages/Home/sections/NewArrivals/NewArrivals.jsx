@@ -1,15 +1,15 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useCatalog } from '@/hooks';
 import styles from './NewArrivals.module.css';
-
-const products = [
-  { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB8xKZ25IbmRvnndlic46Sv55um_18yy3OAj-0WBPnBobpY_QvkjWHQkGHhdVyUdR86GoWQjLpn98mzP24vHp8IX0HCsCFes81lLIILsVtuqvWzE0vidnL5zzgAscaenULO1t64BMkVzgrYP3JTXp0WqkmMwUq4XB3ZJHrFX9XYYCXh1GNJas34HxQ2wQUqz28HsdnpfwZeiSdjcgROB1ukhiYjOKbn27El8gTPWqzKyGInyX_aaoi3p6nQtkkE1Za2VmYaHEXiqnbq', title: 'Bufanda Mezcla de Vicuña', price: '$850.00' },
-  { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBep66_LonJLxi9OUdYADUz0BkuhdB3qiwj_a6bFRtYUbAr62_ktn6I1dtCKIxDizum-e3VcaoSRcnAkYFkLDEMR4oJX53uKjhwzC7iXUl5SgCbY1QzMEHniVFYfmunmnwaVbusdfV2C0cNIdDGwYzl37kTE9KNyVGxPpfMJS3VEnzj6Fn56RexCYUPSIlzHJAt3iRLGvyVfL6eCpNbilqOfM4jhq73hEJDzLUAqqrYNAtoOXswsGxu9MQLBnaE_jLiYhdZqOd3dTBi', title: 'Chompa de Alpaca Real', price: '$1,200.00' },
-  { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDGWRAQg0dIvkKR_mkjC-CCiAvU1m0bK6-0UGr0sQjYyBFyky0gomy3qNFwW_xLbwEnfnarU_P_zHzNvS-lQ5hxhAbu2LBgO8dSMVGynWQJ87afn7yPeVDOng71pM1ugiIvHufYnnZ5Yq488IOkdppSy3yksUHlN0rU8XuqEcwJnfsam4Dl1Z5SWIM8nU-KY_wn-s5H_FvMEiMsOiff6TZcvmbMaceYoe9jxVW8PvP_OS9imPar4gVCz2FeJy79oXguA2OaOQH35RTV', title: 'Manta de Baby Alpaca', price: '$450.00' },
-  { img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDeLfjQci8ya2DET5LGwC1Z1Ppp4Cyb2Rj9FmaTaRnxT0FtzSqA13V2X91EXBcpJbuLF9Zac9kW1dL2HLb7Qpb6ArNW1BA8SMTnCdPC7azHr-78Z34dC7RTfo2vNAQvvmLHz49twLFWi7k6loz1a6O6oBYgcka2tNf5gq1TPgKZjA-R4OVtFiIyaLY_8_CdZWgehX33RnaU1O2GIb0XXPXm6VimgFKbs1isYxjhjoVpxgDcmnJlpm8YyXSOWS9ms4I4Gee6ID8pGkIM', title: 'Chompa Cuello Alto Heritage', price: '$620.00' },
-];
 
 export default function NewArrivals() {
   const scrollRef = useRef(null);
+  const { products, loading, error, fetch } = useCatalog();
+
+  useEffect(() => {
+    fetch({ sort: 'createdAt', order: 'DESC', perPage: 6 });
+  }, [fetch]);
 
   const scroll = (dir) => {
     if (scrollRef.current) {
@@ -25,22 +25,58 @@ export default function NewArrivals() {
           <h2 className={styles.title}>Nuevos Lanzamientos</h2>
         </div>
         <div className={styles.arrows}>
-          <button className={styles.arrow} onClick={() => scroll(-1)}><span className="material-symbols-outlined">arrow_back</span></button>
-          <button className={styles.arrow} onClick={() => scroll(1)}><span className="material-symbols-outlined">arrow_forward</span></button>
+          <button className={styles.arrow} onClick={() => scroll(-1)}>
+            <span className="material-symbols-outlined">arrow_back</span>
+          </button>
+          <button className={styles.arrow} onClick={() => scroll(1)}>
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </button>
         </div>
       </div>
-      <div className={styles.track} ref={scrollRef}>
-        {products.map((p, i) => (
-          <div key={i} className={styles.card}>
-            <div className={styles.cardImg}>
-              <img src={p.img} alt={p.title} className={styles.cardImgEl} loading="lazy" />
-              <span className={styles.badge}>NUEVO</span>
-            </div>
-            <h4 className={styles.cardTitle}>{p.title}</h4>
-            <p className={styles.cardPrice}>{p.price}</p>
-          </div>
-        ))}
-      </div>
+
+      {loading && (
+        <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--color-on-surface-variant)' }}>
+          Cargando nuevos lanzamientos...
+        </div>
+      )}
+
+      {error && !loading && (
+        <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--color-error, #b91c1c)' }}>
+          No se pudieron cargar los nuevos lanzamientos.
+        </div>
+      )}
+
+      {!loading && !error && products.length === 0 && (
+        <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--color-on-surface-variant)' }}>
+          No hay productos nuevos disponibles en este momento.
+        </div>
+      )}
+
+      {!loading && !error && products.length > 0 && (
+        <div className={styles.track} ref={scrollRef}>
+          {products.map((p) => {
+            const priceVal = p.variants?.[0]?.price || p.price || 0;
+            const imgUrl = p.media?.[0]?.url || p.images?.[0] || p.img || '';
+
+            return (
+              <Link key={p.id} to={`/product/${p.id}`} className={styles.card} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className={styles.cardImg}>
+                  {imgUrl ? (
+                    <img src={imgUrl} alt={p.name || p.title} className={styles.cardImgEl} loading="lazy" />
+                  ) : (
+                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--color-surface-variant)' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: 48, color: 'var(--color-outline)' }}>inventory_2</span>
+                    </div>
+                  )}
+                  <span className={styles.badge}>NUEVO</span>
+                </div>
+                <h4 className={styles.cardTitle}>{p.name || p.title}</h4>
+                <p className={styles.cardPrice}>$ {Number(priceVal).toFixed(2)}</p>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }

@@ -1,0 +1,217 @@
+.layout {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: var(--space-12);
+  align-items: start;
+  padding-block: var(--space-10) var(--space-20);
+}
+
+.sidebar {
+  position: sticky;
+  top: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.filterTitle {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.filterOption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  padding-block: var(--space-1);
+  text-align: left;
+  width: 100%;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.filterOption:hover {
+  color: var(--text);
+}
+
+.filterOptionActive {
+  color: var(--text);
+  font-weight: var(--weight-medium);
+}
+
+/* Marca a la izquierda sin desplazar el texto de las opciones inactivas. */
+.filterOption::before {
+  content: '';
+  flex-shrink: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.filterOptionActive::before {
+  background-color: var(--gold);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.resultCount {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sortSelect {
+  min-height: 2.375rem;
+  padding: 0 var(--space-8) 0 var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text);
+  background-color: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  appearance: none;
+  cursor: pointer;
+}
+
+.sortWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sortArrow {
+  position: absolute;
+  right: var(--space-2);
+  pointer-events: none;
+  color: var(--text-muted);
+  display: flex;
+}
+
+.activeFilters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  background-color: var(--bg-muted);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+}
+
+.chip button {
+  display: flex;
+  color: var(--text-muted);
+}
+
+.chip button:hover {
+  color: var(--text);
+}
+
+.filterToggle {
+  display: none;
+}
+
+/* --- Paginación ---------------------------------------------------------------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-16);
+}
+
+.pageButton {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  padding-inline: var(--space-2);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.pageButton:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.pageButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pageButtonActive {
+  color: var(--accent-text);
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.pageEllipsis {
+  color: var(--text-muted);
+  padding-inline: var(--space-1);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .sidebar {
+    position: static;
+    display: none;
+  }
+
+  .sidebarOpen {
+    display: flex;
+    padding: var(--space-6);
+    background-color: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+
+  .filterToggle {
+    display: inline-flex;
+  }
+}

@@ -1,0 +1,157 @@
+/* Gestores de variantes y fotos: viven dentro del cajón del producto, así que
+   la escala es más chica que la de una pantalla completa. */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+.empty {
+  padding: var(--space-5);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  background-color: var(--surface-sunken);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* --- Lista de variantes --------------------------------------------------- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+}
+
+.swatch {
+  flex-shrink: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-strong);
+}
+
+.rowMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rowMain strong {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowMain small {
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+}
+
+.rowNumber {
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.rowActions {
+  display: flex;
+  gap: 2px;
+}
+
+/* --- Formulario ----------------------------------------------------------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  animation: rise-in var(--duration-fast) var(--ease-out);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* --- Galería -------------------------------------------------------------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: var(--space-3);
+}
+
+.tile {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: var(--surface-sunken);
+}
+
+.tileImg,
+.tileImgHidden {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+/* Una foto oculta sigue estando: se muestra apagada en vez de desaparecer,
+   para poder volver a publicarla. */
+.tileImgHidden {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.tileBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  padding: var(--space-1) var(--space-2);
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

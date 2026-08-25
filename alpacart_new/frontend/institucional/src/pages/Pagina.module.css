@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Bloques compartidos por las páginas internas
+   Todas son editoriales y repiten las mismas piezas: una columna de texto, una
+   grilla de tarjetas y algún listado. Viven acá una sola vez en vez de
+   repetirse en nueve módulos casi idénticos.
+   ========================================================================== */
+
+.seccion {
+  padding-block: var(--section-y);
+}
+
+.suave {
+  background: var(--bg-subtle);
+}
+
+.oscuro {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+
+.oscuro :global(.eyebrow) {
+  color: var(--accent-on-inverse);
+}
+
+/* --- Columna de lectura --------------------------------------------------- */
+.columna {
+  max-width: 68ch;
+}
+
+/* Texto a un lado, apuntes al otro. En pantalla angosta se apilan. */
+.dosColumnas {
+  display: grid;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+.apuntes {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.apunte dt {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.apunte dd {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+/* --- Tarjetas ------------------------------------------------------------- */
+.tarjetas {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.tarjetaIcono {
+  color: var(--text-brand);
+}
+
+.tarjetaTitulo {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.tarjetaTexto {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.tarjetaFoto {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+
+figure .tarjetaTexto {
+  margin-top: var(--space-3);
+}
+
+/* --- Cifras --------------------------------------------------------------- */
+.cifras {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.cifras dt {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--text-brand);
+  line-height: 1;
+}
+
+.cifras dd {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  max-width: 24ch;
+}
+
+/* --- Estados -------------------------------------------------------------- */
+.estado {
+  padding-block: var(--space-16);
+}
+
+/* --- Punto de quiebre ----------------------------------------------------- */
+@media (min-width: 900px) {
+  .dosColumnas {
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--space-16);
+  }
+}

@@ -1,0 +1,450 @@
+/* ==========================================================================
+   Portada
+   ========================================================================== */
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: clamp(520px, 78vh, 780px);
+  display: flex;
+  align-items: flex-end;
+  padding-block: var(--space-16);
+  background: var(--alpaca-900);
+  color: #fff;
+  overflow: hidden;
+}
+
+.heroSkeleton {
+  min-height: clamp(520px, 78vh, 780px);
+  background: var(--surface-sunken);
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+}
+
+.heroMediaActive {
+  opacity: 1;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(31, 27, 24, 0.9) 0%,
+    rgba(31, 27, 24, 0.55) 50%,
+    rgba(31, 27, 24, 0.25) 100%
+  );
+}
+
+.heroInner {
+  position: relative;
+}
+
+.heroCopy {
+  max-width: 46ch;
+  animation: rise-in var(--duration-slow) var(--ease-out);
+}
+
+.heroEyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+.heroTitle {
+  font-size: var(--text-5xl);
+  margin-top: var(--space-4);
+}
+
+.heroLead {
+  margin-top: var(--space-5);
+  font-size: var(--text-lg);
+  color: var(--ink-100);
+}
+
+.heroActions {
+  margin-top: var(--space-8);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  background: var(--gold-500);
+  color: var(--ink-900);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  transition: background var(--duration) var(--ease-out);
+}
+
+.heroCta:hover {
+  background: var(--gold-400);
+}
+
+.heroLink {
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 2px;
+}
+
+.heroLink:hover {
+  border-bottom-color: var(--gold-400);
+  color: var(--gold-400);
+}
+
+.dots {
+  position: relative;
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-12);
+}
+
+/* La franja crece cuando está activa: en una foto, un punto de 8px se pierde. */
+.dot {
+  width: 28px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.35);
+  transition:
+    width var(--duration) var(--ease-out),
+    background var(--duration) var(--ease-out);
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.dotActive {
+  width: 56px;
+  background: var(--gold-400);
+}
+
+/* --- Beneficios ---------------------------------------------------------- */
+.beneficios {
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface);
+  padding-block: var(--space-10);
+}
+
+.beneficiosLista {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.beneficio {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.beneficioIcono {
+  flex-shrink: 0;
+  color: var(--text-brand);
+}
+
+.beneficioTitulo {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+}
+
+.beneficioTexto {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* --- Manifiesto ---------------------------------------------------------- */
+.manifiesto {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.manifiestoTitulo {
+  font-size: var(--text-3xl);
+  margin-top: var(--space-3);
+  max-width: 18ch;
+}
+
+.manifiestoTexto {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+}
+
+.cifras {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: var(--space-16);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--border);
+}
+
+.cifras dt {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--text-brand);
+  line-height: 1;
+}
+
+.cifras dd {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  max-width: 24ch;
+}
+
+/* --- Fondos de sección --------------------------------------------------- */
+.fondoSuave {
+  background: var(--bg-subtle);
+}
+
+.fondoOscuro {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+
+.fondoOscuro :global(.eyebrow) {
+  color: var(--accent-on-inverse);
+}
+
+/* --- Colecciones --------------------------------------------------------- */
+.coleccionesGrid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.coleccion {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  color: #fff;
+}
+
+.coleccionImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.coleccion:hover .coleccionImg {
+  transform: scale(1.05);
+}
+
+.coleccionCapa {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-6);
+  background: linear-gradient(to top, rgba(31, 27, 24, 0.85), rgba(31, 27, 24, 0));
+}
+
+.coleccionTitulo {
+  font-size: var(--text-xl);
+}
+
+.coleccionPiezas {
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+/* --- Vitrina ------------------------------------------------------------- */
+.vitrina {
+  display: grid;
+  gap: var(--space-8) var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.vitrinaSkeleton {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+}
+
+.enlaceTienda {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-brand);
+}
+
+.enlaceTienda:hover {
+  color: var(--accent-hover);
+}
+
+/* --- Proceso ------------------------------------------------------------- */
+.pasos {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.paso {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-on-inverse);
+}
+
+.pasoNumero {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wider);
+  color: var(--accent-on-inverse);
+}
+
+.pasoIcono {
+  margin-top: var(--space-5);
+  color: var(--text-inverse-secondary);
+}
+
+.pasoTitulo {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.pasoTexto {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-inverse-secondary);
+}
+
+/* --- Galería ------------------------------------------------------------- */
+/* Mosaico: la primera foto ocupa dos columnas y dos filas, el resto rellena.
+   Con cinco imágenes de proporciones distintas, una grilla pareja se ve
+   plana; el desnivel es lo que le da ritmo. */
+.galeria {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.galeriaItem {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  background: var(--surface-sunken);
+}
+
+.galeriaImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.galeriaItem:hover .galeriaImg {
+  transform: scale(1.04);
+}
+
+.galeriaItem figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-5) var(--space-4) var(--space-3);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: #fff;
+  background: linear-gradient(to top, rgba(31, 27, 24, 0.8), rgba(31, 27, 24, 0));
+}
+
+/* --- Testimonios --------------------------------------------------------- */
+.testimonios {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonio {
+  padding: var(--space-8);
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.comilla {
+  color: var(--gold);
+  opacity: 0.35;
+}
+
+.testimonioTexto {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+}
+
+.testimonioEstrellas {
+  margin-top: var(--space-6);
+  color: var(--gold);
+}
+
+.testimonioAutor {
+  display: block;
+  margin-top: var(--space-3);
+  font-style: normal;
+  font-weight: var(--weight-medium);
+}
+
+.testimonioRol {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* --- Puntos de quiebre --------------------------------------------------- */
+@media (min-width: 900px) {
+  .manifiesto {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+  }
+
+  .galeria {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+  }
+
+  .galeriaItem {
+    aspect-ratio: auto;
+  }
+
+  .galeriaItem:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .galeriaItem:nth-child(4) {
+    grid-column: span 2;
+  }
+}

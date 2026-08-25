@@ -1,0 +1,575 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Alpacart CMS - Content Administration</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for enterprise density */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8ece4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4c4b1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #827565;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#271808",
+                        "secondary-container": "#fbddc3",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#76604c",
+                        "on-surface": "#201b16",
+                        "on-primary-container": "#fffbff",
+                        "tertiary": "#215f92",
+                        "secondary-fixed": "#fbddc3",
+                        "surface-tint": "#7f5600",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#3f78ad",
+                        "surface-dim": "#e3d8d1",
+                        "outline": "#827565",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#574330",
+                        "on-primary": "#ffffff",
+                        "on-background": "#201b16",
+                        "primary-fixed": "#ffddae",
+                        "background": "#fff8f5",
+                        "on-primary-fixed": "#281800",
+                        "surface-container-highest": "#ece0d9",
+                        "on-surface-variant": "#504537",
+                        "surface-variant": "#ece0d9",
+                        "tertiary-fixed-dim": "#9acbff",
+                        "on-tertiary-fixed-variant": "#004a79",
+                        "surface-container": "#f8ece4",
+                        "on-tertiary-container": "#fdfcff",
+                        "outline-variant": "#d4c4b1",
+                        "primary-fixed-dim": "#f6bd60",
+                        "secondary": "#705a46",
+                        "on-error": "#ffffff",
+                        "primary": "#7c5400",
+                        "tertiary-fixed": "#d0e4ff",
+                        "on-tertiary-fixed": "#001d34",
+                        "surface": "#fff8f5",
+                        "inverse-surface": "#352f2b",
+                        "primary-container": "#9a6c14",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#fdf1ea",
+                        "secondary-fixed-dim": "#dec1a8",
+                        "on-primary-fixed-variant": "#614000",
+                        "inverse-on-surface": "#faeee7",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#f2e6df",
+                        "surface-bright": "#fff8f5",
+                        "inverse-primary": "#f6bd60",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-margin": "32px",
+                        "density-compact": "8px",
+                        "sidebar-width": "260px",
+                        "density-comfortable": "16px",
+                        "topbar-height": "56px",
+                        "gutter": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SIDE NAV BAR -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-secondary-container dark:bg-on-secondary-fixed-variant border-r border-outline-variant dark:border-outline flex flex-col py-density-comfortable z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm font-bold text-on-secondary-container dark:text-secondary-fixed leading-tight">Alpacart Textiles</h1>
+<p class="text-label-md font-label-md text-on-surface-variant/80 uppercase tracking-widest mt-1">Enterprise ERP</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-title-md text-title-md">Dashboard</span>
+</a>
+<!-- ACTIVE: Pages (CMS/Content active context) -->
+<a class="flex items-center gap-3 px-3 py-2 text-primary dark:text-primary-fixed-dim font-bold bg-surface-container-high dark:bg-surface-variant rounded" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-title-md text-title-md">Pages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded" href="#">
+<span class="material-symbols-outlined">ads_click</span>
+<span class="font-title-md text-title-md">Banners</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="font-title-md text-title-md">Blog</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-title-md text-title-md">Collections</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-title-md text-title-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<button class="w-full bg-primary text-on-primary py-2.5 px-4 rounded font-title-md text-title-md hover:bg-primary-container transition-all active:opacity-80">
+                New Content
+            </button>
+<div class="border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-1.5 text-on-surface-variant text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 px-3 py-1.5 text-on-surface-variant text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+                    Account
+                </a>
+</div>
+</div>
+</aside>
+<!-- TOP NAV BAR -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-topbar-height bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center px-container-margin z-40">
+<div class="flex items-center gap-8">
+<span class="font-title-lg text-title-lg font-semibold text-primary dark:text-primary-fixed-dim">Alpacart CMS</span>
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-primary-fixed focus:border-primary outline-none transition-all w-64 lg:w-96" placeholder="Search content, banners, pages..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="text-label-md font-bold leading-none">Admin User</p>
+<p class="text-[10px] text-on-surface-variant leading-none mt-1 uppercase tracking-tighter">Chief Editor</p>
+</div>
+<img class="w-9 h-9 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a corporate administrator, middle-aged, wearing a light neutral business casual shirt, neutral lighting, studio background, representing a high-end enterprise persona in a warm light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5Pek5uyUeDvh3xrFhCGKaSPeSjufHyI_yLrZ0L65tsLIShEzcjuecfdFmlcdRbg-Z8pL4dMIDOPUp95pGRwW0aX1OtJkxRpUiARCCXR321_aAxSRckWGB16JAktoPlTA7eI-2QyFL2p6XN5Yo9pLEFzqIGaIMXnebHXlTAmo1T-p-ZAGim7m11yuJ4uEIzuHqt8oVO59FqmtVJz6I5UF1nDKyBZuL3i9EitffuTtjWwAILOz2SgZeZXKGM2O1ltxOr5L8pZt_E-Xa">
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="ml-[260px] mt-[56px] p-container-margin min-h-[calc(100vh-56px)]">
+<!-- Header Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<nav class="flex items-center gap-2 text-label-md text-on-surface-variant mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Content Management</span>
+</nav>
+<h2 class="font-headline-md text-headline-md text-on-surface">Content Administration</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant bg-surface-container-lowest text-on-surface-variant font-title-md text-body-md rounded hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+                    Visual Editor
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant bg-surface-container-lowest text-on-surface-variant font-title-md text-body-md rounded hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">inventory</span>
+                    Bulk Actions
+                </button>
+<button class="flex items-center gap-2 px-6 py-2 bg-primary text-on-primary font-title-md text-title-md rounded hover:bg-primary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    New Content
+                </button>
+</div>
+</div>
+<!-- Filter Bar & View Toggle -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex items-center gap-2 border-r border-outline-variant pr-4">
+<span class="text-label-md text-on-surface-variant font-semibold">TYPE:</span>
+<select class="bg-transparent border-none text-body-sm font-medium focus:ring-0 cursor-pointer text-primary">
+<option>All Content</option>
+<option>Institutional Pages</option>
+<option>Banners</option>
+<option>Collections</option>
+<option>Blog</option>
+<option>FAQ</option>
+</select>
+</div>
+<div class="flex items-center gap-2 border-r border-outline-variant pr-4">
+<span class="text-label-md text-on-surface-variant font-semibold">STATUS:</span>
+<select class="bg-transparent border-none text-body-sm font-medium focus:ring-0 cursor-pointer text-primary">
+<option>All Statuses</option>
+<option>Published</option>
+<option>Draft</option>
+<option>Scheduled</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-md text-on-surface-variant font-semibold">AUTHOR:</span>
+<select class="bg-transparent border-none text-body-sm font-medium focus:ring-0 cursor-pointer text-primary">
+<option>All Authors</option>
+<option>Me</option>
+<option>Editorial Team</option>
+</select>
+</div>
+</div>
+<div class="flex items-center bg-surface-container rounded p-1 border border-outline-variant">
+<button class="px-3 py-1 rounded bg-surface-container-lowest text-primary shadow-sm flex items-center" id="listToggle" onclick="toggleView('list')">
+<span class="material-symbols-outlined text-[18px]">list</span>
+</button>
+<button class="px-3 py-1 rounded text-on-surface-variant hover:text-primary flex items-center" id="cardToggle" onclick="toggleView('card')">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+</div>
+</div>
+<!-- Content Views Container -->
+<div id="listView">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high border-b border-outline-variant">
+<tr>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant w-10">
+<input class="rounded text-primary focus:ring-primary-fixed border-outline-variant" type="checkbox">
+</th>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant">Content Title</th>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant">Type</th>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant">Status</th>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant">Last Edited</th>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant">Date</th>
+<th class="px-6 py-3 text-label-sm uppercase text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded text-primary focus:ring-primary-fixed border-outline-variant" type="checkbox">
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-high border border-outline-variant overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist hero banner image featuring premium folded alpaca wool fabrics in warm beige and cream tones, soft natural lighting, high-end textile photography, professional corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDsU9-CQDMo1_8z3baLLvtOdoUdClbdOvhsp7TyLM-QBif35s6CBxxlc-zFBgWalUESrQE19cLgOKK-enzO9QVVXm2f00lXCR5i8asrproJlSkJoCs-2YOO5FgWUit84u4EzzMo-Amy72QbhVFP6moD0jb5qypnU26OlrV5BRo7QYFpSais2KjhLNizVVcNSvCxcAhAAr7CTXeTykfokcTN6BnUkIN2xqWT8K05puGE3dNNrFx8C9s2J2a_89wyUTXr9QW15rRl68B">
+</div>
+<div>
+<p class="font-title-md text-on-surface truncate max-w-[240px]">Winter Alpaca Essentials 2024</p>
+<p class="text-[11px] text-on-surface-variant">slug: /collections/winter-24</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded border border-outline-variant">Collection</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm bg-green-100 text-green-800 border border-green-200">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+                                    Published
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<img class="w-5 h-5 rounded-full object-cover border border-outline-variant" data-alt="A small circular avatar of a professional designer, neutral tones, corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvDPGB2Xvbbs69qxUdjluJI22b0KYgBflt7p8xGqhxzocyK2XKEhQb1k307-fINPrvZpGBwaXh7kO7TPB8ebb1mXbQjoUyq3hPSZCv0pU0KbBz0hd0ISjnm2QhJsVvx2yOBk1_vixOWN3YFDMjrHqXnP3aXPBWNjh9i58iINPCPHND1u2CHWX30W6MGycL6ESa_op5DGjEIbVpId5GowA7AT_EHh03gO74CH-xcmnar4iALSeM8arDizF3-xjJ-0LgE3r14rdWX3nh">
+<span class="text-body-sm">Elena R.</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Edit"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Preview"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Duplicate"><span class="material-symbols-outlined text-[18px]">content_copy</span></button>
+<button class="p-1.5 text-error hover:bg-error-container/20 rounded transition-colors" title="Delete"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded text-primary focus:ring-primary-fixed border-outline-variant" type="checkbox">
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-high border border-outline-variant overflow-hidden flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">article</span>
+</div>
+<div>
+<p class="font-title-md text-on-surface truncate max-w-[240px]">The Art of Andean Weaving</p>
+<p class="text-[11px] text-on-surface-variant">slug: /blog/andean-weaving-art</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded border border-outline-variant">Blog Post</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                    Scheduled
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<img class="w-5 h-5 rounded-full object-cover border border-outline-variant" data-alt="A small circular avatar of a male content editor, modern glasses, professional attire, neutral lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGMFC1l7nCkh-n-vLUPDrUX7Rt1-TpLknUi18_8GKsObAepgkoWYwvgK69k8ivjVXJyfO_6WHlewrRAUC-vv6JmbA3tQFybA4OoKD4J4hECBGbEU3Rg4L5pOn6UBaloH3JKGDOZu4RFWi7EbicxI-5gqwQDaMz9GZNj-hI45vKCZSAUavwm3fb0S13jEqLZRoq1cg6lWOxJQfNhS56ENqfBhH9r-8Oz1WX9B7SYzLljcmkWNXwyS1GXXHE6pzBefs6KF_w5UalNqz9">
+<span class="text-body-sm">Marco P.</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Nov 01, 2023</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">calendar_today</span></button>
+<button class="p-1.5 text-error hover:bg-error-container/20 rounded transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<input class="rounded text-primary focus:ring-primary-fixed border-outline-variant" type="checkbox">
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-high border border-outline-variant overflow-hidden flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">photo_size_select_actual</span>
+</div>
+<div>
+<p class="font-title-md text-on-surface truncate max-w-[240px]">Holiday Season Promo Banner</p>
+<p class="text-[11px] text-on-surface-variant">target: home_top_hero</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-body-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded border border-outline-variant">Banner</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm bg-surface-variant text-on-surface-variant border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                    Draft
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-primary-fixed flex items-center justify-center text-[8px] font-bold">SY</div>
+<span class="text-body-sm">System</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Today</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">publish</span></button>
+<button class="p-1.5 text-error hover:bg-error-container/20 rounded transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between border-t border-outline-variant">
+<span class="text-label-md text-on-surface-variant">Showing 1-12 of 154 entries</span>
+<div class="flex items-center gap-2">
+<button class="p-1 text-outline hover:text-primary disabled:opacity-30" disabled=""><span class="material-symbols-outlined">chevron_left</span></button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded bg-primary text-on-primary text-label-md font-bold">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-label-md">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-label-md">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 rounded hover:bg-surface-container-high text-label-md">12</button>
+</div>
+<button class="p-1 text-outline hover:text-primary"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="cardView">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden group shadow-sm hover:shadow-md transition-all">
+<div class="relative h-48 bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Wide angle professional photograph of a retail interior featuring minimalist shelving displays of alpaca wool sweaters and scarves, soft studio lighting, high-end luxury brand aesthetic, warm gold and white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSl_ExIHEtLzXy038GpYk-3tnHCFzzPEnM5WqWe-36g3ScxseBjODty6bB-1q2txIaKmOQytfl0AjuJCkJsATIjN87TeiFS7VDR94qvUIsdm0bE1RJ5U9ojg02vxNOG90MjP-OGH9SuKeEbT4YKiUBfywS6tVtHO591blvuIWMJqoQnbjwNI23Q0q0KyXvLc7CyNDyeqlBgJ0fztCJCnsVtni2Ia-pPMuhzhi_d9rJb7xZMSrhLb9pFRYEsU0_EeSU2i_Pa1lWCJ1b">
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-800 border border-green-200">
+                            PUBLISHED
+                        </span>
+</div>
+<div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 bg-surface-container-lowest rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<p class="text-label-sm text-primary uppercase font-bold tracking-wider mb-1">Banner</p>
+<h3 class="font-title-md text-on-surface mb-2 leading-tight">Storefront Hero Winter '24</h3>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Elena R.</span>
+<span>Oct 12</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden group shadow-sm hover:shadow-md transition-all">
+<div class="relative h-48 bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up detail of high-quality alpaca fiber texture, macro photography, showing the intricate weave and soft sheen of the wool, golden hour lighting, luxurious and professional textile display." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCuSh285_SzsK1tnZDAdb3cD6J1rN7HT4uzOXvRn75hwQ3uAaocg81NqyDFqt62byKT7X_O_GKkSWOnxql592OAbm7DKgp_OPraGeowK2T6sjmxfu4xFZ7reDe8Rj0aDUQGkjNfGuM20fPYDMtiili5dQwImYfQXZ4Fdf_JJo-ovxVh9aLU520qCZ4f929Qrkpo23MGSEtwCa_uDDfJ6Dy8fmM3hFsTinhr1WYYhF_HqbDBkQW2TZAuE4yUDpKWGmQZEF1mmthMWWd">
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-container">
+                            SCHEDULED
+                        </span>
+</div>
+<div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 bg-surface-container-lowest rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<p class="text-label-sm text-primary uppercase font-bold tracking-wider mb-1">Promo</p>
+<h3 class="font-title-md text-on-surface mb-2 leading-tight">Artisan Series Promotion</h3>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Marco P.</span>
+<span>Nov 01</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden group shadow-sm hover:shadow-md transition-all">
+<div class="relative h-48 bg-surface-variant overflow-hidden flex items-center justify-center border-b border-outline-variant">
+<span class="material-symbols-outlined text-[48px] text-outline-variant">description</span>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-surface-variant text-on-surface-variant border border-outline-variant">
+                            DRAFT
+                        </span>
+</div>
+</div>
+<div class="p-4">
+<p class="text-label-sm text-primary uppercase font-bold tracking-wider mb-1">Page</p>
+<h3 class="font-title-md text-on-surface mb-2 leading-tight">Privacy Policy Update</h3>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> System</span>
+<span>Today</span>
+</div>
+</div>
+</div>
+<!-- Card 4 (Add New Content Placeholder) -->
+<button class="border-2 border-dashed border-outline-variant rounded-lg h-full flex flex-col items-center justify-center p-8 text-on-surface-variant hover:border-primary hover:text-primary transition-all group">
+<span class="material-symbols-outlined text-[32px] mb-2 group-hover:scale-110 transition-transform">add_circle</span>
+<span class="font-title-md">Create New Component</span>
+</button>
+</div>
+<!-- System Stats / Quick Insights -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-lg flex items-center gap-4 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase font-bold">Total Pages</p>
+<p class="font-headline-sm text-headline-sm">48</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-lg flex items-center gap-4 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_graph</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase font-bold">Active Promos</p>
+<p class="font-headline-sm text-headline-sm">12</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-lg flex items-center gap-4 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase font-bold">Scheduled</p>
+<p class="font-headline-sm text-headline-sm">6</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-lg flex items-center gap-4 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">history</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase font-bold">Recent Changes</p>
+<p class="font-headline-sm text-headline-sm">142</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+        function toggleView(view) {
+            const list = document.getElementById('listView');
+            const card = document.getElementById('cardView');
+            const listBtn = document.getElementById('listToggle');
+            const cardBtn = document.getElementById('cardToggle');
+
+            if (view === 'list') {
+                list.classList.remove('hidden');
+                card.classList.add('hidden');
+                listBtn.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                listBtn.classList.remove('text-on-surface-variant');
+                cardBtn.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                cardBtn.classList.add('text-on-surface-variant');
+            } else {
+                list.classList.add('hidden');
+                card.classList.remove('hidden');
+                cardBtn.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                cardBtn.classList.remove('text-on-surface-variant');
+                listBtn.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                listBtn.classList.add('text-on-surface-variant');
+            }
+        }
+    </script>
+</body></html>

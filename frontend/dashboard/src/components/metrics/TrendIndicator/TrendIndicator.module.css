@@ -1,0 +1,16 @@
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+}
+
+.up {
+  color: var(--color-success);
+}
+
+.down {
+  color: var(--color-error);
+}

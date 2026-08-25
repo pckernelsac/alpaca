@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; import useMarketingStore from '../stores/useMarketingStore'; export default function useMarketing() { const s = useMarketingStore(); useEffect(() => { if (s.campaigns.length === 0) s.fetchAll(); }, []); return s; }

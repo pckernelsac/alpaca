@@ -21,7 +21,7 @@
 
 .btn {
   background: #fff;
-  color: #1f1b16;
+  color: #2f2a25;
   padding: 0.5rem var(--spacing-lg);
   font-family: var(--font-label);
   font-size: 0.75rem;
@@ -35,8 +35,8 @@
 }
 
 .btn:hover {
-  background-color: #ffddae;
-  color: #1f1b16;
+  background-color: var(--color-primary-dim);
+  color: #2f2a25;
 }
 
 @media (max-width: 768px) {

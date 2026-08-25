@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Patrones de página compartidos
+   ========================================================================== */
+
+.head {
+  padding-block: var(--space-12) var(--space-10);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.headNarrow {
+  padding-block: var(--space-16) var(--space-10);
+  text-align: center;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.breadcrumb a:hover {
+  color: var(--text);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  letter-spacing: var(--tracking-tight);
+}
+
+.titleSm {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin-top: var(--space-3);
+  max-width: 56ch;
+}
+
+.headNarrow .subtitle {
+  margin-inline: auto;
+}
+
+/* --- Formularios centrados (login, registro) -------------------------------- */
+.authWrap {
+  display: grid;
+  place-items: center;
+  padding-block: var(--space-20);
+  min-height: 70vh;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 26rem;
+}
+
+.authTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+.authSubtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.authFoot {
+  margin-top: var(--space-6);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.authFoot a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Tarjetas ---------------------------------------------------------------- */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.cardTitle {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+/* --- Contenido editorial ------------------------------------------------------ */
+.prose {
+  max-width: 68ch;
+  margin-inline: auto;
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.prose p + p {
+  margin-top: var(--space-6);
+}
+
+/* --- Layout de dos columnas (carrito, checkout) -------------------------------- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 22rem;
+  gap: var(--space-12);
+  align-items: start;
+  padding-block: var(--space-12);
+}
+
+.aside {
+  position: sticky;
+  top: 7rem;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Resumen de importes -------------------------------------------------------- */
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  padding-block: var(--space-2);
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-4);
+  margin-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+}
+
+.free {
+  color: var(--success);
+}
+
+.discount {
+  color: var(--success);
+}
+
+/* --- Grillas ------------------------------------------------------------------- */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--space-8) var(--space-6);
+}
+
+@media (max-width: 560px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-4);
+  }
+}

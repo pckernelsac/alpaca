@@ -24,7 +24,7 @@ export default function ProductCard({ product, variant = 'grid', onAddToCart, on
         {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
         <h3 className={styles.title}><Link to={'/product/' + id}>{title}</Link></h3>
         {rating !== undefined && <Rating value={rating} count={reviewCount} size="sm" />}
-        <Price value={price} originalValue={originalValue} size="sm" />
+        <Price value={price} originalValue={originalPrice} size="sm" />
       </div>
     </div>
   );

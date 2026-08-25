@@ -1,6 +1,6 @@
 .card {
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
 }
@@ -11,12 +11,12 @@
 
 .hoverable:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--color-primary-light);
+  border-color: var(--color-outline);
 }
 
 .header {
   padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-outline-variant);
 }
 
 .body {
@@ -25,5 +25,5 @@
 
 .footer {
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-outline-variant);
 }

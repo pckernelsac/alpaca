@@ -1,0 +1,106 @@
+.grilla {
+  display: grid;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.aviso {
+  margin-bottom: var(--space-8);
+}
+
+.formulario {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}
+
+.formulario > * {
+  width: 100%;
+}
+
+.formulario > button {
+  width: auto;
+}
+
+.fila {
+  display: grid;
+  gap: var(--space-5);
+}
+
+/* --- Ficha lateral -------------------------------------------------------- */
+.datos {
+  padding: var(--space-8);
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.datosTitulo {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+}
+
+.lista {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.lista li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.listaIcono {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--text-brand);
+}
+
+.lista a:hover {
+  color: var(--text-brand);
+}
+
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  transition:
+    background var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out);
+}
+
+.whatsapp:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.ruc {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+@media (min-width: 720px) {
+  .fila {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  .grilla {
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-16);
+  }
+}

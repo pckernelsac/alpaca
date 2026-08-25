@@ -1,0 +1,10 @@
+/* El color de marca se hereda por `currentColor` dentro del SVG, así el
+   monograma mantiene contraste en tema claro y oscuro. */
+.placeholder {
+  color: var(--text-brand);
+  display: block;
+}
+
+.ground {
+  fill: var(--bg-muted);
+}

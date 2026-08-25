@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '@/hooks';
 import ThemeToggle from '@/components/common/ThemeToggle/ThemeToggle';
-import { cartStore } from '@/stores/cartStore';
 import logo from '@/assets/images/logo.png';
 import styles from './StoreHeader.module.css';
 
 const navLinks = [
+  { to: '/shop', label: 'Tienda' },
   { to: '/collection', label: 'Colecciones' },
   { to: '/category/materials', label: 'Materiales' },
   { to: '/category/nuevos', label: 'Nuevos' },
@@ -15,7 +16,7 @@ const navLinks = [
 export default function StoreHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(cartStore.getCount());
+  const { items, fetch: fetchCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -23,27 +24,46 @@ export default function StoreHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => cartStore.subscribe(() => setCartCount(cartStore.getCount())), []);
+  useEffect(() => {
+    fetchCart();
+    const handleCartUpdate = () => fetchCart();
+    window.addEventListener('cart-updated', handleCartUpdate);
+    window.addEventListener('storage', handleCartUpdate);
+    return () => {
+      window.removeEventListener('cart-updated', handleCartUpdate);
+      window.removeEventListener('storage', handleCartUpdate);
+    };
+  }, [fetchCart]);
+
+  const cartCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   return (
     <header className={[styles.header, scrolled ? styles.scrolled : ''].filter(Boolean).join(' ')}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <Link to="/" className={styles.logo}><img src={logo} alt="ALPACART" className={styles.logoImg} /></Link>
+          <Link to="/" className={styles.logo}>
+            <img src={logo} alt="ALPACART" className={styles.logoImg} />
+          </Link>
           <nav className={styles.nav}>
             {navLinks.map((link) => (
-              <Link key={link.to} to={link.to} className={styles.link}>{link.label}</Link>
+              <Link key={link.to} to={link.to} className={styles.link}>
+                {link.label}
+              </Link>
             ))}
           </nav>
         </div>
         <div className={styles.right}>
-          <Link to="/search" className={styles.iconBtn} aria-label="Buscar"><span className="material-symbols-outlined">search</span></Link>
+          <Link to="/search" className={styles.iconBtn} aria-label="Buscar">
+            <span className="material-symbols-outlined">search</span>
+          </Link>
           <ThemeToggle />
-          <Link to="/cart" className={styles.cartBtn} aria-label="Carrito">
+          <Link to="/cart" className={styles.iconBtn} aria-label="Carrito">
             <span className="material-symbols-outlined">shopping_bag</span>
             {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
           </Link>
-          <Link to="/account" className={styles.iconBtn} aria-label="Cuenta"><span className="material-symbols-outlined">person</span></Link>
+          <Link to="/account" className={styles.iconBtn} aria-label="Cuenta">
+            <span className="material-symbols-outlined">person</span>
+          </Link>
           <button className={styles.hamburger} onClick={() => setMenuOpen((prev) => !prev)} aria-label="Menu">
             <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
           </button>
@@ -52,7 +72,9 @@ export default function StoreHeader() {
       {menuOpen && (
         <div className={styles.mobileNav}>
           {navLinks.map((link) => (
-            <Link key={link.to} to={link.to} className={styles.mobileLink} onClick={() => setMenuOpen(false)}>{link.label}</Link>
+            <Link key={link.to} to={link.to} className={styles.mobileLink} onClick={() => setMenuOpen(false)}>
+              {link.label}
+            </Link>
           ))}
         </div>
       )}

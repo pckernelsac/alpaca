@@ -1,0 +1,257 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background-color: var(--bg-overlay);
+  animation: fade-in var(--duration-fast) var(--ease-out);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-drawer);
+  width: min(30rem, 100vw);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border-left: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  animation: slide-in var(--duration) var(--ease-out);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.count {
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  margin-left: var(--space-2);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.close:hover {
+  background-color: var(--bg-muted);
+  color: var(--text);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-6);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: var(--space-4);
+}
+
+.thumb {
+  width: 5rem;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background-color: var(--bg-muted);
+}
+
+.itemBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.itemName {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+  line-height: var(--leading-snug);
+}
+
+.itemVariant {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.itemFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.stepperButton {
+  display: grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  color: var(--text-secondary);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.stepperButton:hover:not(:disabled) {
+  background-color: var(--bg-muted);
+  color: var(--text);
+}
+
+.stepperButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stepperValue {
+  min-width: 2rem;
+  text-align: center;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.remove {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.remove:hover {
+  color: var(--danger);
+}
+
+/* --- Resumen --------------------------------------------------------------- */
+.foot {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-6);
+  background-color: var(--surface);
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.rowTotal {
+  padding-top: var(--space-3);
+  margin-top: var(--space-1);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+}
+
+.discount {
+  color: var(--success);
+}
+
+.freeShipping {
+  color: var(--success);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.note {
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Barra de progreso hacia el envío gratis: convierte el umbral en incentivo. */
+.progress {
+  margin-bottom: var(--space-5);
+}
+
+.progressText {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.progressTrack {
+  height: 3px;
+  background-color: var(--bg-muted);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--gold);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-slow) var(--ease-out);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  height: 100%;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--text);
+}

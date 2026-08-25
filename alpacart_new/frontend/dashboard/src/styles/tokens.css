@@ -1,0 +1,288 @@
+/* ==========================================================================
+   ALPACART — Sistema de diseño
+   Paleta derivada de la fibra: crudos, camel, vicuña y carbón. El dorado es
+   acento, nunca fondo: en una marca premium el color se gana su lugar.
+   ========================================================================== */
+
+:root {
+  /* --- Escala de marca ---------------------------------------------- */
+  /* La paleta original del proyecto: camel para la marca, dorado como
+     acento y una base de crudos. El dorado no es fondo: se gana su lugar. */
+  --alpaca-50: #faf8f5;
+  --alpaca-100: #f4efe7;
+  --alpaca-200: #e6ddd2;
+  --alpaca-300: #d5c3a6;
+  --alpaca-400: #b08a5c;
+  --alpaca-500: #9d7d55;
+  --alpaca-600: #8b6b3f;
+  --alpaca-700: #73552f;
+  --alpaca-800: #4e3a20;
+  --alpaca-900: #2f2a25;
+
+  --gold-400: #d8ae60;
+  --gold-500: #c79a4b;
+  --gold-600: #b8893a;
+
+  --ink-50: #f5f1ec;
+  --ink-100: #ece7df;
+  --ink-200: #d2c9be;
+  --ink-300: #a69e95;
+  --ink-400: #8a827a;
+  --ink-500: #6b645e;
+  --ink-600: #4a4139;
+  --ink-700: #3a332d;
+  --ink-800: #2b2520;
+  --ink-900: #1f1b18;
+  --ink-950: #17130f;
+
+  --sage-500: #7bae6b;
+  --clay-500: #c66a5b;
+  --lake-500: #6b9eb5;
+
+  /* --- Semánticos (tema claro) --------------------------------------- */
+  --bg: #faf8f5;
+  --bg-subtle: var(--alpaca-100);
+  --bg-muted: var(--ink-100);
+  --bg-inverse: var(--alpaca-900);
+  --bg-overlay: rgba(47, 42, 37, 0.45);
+
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: var(--alpaca-100);
+
+  --text: #2f2a25;
+  --text-secondary: #6b645e;
+  --text-muted: #9c9590;
+  --text-inverse: #ffffff;
+  --text-brand: var(--alpaca-600);
+
+  --border: var(--alpaca-200);
+  --border-strong: #d3c4b2;
+  --border-subtle: #f0eae2;
+
+  /* El primario de la marca es el camel, no el negro. */
+  --accent: var(--alpaca-600);
+  --accent-hover: var(--alpaca-700);
+  --accent-text: #ffffff;
+
+  --gold: var(--gold-500);
+  --gold-soft: rgba(199, 154, 75, 0.14);
+
+  /* Los de estado son los originales, oscurecidos lo justo para que el
+     texto sobre el fondo suave siga siendo legible. */
+  --success: #5e8f4f;
+  --success-soft: rgba(123, 174, 107, 0.16);
+  --warning: #a4762a;
+  --warning-soft: rgba(212, 163, 83, 0.18);
+  --danger: #b04a3c;
+  --danger-soft: rgba(198, 106, 91, 0.16);
+  --info: #4b7f96;
+  --info-soft: rgba(107, 158, 181, 0.16);
+  /* Series de gráfico. Un solo tono por gráfico: todas las series del panel
+     son de una sola variable, así que el color no codifica identidad y no
+     hace falta una paleta categórica. */
+  --chart-1: var(--alpaca-600);
+  --chart-1-soft: rgba(139, 107, 63, 0.16);
+  --chart-grid: var(--border-subtle);
+
+  /* Series de gráfico. Un solo tono por gráfico: todas las series del panel
+     son de una sola variable, así que el color no codifica identidad y no
+     hace falta una paleta categórica. */
+
+  /* --- Tipografía ----------------------------------------------------- */
+  --font-display: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Escala modular 1.25 sobre 16px, con clamp para fluidez. */
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.8vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --text-5xl: clamp(2.75rem, 1.5rem + 5vw, 5rem);
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.75;
+
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.12em;
+  --tracking-widest: 0.2em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* --- Espaciado (base 4px) ------------------------------------------ */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --section-y: clamp(3.5rem, 2rem + 6vw, 7rem);
+  --gutter: clamp(1.25rem, 0.5rem + 3vw, 3rem);
+  --container: 1320px;
+  --container-narrow: 780px;
+
+  /* --- Formas --------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 22px;
+  --radius-full: 999px;
+
+  /* Sombras con tinte cálido: el gris neutro sobre crema se ve sucio. */
+  --shadow-xs: 0 1px 2px rgba(47, 42, 37, 0.05);
+  --shadow-sm: 0 1px 3px rgba(47, 42, 37, 0.08), 0 1px 2px rgba(47, 42, 37, 0.04);
+  --shadow: 0 4px 12px rgba(47, 42, 37, 0.1), 0 1px 3px rgba(47, 42, 37, 0.05);
+  --shadow-md: 0 10px 24px rgba(47, 42, 37, 0.11), 0 2px 6px rgba(47, 42, 37, 0.06);
+  --shadow-lg: 0 20px 48px rgba(47, 42, 37, 0.14), 0 4px 12px rgba(47, 42, 37, 0.07);
+  --shadow-focus: 0 0 0 3px rgba(199, 154, 75, 0.35);
+
+  /* --- Movimiento ------------------------------------------------------ */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 140ms;
+  --duration: 240ms;
+  --duration-slow: 420ms;
+
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-drawer: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   Tema oscuro. Se define en tres lugares a propósito:
+   - `prefers-color-scheme` cubre a quien nunca tocó el selector.
+   - `[data-theme="dark"]` gana cuando el usuario eligió explícitamente.
+   - el `:not([data-theme="light"])` evita que el sistema pise una elección.
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1f1b18;
+    --bg-subtle: var(--ink-800);
+    --bg-muted: #352f29;
+    --bg-inverse: var(--ink-50);
+    --bg-overlay: rgba(23, 19, 15, 0.7);
+
+    --surface: var(--ink-800);
+    --surface-raised: #352f29;
+    --surface-sunken: #1f1b18;
+
+    --text: var(--ink-50);
+    --text-secondary: var(--ink-200);
+    --text-muted: var(--ink-300);
+    --text-inverse: #1f1b18;
+    --text-brand: var(--gold-400);
+
+    --border: var(--ink-600);
+    --border-strong: #5c5149;
+    --border-subtle: var(--ink-700);
+
+    /* En oscuro el primario pasa a ser el dorado, como en el proyecto viejo. */
+    --accent: var(--gold-500);
+    --accent-hover: var(--gold-400);
+    --accent-text: #1f1b18;
+
+    --gold: var(--gold-500);
+    --gold-soft: rgba(199, 154, 75, 0.18);
+
+    --success: #7bae6b;
+    --success-soft: rgba(123, 174, 107, 0.18);
+    --warning: #d4a353;
+    --warning-soft: rgba(212, 163, 83, 0.18);
+    --danger: #c66a5b;
+    --danger-soft: rgba(198, 106, 91, 0.18);
+    --info: #6b9eb5;
+    --info-soft: rgba(107, 158, 181, 0.18);
+    --chart-1: var(--gold-400);
+    --chart-1-soft: rgba(216, 174, 96, 0.2);
+    --chart-grid: var(--ink-700);
+
+
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #1f1b18;
+  --bg-subtle: var(--ink-800);
+  --bg-muted: #352f29;
+  --bg-inverse: var(--ink-50);
+  --bg-overlay: rgba(23, 19, 15, 0.7);
+
+  --surface: var(--ink-800);
+  --surface-raised: #352f29;
+  --surface-sunken: #1f1b18;
+
+  --text: var(--ink-50);
+  --text-secondary: var(--ink-200);
+  --text-muted: var(--ink-300);
+  --text-inverse: #1f1b18;
+  --text-brand: var(--gold-400);
+
+  --border: var(--ink-600);
+  --border-strong: #5c5149;
+  --border-subtle: var(--ink-700);
+
+  /* En oscuro el primario pasa a ser el dorado, como en el proyecto viejo. */
+  --accent: var(--gold-500);
+  --accent-hover: var(--gold-400);
+  --accent-text: #1f1b18;
+
+  --gold: var(--gold-500);
+  --gold-soft: rgba(199, 154, 75, 0.18);
+
+  --success: #7bae6b;
+  --success-soft: rgba(123, 174, 107, 0.18);
+  --warning: #d4a353;
+  --warning-soft: rgba(212, 163, 83, 0.18);
+  --danger: #c66a5b;
+  --danger-soft: rgba(198, 106, 91, 0.18);
+  --info: #6b9eb5;
+  --info-soft: rgba(107, 158, 181, 0.18);
+  --chart-1: var(--gold-400);
+  --chart-1-soft: rgba(216, 174, 96, 0.2);
+  --chart-grid: var(--ink-700);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}

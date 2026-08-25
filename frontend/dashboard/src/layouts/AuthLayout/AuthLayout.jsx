@@ -5,13 +5,7 @@ import styles from './AuthLayout.module.css';
 export default function AuthLayout({ children }) {
   return (
     <div className={styles.layout}>
-      <ErrorBoundary>
-        <div className={styles.container}>
-          <div className={styles.card}>
-            {children}
-          </div>
-        </div>
-      </ErrorBoundary>
+      <ErrorBoundary>{children}</ErrorBoundary>
       <ToastContainer />
     </div>
   );

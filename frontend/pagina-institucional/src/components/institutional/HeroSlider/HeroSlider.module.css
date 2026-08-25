@@ -93,7 +93,7 @@
   display: inline-block;
   padding: 0.625rem 1.5rem;
   background-color: #fff;
-  color: #1f1b16;
+  color: #2f2a25;
   font-family: var(--font-label);
   font-size: 0.75rem;
   font-weight: 600;
@@ -106,8 +106,8 @@
 }
 
 .btnPrimary:hover {
-  background-color: #ffddae;
-  color: #1f1b16;
+  background-color: var(--color-primary-dim);
+  color: #2f2a25;
 }
 
 .btnSecondary {

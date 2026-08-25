@@ -1,0 +1,68 @@
+.page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background-color: var(--bg-subtle);
+  /* Un halo dorado tenue detrás del panel: la única licencia decorativa del
+     login, que si no queda como un formulario de intranet cualquiera. */
+  background-image: radial-gradient(
+    60rem 30rem at 50% -10%,
+    var(--gold-soft),
+    transparent 70%
+  );
+}
+
+.panel {
+  width: min(26rem, 100%);
+  padding: var(--space-8);
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.brandLogo {
+  height: 2.75rem;
+}
+
+.brandSub {
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--text);
+}
+
+.subtitle {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.footer {
+  margin-top: var(--space-6);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+}

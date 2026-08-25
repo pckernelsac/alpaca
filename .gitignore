@@ -50,3 +50,8 @@ coverage/
 # TypeScript (if any)
 *.tsbuildinfo
 next-env.d.ts
+
+# Python (stack nuevo)
+.venv/
+__pycache__/
+*.py[cod]

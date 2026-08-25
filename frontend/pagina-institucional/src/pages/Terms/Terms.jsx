@@ -1,3 +1,4 @@
+import SEO from '@/components/seo/SEO';
 import Eyebrow from '@/components/common/Eyebrow/Eyebrow';
 import Container from '@/components/layout/Container/Container';
 import CTA from '@/components/common/CTA/CTA';
@@ -62,6 +63,7 @@ const sidebarItems = sections.map((s) => ({ id: s.id, label: s.title }));
 export default function Terms() {
   return (
     <>
+      <SEO title="Terminos y Condiciones" />
       <Container>
         <header className={styles.hero}>
           <Eyebrow>Marco Legal</Eyebrow>
@@ -120,3 +122,6 @@ export default function Terms() {
     </>
   );
 }
+
+
+

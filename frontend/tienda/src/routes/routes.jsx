@@ -20,8 +20,14 @@ const ProfileSettings = lazy(() => import('@/pages/ProfileSettings/ProfileSettin
 const Login = lazy(() => import('@/pages/Login/Login'));
 const Register = lazy(() => import('@/pages/Register/Register'));
 const NotFound = lazy(() => import('@/pages/NotFound/NotFound'));
-
-const protectedRoutes = ['/account', '/addresses', '/wishlist', '/order/history', '/settings'];
+const AboutPage = lazy(() => import('@/pages/About/About'));
+const ContactPage = lazy(() => import('@/pages/Contact/Contact'));
+const ShippingPage = lazy(() => import('@/pages/Shipping/Shipping'));
+const CarePage = lazy(() => import('@/pages/Care/Care'));
+const PoliticasPage = lazy(() => import('@/pages/Politicas/Politicas'));
+const ShopPage = lazy(() => import('@/pages/Shop/Shop'));
+const SustainabilityPage = lazy(() => import('@/pages/Sustainability/Sustainability'));
+const ArtisansPage = lazy(() => import('@/pages/Artisans/Artisans'));
 
 export const routes = [
   { path: '/', element: <Home />, layout: 'main', protected: false },
@@ -42,6 +48,15 @@ export const routes = [
   { path: '/settings', element: <ProfileSettings />, layout: 'main', protected: true },
   { path: '/login', element: <Login />, layout: false, protected: false },
   { path: '/register', element: <Register />, layout: false, protected: false },
+  { path: '/about', element: <AboutPage />, layout: 'main', protected: false },
+  { path: '/contact', element: <ContactPage />, layout: 'main', protected: false },
+  { path: '/shipping', element: <ShippingPage />, layout: 'main', protected: false },
+  { path: '/care', element: <CarePage />, layout: 'main', protected: false },
+  { path: '/politicas', element: <PoliticasPage />, layout: 'main', protected: false },
+  { path: '/shop', element: <ShopPage />, layout: 'main', protected: false },
+  { path: '/sustainability', element: <SustainabilityPage />, layout: 'main', protected: false },
+  { path: '/artisans', element: <ArtisansPage />, layout: 'main', protected: false },
   { path: '/search', element: <Search />, layout: false, protected: false },
   { path: '*', element: <NotFound />, layout: 'main', protected: false },
 ];
+

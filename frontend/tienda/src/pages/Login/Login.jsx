@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { serviceProvider } from '@/providers/ServiceProvider';
 import logo from '@/assets/images/logo.png';
 import styles from './Login.module.css';
 
@@ -9,17 +10,33 @@ export default function Login() {
   const { login } = useAuth();
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.email || !form.password) {
       setError('Completa todos los campos');
       return;
     }
-    login('simulated_token_' + Date.now(), { name: 'Cliente Alpacart', email: form.email });
-    navigate('/account');
+    setLoading(true);
+    setError('');
+    try {
+      const result = await serviceProvider.auth.login(form.email, form.password);
+      const accessToken = result?.accessToken || result?.token;
+      const customer = result?.customer || result?.user;
+      if (accessToken) {
+        login(accessToken, customer || { email: form.email });
+        navigate('/account');
+      } else {
+        setError('Error al iniciar sesión');
+      }
+    } catch (err) {
+      setError(err.message || 'Credenciales inválidas');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,7 +55,9 @@ export default function Login() {
             <label className={styles.label}>Contrasena</label>
             <input className={styles.input} name="password" value={form.password} onChange={handleChange} type="password" placeholder="********" />
           </div>
-          <button className={styles.btn} type="submit">Ingresar</button>
+          <button className={styles.btn} type="submit" disabled={loading}>
+            {loading ? 'INGRESANDO...' : 'Ingresar'}
+          </button>
         </form>
         <p className={styles.footer}>¿No tienes cuenta? <Link to="/register" className={styles.link}>Registrate</Link></p>
       </div>

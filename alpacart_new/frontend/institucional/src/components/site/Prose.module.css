@@ -1,0 +1,16 @@
+.prose {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 68ch;
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+/* La primera línea entra en tamaño de bajada: marca dónde empieza a leerse. */
+.prose > p:first-child {
+  font-size: var(--text-xl);
+  color: var(--text);
+  font-family: var(--font-display);
+  line-height: var(--leading-snug);
+}

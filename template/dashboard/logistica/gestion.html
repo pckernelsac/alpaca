@@ -1,0 +1,590 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Shipments | Alpacart ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#fffbff",
+                    "background": "#fff8f5",
+                    "surface-dim": "#e3d8d1",
+                    "surface-variant": "#ece0d9",
+                    "on-surface-variant": "#504537",
+                    "surface-container": "#f8ece4",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#ece0d9",
+                    "outline-variant": "#d4c4b1",
+                    "on-background": "#201b16",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#dec1a8",
+                    "on-surface": "#201b16",
+                    "secondary-fixed": "#fbddc3",
+                    "secondary": "#705a46",
+                    "primary-container": "#9a6c14",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#7f5600",
+                    "surface-container-high": "#f2e6df",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffddae",
+                    "surface": "#fff8f5",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#d0e4ff",
+                    "on-primary-fixed-variant": "#614000",
+                    "surface-bright": "#fff8f5",
+                    "primary-fixed-dim": "#f6bd60",
+                    "on-tertiary-fixed-variant": "#004a79",
+                    "on-primary-fixed": "#281800",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#3f78ad",
+                    "inverse-on-surface": "#faeee7",
+                    "surface-container-low": "#fdf1ea",
+                    "inverse-surface": "#352f2b",
+                    "tertiary": "#215f92",
+                    "on-tertiary-fixed": "#001d34",
+                    "outline": "#827565",
+                    "on-secondary-fixed-variant": "#574330",
+                    "on-tertiary-container": "#fdfcff",
+                    "inverse-primary": "#f6bd60",
+                    "on-secondary-container": "#76604c",
+                    "secondary-container": "#fbddc3",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#9acbff",
+                    "primary": "#7c5400",
+                    "on-secondary-fixed": "#271808"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "topbar-height": "56px",
+                    "sidebar-width": "260px",
+                    "gutter": "16px",
+                    "density-comfortable": "16px",
+                    "container-margin": "32px",
+                    "density-compact": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "title-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+        /* Custom Table Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d4c4b1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #827565; }
+
+        .kpi-accent {
+            border-left: 2px solid #7c5400;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="flex flex-col h-full border-r border-outline-variant bg-secondary-container dark:bg-inverse-surface w-[260px] flex-shrink-0">
+<div class="p-gutter flex flex-col gap-unit">
+<div class="flex items-center gap-3 py-4">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary font-bold">A</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Alpacart Textiles</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Enterprise Logistics</p>
+</div>
+</div>
+<button class="mt-4 flex items-center justify-center gap-2 bg-primary text-on-primary py-3 px-4 rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">add</span>
+<span>New Shipment</span>
+</button>
+</div>
+<nav class="flex-1 mt-6 flex flex-col px-3 gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<!-- Active Tab: Shipments -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary dark:text-primary-fixed-dim font-bold bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Shipments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-label-md text-label-md">Production</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-md text-label-md">Notifications</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full bg-surface overflow-hidden">
+<!-- TopNavBar (Execution from JSON) -->
+<header class="flex justify-between items-center w-full px-container-margin h-topbar-height border-b border-outline-variant bg-surface shrink-0">
+<div class="flex items-center gap-8">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded-full pl-10 pr-4 py-1.5 w-80 text-body-sm focus:ring-2 focus:ring-primary-container focus:outline-none transition-all" placeholder="Search waybills, orders, or customers..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-3 py-1.5 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm border border-outline-variant rounded">
+<span class="material-symbols-outlined">filter_list</span>
+<span>Advanced Filters</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm border border-outline-variant rounded">
+<span class="material-symbols-outlined">download</span>
+<span>Export Data</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">sync</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">history</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of a logistics manager in a modern office environment, warm lighting, high-end professional photography style reflecting the Andean precision brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc3z9pPdYysFxMRK-_vC30PHUl9UgiCSfmZ7Pnd1A4c-w7hPtw_du3dihXTqpDX58Qtmp6iFw1m-9LfxqrUQ2K2gxQfgAX53deuuHoet1hgRlHiKjpvQ_sdbiOs1DywZ7GYYavL2wQN8cYhuvE_SviSN9bkZSo3QtkZzmZ2OrLRy-dXQ2bLbSUM8gDqiWy4VQnwmtbLGLmjlrRkjp0pYQc6a5U87OTMY0l0u8m99fzRbaw1lkpxJ_oiEfCqpmhPSa0AajCPyFmRb93">
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-container-margin custom-scrollbar">
+<!-- Page Header & KPIs -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Shipment Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Track and coordinate textile logistics across global carriers.</p>
+</div>
+<div class="flex gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary-container text-[10px] flex items-center justify-center text-white font-bold">DHL</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-inverse-surface text-[10px] flex items-center justify-center text-white font-bold">FDX</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-secondary text-[10px] flex items-center justify-center text-white font-bold">+4</div>
+</div>
+</div>
+</div>
+<!-- Bento-ish KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant kpi-accent">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">In Transit</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h3 class="font-headline-md text-headline-md">142</h3>
+<span class="text-primary font-label-sm text-label-sm">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant kpi-accent">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Ready for Pickup</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h3 class="font-headline-md text-headline-md">28</h3>
+<span class="text-error font-label-sm text-label-sm">-4%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant kpi-accent">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Delayed</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h3 class="font-headline-md text-headline-md">7</h3>
+<span class="text-error font-label-sm text-label-sm">High</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded border border-outline-variant kpi-accent">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Delivered Today</p>
+<div class="flex items-baseline gap-2 mt-1">
+<h3 class="font-headline-md text-headline-md">54</h3>
+<span class="text-primary font-label-sm text-label-sm">On Track</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Logistics Table -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm">
+<!-- Table Toolbar -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-high rounded p-0.5 border border-outline-variant">
+<button class="px-3 py-1 text-label-sm font-label-sm bg-surface rounded shadow-sm text-primary">All Shipments</button>
+<button class="px-3 py-1 text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors">Exceptions</button>
+<button class="px-3 py-1 text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors">Watchlist</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Displaying 1-15 of 842</span>
+<div class="flex border border-outline-variant rounded">
+<button class="p-1 hover:bg-surface-container-high border-r border-outline-variant"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 hover:bg-surface-container-high"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- Main Table -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F7F2EA] border-b border-outline-variant">
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Guía (Waybill)</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Pedido</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Cliente</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Transportista</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Estado</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Ciudad</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Despacho</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant">Estimada</th>
+<th class="px-4 py-3 font-label-sm text-label-sm text-on-surface-variant text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors group">
+<td class="px-4 py-3 font-label-md text-label-md text-primary font-bold">ALPC-TR-88294</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">ORD-4421</td>
+<td class="px-4 py-3 font-body-sm text-body-sm font-medium">Textiles Del Sur S.A.</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#FFCC00]"></span>
+<span class="font-body-sm text-body-sm">DHL Express</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm">In Transit</span>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Lima, PE</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 12, 2023</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 15, 2023</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors" title="Track"><span class="material-symbols-outlined">location_on</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Timeline"><span class="material-symbols-outlined">timeline</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Print Label"><span class="material-symbols-outlined">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors group">
+<td class="px-4 py-3 font-label-md text-label-md text-primary font-bold">ALPC-TR-88301</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">ORD-4425</td>
+<td class="px-4 py-3 font-body-sm text-body-sm font-medium">Alpaca Boutique NYC</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#4D148C]"></span>
+<span class="font-body-sm text-body-sm">FedEx International</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm">Delayed</span>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">New York, US</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 11, 2023</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-error font-medium">Oct 14, 2023</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors" title="Track"><span class="material-symbols-outlined">location_on</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Timeline"><span class="material-symbols-outlined">timeline</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Print Label"><span class="material-symbols-outlined">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors group">
+<td class="px-4 py-3 font-label-md text-label-md text-primary font-bold">ALPC-TR-88310</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">ORD-4428</td>
+<td class="px-4 py-3 font-body-sm text-body-sm font-medium">Andean Fabrics Ltd.</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm">Local Fleet #4</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm">Ready for Pickup</span>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Arequipa, PE</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">---</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 16, 2023</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors" title="Track"><span class="material-symbols-outlined">location_on</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Timeline"><span class="material-symbols-outlined">timeline</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Print Label"><span class="material-symbols-outlined">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors group">
+<td class="px-4 py-3 font-label-md text-label-md text-primary font-bold">ALPC-TR-88280</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">ORD-4410</td>
+<td class="px-4 py-3 font-body-sm text-body-sm font-medium">Milan Wool Dist.</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#FFCC00]"></span>
+<span class="font-body-sm text-body-sm">DHL Global</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm">Delivered</span>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Milan, IT</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 08, 2023</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 12, 2023</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors" title="Track"><span class="material-symbols-outlined">location_on</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Timeline"><span class="material-symbols-outlined">timeline</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Print Label"><span class="material-symbols-outlined">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors group">
+<td class="px-4 py-3 font-label-md text-label-md text-primary font-bold">ALPC-TR-88322</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">ORD-4430</td>
+<td class="px-4 py-3 font-body-sm text-body-sm font-medium">Cuzco Craft Co.</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm">Local Fleet #2</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm">In Transit</span>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Cusco, PE</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 13, 2023</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 14, 2023</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors" title="Track"><span class="material-symbols-outlined">location_on</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Timeline"><span class="material-symbols-outlined">timeline</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Print Label"><span class="material-symbols-outlined">print</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-[#FCFBF9] transition-colors group">
+<td class="px-4 py-3 font-label-md text-label-md text-primary font-bold">ALPC-TR-88335</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">ORD-4435</td>
+<td class="px-4 py-3 font-body-sm text-body-sm font-medium">Global Fibers Inc.</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#4D148C]"></span>
+<span class="font-body-sm text-body-sm">FedEx Express</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm">In Transit</span>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Tokyo, JP</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 13, 2023</td>
+<td class="px-4 py-3 font-body-sm text-body-sm">Oct 18, 2023</td>
+<td class="px-4 py-3 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary transition-colors" title="Track"><span class="material-symbols-outlined">location_on</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Timeline"><span class="material-symbols-outlined">timeline</span></button>
+<button class="p-1 hover:text-primary transition-colors" title="Print Label"><span class="material-symbols-outlined">print</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Map / Quick Insights -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-surface-container-low border border-outline-variant rounded-lg p-6 relative overflow-hidden min-h-[400px]">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<!-- This would be an interactive map in a real app -->
+<div class="w-full h-full bg-cover bg-center" data-alt="A stylized minimalist digital logistics map showing shipment routes across South America and the globe, focusing on Peru. The map uses warm gold and earth tones on a clean off-white background with subtle glowing data nodes representing shipping hubs." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWHqODEDLuCBpXz7Mp9j8DEWQlvFzCdA2tHpXgIs3ATlatwzCxR0hP2xmUCjRHPdbFKfTONDvV5XOYLwzzZhE1N_uSRpQsZH8-DIicZs0grJj5DzCedVETjUdKMvKgUmRpn0ff2VPBEhSH_DwCP_YveL2gdSzYHfmfVnQLKvDWnwTu4w6xtfDY0UZINLrmLO3OulSWsZbkPCERVOSZyRSW6fQtDA5FwMncTuZQ8ulU2ltRveVvrjZYRrm1wQjlg28zgPi1L_F5TbzT')"></div>
+</div>
+<div class="relative z-10">
+<h4 class="font-title-lg text-title-lg text-on-surface mb-2">Live Fleet Distribution</h4>
+<div class="flex gap-4 mb-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-label-sm font-label-sm">Active Shipments</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span>
+<span class="text-label-sm font-label-sm">Warehouse Hubs</span>
+</div>
+</div>
+<div class="flex flex-col gap-4 max-w-xs">
+<div class="bg-surface p-3 border border-outline-variant rounded flex justify-between items-center shadow-sm">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">LIMA HUB</p>
+<p class="text-body-md font-body-md">42 Departures Today</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward</span>
+</div>
+<div class="bg-surface p-3 border border-outline-variant rounded flex justify-between items-center shadow-sm">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">CUZCO HUB</p>
+<p class="text-body-md font-body-md">18 Departures Today</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-6">
+<h4 class="font-title-lg text-title-lg text-on-surface mb-4">Carrier Performance</h4>
+<div class="flex flex-col gap-6">
+<div class="space-y-2">
+<div class="flex justify-between text-label-md font-label-md">
+<span>DHL Express</span>
+<span>98.2% OTD</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 98%;"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-label-md font-label-md">
+<span>FedEx Int.</span>
+<span>91.5% OTD</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 91%;"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-label-md font-label-md">
+<span>Local Fleet</span>
+<span>84.0% OTD</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-on-surface-variant rounded-full" style="width: 84%;"></div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant">
+<h5 class="text-label-sm font-label-sm text-on-surface-variant uppercase mb-3">Recent Incident Report</h5>
+<div class="flex items-start gap-3 p-3 bg-error-container rounded">
+<span class="material-symbols-outlined text-error">warning</span>
+<div>
+<p class="text-label-md font-label-md text-on-error-container">Weather delay in Chicago hub affecting 4 shipments to NYC Boutique.</p>
+<button class="mt-2 text-label-sm font-label-sm underline text-on-error-container">Notify Customers</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Quick Search (Command Palette Simulation) -->
+<div class="hidden fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm flex items-start justify-center pt-[153px]" id="command-palette">
+<div class="bg-surface w-full max-w-2xl rounded-xl shadow-2xl border border-outline-variant overflow-hidden">
+<div class="flex items-center px-4 py-3 border-b border-outline-variant">
+<span class="material-symbols-outlined text-outline mr-3">search</span>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-title-md font-body-md outline-none" placeholder="Type a command or search shipments..." type="text">
+<span class="px-1.5 py-0.5 rounded border border-outline-variant text-[10px] text-on-surface-variant">ESC</span>
+</div>
+<div class="p-2">
+<div class="text-label-sm font-label-sm text-on-surface-variant px-3 py-2 uppercase">Recent Shipments</div>
+<div class="hover:bg-surface-container-high p-3 rounded flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<div class="flex-1">
+<p class="text-body-md font-medium">ALPC-TR-88294</p>
+<p class="text-label-sm text-on-surface-variant">Customer: Textiles Del Sur • Status: In Transit</p>
+</div>
+<span class="text-label-sm text-on-surface-variant">Open</span>
+</div>
+<div class="hover:bg-surface-container-high p-3 rounded flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<div class="flex-1">
+<p class="text-body-md font-medium">ALPC-TR-88301</p>
+<p class="text-label-sm text-on-surface-variant">Customer: Alpaca Boutique NYC • Status: Delayed</p>
+</div>
+<span class="text-label-sm text-on-surface-variant">Open</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-2 border-t border-outline-variant flex justify-between">
+<div class="flex gap-4 px-2">
+<div class="flex items-center gap-1.5"><span class="px-1 rounded border border-outline-variant text-[10px]">↑↓</span> <span class="text-[10px] text-on-surface-variant">Navigate</span></div>
+<div class="flex items-center gap-1.5"><span class="px-1 rounded border border-outline-variant text-[10px]">↵</span> <span class="text-[10px] text-on-surface-variant">Select</span></div>
+</div>
+<div class="text-[10px] text-on-surface-variant px-2">Alpacart QuickSearch v1.2</div>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interaction for command palette (Ctrl+K or Cmd+K)
+        document.addEventListener('keydown', function(e) {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                const palette = document.getElementById('command-palette');
+                palette.classList.toggle('hidden');
+            }
+            if (e.key === 'Escape') {
+                document.getElementById('command-palette').classList.add('hidden');
+            }
+        });
+
+        // Close palette on backdrop click
+        document.getElementById('command-palette').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+
+        // Hover animations for table rows could be handled with CSS purely, 
+        // but adding simple JS to track specific interaction states for potential future use.
+        console.log("Alpacart ERP Logistics Module Loaded.");
+    </script>
+</body></html>

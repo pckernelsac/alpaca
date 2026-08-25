@@ -1,0 +1,66 @@
+/* Línea de tiempo vertical: el hilo une los ocho pasos y deja claro que es
+   una secuencia, no una lista de servicios. */
+.linea {
+  display: grid;
+  gap: var(--space-12);
+  max-width: 860px;
+}
+
+.paso {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.marca {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  align-self: stretch;
+}
+
+.numero {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--text-brand);
+  line-height: 1;
+}
+
+/* El hilo baja desde el número hasta el paso siguiente; el último no lo lleva. */
+.punto {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--border-strong), transparent);
+}
+
+.paso:last-child .punto {
+  display: none;
+}
+
+.contenido {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.paso:last-child .contenido {
+  border-bottom: 0;
+}
+
+.icono {
+  color: var(--text-muted);
+}
+
+.titulo {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+}
+
+.texto {
+  margin-top: var(--space-3);
+  color: var(--text-secondary);
+  max-width: 56ch;
+}

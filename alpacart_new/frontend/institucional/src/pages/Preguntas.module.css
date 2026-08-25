@@ -1,0 +1,104 @@
+.grilla {
+  display: grid;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+.indice {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.indiceEnlace {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  transition: background var(--duration) var(--ease-out);
+}
+
+.indiceEnlace:hover {
+  background: var(--bg-subtle);
+  color: var(--text);
+}
+
+.indiceCuenta {
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.bloques {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.categoria {
+  font-size: var(--text-2xl);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  /* Compensa la cabecera fija al saltar desde el índice. */
+  scroll-margin-top: 120px;
+}
+
+.preguntas {
+  display: grid;
+}
+
+.pregunta {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.enunciado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--text-lg);
+  font-family: var(--font-display);
+}
+
+/* Safari dibuja su propio triángulo aunque `list-style` esté en none. */
+.enunciado::-webkit-details-marker {
+  display: none;
+}
+
+.enunciado:hover {
+  color: var(--text-brand);
+}
+
+.flecha {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.pregunta[open] .flecha {
+  transform: rotate(180deg);
+}
+
+.respuesta {
+  padding-bottom: var(--space-6);
+  max-width: 68ch;
+  color: var(--text-secondary);
+  animation: fade-in var(--duration) var(--ease-out);
+}
+
+@media (min-width: 900px) {
+  .grilla {
+    grid-template-columns: 240px 1fr;
+    gap: var(--space-16);
+  }
+
+  .indice {
+    position: sticky;
+    top: 120px;
+  }
+}

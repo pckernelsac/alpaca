@@ -1,0 +1,33 @@
+.heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-10);
+}
+
+.center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  margin-top: var(--space-2);
+}
+
+.description {
+  margin-top: var(--space-4);
+  max-width: 62ch;
+  color: var(--text-secondary);
+}
+
+.center .description {
+  margin-inline: auto;
+}
+
+.actions {
+  flex-shrink: 0;
+}

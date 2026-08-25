@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; import useLogisticsStore from '../stores/useLogisticsStore'; export default function useLogistics() { const s = useLogisticsStore(); useEffect(() => { if (s.shipments.length === 0) s.fetchAll(); }, []); return s; }

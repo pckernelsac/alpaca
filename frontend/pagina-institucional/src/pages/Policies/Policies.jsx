@@ -1,3 +1,4 @@
+import SEO from '@/components/seo/SEO';
 import Eyebrow from '@/components/common/Eyebrow/Eyebrow';
 import Container from '@/components/layout/Container/Container';
 import CTA from '@/components/common/CTA/CTA';
@@ -63,6 +64,7 @@ const sidebarItems = sections.map((s) => ({ id: s.id, label: s.title }));
 export default function Policies() {
   return (
     <>
+      <SEO title="Politicas de Privacidad" />
       <Container>
         <header className={styles.hero}>
           <Eyebrow>Privacidad y Confianza</Eyebrow>
@@ -137,3 +139,6 @@ export default function Policies() {
     </>
   );
 }
+
+
+

@@ -4,42 +4,49 @@
      Based on template/pagina/light/ audit
      ======================================== */
 
-  /* Brand */
-  --color-primary: #7c5400;
-  --color-primary-light: #a67c00;
-  --color-primary-dark: #5a3d00;
-  --color-primary-dim: #f6bd60;
-  --color-secondary: #685c51;
-  --color-secondary-light: #7a6d62;
-  --color-secondary-dark: #50453b;
+  /* Brand — paleta original de Alpacart: camel de marca, dorado de acento */
+  --color-primary: #8b6b3f;
+  --color-primary-light: #9d7d55;
+  --color-primary-dark: #73552f;
+  --color-primary-dim: #c79a4b;
+  /* El secundario es un botón sólido con texto claro encima: neutro cálido,
+     no un crudo, o el texto queda ilegible. */
+  --color-secondary: #6b645e;
+  --color-secondary-light: #7a736c;
+  --color-secondary-dark: #4a4139;
 
   /* Text */
-  --color-text: #1f1b16;
-  --color-text-secondary: #504537;
-  --color-text-light: #9c9288;
+  --color-text: #2f2a25;
+  --color-text-secondary: #6b645e;
+  --color-text-light: #9c9590;
+  --color-text-muted: #9c9590;
   --color-text-inverse: #ffffff;
 
   /* Background */
-  --color-bg: #fff8f4;
-  --color-bg-secondary: #faf0e8;
-  --color-bg-tertiary: #f0e4d8;
-  --color-bg-hover: #e8d9cb;
-  --color-bg-inverse: #1f1b16;
+  --color-bg: #faf8f5;
+  --color-bg-secondary: #f4efe7;
+  --color-bg-tertiary: #ece7df;
+  --color-bg-hover: #e6ddd2;
+  --color-bg-inverse: #2f2a25;
 
   /* Surface */
-  --color-surface: #fff8f4;
-  --color-surface-container: #f6ece4;
-  --color-surface-variant: #ebe1d9;
+  --color-surface: #ffffff;
+  --color-surface-dim: #f0eae2;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #faf8f5;
+  --color-surface-container: #f4efe7;
+  --color-surface-container-high: #ece7df;
+  --color-surface-variant: #e6ddd2;
 
   /* Borders */
-  --color-border: #d4c4b1;
-  --color-border-light: #e8d9cb;
+  --color-border: #e6ddd2;
+  --color-border-light: #f0eae2;
 
-  /* Status */
-  --color-success: #2e7d32;
-  --color-warning: #f9a825;
-  --color-error: #ba1a1a;
-  --color-info: #1565c0;
+  /* Status — los del proyecto, oscurecidos lo justo para leerlos sobre crudo */
+  --color-success: #5e8f4f;
+  --color-warning: #a4762a;
+  --color-error: #b04a3c;
+  --color-info: #4b7f96;
 
   /* Typography families */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -87,10 +94,10 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(31, 27, 22, 0.08);
-  --shadow-md: 0 4px 12px rgba(31, 27, 22, 0.1);
-  --shadow-lg: 0 10px 30px rgba(31, 27, 22, 0.12);
-  --shadow-xl: 0 20px 50px rgba(31, 27, 22, 0.15);
+  --shadow-sm: 0 1px 3px rgba(47, 42, 37, 0.08);
+  --shadow-md: 0 4px 12px rgba(47, 42, 37, 0.1);
+  --shadow-lg: 0 10px 30px rgba(47, 42, 37, 0.12);
+  --shadow-xl: 0 20px 50px rgba(47, 42, 37, 0.15);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -112,37 +119,43 @@
    DARK THEME
    Based on template/pagina/dark/ audit
    ======================================== */
-[data-theme='dark'] {
-  --color-primary: #e9c176;
-  --color-primary-light: #f0d48f;
-  --color-primary-dark: #d4a84e;
-  --color-primary-dim: #b8860b;
-  --color-secondary: #ffb597;
-  --color-secondary-light: #ffc7b0;
-  --color-secondary-dark: #d97a5e;
+[data-theme="dark"] {
+  /* En oscuro el primario pasa a ser el dorado, como en el resto del proyecto */
+  --color-primary: #c79a4b;
+  --color-primary-light: #d8ae60;
+  --color-primary-dark: #b8893a;
+  --color-primary-dim: #d8ae60;
+  --color-secondary: #4a4139;
+  --color-secondary-light: #5c5149;
+  --color-secondary-dark: #3a332d;
 
-  --color-text: #e5e2e3;
-  --color-text-secondary: #d1c5b4;
-  --color-text-light: #7a7779;
-  --color-text-inverse: #131314;
+  --color-text: #f5f1ec;
+  --color-text-secondary: #d2c9be;
+  --color-text-light: #a69e95;
+  --color-text-muted: #a69e95;
+  --color-text-inverse: #1f1b18;
 
-  --color-bg: #131314;
-  --color-bg-secondary: #1a1a1c;
-  --color-bg-tertiary: #222224;
-  --color-bg-hover: #2a2a2d;
-  --color-bg-inverse: #e5e2e3;
+  --color-bg: #1f1b18;
+  --color-bg-secondary: #2b2520;
+  --color-bg-tertiary: #352f29;
+  --color-bg-hover: #3a332d;
+  --color-bg-inverse: #f5f1ec;
 
-  --color-surface: #131314;
-  --color-surface-container: #201f20;
-  --color-surface-variant: #353436;
+  --color-surface: #2b2520;
+  --color-surface-dim: #1a1714;
+  --color-surface-container-lowest: #17130f;
+  --color-surface-container-low: #1f1b18;
+  --color-surface-container: #2b2520;
+  --color-surface-container-high: #352f29;
+  --color-surface-variant: #3a332d;
 
-  --color-border: #4e4639;
-  --color-border-light: #353436;
+  --color-border: #4a4139;
+  --color-border-light: #3a332d;
 
-  --color-success: #66bb6a;
-  --color-warning: #ffa726;
-  --color-error: #ffb4ab;
-  --color-info: #42a5f5;
+  --color-success: #7bae6b;
+  --color-warning: #d4a353;
+  --color-error: #c66a5b;
+  --color-info: #6b9eb5;
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;

@@ -1,0 +1,35 @@
+# Puertos deliberadamente distintos del proyecto viejo (5446/6387) y de
+# cualquier otro stack local, para que ambos puedan convivir.
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: alpacart-new-pg
+    ports:
+      - "5448:5432"
+    environment:
+      POSTGRES_DB: alpacart_new
+      POSTGRES_USER: alpacart
+      POSTGRES_PASSWORD: alpacart
+    volumes:
+      # PG18 cambio la convencion: se monta /var/lib/postgresql (no .../data),
+      # que es lo que permite pg_upgrade --link sin cruzar el punto de montaje.
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alpacart -d alpacart_new"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+
+  redis:
+    image: redis:7-alpine
+    container_name: alpacart-new-redis
+    ports:
+      - "6389:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

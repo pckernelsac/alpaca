@@ -1,0 +1,1 @@
+import { useEffect } from 'react'; import useCatalogStore from '../stores/useCatalogStore'; export default function useCatalog() { const store = useCatalogStore(); useEffect(() => { if (store.products.length === 0) store.fetchAll(); }, []); return store; }

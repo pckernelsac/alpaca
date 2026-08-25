@@ -52,7 +52,7 @@
 }
 
 .btnPrimary:hover {
-  background-color: #ffddae;
+  background-color: var(--color-primary-dim);
 }
 
 .divider {

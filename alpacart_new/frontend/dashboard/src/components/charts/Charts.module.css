@@ -1,0 +1,137 @@
+.chart {
+  position: relative;
+  width: 100%;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Cuadrícula recesiva: guía la lectura sin competir con los datos. */
+.grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.axisLabel {
+  fill: var(--text-muted);
+  font-size: 10px;
+  font-family: var(--font-sans);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* El valor va con tinta de texto, no con el color de la serie. */
+.value {
+  fill: var(--text-secondary);
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  fill: var(--chart-1);
+  transition: fill var(--duration-fast) var(--ease-out);
+}
+
+.barActive {
+  fill: var(--chart-1);
+  filter: brightness(1.12);
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  min-width: 8rem;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  z-index: var(--z-base);
+}
+
+.tooltipTitle {
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tooltipValue {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.tooltipHint {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.empty {
+  padding: var(--space-8) 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* --- Ranking horizontal --------------------------------------------------- */
+.ranked {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.rankedRow {
+  display: grid;
+  grid-template-columns: minmax(6rem, 11rem) 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.rankedName {
+  font-size: var(--text-sm);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rankedTrack {
+  position: relative;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--chart-1-soft);
+  overflow: hidden;
+}
+
+.rankedBar {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background-color: var(--chart-1);
+}
+
+.rankedValue {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .rankedRow {
+    grid-template-columns: 1fr auto;
+  }
+
+  .rankedTrack {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+}

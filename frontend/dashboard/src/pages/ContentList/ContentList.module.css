@@ -1,0 +1,665 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 6rem;
+}
+
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .headerSection {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+  margin-bottom: 0.25rem;
+}
+
+.breadcrumbActive {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.headerActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.5rem;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.btnOutline:hover {
+  background-color: var(--color-surface-container-low);
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  opacity: 0.9;
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.75rem;
+}
+
+.filterLeft {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 1rem;
+  border-right: 1px solid var(--color-outline-variant);
+}
+
+.filterGroup:last-child {
+  border-right: none;
+}
+
+.filterLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  white-space: nowrap;
+}
+
+.filterSelect {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary);
+  cursor: pointer;
+  outline: none;
+  padding: 0.125rem 0;
+}
+
+.viewToggle {
+  display: flex;
+  background-color: var(--color-surface-container);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-outline-variant);
+}
+
+.viewBtn {
+  padding: 0.375rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.15s;
+}
+
+.viewActive {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.tableCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table thead th {
+  background-color: var(--color-surface-container-high);
+  padding: 0.75rem 1rem;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-outline-variant);
+  white-space: nowrap;
+}
+
+.thCheck {
+  width: 2.5rem;
+}
+
+.thActions {
+  text-align: right;
+  width: 10rem;
+}
+
+.table tbody td {
+  padding: 0.75rem 1rem;
+  font-size: 14px;
+  color: var(--color-on-surface);
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.tableRow {
+  transition: background-color 0.15s;
+}
+
+.tableRow:hover {
+  background-color: var(--color-surface-container-low);
+}
+
+.tdCheck {
+  width: 2.5rem;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.titleCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.titleThumb {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--color-surface-container-high);
+  border: 1px solid var(--color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.thumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-surface-variant);
+}
+
+.titleText {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-on-surface);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.titleSlug {
+  font-size: 11px;
+  color: var(--color-on-surface-variant);
+  margin: 0.125rem 0 0;
+}
+
+.typeBadge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 0.125rem;
+  white-space: nowrap;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.625rem;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+}
+
+.authorCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.authorAvatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+
+.authorName {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.tdDate {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.125rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.tableRow:hover .actions {
+  opacity: 1;
+}
+
+.actionBtn {
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: color 0.15s;
+}
+
+.actionBtn:hover {
+  color: var(--color-primary);
+}
+
+.actionDanger {
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: var(--color-error);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s;
+}
+
+.actionDanger:hover {
+  background-color: var(--color-error-container);
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-surface-container-low);
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.paginationInfo {
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+}
+
+.paginationBtns {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.pageBtn {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--color-outline);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.15s;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background-color: var(--color-surface-container-high);
+}
+
+.pageBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pageActive {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: 0.25rem;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pageEllipsis {
+  padding: 0 0.25rem;
+  color: var(--color-outline);
+  font-size: 12px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .cardGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.cardImage {
+  position: relative;
+  height: 12rem;
+  background-color: var(--color-surface-variant);
+  overflow: hidden;
+}
+
+.cardImageBg {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-surface-container-high);
+  transition: transform 0.5s;
+}
+
+.card:hover .cardImageBg {
+  transform: scale(1.05);
+}
+
+.cardImageIcon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.cardStatus {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.cardStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+.cardEditBtn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card:hover .cardEditBtn {
+  opacity: 1;
+}
+
+.cardEditIcon {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cardEditIcon:hover {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.cardBody {
+  padding: 1rem;
+}
+
+.cardType {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.cardAuthor {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cardDate {
+  font-size: 13px;
+}
+
+.cardAdd {
+  border: 2px dashed var(--color-outline-variant);
+  border-radius: 0.75rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 20rem;
+}
+
+.cardAdd:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.cardAddText {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.statsFooter {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .statsFooter {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.statAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.25rem;
+  background-color: var(--color-primary);
+}
+
+.statIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-on-surface-variant);
+  margin: 0;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  margin: 0.125rem 0 0;
+}

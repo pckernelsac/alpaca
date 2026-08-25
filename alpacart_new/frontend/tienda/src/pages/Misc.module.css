@@ -1,0 +1,94 @@
+/* --- Colecciones ---------------------------------------------------------- */
+.collectionGrid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: var(--space-8); padding-bottom: var(--space-24);
+}
+.collectionCard { display: flex; flex-direction: column; gap: var(--space-5); }
+.collectionMedia {
+  aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-md);
+  background-color: var(--bg-muted);
+}
+.collectionMedia img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+.collectionCard:hover .collectionMedia img { transform: scale(1.04); }
+.collectionName { font-family: var(--font-display); font-size: var(--text-2xl); }
+.collectionText {
+  font-size: var(--text-sm); color: var(--text-secondary);
+  line-height: var(--leading-relaxed); margin-top: var(--space-2);
+}
+.collectionCount {
+  font-size: var(--text-2xs); letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: var(--text-muted); margin-top: var(--space-3);
+}
+
+/* --- Favoritos ------------------------------------------------------------- */
+.wishlistGrid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--space-6);
+}
+.wishCard { display: flex; flex-direction: column; gap: var(--space-3); }
+.wishMedia {
+  aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--radius-md);
+  background-color: var(--bg-muted);
+}
+.wishMedia img { width: 100%; height: 100%; object-fit: cover; }
+.wishName { font-family: var(--font-display); font-size: var(--text-lg); }
+.wishSku { font-size: var(--text-xs); color: var(--text-muted); }
+
+/* --- FAQ -------------------------------------------------------------------- */
+.faqWrap { max-width: 46rem; margin-inline: auto; }
+.faqSection { margin-bottom: var(--space-12); }
+.faqCategory {
+  font-family: var(--font-display); font-size: var(--text-2xl);
+  margin-bottom: var(--space-5);
+}
+.faqItem { border-bottom: 1px solid var(--border-subtle); }
+.faqTrigger {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  width: 100%; padding-block: var(--space-5); text-align: left;
+  font-size: var(--text-base); color: var(--text);
+}
+.faqIcon { color: var(--text-muted); flex-shrink: 0; transition: transform var(--duration) var(--ease-out); }
+.faqIconOpen { transform: rotate(180deg); }
+.faqAnswer {
+  padding-bottom: var(--space-5); font-size: var(--text-sm);
+  line-height: var(--leading-relaxed); color: var(--text-secondary);
+  animation: rise-in var(--duration-fast) var(--ease-out);
+}
+.faqFoot {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+  padding-block: var(--space-12) var(--space-24); text-align: center;
+  font-size: var(--text-sm); color: var(--text-secondary);
+}
+
+/* --- Contacto ---------------------------------------------------------------- */
+.contactWrap {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-16);
+  align-items: start; padding-bottom: var(--space-24);
+  max-width: 62rem; margin-inline: auto;
+}
+.contactAside { display: flex; flex-direction: column; gap: var(--space-8); }
+.contactBlock {
+  font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-relaxed);
+}
+
+/* --- Confirmación ------------------------------------------------------------- */
+.confirmed {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: var(--space-4); padding-block: var(--space-24); max-width: 34rem; margin-inline: auto;
+}
+.confirmedIcon {
+  display: grid; place-items: center; width: 4.5rem; height: 4.5rem;
+  border-radius: var(--radius-full); background-color: var(--success-soft);
+  color: var(--success); margin-bottom: var(--space-2);
+}
+.confirmedActions {
+  display: flex; gap: var(--space-3); margin-top: var(--space-4); flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .contactWrap { grid-template-columns: 1fr; gap: var(--space-10); }
+}
