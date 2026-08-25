@@ -1,8 +1,0 @@
-.hero { position: relative; width: 100%; height: 870px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.bg { position: absolute; inset: 0; background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCBQdtWm7n55rLHsW4_MGAT1yi2ZhFaNyJ15l78n-h8Y93-jSXR7q8ecFIYTpbfaAVjvoxrdgtUtyHqfwANrQ4krjjWZ3NhsHoQUmO19tKRiwA26zo-icF_mAygud5ZjzecLn8hnCRJlYa8NvAI8OmBPitHDu0Wxgy5OygyzStPW0ejIKftmu518HSIk4WTIcihMkmTCIMS8RKC7znwieb4BWm01qZrSkUvBRd3gEhw1XGbygyzkx0dlqpCiFEqubY09nWrME6NdeiU); background-size: cover; background-position: center; }
-.overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(31,27,22,0) 0%, rgba(31,27,22,0.4) 100%); }
-.content { position: relative; z-index: 1; text-align: center; max-width: 768px; padding: 0 var(--spacing-lg); }
-.eyebrow { font-family: var(--font-label); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-text-inverse); display: block; margin-bottom: var(--spacing-gutter, 24px); }
-.title { font-family: var(--font-display); font-size: 64px; line-height: 1.1; font-weight: 400; letter-spacing: -0.02em; color: var(--color-text-inverse); margin-bottom: var(--spacing-md); }
-.subtitle { font-family: var(--font-body); font-size: 18px; line-height: 1.6; color: var(--color-text-inverse); opacity: 0.9; max-width: 640px; margin: 0 auto; font-style: italic; }
-@media (max-width: 768px) { .hero { height: 60vh; } .title { font-size: 40px; } }

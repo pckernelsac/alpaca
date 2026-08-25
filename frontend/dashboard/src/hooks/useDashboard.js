@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import useDashboardStore from '../stores/useDashboardStore'; export default function useDashboard() { const store = useDashboardStore(); useEffect(() => { if (!store.kpis) store.fetchKpis(); }, []); return store; }

@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import useInventoryStore from '../stores/useInventoryStore'; export default function useInventory() { const s = useInventoryStore(); useEffect(() => { if (!s.kpis) s.fetchAll(); }, []); return s; }

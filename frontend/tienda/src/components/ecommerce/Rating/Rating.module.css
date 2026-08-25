@@ -1,7 +1,0 @@
-.wrapper { display: inline-flex; align-items: center; gap: 0.125rem; }
-.sm .star { font-size: 0.875rem; }
-.md .star { font-size: 1rem; }
-.lg .star { font-size: 1.25rem; }
-.star { color: var(--color-border); }
-.filled { color: #C79A4B; }
-.count { font-size: 0.75rem; color: var(--color-text-light); margin-left: 0.25rem; }

@@ -1,1 +1,0 @@
-{ "name": "@alpacart/shared-hooks", "version": "1.0.0", "main": "src/index.js", "types": "src/index.js", "dependencies": { "react": "^19.0.0" } }

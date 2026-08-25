@@ -1,5 +1,0 @@
-.section { padding: var(--spacing-xl) 0; }
-.grid { max-width: 1440px; margin: 0 auto; padding: 0 var(--spacing-lg); display: grid; grid-template-columns: 1fr; gap: var(--spacing-xl); }
-@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 120px; } }
-.offset { margin-top: 0; }
-@media (min-width: 768px) { .offset { margin-top: var(--spacing-xl); } }

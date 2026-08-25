@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import useSettingsStore from '../stores/useSettingsStore'; export default function useSettings() { const s = useSettingsStore(); useEffect(() => { if (!s.settings) s.fetch(); }, []); return s; }

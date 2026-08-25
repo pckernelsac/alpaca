@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import usePaymentsStore from '../stores/usePaymentsStore'; export default function usePayments() { const s = usePaymentsStore(); useEffect(() => { if (!s.summary) s.fetchAll(); }, []); return s; }

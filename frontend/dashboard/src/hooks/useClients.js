@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import useClientsStore from '../stores/useClientsStore'; export default function useClients() { const s = useClientsStore(); useEffect(() => { if (s.clients.length === 0) s.fetchAll(); }, []); return s; }

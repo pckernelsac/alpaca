@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import useUsersStore from '../stores/useUsersStore'; export default function useUsers() { const store = useUsersStore(); useEffect(() => { if (store.users.length === 0) store.fetchAll(); }, []); return store; }

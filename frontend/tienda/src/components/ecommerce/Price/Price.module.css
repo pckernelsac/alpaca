@@ -1,9 +1,0 @@
-.wrapper { display: inline-flex; align-items: center; gap: 0.5rem; }
-.sm .current { font-size: 0.875rem; font-weight: 600; }
-.sm .original { font-size: 0.75rem; }
-.md .current { font-size: 1.125rem; font-weight: 700; }
-.md .original { font-size: 0.875rem; }
-.lg .current { font-size: 1.5rem; font-weight: 700; }
-.lg .original { font-size: 1rem; }
-.current { color: var(--color-text); }
-.original { color: var(--color-text-light); text-decoration: line-through; }

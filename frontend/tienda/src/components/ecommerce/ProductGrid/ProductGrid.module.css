@@ -1,7 +1,0 @@
-.grid { display: grid; gap: var(--spacing-lg); }
-.cols2 { grid-template-columns: repeat(2, 1fr); }
-.cols3 { grid-template-columns: repeat(3, 1fr); }
-.cols4 { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 768px) { .cols3, .cols4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .cols2, .cols3, .cols4 { grid-template-columns: 1fr; } }
-.empty { padding: var(--spacing-2xl) 0; text-align: center; color: var(--color-text-secondary); }

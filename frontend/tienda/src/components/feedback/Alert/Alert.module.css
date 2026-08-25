@@ -1,9 +1,0 @@
-.alert { display: flex; align-items: center; gap: var(--spacing-sm); padding: var(--spacing-md); border-radius: var(--radius-md); border: 1px solid transparent; font-size: var(--font-size-sm); }
-.success { background-color: color-mix(in srgb, var(--color-success) 15%, var(--color-bg)); border-color: color-mix(in srgb, var(--color-success) 30%, var(--color-bg)); color: var(--color-success); }
-.error { background-color: color-mix(in srgb, var(--color-error) 15%, var(--color-bg)); border-color: color-mix(in srgb, var(--color-error) 30%, var(--color-bg)); color: var(--color-error); }
-.warning { background-color: color-mix(in srgb, var(--color-warning) 15%, var(--color-bg)); border-color: color-mix(in srgb, var(--color-warning) 30%, var(--color-bg)); color: var(--color-warning); }
-.info { background-color: color-mix(in srgb, var(--color-info) 15%, var(--color-bg)); border-color: color-mix(in srgb, var(--color-info) 30%, var(--color-bg)); color: var(--color-info); }
-.icon { flex-shrink: 0; }
-.message { flex: 1; }
-.close { display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0.6; transition: opacity var(--transition-fast); }
-.close:hover { opacity: 1; }

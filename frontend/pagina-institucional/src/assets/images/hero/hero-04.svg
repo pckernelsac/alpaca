@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
-  <defs><linearGradient id="g" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" style="stop-color:#1f1b16;stop-color:1" /><stop offset="100%" style="stop-color:#6d5940;stop-color:1" /></linearGradient></defs>
-  <rect width="1920" height="1080" fill="url(#g)"/>
-  <ellipse cx="960" cy="540" rx="700" ry="500" fill="#7c5400" opacity="0.08"/>
-</svg>

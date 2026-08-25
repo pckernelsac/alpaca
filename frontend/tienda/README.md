@@ -1,40 +1,32 @@
-# ALPACART — Tienda
+# React + TypeScript + Vite
 
-Frontend de comercio electrónico para la marca premium de alpaca peruana.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Rutas principales
+Currently, two official plugins are available:
 
-| Ruta | Página |
-|---|---|
-| `/` | Home |
-| `/collection` | Colecciones |
-| `/category/:slug` | Categoría (ponchos, chompas, bufandas, accesorios, etc.) |
-| `/product/:id` | Detalle de producto |
-| `/cart` | Carrito |
-| `/checkout` | Checkout |
-| `/order/payment` | Pago |
-| `/order/confirmed` | Pedido confirmado |
-| `/order/tracking/:id` | Seguimiento |
-| `/order/history` | Historial de pedidos |
-| `/search` | Buscador |
-| `/search/:query` | Resultados de búsqueda |
-| `/wishlist` | Lista de deseos |
-| `/account` | Mi cuenta |
-| `/addresses` | Direcciones |
-| `/settings` | Configuración de perfil |
-| `/login` | Iniciar sesión |
-| `/register` | Registro |
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Scripts
+## React Compiler
 
-```bash
-npm run dev      # http://localhost:3102
-npm run build
-npm run preview
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
 ```
 
-## Stack
-- React 19 + Vite 6
-- CSS Modules
-- Tema claro/oscuro con `data-theme`
-- Sin TypeScript
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.

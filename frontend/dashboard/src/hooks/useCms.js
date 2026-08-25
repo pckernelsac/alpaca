@@ -1,1 +1,0 @@
-import { useEffect } from 'react'; import useCmsStore from '../stores/useCmsStore'; export default function useCms() { const s = useCmsStore(); useEffect(() => { if (s.contents.length === 0) s.fetchAll(); }, []); return s; }

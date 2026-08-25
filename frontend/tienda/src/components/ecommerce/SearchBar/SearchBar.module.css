@@ -1,5 +1,0 @@
-.wrapper { display: flex; align-items: center; background-color: var(--color-bg-secondary); border-radius: var(--radius-full); padding: 0.5rem 1rem; border: 1px solid var(--color-border); transition: border-color 0.2s; }
-.wrapper:focus-within { border-color: var(--color-primary); }
-.icon { color: var(--color-text-light); flex-shrink: 0; }
-.input { flex: 1; border: none; background: none; outline: none; margin-left: 0.5rem; font-size: 0.875rem; color: var(--color-text); }
-.input::placeholder { color: var(--color-text-light); }

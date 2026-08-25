@@ -1,7 +1,0 @@
-.section { padding: var(--spacing-xl) 0; }
-.banner { margin: 0 var(--spacing-lg); max-width: 1440px; margin-left: auto; margin-right: auto; background: var(--color-bg-inverse); position: relative; overflow: hidden; min-height: 400px; display: flex; align-items: center; justify-content: center; }
-.content { position: relative; z-index: 1; text-align: center; padding: 0 var(--spacing-md); }
-.eyebrow { font-family: var(--font-label); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary); display: block; margin-bottom: var(--spacing-md); }
-.title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 400; color: var(--color-text-inverse); margin-bottom: var(--spacing-lg); letter-spacing: -0.01em; }
-.btn { padding: 0.75rem var(--spacing-lg); background: transparent; color: var(--color-text-inverse); border: 1px solid var(--color-text-inverse); font-family: var(--font-label); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.5s; }
-.btn:hover { background: var(--color-text-inverse); color: var(--color-text); }

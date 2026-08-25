@@ -1,1 +1,0 @@
-export const APP_NAME = 'Alpacart'; export const TOKEN_KEY = 'auth_token'; export const USER_KEY = 'auth_user'; export const THEME_KEY = 'app_theme'; export const ROLES = { ADMIN: 'admin', USER: 'user', };

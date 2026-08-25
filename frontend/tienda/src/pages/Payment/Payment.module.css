@@ -1,8 +1,0 @@
-.wrapper { max-width: 480px; margin: 60px auto; padding: 0 20px; }
-.title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; margin-bottom: 8px; }
-.form { display: flex; flex-direction: column; gap: 16px; }
-.cardField { }
-.label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; color: #555; }
-.input { padding: 12px; border: 1px solid #d4c9b0; border-radius: 8px; background: #fff; }
-.btn { width: 100%; padding: 16px; background: #8B4513; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
-.btn:disabled { opacity: 0.6; }
