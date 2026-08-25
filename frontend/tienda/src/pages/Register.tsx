@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Field';
@@ -21,7 +21,12 @@ export function Register() {
   usePageTitle('Crear cuenta');
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { register } = useAuth();
+
+  // Se puede llegar desde el login del checkout: hay que devolver a quien se
+  // registra al mismo lugar, no a /cuenta, o pierde la compra que iba a pagar.
+  const from = (location.state as { from?: string } | null)?.from ?? '/cuenta';
 
   const [form, setForm] = useState({
     first_name: '',
@@ -64,7 +69,7 @@ export function Register() {
         password: form.password,
         phone: form.phone.trim() || undefined,
       });
-      navigate('/cuenta', { replace: true });
+      navigate(from, { replace: true });
     } catch (caught) {
       if (caught instanceof ApiRequestError && caught.details?.length) {
         const mapped: FieldErrors = {};
@@ -145,7 +150,10 @@ export function Register() {
           </form>
 
           <p className={styles.authFoot}>
-            ¿Ya tenés cuenta? <Link to="/ingresar">Ingresá</Link>
+            ¿Ya tenés cuenta?{' '}
+            <Link to="/ingresar" state={{ from }}>
+              Ingresá
+            </Link>
           </p>
         </div>
       </div>

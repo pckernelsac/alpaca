@@ -23,6 +23,9 @@ export function Login() {
   const [submitting, setSubmitting] = useState(false);
 
   const from = (location.state as { from?: string } | null)?.from ?? '/cuenta';
+  // Al carrito se llega sin cuenta; la sesión recién se pide acá, al pagar.
+  // Decirlo evita que parezca que se perdió lo que ya había elegido.
+  const desdeCheckout = from === '/checkout';
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -44,8 +47,14 @@ export function Login() {
     <div className="container">
       <div className={styles.authWrap}>
         <div className={styles.authCard}>
-          <h1 className={styles.authTitle}>Bienvenido de vuelta</h1>
-          <p className={styles.authSubtitle}>Ingresá para ver tus pedidos y favoritos.</p>
+          <h1 className={styles.authTitle}>
+            {desdeCheckout ? 'Último paso' : 'Bienvenido de vuelta'}
+          </h1>
+          <p className={styles.authSubtitle}>
+            {desdeCheckout
+              ? 'Ingresá para finalizar tu compra. Tu carrito te espera tal como lo armaste.'
+              : 'Ingresá para ver tus pedidos y favoritos.'}
+          </p>
 
           <form className={styles.form} onSubmit={submit} noValidate>
             {error && <Alert tone="danger">{error}</Alert>}
@@ -74,7 +83,12 @@ export function Login() {
           </form>
 
           <p className={styles.authFoot}>
-            ¿Todavía no tenés cuenta? <Link to="/registro">Creá una</Link>
+            ¿Todavía no tenés cuenta?{' '}
+            {/* El destino viaja con el link: si no, quien se registra desde acá
+                termina en /cuenta y pierde el checkout que venía a pagar. */}
+            <Link to="/registro" state={{ from }}>
+              Creá una
+            </Link>
           </p>
         </div>
       </div>

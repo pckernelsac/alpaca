@@ -9,7 +9,6 @@ import { Input } from '../components/ui/Field';
 import { IconBag, IconMinus, IconPlus, IconTrash } from '../components/ui/Icon';
 import { EmptyState, LoadingBlock, formatPrice } from '../components/ui/Primitives';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { useAuth } from '../providers/AuthProvider';
 import { useCart } from '../providers/CartProvider';
 import styles from './Cart.module.css';
 import page from './Page.module.css';
@@ -18,8 +17,7 @@ export function Cart() {
   usePageTitle('Carrito');
 
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-  const { cart, loading, busy, updateItem, removeItem, applyCoupon } = useCart();
+  const { cart, loading, busy, isGuest, updateItem, removeItem, applyCoupon } = useCart();
   const [code, setCode] = useState('');
 
   async function submitCoupon(event: FormEvent) {
@@ -27,26 +25,6 @@ export function Cart() {
     if (!code.trim()) return;
     const ok = await applyCoupon(code.trim());
     if (ok) setCode('');
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="container">
-        <EmptyState
-          icon={<IconBag size={26} />}
-          title="Ingresá para ver tu carrito"
-          description="Tu carrito se guarda en tu cuenta, así lo encontrás desde cualquier dispositivo."
-          actions={
-            <>
-              <ButtonLink to="/ingresar">Iniciar sesión</ButtonLink>
-              <ButtonLink to="/catalogo" variant="secondary">
-                Ver catálogo
-              </ButtonLink>
-            </>
-          }
-        />
-      </div>
-    );
   }
 
   if (loading) return <LoadingBlock label="Cargando carrito" />;
@@ -173,17 +151,19 @@ export function Cart() {
               <span>{formatPrice(cart!.total)}</span>
             </div>
 
-            <form className={styles.coupon} onSubmit={submitCoupon}>
-              <Input
-                placeholder="Código de descuento"
-                value={code}
-                onChange={(event) => setCode(event.target.value.toUpperCase())}
-                aria-label="Código de descuento"
-              />
-              <Button type="submit" variant="secondary" disabled={busy || !code.trim()}>
-                Aplicar
-              </Button>
-            </form>
+            {!isGuest && (
+              <form className={styles.coupon} onSubmit={submitCoupon}>
+                <Input
+                  placeholder="Código de descuento"
+                  value={code}
+                  onChange={(event) => setCode(event.target.value.toUpperCase())}
+                  aria-label="Código de descuento"
+                />
+                <Button type="submit" variant="secondary" disabled={busy || !code.trim()}>
+                  Aplicar
+                </Button>
+              </form>
+            )}
 
             <Button
               size="lg"
@@ -196,7 +176,9 @@ export function Cart() {
             </Button>
 
             <p className={styles.note}>
-              Los impuestos están incluidos. El envío se confirma en el siguiente paso.
+              {isGuest
+                ? 'Los impuestos están incluidos. Al finalizar te vamos a pedir que ingreses; ahí también podés aplicar tu cupón.'
+                : 'Los impuestos están incluidos. El envío se confirma en el siguiente paso.'}
             </p>
           </div>
         </aside>
