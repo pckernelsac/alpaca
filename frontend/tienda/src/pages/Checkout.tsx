@@ -38,6 +38,11 @@ export function Checkout() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [payments, setPayments] = useState<PaymentConfig | null>(null);
+  // El pedido ya existe en el servidor. Desde ese instante esta pantalla no
+  // puede volver a mirar el carrito: el checkout lo vacía, y la guarda de
+  // «carrito vacío» de más abajo redirige a /carrito con `replace`, que se
+  // lleva por delante la navegación al pago.
+  const [placed, setPlaced] = useState(false);
 
   // Con pasarela activa esta pantalla solo arma el pedido: el cobro ocurre en
   // el paso siguiente, que tiene URL propia. Sin credenciales, la tienda sigue
@@ -73,15 +78,23 @@ export function Checkout() {
             .filter(Boolean)
             .join(' · ') + (form.notes ? ` — ${form.notes}` : ''),
       });
-      await refresh();
+      // Antes que nada: cierra la guarda del carrito vacío y navega. Refrescar
+      // primero abría una ventana de un render en la que el carrito ya estaba
+      // vacío y esta pantalla todavía montada, y ahí la guarda ganaba la
+      // carrera: el cliente terminaba en /carrito, sin carrito y sin pasarela,
+      // con el pedido creado y sin cobrar.
+      setPlaced(true);
 
       if (cobraEnLinea) {
         navigate(`/pedido/${order.id}/pagar`, { replace: true });
-        return;
+      } else {
+        toast.success(`Pedido ${order.orderNumber} confirmado`);
+        navigate(`/pedido/${order.orderNumber}/confirmado`, { replace: true });
       }
 
-      toast.success(`Pedido ${order.orderNumber} confirmado`);
-      navigate(`/pedido/${order.orderNumber}/confirmado`, { replace: true });
+      // Último y sin esperar: el carrito ya se vació en el servidor y esto solo
+      // sincroniza la insignia del header, que vive por encima de esta ruta.
+      void refresh().catch(() => undefined);
     } catch (caught) {
       setError(
         caught instanceof ApiRequestError ? caught.message : 'No pudimos procesar tu pedido',
@@ -89,6 +102,11 @@ export function Checkout() {
       setSubmitting(false);
     }
   }
+
+  // Va primero, y antes que `loading`: el pedido está hecho y lo único que
+  // falta es que la ruta cambie. Volver a pintar el formulario con el carrito
+  // ya vacío no tiene sentido, y evaluar la guarda de abajo sería el bug.
+  if (placed) return <LoadingBlock label="Confirmando tu pedido" />;
 
   if (loading) return <LoadingBlock label="Preparando checkout" />;
 
