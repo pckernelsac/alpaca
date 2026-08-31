@@ -14,6 +14,7 @@ import { Rating } from '../components/ui/Primitives';
 import { useCollections, useProducts } from '../hooks/useCatalog';
 import { useCms } from '../hooks/useCms';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { mediaUrl } from '../lib/api';
 import styles from './Home.module.css';
 
 const BENEFIT_ICONS: Record<string, typeof IconTruck> = {
@@ -60,7 +61,7 @@ export function Home() {
           <div className={styles.heroMedia}>
             <img
               key={current.id}
-              src={current.image}
+              src={mediaUrl(current.image) ?? undefined}
               alt=""
               className={styles.heroImage}
               fetchPriority="high"
@@ -181,7 +182,7 @@ export function Home() {
                 >
                   {collection.image ? (
                     <img
-                      src={collection.image}
+                      src={mediaUrl(collection.image) ?? undefined}
                       alt=""
                       className={styles.editorialImage}
                       loading="lazy"

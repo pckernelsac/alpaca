@@ -19,8 +19,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Sin privilegios: el contenedor no escribe nada fuera de /tmp.
+# Sin privilegios: lo unico que el contenedor escribe es /app/uploads, que se
+# crea aca para que exista aunque el volumen se monte vacio.
 RUN useradd --create-home --uid 10001 alpacart \
+    && mkdir -p /app/uploads \
     && chown -R alpacart:alpacart /app
 USER alpacart
 

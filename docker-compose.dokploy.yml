@@ -32,6 +32,10 @@ services:
       RUN_SEED: ${ALPACART_RUN_SEED:-false}
       STRIPE_SECRET_KEY: ${ALPACART_STRIPE_SECRET_KEY:-}
       STRIPE_WEBHOOK_SECRET: ${ALPACART_STRIPE_WEBHOOK_SECRET:-}
+    volumes:
+      # Las imagenes que se suben desde el panel. Sin volumen, cada redeploy
+      # reconstruye la imagen y se lleva puestas todas las fotos del catalogo.
+      - alpacart-uploads:/app/uploads
     networks:
       # dokploy-network para llegar al servicio de base de datos;
       # alpacart-internal para que lo vea el nginx y nadie mas.
@@ -83,3 +87,6 @@ networks:
     external: true
   alpacart-internal:
     driver: bridge
+
+volumes:
+  alpacart-uploads:

@@ -14,7 +14,7 @@ esa limpieza, por si hiciera falta consultarlo.
 | Pieza | Estado | Puerto |
 |---|---|---|
 | PostgreSQL 18 + Redis | ✅ funcionando | 5448 / 6389 |
-| Backend FastAPI | ✅ 94 endpoints, 127/127 en smoke test | 8010 |
+| Backend FastAPI | ✅ 95 endpoints, 127/127 en smoke test | 8010 |
 | Tienda (React TS) | ✅ rediseñada y verificada en navegador | 3200 |
 | Dashboard (React TS) | ✅ 11 pantallas, verificado en navegador | 3300 |
 | Institucional (React TS) | ✅ 14 rutas, verificada en navegador | 3101 |
@@ -188,8 +188,28 @@ En el panel, el cajón del producto ahora tiene pestañas **Datos · Variantes �
 Fotos** (solo al editar: un producto sin id todavía no puede tener variantes).
 Elegir un color del catálogo textil completa nombre y hex de una vez.
 
-Las fotos se cargan **por URL**: el stack local no levanta almacenamiento de
-objetos, así que un archivo subido no tendría dónde vivir.
+Las fotos se **suben desde la máquina**; el campo de URL ya no existe, ni en el
+cajón del producto ni en el CMS. El archivo va a `POST /uploads` (staff, una
+imagen por llamada) y la respuesta trae la ruta con la que se guarda:
+
+| Pieza | Detalle |
+|---|---|
+| `POST /uploads` | acepta JPG, PNG, WEBP, AVIF y GIF hasta 8 MB; valida el tipo por los **primeros bytes**, no por lo que declara el navegador |
+| `GET /api/v1/files/{archivo}` | el propio backend sirve la carpeta como estática |
+| `backend/uploads/` | dónde aterrizan; en el servidor es el volumen `alpacart-uploads` |
+
+Tres decisiones que conviene no deshacer:
+
+- **Lo que se guarda es una ruta relativa** (`/api/v1/files/…`), no una URL
+  absoluta. En producción las tres apps y la API comparten dominio y la ruta ya
+  apunta bien; guardar `http://localhost:8010/…` dejaría el catálogo inservible
+  apenas se despliegue. En desarrollo cada frontend la resuelve con `mediaUrl()`
+  contra su `VITE_API_URL`, y esa misma función deja pasar tal cual las fotos
+  viejas de Unsplash, que son absolutas.
+- **Los archivos se sirven bajo `/files/` y no bajo `/media/`**, que ya es la
+  ruta con la que el catálogo edita y borra fotos.
+- **SVG no se acepta**: es XML, admite `<script>` y se serviría desde el mismo
+  dominio que el panel y la tienda.
 
 ## Edición del contenido de la web
 

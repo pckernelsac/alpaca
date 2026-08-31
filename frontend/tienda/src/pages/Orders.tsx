@@ -7,7 +7,7 @@ import { Button, ButtonLink } from '../components/ui/Button';
 import { IconChevronLeft, IconPackage } from '../components/ui/Icon';
 import { Alert, Badge, EmptyState, LoadingBlock, formatPrice } from '../components/ui/Primitives';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { ApiRequestError, ordersApi } from '../lib/api';
+import { ApiRequestError, mediaUrl, ordersApi } from '../lib/api';
 import type { Order } from '../lib/types';
 import { useToast } from '../providers/ToastProvider';
 import styles from './Orders.module.css';
@@ -75,7 +75,7 @@ export function Orders() {
                     <div className={styles.thumbs}>
                       {order.items.slice(0, 4).map((item) =>
                         item.image ? (
-                          <img key={item.id} src={item.image} alt="" loading="lazy" />
+                          <img key={item.id} src={mediaUrl(item.image) ?? undefined} alt="" loading="lazy" />
                         ) : (
                           <div key={item.id} className={styles.thumbBlank} />
                         ),
@@ -175,7 +175,7 @@ export function OrderDetail() {
               {order.items.map((item) => (
                 <li key={item.id} className={styles.item}>
                   {item.image ? (
-                    <img src={item.image} alt="" className={styles.itemThumb} loading="lazy" />
+                    <img src={mediaUrl(item.image) ?? undefined} alt="" className={styles.itemThumb} loading="lazy" />
                   ) : (
                     <div className={styles.itemThumb} />
                   )}

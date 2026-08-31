@@ -10,6 +10,7 @@
 
 import { useId, useState } from 'react';
 
+import { mediaUrl } from '../../lib/api';
 import styles from './ProductImage.module.css';
 
 interface Props {
@@ -99,14 +100,16 @@ export function ProductImage({
   height,
 }: Props) {
   const [failed, setFailed] = useState(false);
+  // Las fotos que sube el panel se guardan como ruta relativa a la API.
+  const resuelta = mediaUrl(src);
 
-  if (!src || failed) {
+  if (!resuelta || failed) {
     return <Placeholder alt={alt} tint={tint} className={className} />;
   }
 
   return (
     <img
-      src={src}
+      src={resuelta}
       alt={alt}
       className={className}
       loading={loading}

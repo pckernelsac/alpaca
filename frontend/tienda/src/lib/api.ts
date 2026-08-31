@@ -28,6 +28,24 @@ import type {
 } from './types';
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8010/api/v1';
+
+/** Origen de la API, para resolver las rutas de las fotos que sube el panel.
+ *
+ *  El backend las guarda como `/api/v1/files/<archivo>`, relativas a proposito:
+ *  en produccion la tienda y la API comparten dominio y la ruta ya apunta bien.
+ *  En desarrollo la tienda corre en :3200 y la API en :8010, asi que hay que
+ *  anteponerle el origen o el navegador buscaria la foto en la tienda. */
+const API_ORIGIN = /^https?:\/\//.test(BASE_URL) ? new URL(BASE_URL).origin : '';
+
+/** Deja lista una URL de imagen para un `<img src>`.
+ *
+ *  Convive con las fotos viejas, que son URLs absolutas de Unsplash: esas pasan
+ *  tal cual. */
+export function mediaUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (/^(https?:)?\/\//.test(url) || url.startsWith('data:')) return url;
+  return url.startsWith('/') ? `${API_ORIGIN}${url}` : url;
+}
 const TOKEN_KEY = 'alpacart.token';
 
 export class ApiRequestError extends Error {

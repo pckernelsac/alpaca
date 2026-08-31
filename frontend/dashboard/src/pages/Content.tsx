@@ -7,7 +7,7 @@ import { PageHeader } from '../components/layout/Shell';
 import type { Column } from '../components/ui/DataTable';
 import { Badge, Tabs } from '../components/ui/Primitives';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { cmsApi } from '../lib/api';
+import { cmsApi, mediaUrl } from '../lib/api';
 import { formatNumber } from '../lib/format';
 import type {
   ArtisanProcess,
@@ -61,7 +61,11 @@ export function Content() {
       header: 'Imagen',
       secondary: true,
       render: (r) =>
-        r.image ? <img src={r.image} alt="" className={cms.miniatura} loading="lazy" /> : '—',
+        r.image ? (
+          <img src={mediaUrl(r.image)} alt="" className={cms.miniatura} loading="lazy" />
+        ) : (
+          '—'
+        ),
     },
     { key: 'order', header: 'Orden', align: 'right', sortValue: (r) => r.order },
     { key: 'active', header: 'Estado', render: (r) => <EstadoPublicado publicado={r.active} /> },
@@ -126,7 +130,9 @@ export function Content() {
     {
       key: 'url',
       header: 'Imagen',
-      render: (r) => <img src={r.url} alt={r.altText ?? ''} className={cms.miniatura} loading="lazy" />,
+      render: (r) => (
+        <img src={mediaUrl(r.url)} alt={r.altText ?? ''} className={cms.miniatura} loading="lazy" />
+      ),
     },
     {
       key: 'caption',
@@ -223,7 +229,7 @@ export function Content() {
             { name: 'subtitle', label: 'Bajada', type: 'textarea', full: true },
             { name: 'cta_text', label: 'Texto del botón' },
             { name: 'cta_link', label: 'Destino del botón', hint: '/tienda, /colecciones…' },
-            { name: 'image', label: 'Imagen', type: 'url', full: true },
+            { name: 'image', label: 'Imagen', type: 'image', full: true },
             ORDEN,
             { name: 'active', label: 'Publicado', type: 'check' },
           ]}
@@ -250,7 +256,7 @@ export function Content() {
             { name: 'title', label: 'Título', full: true },
             { name: 'description', label: 'Descripción', type: 'textarea', full: true },
             { name: 'icon', label: 'Ícono', hint: 'Nombre del ícono, p. ej. local_shipping' },
-            { name: 'image', label: 'Imagen', type: 'url' },
+            { name: 'image', label: 'Imagen', type: 'image' },
             ORDEN,
             { name: 'active', label: 'Publicado', type: 'check' },
           ]}
@@ -290,7 +296,7 @@ export function Content() {
             { name: 'author', label: 'Autor' },
             { name: 'role', label: 'Rol' },
             { name: 'company', label: 'Ciudad o empresa' },
-            { name: 'avatar', label: 'Foto', type: 'url' },
+            { name: 'avatar', label: 'Foto', type: 'image' },
             { name: 'text', label: 'Testimonio', type: 'textarea', full: true },
             { name: 'rating', label: 'Puntaje', type: 'number', hint: 'De 1 a 5' },
             ORDEN,
@@ -318,7 +324,7 @@ export function Content() {
             visible: r.visible,
           })}
           campos={[
-            { name: 'url', label: 'URL de la imagen', type: 'url', full: true },
+            { name: 'url', label: 'Imagen', type: 'image', full: true },
             { name: 'caption', label: 'Epígrafe' },
             { name: 'category', label: 'Categoría', hint: 'taller, origen, producto…' },
             {
@@ -353,7 +359,7 @@ export function Content() {
             { name: 'title', label: 'Título', full: true },
             { name: 'description', label: 'Descripción', type: 'textarea', full: true },
             { name: 'icon', label: 'Ícono' },
-            { name: 'image', label: 'Imagen', type: 'url' },
+            { name: 'image', label: 'Imagen', type: 'image' },
             { name: 'step_order', label: 'Paso', type: 'number', hint: 'Menor va primero' },
             { name: 'active', label: 'Publicado', type: 'check' },
           ]}

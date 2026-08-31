@@ -28,6 +28,24 @@ import type {
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8010/api/v1';
 
+/** Origen de la API, para resolver las rutas de las fotos que sube el panel.
+ *
+ *  El backend las guarda como `/api/v1/files/<archivo>`, relativas a proposito:
+ *  en produccion la web y la API comparten dominio y la ruta ya apunta bien. En
+ *  desarrollo la institucional corre en :3101 y la API en :8010, asi que hay que
+ *  anteponerle el origen o el navegador buscaria la foto en la propia web. */
+const API_ORIGIN = /^https?:\/\//.test(BASE_URL) ? new URL(BASE_URL).origin : '';
+
+/** Deja lista una URL de imagen para un `<img src>`.
+ *
+ *  Convive con las fotos viejas, que son URLs absolutas de Unsplash: esas pasan
+ *  tal cual. */
+export function mediaUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (/^(https?:)?\/\//.test(url) || url.startsWith('data:')) return url;
+  return url.startsWith('/') ? `${API_ORIGIN}${url}` : url;
+}
+
 /**
  * Raiz de la tienda: otro origen en desarrollo (localhost:3200) y el prefijo
  * `/tienda` en produccion, donde las tres apps comparten dominio. De ahi cuelga

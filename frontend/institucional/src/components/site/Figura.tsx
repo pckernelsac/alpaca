@@ -10,6 +10,7 @@
 
 import { useId, useState } from 'react';
 
+import { mediaUrl } from '../../lib/api';
 import styles from './Figura.module.css';
 
 interface Props {
@@ -85,10 +86,18 @@ function Respaldo({ alt, className }: { alt: string; className?: string }) {
 
 export function Figura({ src, alt, className, loading = 'lazy' }: Props) {
   const [fallo, setFallo] = useState(false);
+  // Las fotos que sube el panel se guardan como ruta relativa a la API.
+  const resuelta = mediaUrl(src);
 
-  if (!src || fallo) return <Respaldo alt={alt} className={className} />;
+  if (!resuelta || fallo) return <Respaldo alt={alt} className={className} />;
 
   return (
-    <img src={src} alt={alt} className={className} loading={loading} onError={() => setFallo(true)} />
+    <img
+      src={resuelta}
+      alt={alt}
+      className={className}
+      loading={loading}
+      onError={() => setFallo(true)}
+    />
   );
 }

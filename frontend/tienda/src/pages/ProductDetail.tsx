@@ -8,6 +8,7 @@ import { Alert, Badge, LoadingBlock, Price, Rating } from '../components/ui/Prim
 import { useProduct, useProducts, useReviews } from '../hooks/useCatalog';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useWishlist } from '../hooks/useWishlist';
+import { mediaUrl } from '../lib/api';
 import { useCart } from '../providers/CartProvider';
 import page from './Page.module.css';
 import styles from './ProductDetail.module.css';
@@ -125,7 +126,7 @@ export function ProductDetail() {
             {images.length > 0 ? (
               <>
                 <img
-                  src={images[imageIndex]}
+                  src={mediaUrl(images[imageIndex]) ?? undefined}
                   alt={product.name}
                   className={styles.mainImage}
                   width={900}
@@ -136,7 +137,7 @@ export function ProductDetail() {
                     {images.map((url, index) => (
                       <img
                         key={url}
-                        src={url}
+                        src={mediaUrl(url) ?? undefined}
                         alt=""
                         className={`${styles.thumb} ${
                           index === imageIndex ? styles.thumbActive : ''

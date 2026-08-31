@@ -1,4 +1,5 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -32,6 +33,13 @@ class Settings(BaseSettings):
     STRIPE_SECRET_KEY: str = ""
     STRIPE_WEBHOOK_SECRET: str = ""
 
+    # Carpeta donde aterrizan las imagenes que se suben desde el panel. Relativa
+    # se resuelve contra la raiz del backend, para que valga igual corriendo
+    # uvicorn a mano o dentro del contenedor. En un servidor tiene que ser un
+    # volumen: si no, cada redeploy se lleva las fotos.
+    UPLOAD_DIR: str = "uploads"
+    MAX_UPLOAD_MB: int = 8
+
     @property
     def database_url(self) -> str:
         if self.DATABASE_URL:
@@ -49,6 +57,14 @@ class Settings(BaseSettings):
             f"postgresql+psycopg://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
+
+    @property
+    def upload_path(self) -> Path:
+        ruta = Path(self.UPLOAD_DIR)
+        if not ruta.is_absolute():
+            # config.py vive en app/core/: dos niveles arriba esta backend/.
+            ruta = Path(__file__).resolve().parents[2] / ruta
+        return ruta
 
     @property
     def cors_origins(self) -> list[str]:

@@ -12,6 +12,7 @@ from app.api.v1 import (
     orders,
     system,
     textile,
+    uploads,
 )
 
 router = APIRouter()
@@ -24,3 +25,4 @@ router.include_router(inventory.router)
 router.include_router(iam.router)
 router.include_router(system.router)
 router.include_router(textile.router)
+router.include_router(uploads.router)

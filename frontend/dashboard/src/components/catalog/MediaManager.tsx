@@ -1,47 +1,68 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { ApiRequestError, catalogApi } from '../../lib/api';
+import { ApiRequestError, catalogApi, mediaUrl, uploadImage } from '../../lib/api';
 import type { MediaItem, Product } from '../../lib/types';
 import { useToast } from '../../providers/ToastProvider';
 import { Button } from '../ui/Button';
 import { ConfirmDialog } from '../ui/ConfirmDialog';
 import { Input } from '../ui/Field';
-import { IconCheck, IconPlus, IconTrash } from '../ui/Icon';
+import { IconCheck, IconTrash, IconUpload } from '../ui/Icon';
 import { Badge } from '../ui/Primitives';
 import styles from './Manager.module.css';
 
 /** Fotos del producto.
  *
- *  Se cargan por URL y no por archivo: el stack local no levanta almacenamiento
- *  de objetos, así que subir un archivo no tendría dónde dejarlo.
+ *  Se suben desde la máquina: el archivo va a `POST /uploads`, que devuelve la
+ *  ruta con la que se guarda la foto. Se aceptan varias de una vez y se cargan
+ *  en orden — no en paralelo — porque la primera del producto queda como
+ *  principal y subirlas a la vez volvería azaroso cuál es.
  */
 export function MediaManager({ product, onChanged }: { product: Product; onChanged: () => void }) {
   const toast = useToast();
-  const [url, setUrl] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
   const [alt, setAlt] = useState('');
   const [saving, setSaving] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
   const [toDelete, setToDelete] = useState<MediaItem | null>(null);
   const [deleting, setDeleting] = useState(false);
 
-  async function add(event: React.FormEvent) {
-    event.preventDefault();
-    const limpia = url.trim();
-    if (!limpia) return;
+  async function add(archivos: FileList | null) {
+    const lista = Array.from(archivos ?? []);
+    if (lista.length === 0) return;
 
     setSaving(true);
+    let subidas = 0;
     try {
-      await catalogApi.addMedia(product.id, { url: limpia, alt_text: alt.trim() || null });
-      toast.success(product.media.length ? 'Foto agregada' : 'Foto agregada como principal');
-      setUrl('');
+      for (const archivo of lista) {
+        const subida = await uploadImage(archivo);
+        // El texto alternativo escrito arriba acompaña solo a la primera: es de
+        // una foto, no de la tanda.
+        await catalogApi.addMedia(product.id, {
+          url: subida.url,
+          alt_text: subidas === 0 ? alt.trim() || null : null,
+        });
+        subidas += 1;
+      }
+      const primera = product.media.length === 0;
+      toast.success(
+        subidas > 1
+          ? `${subidas} fotos agregadas`
+          : primera
+            ? 'Foto agregada como principal'
+            : 'Foto agregada',
+      );
       setAlt('');
       onChanged();
     } catch (caught) {
       toast.error(
         caught instanceof ApiRequestError ? caught.message : 'No pudimos agregar la foto',
       );
+      // Si la tanda se cortó por la mitad, lo ya subido igual tiene que verse.
+      if (subidas > 0) onChanged();
     } finally {
       setSaving(false);
+      // Sin esto, volver a elegir el mismo archivo no dispara el change.
+      if (inputRef.current) inputRef.current.value = '';
     }
   }
 
@@ -86,7 +107,7 @@ export function MediaManager({ product, onChanged }: { product: Product; onChang
           {product.media.map((media) => (
             <li key={media.id} className={styles.tile}>
               <img
-                src={media.url}
+                src={mediaUrl(media.url)}
                 alt={media.alt_text ?? ''}
                 className={media.visible ? styles.tileImg : styles.tileImgHidden}
                 loading="lazy"
@@ -133,15 +154,8 @@ export function MediaManager({ product, onChanged }: { product: Product; onChang
         </ul>
       )}
 
-      <form className={styles.form} onSubmit={add}>
+      <div className={styles.form}>
         <div className={styles.formGrid}>
-          <Input
-            label="URL de la foto"
-            type="url"
-            value={url}
-            onChange={(event) => setUrl(event.target.value)}
-            placeholder="https://…"
-          />
           <Input
             label="Texto alternativo"
             value={alt}
@@ -150,12 +164,27 @@ export function MediaManager({ product, onChanged }: { product: Product; onChang
           />
         </div>
         <div className={styles.formActions}>
-          <Button type="submit" size="sm" loading={saving} disabled={!url.trim()}>
-            <IconPlus size={16} />
-            Agregar foto
+          <input
+            ref={inputRef}
+            type="file"
+            multiple
+            accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
+            className={styles.fileInput}
+            disabled={saving}
+            onChange={(event) => void add(event.target.files)}
+          />
+          <span className={styles.formHint}>JPG, PNG, WEBP, AVIF o GIF. Hasta 8 MB cada una.</span>
+          <Button
+            type="button"
+            size="sm"
+            loading={saving}
+            onClick={() => inputRef.current?.click()}
+          >
+            <IconUpload size={16} />
+            Subir fotos
           </Button>
         </div>
-      </form>
+      </div>
 
       <ConfirmDialog
         open={toDelete !== null}

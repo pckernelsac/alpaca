@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -81,6 +82,20 @@ def health():
 
 
 app.include_router(api_router, prefix=settings.API_PREFIX)
+
+# Las imagenes que se suben desde el panel se sirven desde el propio backend,
+# bajo el prefijo de la API. Es lo que hace que funcionen sin tocar nada mas:
+# en produccion el nginx del frontend ya proxea /api/ al backend, y en
+# desarrollo cada app las pide al mismo origen al que le pide todo lo demas.
+#
+# La ruta es /files/ y no /media/ porque el catalogo ya usa /media/{id} para
+# editar y borrar fotos; dos cosas distintas en la misma ruta terminan mal.
+settings.upload_path.mkdir(parents=True, exist_ok=True)
+app.mount(
+    f"{settings.API_PREFIX}/files",
+    StaticFiles(directory=settings.upload_path),
+    name="files",
+)
 
 
 @app.on_event("startup")

@@ -23,7 +23,7 @@ import { useCollections, useProducts } from '../hooks/useCatalog';
 import { useFaq } from '../hooks/useCms';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useWishlist } from '../hooks/useWishlist';
-import { ApiRequestError, cmsApi } from '../lib/api';
+import { ApiRequestError, cmsApi, mediaUrl } from '../lib/api';
 import { useToast } from '../providers/ToastProvider';
 import styles from './Misc.module.css';
 import page from './Page.module.css';
@@ -57,7 +57,7 @@ export function Collections() {
             >
               <div className={styles.collectionMedia}>
                 {collection.image && (
-                  <img src={collection.image} alt="" loading="lazy" />
+                  <img src={mediaUrl(collection.image) ?? undefined} alt="" loading="lazy" />
                 )}
               </div>
               <div className={styles.collectionBody}>
@@ -107,7 +107,7 @@ export function Wishlist() {
           {items.map((item) => (
             <Link key={item.id} to={productPath(item.productSlug, item.productId)} className={styles.wishCard}>
               <div className={styles.wishMedia}>
-                {item.image && <img src={item.image} alt="" loading="lazy" />}
+                {item.image && <img src={mediaUrl(item.image) ?? undefined} alt="" loading="lazy" />}
               </div>
               <div>
                 <p className={styles.wishName}>{item.name}</p>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { mediaUrl } from '../lib/api';
 import { productPath } from '../lib/routes';
 
 import { Button, ButtonLink } from '../components/ui/Button';
@@ -59,7 +60,7 @@ export function Cart() {
             <li key={item.id} className={styles.item}>
               <Link to={productPath(item.productSlug, item.productId)}>
                 {item.image ? (
-                  <img src={item.image} alt="" className={styles.thumb} loading="lazy" />
+                  <img src={mediaUrl(item.image) ?? undefined} alt="" className={styles.thumb} loading="lazy" />
                 ) : (
                   <div className={styles.thumb} />
                 )}

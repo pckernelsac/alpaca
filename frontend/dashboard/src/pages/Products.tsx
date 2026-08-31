@@ -13,7 +13,7 @@ import { IconPencil, IconPlus, IconSearch, IconTrash } from '../components/ui/Ic
 import { Badge, Card, Tabs } from '../components/ui/Primitives';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useDebounced, useResource } from '../hooks/useResource';
-import { ApiRequestError, catalogApi } from '../lib/api';
+import { ApiRequestError, catalogApi, mediaUrl } from '../lib/api';
 import { formatNumber, formatPrice } from '../lib/format';
 import { PRODUCT_STATUS } from '../lib/orderStatus';
 import type { Category, Collection, Paginated, Product, ProductInput } from '../lib/types';
@@ -176,7 +176,7 @@ export function Products() {
       render: (row) => (
         <div className={styles.productCell}>
           {row.image ? (
-            <img src={row.image} alt="" className={styles.thumb} loading="lazy" />
+            <img src={mediaUrl(row.image)} alt="" className={styles.thumb} loading="lazy" />
           ) : (
             <span className={styles.thumb} aria-hidden="true" />
           )}

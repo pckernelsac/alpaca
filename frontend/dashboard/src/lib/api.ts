@@ -157,6 +157,80 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   return payload as T;
 }
 
+/** Origen de la API, para resolver las rutas de las imagenes subidas.
+ *
+ *  El backend guarda `/api/v1/files/<archivo>`, relativo a proposito: en
+ *  produccion las tres apps y la API comparten dominio y la ruta ya apunta bien.
+ *  En desarrollo, en cambio, el panel corre en :3300 y la API en :8010, asi que
+ *  hay que anteponerle el origen o el navegador buscaria la foto en el panel. */
+const API_ORIGIN = /^https?:\/\//.test(BASE_URL) ? new URL(BASE_URL).origin : '';
+
+/** Deja lista una URL de imagen para un `<img src>`.
+ *
+ *  Las fotos viejas del catalogo son URLs absolutas (Unsplash) y las nuevas son
+ *  rutas del backend: esto acepta las dos y no toca las primeras. */
+export function mediaUrl(url: string | null | undefined): string | undefined {
+  if (!url) return undefined;
+  if (/^(https?:)?\/\//.test(url) || url.startsWith('data:') || url.startsWith('blob:')) return url;
+  return url.startsWith('/') ? `${API_ORIGIN}${url}` : url;
+}
+
+export interface UploadedFile {
+  url: string;
+  filename: string;
+  size: number;
+  content_type: string;
+}
+
+/** Sube una imagen y devuelve la ruta con la que guardarla.
+ *
+ *  No pasa por `request` porque el cuerpo es un FormData: el Content-Type lo
+ *  tiene que poner el navegador, que es el unico que conoce el separador del
+ *  multipart. Ponerlo a mano rompe la subida. */
+export async function uploadImage(file: File, signal?: AbortSignal): Promise<UploadedFile> {
+  const datos = new FormData();
+  datos.append('file', file);
+
+  const headers: Record<string, string> = {};
+  const token = tokenStore.get();
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  let response: Response;
+  try {
+    response = await fetch(`${BASE_URL}/uploads`, {
+      method: 'POST',
+      headers,
+      body: datos,
+      signal,
+    });
+  } catch (error) {
+    if ((error as Error).name === 'AbortError') throw error;
+    throw new ApiRequestError('No pudimos conectar con el servidor', 0);
+  }
+
+  let payload: unknown;
+  try {
+    payload = await response.json();
+  } catch {
+    payload = null;
+  }
+
+  if (!response.ok) {
+    const error = (payload as { error?: ApiError } | null)?.error;
+    if (response.status === 401) {
+      tokenStore.clear();
+      window.dispatchEvent(new CustomEvent(UNAUTHORIZED_EVENT));
+    }
+    throw new ApiRequestError(
+      error?.message ?? messageForStatus(response.status),
+      response.status,
+      error?.details,
+    );
+  }
+
+  return (payload as ApiEnvelope<UploadedFile>).data;
+}
+
 function messageForStatus(status: number): string {
   const map: Record<number, string> = {
     400: 'La solicitud no es válida',

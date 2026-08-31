@@ -10,13 +10,16 @@ import { DataTable } from '../ui/DataTable';
 import type { Column } from '../ui/DataTable';
 import { Checkbox, Input, Select, Textarea } from '../ui/Field';
 import { IconPencil, IconPlus, IconTrash } from '../ui/Icon';
+import { ImagePicker } from '../ui/ImagePicker';
 import { Card } from '../ui/Primitives';
 import styles from './CmsResource.module.css';
 
 export interface CampoDef {
   name: string;
   label: string;
-  type?: 'text' | 'url' | 'number' | 'textarea' | 'check' | 'select' | 'date';
+  /** `image` abre el selector de archivo y guarda la ruta que devuelve el
+   *  backend: las imagenes se suben, no se pegan como URL. */
+  type?: 'text' | 'image' | 'number' | 'textarea' | 'check' | 'select' | 'date';
   hint?: string;
   /** Ocupa las dos columnas del formulario. */
   full?: boolean;
@@ -230,6 +233,19 @@ export function CmsResource<T extends { id: number | string }>({
                   );
                 }
 
+                if (campo.type === 'image') {
+                  return (
+                    <div key={campo.name} className={clase}>
+                      <ImagePicker
+                        label={campo.label}
+                        hint={campo.hint}
+                        value={String(valor ?? '')}
+                        onChange={(url) => setForm({ ...form, [campo.name]: url })}
+                      />
+                    </div>
+                  );
+                }
+
                 if (campo.type === 'textarea') {
                   return (
                     <div key={campo.name} className={clase}>
@@ -252,11 +268,9 @@ export function CmsResource<T extends { id: number | string }>({
                       type={
                         campo.type === 'number'
                           ? 'number'
-                          : campo.type === 'url'
-                            ? 'url'
-                            : campo.type === 'date'
-                              ? 'date'
-                              : 'text'
+                          : campo.type === 'date'
+                            ? 'date'
+                            : 'text'
                       }
                       disabled={Boolean(editing && campo.soloAlCrear)}
                       value={String(valor ?? '')}
