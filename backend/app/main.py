@@ -13,6 +13,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.api.v1 import router as api_router
 from app.core.config import settings
 from app.db.session import engine
+from app.services import mercadopago_client as mp
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("alpacart")
@@ -103,3 +104,20 @@ def on_startup() -> None:
     logger.info("ALPACART API — %s", settings.APP_ENV)
     logger.info("Base:    %s", f"http://localhost:{settings.PORT}{settings.API_PREFIX}")
     logger.info("Swagger: %s", f"http://localhost:{settings.PORT}{settings.API_PREFIX}/docs")
+
+    # La pasarela se apaga sola si le faltan las credenciales, y hasta aca lo
+    # hacia sin decir nada: el backend arrancaba igual y el unico sintoma
+    # aparecia tres pantallas mas adentro, cuando el cliente iba a pagar y leia
+    # «el pago en linea no esta disponible». Un despliegue al que se le
+    # olvidaron las variables tiene que notarse en la primera linea del log.
+    pasarela = mp.configuracion()
+    if not pasarela["enabled"]:
+        logger.warning(
+            "Mercado Pago APAGADO — falta %s. El checkout registra pedidos pero no cobra.",
+            ", ".join(pasarela["missing"]),
+        )
+    else:
+        logger.info("Pagos:   Mercado Pago en modo %s", pasarela["mode"])
+        logger.info("Webhook: %s", pasarela["notificationUrl"] or "sin publicar (PUBLIC_BASE_URL)")
+    for aviso in pasarela["warnings"]:
+        logger.warning("Mercado Pago: %s", aviso)

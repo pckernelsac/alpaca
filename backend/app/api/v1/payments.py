@@ -323,14 +323,18 @@ async def mercadopago_webhook(
 # ---------------------------------------------------------------------------
 @router.get("/payments/health", summary="Estado de la integracion de pagos")
 def payments_health(actor: StaffActor):
+    """Por que la pasarela esta como esta, sin entrar al servidor.
+
+    Decir solo `enabled: false` no alcanza: deja al staff adivinando entre una
+    credencial que falta, una mal pegada y dos de modos distintos. `missing`
+    nombra la variable exacta y `warnings` describe lo que igual va a fallar
+    aunque este encendida. Nunca sale el valor de una credencial, solo si esta.
+    """
+    pasarela = mp.configuracion()
     return ok(
         {
             "provider": PROVEEDOR,
-            "enabled": settings.mercadopago_enabled,
             "webhookConfigured": bool(settings.MP_WEBHOOK_SECRET),
-            "notificationUrl": settings.mp_notification_url,
-            "mode": "produccion"
-            if settings.MP_ACCESS_TOKEN.startswith("APP_USR-")
-            else ("prueba" if settings.MP_ACCESS_TOKEN.startswith("TEST-") else "sin credencial"),
+            **pasarela,
         }
     )

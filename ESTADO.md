@@ -392,8 +392,23 @@ El código está en `app/services/mercadopago_client.py` (todo lo que toca su re
 
 ### Verificación
 
+Si el checkout muestra «el pago en línea no está disponible», la pasarela está
+apagada por configuración, no por un fallo. **El backend lo dice al arrancar**:
+
+```
+WARNING alpacart: Mercado Pago APAGADO — falta MP_PUBLIC_KEY, MP_ACCESS_TOKEN.
+                  El checkout registra pedidos pero no cobra.
+```
+
+Y `/payments/health` (solo staff) nombra la variable exacta que falta en
+`missing`, más los `warnings` de lo que va a fallar aunque esté encendida —
+credencial mal pegada, o clave pública y access token de modos distintos, que
+es el error clásico: el formulario monta, tokeniza, y el cobro muere con un
+mensaje que habla del importe y no de las credenciales.
+
 ```bash
 curl -s https://DOMINIO/api/v1/payments/config | python -m json.tool
+curl -s https://DOMINIO/api/v1/payments/health -H "Authorization: Bearer $TOKEN_STAFF" | python -m json.tool
 
 # Sin firma tiene que dar 401 — no 200, no 5xx
 curl -s -o /dev/null -w "%{http_code}

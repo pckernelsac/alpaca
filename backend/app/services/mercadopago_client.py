@@ -50,6 +50,81 @@ def get_sdk() -> mercadopago.SDK:
 
 
 # ---------------------------------------------------------------------------
+# Estado de la configuracion
+# ---------------------------------------------------------------------------
+def _modo(credencial: str) -> str:
+    """Que cuenta hay detras de una credencial, mirando solo su prefijo."""
+    if credencial.startswith("APP_USR-"):
+        return "produccion"
+    if credencial.startswith("TEST-"):
+        return "prueba"
+    # Puesta pero irreconocible: casi siempre es un copiar/pegar a medias.
+    return "desconocido" if credencial else "sin credencial"
+
+
+def configuracion() -> dict[str, Any]:
+    """Que le falta a la pasarela para funcionar, en una sola pieza.
+
+    La usan el arranque —para gritarlo en el log— y `/payments/health`, para
+    que el staff lo vea sin entrar al servidor. **Nunca devuelve el valor de
+    una credencial**: solo si esta, y de que cuenta es su prefijo.
+
+    Sin esto la pasarela se apaga en silencio: el backend arranca igual, el
+    checkout sigue registrando pedidos y el cliente solo ve «el pago en linea
+    no esta disponible». Un despliegue al que se le olvidaron las variables es
+    indistinguible de uno sano, y eso es exactamente lo que hay que evitar.
+    """
+    faltan = [
+        nombre
+        for nombre in ("MP_PUBLIC_KEY", "MP_ACCESS_TOKEN")
+        if not getattr(settings, nombre)
+    ]
+
+    # Estas dos no impiden cobrar, pero sin ellas ningun pago se concilia: un
+    # cupon o una revision manual se quedan pendientes para siempre.
+    faltan_webhook: list[str] = []
+    if not settings.MP_WEBHOOK_SECRET:
+        faltan_webhook.append("MP_WEBHOOK_SECRET")
+    if not settings.mp_notification_url:
+        faltan_webhook.append("PUBLIC_BASE_URL")
+
+    modo_publica = _modo(settings.MP_PUBLIC_KEY)
+    modo_token = _modo(settings.MP_ACCESS_TOKEN)
+
+    avisos: list[str] = []
+    if modo_token == "desconocido":
+        avisos.append(
+            "MP_ACCESS_TOKEN no empieza por APP_USR- ni por TEST-: no parece un access token"
+        )
+    if modo_publica == "desconocido":
+        avisos.append(
+            "MP_PUBLIC_KEY no empieza por APP_USR- ni por TEST-: no parece una clave publica"
+        )
+    if not faltan and modo_publica != modo_token:
+        # El clasico: la publica de prueba con el token productivo. El
+        # formulario monta, tokeniza, y el cobro muere con un error que habla
+        # del importe o de la tarjeta y no dice una palabra de las credenciales.
+        avisos.append(
+            f"la clave publica es de {modo_publica} y el access token de {modo_token}: "
+            "las dos tienen que ser de la misma cuenta y del mismo modo"
+        )
+    if not faltan and faltan_webhook:
+        avisos.append(
+            "sin " + " ni ".join(faltan_webhook) + " se cobra, pero ningun pago se concilia"
+        )
+
+    return {
+        "enabled": not faltan,
+        "mode": modo_token,
+        "publicKeyMode": modo_publica,
+        "missing": faltan,
+        "missingForWebhook": faltan_webhook,
+        "notificationUrl": settings.mp_notification_url,
+        "warnings": avisos,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Cobro
 # ---------------------------------------------------------------------------
 def create_payment(body: dict[str, Any], idempotency_key: str) -> dict[str, Any]:
