@@ -52,6 +52,7 @@ export function YapeForm({ publicKey, locale, onPay }: Props) {
       const { id } = await mp.yape({ otp, phoneNumber: phone }).create();
       await onPay({
         token: id,
+        payment_method_id: 'yape',
         // Yape es `debit_card` para Mercado Pago, por raro que suene: es lo que
         // devuelve su propio `/v1/payment_methods`. No viaja a la pasarela —el
         // backend solo manda `payment_method_id`— pero queda archivado en
