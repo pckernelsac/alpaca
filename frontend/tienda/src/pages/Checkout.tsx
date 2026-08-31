@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,8 @@ import { Input, Select, Textarea } from '../components/ui/Field';
 import { IconCheck } from '../components/ui/Icon';
 import { Alert, LoadingBlock, formatPrice } from '../components/ui/Primitives';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { ApiRequestError, checkoutApi } from '../lib/api';
+import { ApiRequestError, checkoutApi, paymentsApi } from '../lib/api';
+import type { PaymentConfig } from '../lib/types';
 import { useAuth } from '../providers/AuthProvider';
 import { useCart } from '../providers/CartProvider';
 import { useToast } from '../providers/ToastProvider';
@@ -36,6 +37,25 @@ export function Checkout() {
   });
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [payments, setPayments] = useState<PaymentConfig | null>(null);
+
+  // Con pasarela activa esta pantalla solo arma el pedido: el cobro ocurre en
+  // el paso siguiente, que tiene URL propia. Sin credenciales, la tienda sigue
+  // funcionando como antes y el pedido queda registrado para cobrarlo aparte.
+  useEffect(() => {
+    const controlador = new AbortController();
+    paymentsApi
+      .config(controlador.signal)
+      .then((configuracion) => {
+        if (!controlador.signal.aborted) setPayments(configuracion);
+      })
+      .catch(() => {
+        if (!controlador.signal.aborted) setPayments(null);
+      });
+    return () => controlador.abort();
+  }, []);
+
+  const cobraEnLinea = payments?.enabled ?? false;
 
   function update(key: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -47,13 +67,19 @@ export function Checkout() {
     setSubmitting(true);
     try {
       const order = await checkoutApi.submit({
-        payment_method: form.payment_method,
+        payment_method: cobraEnLinea ? 'mercadopago' : form.payment_method,
         notes:
           [form.name, form.street, form.city, form.state, form.zip, form.phone]
             .filter(Boolean)
             .join(' · ') + (form.notes ? ` — ${form.notes}` : ''),
       });
       await refresh();
+
+      if (cobraEnLinea) {
+        navigate(`/pedido/${order.id}/pagar`, { replace: true });
+        return;
+      }
+
       toast.success(`Pedido ${order.orderNumber} confirmado`);
       navigate(`/pedido/${order.orderNumber}/confirmado`, { replace: true });
     } catch (caught) {
@@ -141,18 +167,27 @@ export function Checkout() {
 
           <section className={page.card}>
             <h2 className={page.cardTitle}>Método de pago</h2>
-            <Select
-              label="Forma de pago"
-              value={form.payment_method}
-              onChange={(event) => update('payment_method', event.target.value)}
-            >
-              <option value="card">Tarjeta de crédito o débito</option>
-              <option value="transfer">Transferencia bancaria</option>
-              <option value="cash">Pago contra entrega</option>
-            </Select>
-            <p className={styles.paymentNote}>
-              El cobro se procesa al confirmar el pedido. No almacenamos datos de tu tarjeta.
-            </p>
+            {cobraEnLinea ? (
+              <p className={styles.paymentNote}>
+                Elegís cómo pagar en el paso siguiente: tarjeta de crédito o débito, Yape o pago
+                en efectivo. Los datos de tu tarjeta viajan directo a Mercado Pago y no pasan por
+                nuestros servidores.
+              </p>
+            ) : (
+              <>
+                <Select
+                  label="Forma de pago"
+                  value={form.payment_method}
+                  onChange={(event) => update('payment_method', event.target.value)}
+                >
+                  <option value="transfer">Transferencia bancaria</option>
+                  <option value="cash">Pago contra entrega</option>
+                </Select>
+                <p className={styles.paymentNote}>
+                  Coordinamos el cobro por correo apenas registremos tu pedido.
+                </p>
+              </>
+            )}
           </section>
 
           <section className={page.card}>
@@ -213,7 +248,7 @@ export function Checkout() {
             </div>
 
             <Button type="submit" size="lg" fullWidth loading={submitting}>
-              Confirmar pedido
+              {cobraEnLinea ? 'Continuar al pago' : 'Confirmar pedido'}
             </Button>
 
             <ul className={styles.assurances}>

@@ -17,6 +17,7 @@ const ProductDetail = lazy(() =>
 const Collections = lazy(() => import('./pages/Misc').then((m) => ({ default: m.Collections })));
 const Cart = lazy(() => import('./pages/Cart').then((m) => ({ default: m.Cart })));
 const Checkout = lazy(() => import('./pages/Checkout').then((m) => ({ default: m.Checkout })));
+const PayOrder = lazy(() => import('./pages/Payment').then((m) => ({ default: m.PayOrder })));
 const OrderConfirmed = lazy(() =>
   import('./pages/Misc').then((m) => ({ default: m.OrderConfirmed })),
 );
@@ -69,6 +70,14 @@ export default function App() {
               element={
                 <RequireAuth>
                   <Checkout />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/pedido/:id/pagar"
+              element={
+                <RequireAuth>
+                  <PayOrder />
                 </RequireAuth>
               }
             />

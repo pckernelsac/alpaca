@@ -20,6 +20,10 @@ import type {
   HeroSlide,
   Order,
   Paginated,
+  PaymentCharge,
+  PaymentConfig,
+  PaymentResult,
+  PaymentStatusResponse,
   Product,
   ProductQuery,
   ReviewSummary,
@@ -276,6 +280,24 @@ export const checkoutApi = {
       // Una clave por intento evita que un doble clic genere dos pedidos.
       headers: { 'Idempotency-Key': crypto.randomUUID() },
     }),
+};
+
+// ---------------------------------------------------------------------------
+// Pagos
+// ---------------------------------------------------------------------------
+export const paymentsApi = {
+  /** Clave pública y medios habilitados. Sin credenciales devuelve
+   *  `enabled: false` y la tienda cae al flujo sin cobro. */
+  config: (signal?: AbortSignal) =>
+    unwrap<PaymentConfig>('/payments/config', { auth: false, signal }),
+
+  /** Cobra un pedido ya creado. El importe no viaja: lo pone el servidor. */
+  charge: (input: PaymentCharge) =>
+    unwrap<PaymentResult>('/payments/mercadopago', { method: 'POST', body: input }),
+
+  /** Estado del último intento, releído de la pasarela si sigue pendiente. */
+  status: (orderId: string, signal?: AbortSignal) =>
+    unwrap<PaymentStatusResponse>(`/payments/orders/${orderId}`, { signal }),
 };
 
 export const ordersApi = {

@@ -150,6 +150,9 @@ export function OrderDetail() {
 
   const status = ORDER_STATUS[order.status];
   const canCancel = !['shipped', 'delivered', 'cancelled', 'refunded'].includes(order.status);
+  // Un pago abandonado a mitad deja el pedido registrado y sin cobrar. Desde
+  // aca se retoma: es la unica puerta de vuelta a la pasarela.
+  const canPay = !order.paid && !['cancelled', 'refunded'].includes(order.status);
 
   return (
     <div className="container">
@@ -256,6 +259,16 @@ export function OrderDetail() {
             <p className={styles.paidNote}>
               {order.paid ? 'Pago confirmado' : 'Pago pendiente'}
             </p>
+
+            {canPay && (
+              <ButtonLink
+                to={`/pedido/${order.id}/pagar`}
+                fullWidth
+                className={styles.payAction}
+              >
+                Pagar pedido
+              </ButtonLink>
+            )}
 
             {canCancel && (
               <Button

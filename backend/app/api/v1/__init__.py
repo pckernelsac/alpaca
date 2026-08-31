@@ -10,6 +10,7 @@ from app.api.v1 import (
     iam,
     inventory,
     orders,
+    payments,
     system,
     textile,
     uploads,
@@ -20,6 +21,7 @@ router.include_router(auth.router)
 router.include_router(catalog.router)
 router.include_router(customers.router)
 router.include_router(orders.router)
+router.include_router(payments.router)
 router.include_router(cms.router)
 router.include_router(inventory.router)
 router.include_router(iam.router)

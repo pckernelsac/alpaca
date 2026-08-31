@@ -1,7 +1,8 @@
 """Prueba de humo end-to-end contra la API corriendo.
 
 Uso: python smoke_test.py [base_url]
-Recorre el flujo real de un cliente: login, catalogo, carrito, cupon y checkout.
+Recorre el flujo real de un cliente: login, catalogo, carrito, cupon, checkout y
+las guardas de la pasarela de pago.
 """
 
 import json
@@ -297,6 +298,58 @@ code, body = call("GET", f"/products/{product['id']}")
 new_stock = body["data"]["stock"]
 check("stock se descuenta tras la compra", new_stock == product["stock"] - 2,
       f"({new_stock} vs {product['stock'] - 2})")
+
+# --- Pagos (Mercado Pago, Checkout API) ------------------------------------
+code, body = call("GET", "/payments/config")
+check("config de pagos es publica", code == 200, body)
+pasarela = body.get("data", {}) if code == 200 else {}
+check("config trae proveedor y clave publica",
+      pasarela.get("provider") == "mercadopago" and "publicKey" in pasarela)
+
+# El webhook es la unica puerta por la que entra plata sin sesion: sin firma
+# valida no pasa nada. 401 y no 5xx, para que Mercado Pago no reintente en bucle.
+code, body = call("POST", "/payments/mercadopago/webhook?data.id=1&type=payment",
+                  {"type": "payment", "data": {"id": "1"}})
+check("webhook sin firma da 401", code == 401, f"(dio {code})")
+
+code, body = call("POST", "/payments/mercadopago/webhook?data.id=1&type=payment",
+                  {"type": "payment", "data": {"id": "1"}},
+                  headers={"x-signature": "ts=1,v1=nada", "x-request-id": "r1"})
+check("webhook con firma falsa da 401", code == 401, f"(dio {code})")
+
+code, body = call("GET", f"/payments/orders/{order['id']}", token=cust_token)
+check("estado de pago del pedido", code == 200 and body["data"]["paid"] is False, body)
+check("pedido sin intentos de cobro", body.get("data", {}).get("transaction") is None)
+
+code, body = call("POST", "/payments/mercadopago",
+                  {"order_id": order["id"], "payment_method_id": "visa",
+                   "token": "no-vale", "payer_email": "camila.g@email.com"})
+check("cobrar sin sesion da 401", code == 401, f"(dio {code})")
+
+code, body = call("POST", "/payments/mercadopago",
+                  {"order_id": order["id"], "payment_method_id": "visa",
+                   "payer_email": "camila.g@email.com"}, token=cust_token)
+check("cobrar sin token da 422", code == 422, f"(dio {code})")
+
+if pasarela.get("enabled"):
+    # Con credenciales puestas, un token inventado tiene que volver rechazado y
+    # rapido. Si esto cuelga o tarda, el servidor no esta alcanzando a MP.
+    code, body = call("POST", "/payments/mercadopago",
+                      {"order_id": order["id"], "payment_method_id": "visa",
+                       "token": "token-inventado", "payer_email": "camila.g@email.com"},
+                      token=cust_token)
+    check("token falso lo rechaza la pasarela", code == 400, f"(dio {code}: {body})")
+
+    code, body = call("POST", "/payments/mercadopago",
+                      {"order_id": "11111111-1111-1111-1111-111111111111",
+                       "payment_method_id": "visa", "token": "x",
+                       "payer_email": "camila.g@email.com"}, token=cust_token)
+    check("cobrar un pedido inexistente da 404", code == 404, f"(dio {code})")
+else:
+    code, body = call("POST", "/payments/mercadopago",
+                      {"order_id": order["id"], "payment_method_id": "visa",
+                       "token": "x", "payer_email": "camila.g@email.com"}, token=cust_token)
+    check("sin credenciales la pasarela responde 503", code == 503, f"(dio {code})")
 
 # --- Cupones, campanias y promociones -------------------------------------
 code, body = call("POST", "/coupons", {

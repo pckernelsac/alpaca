@@ -1,6 +1,6 @@
 # ALPACART — Estado del proyecto
 
-> Última actualización: 2026-08-25 (migración terminada y stack viejo retirado)
+> Última actualización: 2026-08-31 (pasarela de pago con Mercado Pago)
 > Stack: FastAPI + SQLAlchemy 2.0 + PostgreSQL 18 · React 19 + TypeScript + Vite
 
 El stack viejo (NestJS + React JS) se borró del árbol el 2026-08-25 y el contenido
@@ -14,7 +14,7 @@ esa limpieza, por si hiciera falta consultarlo.
 | Pieza | Estado | Puerto |
 |---|---|---|
 | PostgreSQL 18 + Redis | ✅ funcionando | 5448 / 6389 |
-| Backend FastAPI | ✅ 95 endpoints, 127/127 en smoke test | 8010 |
+| Backend FastAPI | ✅ 100 endpoints, 127/127 en smoke test antes de la pasarela | 8010 |
 | Tienda (React TS) | ✅ rediseñada y verificada en navegador | 3200 |
 | Dashboard (React TS) | ✅ 11 pantallas, verificado en navegador | 3300 |
 | Institucional (React TS) | ✅ 14 rutas, verificada en navegador | 3101 |
@@ -67,7 +67,7 @@ Swagger http://localhost:8010/api/v1/docs
 ```bash
 cd backend
 .venv/Scripts/python.exe -m app.seeds.run --reset   # el test asume datos frescos
-.venv/Scripts/python.exe smoke_test.py              # 127 verificaciones
+.venv/Scripts/python.exe smoke_test.py              # 127 + 11 de la pasarela
 
 cd frontend/tienda
 npx tsc --noEmit && npm run build
@@ -271,7 +271,9 @@ Variables que van en **App → Environment** de Dokploy:
 | `ALPACART_JWT_SECRET` | largo y aleatorio; sin esto el deploy falla a propósito |
 | `ALPACART_RUN_SEED` | `true` sólo en el primer deploy; **borra y reescribe el catálogo** |
 | `ALPACART_TOKEN_MINUTES` | opcional, por defecto 720 |
-| `ALPACART_STRIPE_*` | opcionales, vacías mientras el checkout no cobre |
+| `ALPACART_MP_PUBLIC_KEY` · `ALPACART_MP_ACCESS_TOKEN` | credenciales de Mercado Pago; sin las dos, el checkout no cobra |
+| `ALPACART_MP_WEBHOOK_SECRET` | clave secreta del webhook — **no** es el access token |
+| `ALPACART_STRIPE_*` | opcionales, sin uso: la pasarela es Mercado Pago |
 
 Detalles que ya costaron una vuelta y conviene no repetir:
 
@@ -304,6 +306,106 @@ curl -s  https://DOMINIO/panel/  | grep -o '/panel/assets/index-[^"]*\.js'
 curl -s  https://DOMINIO/api/v1/textile/materials | head -c 80
 ```
 
+## Pagos con Mercado Pago
+
+**Checkout API**, no Checkout Pro: el formulario va embebido en la tienda y no
+hay redirección a ningún lado. El navegador tokeniza con el SDK de Mercado Pago
+y al backend solo le llega un token — **los datos de la tarjeta nunca tocan este
+servidor**, que es lo que nos mantiene fuera del alcance de PCI serio. No se
+crean preferencias, así que tampoco hay `back_urls`.
+
+### El recorrido
+
+| Paso | Dónde |
+|---|---|
+| 1. Datos de envío, confirma el pedido | `/checkout` — crea el pedido `pending` y vacía el carrito |
+| 2. Elige medio y paga | `/pedido/:id/pagar` |
+| 3. Confirmación | `/pedido/:numero/confirmado` |
+
+**El pago vive en su propia URL a propósito.** Si el cliente cierra la pestaña
+con la tarjeta a medio tipear, el pedido ya está creado y sin cobrar; desde «Mis
+pedidos» hay un botón *Pagar pedido* que vuelve a esa misma ruta. Embebido en el
+checkout, ese pedido no habría tenido forma de cobrarse nunca.
+
+### Endpoints
+
+| Ruta | Quién | Qué hace |
+|---|---|---|
+| `GET /payments/config` | público | clave pública, medios y si la pasarela está encendida |
+| `POST /payments/mercadopago` | cliente | cobra un pedido suyo |
+| `GET /payments/orders/{id}` | cliente o staff | último intento, releído de la pasarela si sigue pendiente |
+| `POST /payments/mercadopago/webhook` | Mercado Pago | **el único** webhook; concilia todo |
+| `GET /payments/health` | staff | si hay credenciales, en qué modo y la URL del webhook |
+
+El código está en `app/services/mercadopago_client.py` (todo lo que toca su red),
+`app/services/payments.py` (fila → cobro → fila) y `app/api/v1/payments.py`.
+
+### Lo que no hay que deshacer
+
+- **El importe lo fija el servidor**, leyéndolo del pedido. El `formData` del
+  Brick trae un `transaction_amount` y se ignora; aceptarlo sería dejar que el
+  navegador elija cuánto paga. Hay además un tope, `MP_MAX_AMOUNT`.
+- **La fila de `transactions` nace antes de la llamada** a Mercado Pago. Si la
+  llamada se corta a mitad, el intento queda anotado con su `external_reference`
+  y el webhook lo concilia después.
+- **`external_reference` es único por intento** (`ALP-2026-0007-a3f9…`) y viaja
+  además como `X-Idempotency-Key`. El SDK genera uno aleatorio por llamada, que
+  no protege de nada: hay que fijarlo con `RequestOptions.custom_headers`.
+- **El webhook nunca se fía del cuerpo**: relee el pago con `payment().get()` y
+  usa ese estado. Por eso una clave de webhook filtrada tiene impacto bajo.
+- **Responde 200 salvo firma inválida (401).** Un 5xx solo consigue que Mercado
+  Pago reintente lo mismo, que va a volver a fallar.
+- **La validación de la firma está escrita a mano**: el SDK de Python no la
+  trae, solo el de Node.
+- **`notification_url` se omite en localhost.** MP valida el host y rechaza el
+  cobro entero con `notificaction_url attribute must be url valid` (la errata es
+  suya). Sale de `PUBLIC_BASE_URL`, que en desarrollo va vacía.
+- **En el Payment Brick no se activa `mercadoPago` como medio.** Ese exige un
+  `preferenceId`, y sin él el Brick **no se inicializa**: `onReady` no dispara
+  nunca y la pantalla se queda en un spinner eterno sin ningún error. Solo
+  `creditCard`, `debitCard`, `prepaidCard` y `ticket`.
+- **Yape va aparte** (`components/checkout/YapeForm.tsx`): Mercado Pago no lo
+  renderiza dentro del Brick. Pide celular y un código de seis dígitos que el
+  cliente saca de su app, y tokeniza con `mp.yape()`. Reusa los `status_detail`
+  de tarjeta, así que un código vencido llega como
+  `cc_rejected_bad_filled_security_code`; los mensajes se eligen según el medio,
+  o le hablaríamos del CVV de una tarjeta que no usó.
+- **El cargador del SDK sondea `window.MercadoPago` si la etiqueta ya existe.**
+  Engancharse a su `load` cuando el script ya cargó deja la promesa colgada para
+  siempre, sin error.
+
+### Configurar la cuenta
+
+1. Panel de MP → Tus integraciones → tu aplicación → **Credenciales**.
+   `TEST-…` es sandbox, `APP_USR-…` es producción. La pública viaja al
+   navegador; el access token es solo del servidor.
+2. **Webhooks** → notificaciones. La URL va **completa, con la ruta**:
+   `https://DOMINIO/api/v1/payments/mercadopago/webhook`. Con solo el dominio,
+   Mercado Pago recibe el `index.html` de la SPA, lo toma por un 200 y **nada se
+   concilia jamás**, sin ningún síntoma. Marcar solo el evento **Pagos**.
+3. La **clave secreta del webhook** no es el access token, y **prueba y
+   producción tienen claves distintas**: con la de prueba en producción, todos
+   los avisos se rechazan con 401.
+4. En Dokploy son variables de *runtime*: cambiarlas y reiniciar alcanza, no
+   hace falta rebuild. La clave pública se sirve por `/payments/config`
+   justamente para eso — como `VITE_*` quedaría incrustada al compilar.
+
+### Verificación
+
+```bash
+curl -s https://DOMINIO/api/v1/payments/config | python -m json.tool
+
+# Sin firma tiene que dar 401 — no 200, no 5xx
+curl -s -o /dev/null -w "%{http_code}
+" -X POST   "https://DOMINIO/api/v1/payments/mercadopago/webhook?data.id=1&type=payment"   -H 'Content-Type: application/json' -d '{"type":"payment","data":{"id":"1"}}'
+```
+
+**Para probar un cobro hace falta una cuenta compradora distinta a la del
+vendedor.** Mercado Pago impide que el titular se pague a sí mismo y lo reporta
+con errores que despistan: pagar con el Yape del propio dueño devuelve
+`Invalid value for transaction_amount`, como si el monto estuviera mal. No lo
+está.
+
 ## Pendientes menores
 
 - **El material fotográfico está mal.** Dos productos (Chalina Vicuña, Bufanda
@@ -315,9 +417,13 @@ curl -s  https://DOMINIO/api/v1/textile/materials | head -c 80
   Unsplash son arbitrarios y no se pueden deducir del tema, así que hay que
   reemplazarlas a mano por fotos reales del taller. Mientras tanto la
   institucional abre casi todas sus secciones con portada tipográfica.
-- Stripe está integrado a nivel de modelo (`transactions`, `webhook_events`) pero el
-  checkout todavía no cobra: registra el pedido como `pending`. Falta el
-  PaymentIntent y el webhook.
+- **La pasarela no está probada contra la cuenta real.** El código está entero
+  (ver «Pagos con Mercado Pago»), pero hasta que no se carguen las credenciales
+  y se haga un cobro de punta a punta con una cuenta compradora distinta a la
+  del vendedor, no está verificado en vivo.
+- Stripe quedó a nivel de modelo (`transactions.stripe_id`) y sin uso: la
+  pasarela es Mercado Pago. Las variables `STRIPE_*` siguen aceptándose para no
+  romper despliegues viejos, pero no hacen nada.
 - No hay tests unitarios del backend, solo el smoke test end-to-end.
 - `passlib` emite un warning al leer la versión de `bcrypt` (incompatibilidad conocida
   entre passlib 1.7.4 y bcrypt 4.x). El hashing funciona; es solo ruido en el log.

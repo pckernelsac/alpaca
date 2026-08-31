@@ -32,6 +32,19 @@ services:
       RUN_SEED: ${ALPACART_RUN_SEED:-false}
       STRIPE_SECRET_KEY: ${ALPACART_STRIPE_SECRET_KEY:-}
       STRIPE_WEBHOOK_SECRET: ${ALPACART_STRIPE_WEBHOOK_SECRET:-}
+      # Mercado Pago — Checkout API. Las tres son de runtime: cambiarlas y
+      # reiniciar alcanza, no hace falta reconstruir la imagen. La clave publica
+      # la sirve el backend en /api/v1/payments/config, asi que tampoco entra
+      # como build arg del frontend (una VITE_* si obligaria a recompilar).
+      MP_PUBLIC_KEY: ${ALPACART_MP_PUBLIC_KEY:-}
+      MP_ACCESS_TOKEN: ${ALPACART_MP_ACCESS_TOKEN:-}
+      # OJO: la clave secreta del webhook NO es el access token, y modo prueba y
+      # modo productivo tienen claves distintas. Con la de prueba en produccion,
+      # todos los avisos se rechazan con 401 y ningun pago se concilia.
+      MP_WEBHOOK_SECRET: ${ALPACART_MP_WEBHOOK_SECRET:-}
+      # De aca sale la notification_url completa que hay que pegar en el panel
+      # de Mercado Pago: https://DOMINIO/api/v1/payments/mercadopago/webhook
+      PUBLIC_BASE_URL: https://${ALPACART_DOMAIN}
     volumes:
       # Las imagenes que se suben desde el panel. Sin volumen, cada redeploy
       # reconstruye la imagen y se lleva puestas todas las fotos del catalogo.

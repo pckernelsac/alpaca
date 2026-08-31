@@ -272,3 +272,73 @@ export interface ProductQuery {
   collection_id?: string;
   sort?: 'recent' | 'name' | 'price_asc' | 'price_desc';
 }
+
+/* -------------------------------------------------------------------------- */
+/* Pagos                                                                      */
+/* -------------------------------------------------------------------------- */
+/** Lo que publica el backend en `/payments/config`.
+ *
+ *  La clave pública llega en tiempo de ejecución y no compilada dentro del
+ *  bundle: las `VITE_*` se incrustan al construir la imagen, así que cambiarla
+ *  obligaría a recompilar las tres apps. */
+export interface PaymentConfig {
+  provider: string;
+  enabled: boolean;
+  publicKey: string;
+  currency: string;
+  locale: string;
+  methods: string[];
+}
+
+export type PaymentStatus =
+  | 'approved'
+  | 'pending'
+  | 'in_process'
+  | 'authorized'
+  | 'rejected'
+  | 'cancelled'
+  | 'refunded'
+  | 'charged_back'
+  | 'error';
+
+export interface PaymentResult {
+  id: string;
+  transactionId: string;
+  orderId: string | null;
+  provider: string;
+  method: string;
+  amount: number;
+  currency: string;
+  status: PaymentStatus;
+  statusDetail: string | null;
+  paymentId: string | null;
+  externalReference: string | null;
+  /** Cupón de pago en efectivo: sin esta URL el cliente no puede abonarlo. */
+  voucherUrl: string | null;
+  createdAt: string;
+  message: string;
+  orderNumber?: string;
+  paid: boolean;
+}
+
+export interface PaymentStatusResponse {
+  orderNumber: string;
+  paid: boolean;
+  status?: OrderStatus;
+  transaction: PaymentResult | null;
+}
+
+/** El importe no está: lo fija el servidor leyéndolo del pedido. */
+export interface PaymentCharge {
+  order_id: string;
+  token?: string;
+  payment_method_id: string;
+  payment_type_id?: string;
+  issuer_id?: string;
+  installments?: number;
+  payer_email: string;
+  payer_first_name?: string;
+  payer_last_name?: string;
+  identification_type?: string;
+  identification_number?: string;
+}

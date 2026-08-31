@@ -1,0 +1,84 @@
+.brickWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* El contenedor del Brick no se desmonta mientras carga: tiene que existir en
+   el DOM antes de crearlo, así que se oculta en vez de sacarlo del árbol. */
+.hidden {
+  display: none;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* --- pestañas de medio de pago ------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tab {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: -1px;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tabActive {
+  color: var(--text);
+  font-weight: var(--weight-medium);
+  border-bottom-color: var(--accent);
+}
+
+/* --- Yape ----------------------------------------------------------------- */
+.yape {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.yapeSteps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-left: var(--space-5);
+  list-style: decimal;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+
+/* --- resultado del cobro -------------------------------------------------- */
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.voucher {
+  font-size: var(--text-sm);
+}

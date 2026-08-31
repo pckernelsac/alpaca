@@ -18,6 +18,17 @@ class Transaction(Base, TimestampMixin):
     transaction_id: Mapped[str] = mapped_column(String(50), nullable=False, unique=True, index=True)
     order_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("orders.id"))
     stripe_id: Mapped[str | None] = mapped_column(String(100), index=True)
+    # Quien cobro: 'mercadopago' o 'manual' (transferencia, contra entrega).
+    provider: Mapped[str] = mapped_column(String(30), default="manual", server_default="manual")
+    # Id del pago en el proveedor. En Mercado Pago es el que trae el webhook.
+    provider_payment_id: Mapped[str | None] = mapped_column(String(60), index=True)
+    # Referencia unica del intento (`<pedido>-<uuid4>`). Viaja como
+    # external_reference y como X-Idempotency-Key: es lo que ata el aviso del
+    # webhook con la fila, aunque el pago se acredite dias despues.
+    external_reference: Mapped[str | None] = mapped_column(String(80), unique=True, index=True)
+    # El motivo fino del rechazo o de la espera (cc_rejected_bad_filled_*, …).
+    status_detail: Mapped[str | None] = mapped_column(String(60))
+    payer_email: Mapped[str | None] = mapped_column(String(255))
     method: Mapped[str] = mapped_column(String(30), nullable=False)
     amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     currency: Mapped[str] = mapped_column(String(5), default="PEN", server_default="PEN")
@@ -45,8 +56,8 @@ class TransactionRefund(Base, TimestampMixin):
 
 
 class WebhookEvent(Base):
-    """Stripe reintenta webhooks: (provider, external_event_id) unico evita
-    procesar el mismo evento dos veces."""
+    """Las pasarelas reintentan los avisos: (provider, external_event_id)
+    unico evita procesar el mismo evento dos veces."""
 
     __tablename__ = "webhook_events"
 
