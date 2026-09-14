@@ -12,6 +12,7 @@ from decimal import Decimal
 
 from sqlalchemy import select, text
 
+from app.core.config import settings
 from app.core.security import hash_password
 from app.core.slugs import unique_slug
 from app.db.session import SessionLocal
@@ -75,6 +76,27 @@ TABLES_IN_DELETE_ORDER = [
 ]
 
 
+def clave_inicial() -> str | None:
+    """Contrasena con la que nacen las cuentas que crea el seed.
+
+    Las de `data.py` son fixtures: viven en el repositorio y cualquiera
+    puede leerlas, lo cual esta bien en local y es un panel abierto de par
+    en par en un servidor. Por eso en produccion la clave tiene que venir
+    de SEED_PASSWORD, y sin ella no se siembra.
+
+    Devuelve None cuando toca respetar las claves de `data.py`.
+    """
+    if settings.SEED_PASSWORD:
+        return settings.SEED_PASSWORD
+    if settings.APP_ENV == "production":
+        raise SystemExit(
+            """[seed] APP_ENV=production y SEED_PASSWORD vacia: no se siembra.
+       Las claves de app/seeds/data.py son publicas: sembrar con ellas
+       dejaria el panel abierto a cualquiera. Define
+       ALPACART_SEED_PASSWORD en el entorno y vuelve a desplegar."""
+        )
+    return None
+
 def as_uuid(value: str | uuid.UUID) -> uuid.UUID:
     """Las columnas UUID no aceptan str: SQLAlchemy no puede casar los
     sentinels del INSERT masivo si el tipo no coincide exactamente."""
@@ -87,7 +109,7 @@ def reset(db) -> None:
     db.commit()
 
 
-def seed_iam(db) -> None:
+def seed_iam(db, clave: str | None) -> None:
     for row in d.DEPARTMENTS:
         db.merge(Department(**row))
     for row in d.ROLES:
@@ -101,7 +123,7 @@ def seed_iam(db) -> None:
 
     for row in d.STAFF:
         payload = dict(row)
-        payload["password"] = hash_password(payload["password"])
+        payload["password"] = hash_password(clave or payload["password"])
         payload["id"] = as_uuid(payload["id"])
         db.merge(User(**payload))
     db.commit()
@@ -201,10 +223,10 @@ def seed_catalog(db) -> None:
     print(f"  Catalogo: {len(cd.PRODUCTS)} productos, {variant_count} variantes")
 
 
-def seed_customers(db) -> None:
+def seed_customers(db, clave: str | None) -> None:
     for row in d.CUSTOMERS:
         payload = dict(row)
-        payload["password"] = hash_password(payload["password"])
+        payload["password"] = hash_password(clave or payload["password"])
         payload["id"] = as_uuid(payload["id"])
         db.merge(Customer(**payload))
     db.flush()
@@ -432,15 +454,18 @@ def sincronizar_secuencias(db) -> None:
 
 def main() -> None:
     do_reset = "--reset" in sys.argv
+    # Antes de abrir la sesion: si falta la clave, --reset no debe llegar a
+    # vaciar las tablas para despues abortar.
+    clave = clave_inicial()
     db = SessionLocal()
     try:
         print("Sembrando ALPACART...")
         if do_reset:
             reset(db)
-        seed_iam(db)
+        seed_iam(db, clave)
         seed_textile(db)
         seed_catalog(db)
-        seed_customers(db)
+        seed_customers(db, clave)
         seed_infra(db)
         seed_cms(db)
         seed_marketing(db)

@@ -30,6 +30,11 @@ services:
       # Sembrar BORRA y reescribe el catalogo. Se pone en true una sola vez, en
       # el primer deploy, y se vuelve a false antes del siguiente.
       RUN_SEED: ${ALPACART_RUN_SEED:-false}
+      # Clave con la que nacen las cuentas del seed. En produccion el seed
+      # la exige: las de app/seeds/data.py estan publicadas en el repo y
+      # sembrar con ellas dejaria el panel abierto. Cambiala igual desde
+      # el panel despues del primer acceso.
+      SEED_PASSWORD: ${ALPACART_SEED_PASSWORD:-}
       STRIPE_SECRET_KEY: ${ALPACART_STRIPE_SECRET_KEY:-}
       STRIPE_WEBHOOK_SECRET: ${ALPACART_STRIPE_WEBHOOK_SECRET:-}
       # Mercado Pago — Checkout API. Las tres son de runtime: cambiarlas y

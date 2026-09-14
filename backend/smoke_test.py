@@ -6,11 +6,17 @@ las guardas de la pasarela de pago.
 """
 
 import json
+import os
 import sys
 import urllib.error
 import urllib.request
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8010/api/v1"
+
+# La clave del staff sembrado. En desarrollo es la fixture de
+# app/seeds/data.py; contra un servidor hay que pasar la misma
+# SEED_PASSWORD con la que se sembro, o el login fallara.
+CLAVE_STAFF = os.environ.get("SEED_PASSWORD") or "Admin123!"
 
 passed = 0
 failed = 0
@@ -53,7 +59,7 @@ check("health responde", code == 200 and body["data"]["status"] == "ok")
 check("base de datos conectada", body["data"]["info"]["database"]["status"] == "up")
 
 # --- Auth ------------------------------------------------------------------
-code, body = call("POST", "/auth/login", {"email": "mateo.q@alpacart.com", "password": "Admin123!"})
+code, body = call("POST", "/auth/login", {"email": "mateo.q@alpacart.com", "password": CLAVE_STAFF})
 check("login staff", code == 200, body)
 staff_token = body["data"]["accessToken"] if code == 200 else None
 check("staff trae rol", code == 200 and body["data"]["user"]["role"] == "Super Administrador")

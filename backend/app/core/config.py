@@ -26,6 +26,11 @@ class Settings(BaseSettings):
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6389
 
+    # Contrasena con la que nacen las cuentas que crea el seed. Vacia en
+    # desarrollo: ahi valen las de app/seeds/data.py. En produccion el seed la
+    # exige, porque esas fixtures estan publicadas en el repositorio.
+    SEED_PASSWORD: str = ""
+
     JWT_SECRET: str = "alpacart-dev-secret-change-in-production"
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 720

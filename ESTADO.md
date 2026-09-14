@@ -53,12 +53,18 @@ cd backend
 institucional http://localhost:3101 · API http://localhost:8010/api/v1 ·
 Swagger http://localhost:8010/api/v1/docs
 
-**Credenciales sembradas** (las mismas del proyecto viejo):
+**Credenciales sembradas** — sólo en desarrollo:
 
 | Tipo | Correo | Contraseña |
 |---|---|---|
 | Staff (admin) | `mateo.q@alpacart.com` | `Admin123!` |
 | Cliente | `camila.g@email.com` | `Cliente2024!` |
+
+Esas contraseñas son fixtures y están publicadas en este repositorio, así que
+**en producción no se usan**: con `APP_ENV=production` el seed exige
+`SEED_PASSWORD` y aborta si falta, en lugar de crear un panel que cualquiera
+puede abrir leyendo `app/seeds/data.py`. Los correos no cambian; la clave sale
+de esa variable y conviene cambiarla desde el panel tras el primer acceso.
 
 ---
 
@@ -270,6 +276,7 @@ Variables que van en **App → Environment** de Dokploy:
 | `ALPACART_DATABASE_URL` | cadena del servicio de PostgreSQL **18** creado en Dokploy |
 | `ALPACART_JWT_SECRET` | largo y aleatorio; sin esto el deploy falla a propósito |
 | `ALPACART_RUN_SEED` | `true` sólo en el primer deploy; **borra y reescribe el catálogo** |
+| `ALPACART_SEED_PASSWORD` | clave inicial del staff y los clientes demo; **obligatoria para sembrar en producción** |
 | `ALPACART_TOKEN_MINUTES` | opcional, por defecto 720 |
 | `ALPACART_MP_PUBLIC_KEY` · `ALPACART_MP_ACCESS_TOKEN` | credenciales de Mercado Pago; sin las dos, el checkout no cobra |
 | `ALPACART_MP_WEBHOOK_SECRET` | clave secreta del webhook — **no** es el access token |
