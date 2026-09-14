@@ -33,11 +33,24 @@ export function Drawer({
 }: DrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
+  // `onClose` casi siempre llega como funcion nueva en cada render (los
+  // llamadores la declaran en el cuerpo del componente). Si entrara como
+  // dependencia del efecto de abajo, ese efecto se repetiria con CADA tecla
+  // que se escribe en el panel, y con el el temporizador que mueve el foco:
+  // al pausar entre palabras, el cursor saltaba al primer campo. Guardada en
+  // una ref, el handler siempre ve la version actual sin reejecutar nada.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  // Depende solo de `open`: esto tiene que correr al abrir el panel, no cada
+  // vez que el formulario de dentro se vuelve a pintar.
   useEffect(() => {
     if (!open) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') onCloseRef.current();
     };
     document.addEventListener('keydown', onKeyDown);
 
@@ -55,7 +68,7 @@ export function Drawer({
       document.body.style.overflow = previousOverflow;
       clearTimeout(timer);
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
 
