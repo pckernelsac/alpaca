@@ -10,6 +10,7 @@ import os
 import sys
 import urllib.error
 import urllib.request
+import uuid
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8010/api/v1"
 
@@ -282,7 +283,13 @@ code, body = call("POST", "/wishlist/items", {"product_id": product["id"]}, toke
 check("toggle quita de favoritos", body["data"]["added"] is False)
 
 # --- Checkout con idempotencia --------------------------------------------
-key = "smoke-test-key-001"
+# La clave tiene que ser nueva en cada corrida. Con una fija, la segunda vez
+# que se corre la prueba contra la misma base el checkout hace lo correcto
+# —devolver el pedido original sin repetir efectos— y entonces no vacia el
+# carrito de esta corrida, con lo que fallan las dos comprobaciones de abajo
+# por un motivo que no es un fallo del producto. La idempotencia se sigue
+# probando igual: lo que importa es reusar la clave DENTRO de la corrida.
+key = f"smoke-test-{uuid.uuid4()}"
 code, body = call("POST", "/checkout", {"payment_method": "card"}, token=cust_token,
                   headers={"Idempotency-Key": key})
 check("checkout crea pedido", code == 201, body)
