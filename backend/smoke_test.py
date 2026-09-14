@@ -13,10 +13,12 @@ import urllib.request
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8010/api/v1"
 
-# La clave del staff sembrado. En desarrollo es la fixture de
-# app/seeds/data.py; contra un servidor hay que pasar la misma
-# SEED_PASSWORD con la que se sembro, o el login fallara.
-CLAVE_STAFF = os.environ.get("SEED_PASSWORD") or "Admin123!"
+# Claves de las cuentas sembradas. En desarrollo son las fixtures de
+# app/seeds/data.py; contra un servidor el seed las crea todas con
+# SEED_PASSWORD, asi que hay que pasar la misma o los logins fallaran.
+_SEED = os.environ.get("SEED_PASSWORD")
+CLAVE_STAFF = _SEED or "Admin123!"
+CLAVE_CLIENTE = _SEED or "Cliente2024!"
 
 passed = 0
 failed = 0
@@ -68,7 +70,7 @@ code, body = call("POST", "/auth/login", {"email": "mateo.q@alpacart.com", "pass
 check("password incorrecto da 401", code == 401)
 
 code, body = call(
-    "POST", "/auth/customer-login", {"email": "camila.g@email.com", "password": "Cliente2024!"}
+    "POST", "/auth/customer-login", {"email": "camila.g@email.com", "password": CLAVE_CLIENTE}
 )
 check("login customer", code == 200, body)
 cust_token = body["data"]["accessToken"] if code == 200 else None
