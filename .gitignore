@@ -59,3 +59,7 @@ __pycache__/
 # Imagenes subidas desde el panel: son datos, no codigo. En el servidor viven
 # en un volumen (ver docker-compose.dokploy.yml).
 backend/uploads/
+
+# Valores reales para pegar en App -> Environment de Dokploy. Son credenciales:
+# nunca al repo. Dokploy es la fuente de verdad; esto es solo una copia local.
+.env.dokploy.local
