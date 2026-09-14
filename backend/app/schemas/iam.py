@@ -15,6 +15,9 @@ class UserCreate(BaseModel):
 
 class UserUpdate(BaseModel):
     name: str | None = Field(default=None, max_length=255)
+    # El correo es ademas el identificador con el que se entra, y es unico en
+    # la tabla: cambiarlo a uno ya tomado lo rechaza el endpoint con un 409.
+    email: EmailStr | None = None
     password: str | None = Field(default=None, min_length=8, max_length=128)
     phone: str | None = Field(default=None, max_length=50)
     position: str | None = Field(default=None, max_length=255)

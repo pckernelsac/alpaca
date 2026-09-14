@@ -472,7 +472,7 @@ def main() -> None:
         seed_orders(db)
         sincronizar_secuencias(db)
         print("\nListo.")
-        print("  Staff:    mateo.q@alpacart.com / Admin123!")
+        print("  Staff:    admin@alpacartcollection.com / Admin123!")
         print("  Cliente:  camila.g@email.com / Cliente2024!")
     finally:
         db.close()

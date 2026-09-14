@@ -61,12 +61,12 @@ check("health responde", code == 200 and body["data"]["status"] == "ok")
 check("base de datos conectada", body["data"]["info"]["database"]["status"] == "up")
 
 # --- Auth ------------------------------------------------------------------
-code, body = call("POST", "/auth/login", {"email": "mateo.q@alpacart.com", "password": CLAVE_STAFF})
+code, body = call("POST", "/auth/login", {"email": "admin@alpacartcollection.com", "password": CLAVE_STAFF})
 check("login staff", code == 200, body)
 staff_token = body["data"]["accessToken"] if code == 200 else None
 check("staff trae rol", code == 200 and body["data"]["user"]["role"] == "Super Administrador")
 
-code, body = call("POST", "/auth/login", {"email": "mateo.q@alpacart.com", "password": "malo"})
+code, body = call("POST", "/auth/login", {"email": "admin@alpacartcollection.com", "password": "malo"})
 check("password incorrecto da 401", code == 401)
 
 code, body = call(

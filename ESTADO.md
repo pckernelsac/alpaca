@@ -57,7 +57,7 @@ Swagger http://localhost:8010/api/v1/docs
 
 | Tipo | Correo | Contraseña |
 |---|---|---|
-| Staff (admin) | `mateo.q@alpacart.com` | `Admin123!` |
+| Staff (admin) | `admin@alpacartcollection.com` | `Admin123!` |
 | Cliente | `camila.g@email.com` | `Cliente2024!` |
 
 Esas contraseñas son fixtures y están publicadas en este repositorio, así que

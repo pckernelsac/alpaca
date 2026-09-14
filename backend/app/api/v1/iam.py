@@ -72,6 +72,20 @@ def update_user(user_id: UUID, payload: UserUpdate, db: DbSession, actor: StaffA
     else:
         data.pop("password", None)
 
+    # `email` tiene indice unico: sin esta comprobacion, reasignar uno ya
+    # tomado revienta en el commit con un IntegrityError y sale como 500.
+    nuevo_email = data.get("email")
+    if nuevo_email and nuevo_email != user.email:
+        ocupado = db.scalar(
+            select(User).where(
+                User.email == nuevo_email,
+                User.id != user.id,
+                User.deleted_at.is_(None),
+            )
+        )
+        if ocupado:
+            raise HTTPException(status.HTTP_409_CONFLICT, "Ese correo ya esta en uso")
+
     for field, value in data.items():
         setattr(user, field, value)
     db.commit()

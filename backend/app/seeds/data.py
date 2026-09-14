@@ -43,7 +43,7 @@ STAFF = [
     {
         "id": "00000001-0000-0000-0000-000000000001",
         "name": "Mateo Quispe",
-        "email": "mateo.q@alpacart.com",
+        "email": "admin@alpacartcollection.com",
         "password": "Admin123!",
         "phone": "+51 999 888 777",
         "employee_id": "ALP-001",

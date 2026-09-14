@@ -11,7 +11,7 @@ npm run lint     # oxlint
 ```
 
 Necesita el backend en `http://localhost:8010/api/v1` (se cambia con
-`VITE_API_URL`). Entrá con una cuenta de personal: `mateo.q@alpacart.com` /
+`VITE_API_URL`). Entrá con una cuenta de personal: `admin@alpacartcollection.com` /
 `Admin123!`.
 
 ## Cómo está organizado
