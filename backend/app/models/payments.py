@@ -17,7 +17,6 @@ class Transaction(Base, TimestampMixin):
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     transaction_id: Mapped[str] = mapped_column(String(50), nullable=False, unique=True, index=True)
     order_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("orders.id"))
-    stripe_id: Mapped[str | None] = mapped_column(String(100), index=True)
     # Quien cobro: 'mercadopago' o 'manual' (transferencia, contra entrega).
     provider: Mapped[str] = mapped_column(String(30), default="manual", server_default="manual")
     # Id del pago en el proveedor. En Mercado Pago es el que trae el webhook.

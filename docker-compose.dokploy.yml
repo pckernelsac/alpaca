@@ -35,8 +35,6 @@ services:
       # sembrar con ellas dejaria el panel abierto. Cambiala igual desde
       # el panel despues del primer acceso.
       SEED_PASSWORD: ${ALPACART_SEED_PASSWORD:-}
-      STRIPE_SECRET_KEY: ${ALPACART_STRIPE_SECRET_KEY:-}
-      STRIPE_WEBHOOK_SECRET: ${ALPACART_STRIPE_WEBHOOK_SECRET:-}
       # Mercado Pago — Checkout API. Las tres son de runtime: cambiarlas y
       # reiniciar alcanza, no hace falta reconstruir la imagen. La clave publica
       # la sirve el backend en /api/v1/payments/config, asi que tampoco entra

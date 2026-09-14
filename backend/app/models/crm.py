@@ -72,7 +72,11 @@ class ClientNote(Base, TimestampMixin):
 
 
 class ClientPaymentMethod(Base, TimestampMixin):
-    """Solo marca y ultimos 4 digitos: el dato sensible vive en Stripe."""
+    """Solo marca y ultimos 4 digitos: el numero completo nunca toca esta base.
+
+    Lo custodia la pasarela; aca queda lo justo para que el cliente reconozca
+    su tarjeta en el listado.
+    """
 
     __tablename__ = "client_payment_methods"
 

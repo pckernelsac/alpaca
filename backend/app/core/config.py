@@ -35,9 +35,6 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 720
 
-    STRIPE_SECRET_KEY: str = ""
-    STRIPE_WEBHOOK_SECRET: str = ""
-
     # Mercado Pago — Checkout API (pago embebido, sin redireccion).
     #   MP_PUBLIC_KEY     viaja al navegador; la sirve GET /payments/config.
     #   MP_ACCESS_TOKEN   solo servidor: permite cobrar en nombre de la cuenta.

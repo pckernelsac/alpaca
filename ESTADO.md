@@ -280,7 +280,6 @@ Variables que van en **App → Environment** de Dokploy:
 | `ALPACART_TOKEN_MINUTES` | opcional, por defecto 720 |
 | `ALPACART_MP_PUBLIC_KEY` · `ALPACART_MP_ACCESS_TOKEN` | credenciales de Mercado Pago; sin las dos, el checkout no cobra |
 | `ALPACART_MP_WEBHOOK_SECRET` | clave secreta del webhook — **no** es el access token |
-| `ALPACART_STRIPE_*` | opcionales, sin uso: la pasarela es Mercado Pago |
 
 Detalles que ya costaron una vuelta y conviene no repetir:
 
@@ -443,9 +442,6 @@ está.
   (ver «Pagos con Mercado Pago»), pero hasta que no se carguen las credenciales
   y se haga un cobro de punta a punta con una cuenta compradora distinta a la
   del vendedor, no está verificado en vivo.
-- Stripe quedó a nivel de modelo (`transactions.stripe_id`) y sin uso: la
-  pasarela es Mercado Pago. Las variables `STRIPE_*` siguen aceptándose para no
-  romper despliegues viejos, pero no hacen nada.
 - No hay tests unitarios del backend, solo el smoke test end-to-end.
 - `passlib` emite un warning al leer la versión de `bcrypt` (incompatibilidad conocida
   entre passlib 1.7.4 y bcrypt 4.x). El hashing funciona; es solo ruido en el log.

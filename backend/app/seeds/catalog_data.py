@@ -240,9 +240,9 @@ FAQ_ITEMS = [
      "answer": "La vicuña es más fina (12-13 micrones frente a 21-22) y su esquila está regulada, "
                "lo que la vuelve considerablemente más escasa."},
     {"category_id": 3, "order": 1, "question": "¿Qué medios de pago aceptan?",
-     "answer": "Tarjetas de crédito y débito Visa, Mastercard y American Express mediante Stripe."},
+     "answer": "Tarjetas de crédito y débito Visa, Mastercard y American Express, y Yape, mediante Mercado Pago."},
     {"category_id": 3, "order": 2, "question": "¿Es seguro pagar en el sitio?",
-     "answer": "Sí. No almacenamos datos de tarjeta: el pago se procesa íntegramente en Stripe."},
+     "answer": "Sí. No almacenamos datos de tarjeta: el pago se procesa íntegramente en Mercado Pago."},
     {"category_id": 3, "order": 3, "question": "¿Emiten factura?",
      "answer": "Sí, podés solicitarla durante el checkout indicando tu RUC."},
     {"category_id": 4, "order": 1, "question": "¿Puedo cambiar la talla?",
